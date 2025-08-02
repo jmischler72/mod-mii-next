@@ -55,6 +55,7 @@ export default function Home() {
                 <p><strong>Size:</strong> {(uploadData.size / 1024).toFixed(2)} KB</p>
                 <p><strong>Region:</strong> {uploadData.region}</p>
                 <p><strong>HBC Version:</strong> {uploadData.hbcVersion}</p>
+                <p><strong>System Menu Version:</strong> {uploadData.systemMenuVersion}</p>
               </div>
               {uploadData.preview && uploadData.preview.length > 0 && (
                 <div className="mt-3">

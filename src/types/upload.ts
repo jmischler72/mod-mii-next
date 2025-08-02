@@ -3,6 +3,7 @@ export interface UploadData {
   size: number
   region: string
   hbcVersion: string
+  systemMenuVersion: string
   preview?: string[]
 }
 

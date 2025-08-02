@@ -1,6 +1,6 @@
 "use server"
 
-import { getConsoleRegion, getHBCVersion, translateKeywordsToEnglish, validateConsoleType, validateSyscheckData } from "@/lib/helpers/syscheck-validation"
+import { checkIfPriiloaderInstalled, getConsoleRegion, getFirmware, getHBCVersion, getLatestSMVersion, getSystemMenuVersion, translateKeywordsToEnglish, validateConsoleType, validateSyscheckData } from "@/lib/helpers/syscheck-validation"
 import { z } from "zod"
 import { UploadResult, SyscheckValidationResult } from "@/types/upload"
 
@@ -65,9 +65,41 @@ export async function uploadCsvFile(formData: FormData): Promise<UploadResult> {
 
     const region = getConsoleRegion(copyData);
     const hbcVersion = getHBCVersion(copyData);
+    const systemMenuVersion = getSystemMenuVersion(copyData);
+
+    if (!region || !hbcVersion || !systemMenuVersion) {
+      return {
+        success: false,
+        error: "Could not extract necessary information from the CSV file"
+      }
+    }
+
+    const firmware = getFirmware(systemMenuVersion);
+
+    if( firmware?.SMregion !== region ) {
+      return {
+        success: false,
+        error: `The firmware region "${firmware?.SMregion}" does not match the console region "${region}"`
+      }
+    }
+
+    const latestVersion = getLatestSMVersion(firmware);
+
+    if (!latestVersion.success) {
+      return {
+        success: false,
+        error: latestVersion.error
+      }
+    }
+
+    const isPriiloaderInstalled = checkIfPriiloaderInstalled(copyData);
 
     console.log("Console Region:", region);
     console.log("HBC Version:", hbcVersion);
+    console.log("System Menu Version:", systemMenuVersion);
+    console.log("region:", firmware?.SMregion, "firm:", firmware?.firmware, "version:", firmware?.firmwareVersion);
+    console.log("Latest System Menu Version:", latestVersion);
+    console.log("Is Priiloader Installed:", isPriiloaderInstalled);
 
     return {
       success: true,
@@ -77,6 +109,8 @@ export async function uploadCsvFile(formData: FormData): Promise<UploadResult> {
         size: file.size,
         region: region || "Unknown",
         hbcVersion: hbcVersion || "Unknown",
+        systemMenuVersion: systemMenuVersion || "Unknown",
+        preview: copyData.split('\n').slice(0, 5), // Preview first
       }
     }
 
