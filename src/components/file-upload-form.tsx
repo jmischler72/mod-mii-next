@@ -148,7 +148,7 @@ export function FileUploadForm({ onSubmit, className }: FileUploadFormProps) {
                           variant="ghost"
                           size="sm"
                           onClick={removeFile}
-                          className="text-red-500 hover:text-red-700"
+                          className="text-red-500 hover:text-red-700 z-20 cursor-pointer"
                         >
                           <X className="h-4 w-4" />
                         </Button>
