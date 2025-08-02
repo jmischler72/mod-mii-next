@@ -77,14 +77,54 @@ export function validateSyscheckData(data: string): boolean {
     return false;
 }
 
+
+enum ConsoleType {
+    Wii = 'Wii',
+    vWii = 'vWii',
+}
+
 export function validateConsoleType(data: string): boolean {
-    const validConsoleTypes = ['Wii', 'vWii'];
+    const validConsoleTypes = [ConsoleType.Wii, ConsoleType.vWii];
     if( data.includes('Console Type')) {
         const consoleTypeLine = data.split('\n').find(line => line.includes('Console Type'));
-        if (consoleTypeLine) {
-            const consoleType = consoleTypeLine.split(':')[1].trim();
-            return validConsoleTypes.includes(consoleType);
+        if (!consoleTypeLine) return false;
+
+        const consoleType = consoleTypeLine.split(':')[1].trim();
+
+        if( consoleType === ConsoleType.vWii ) {
+
         }
+
+        return validConsoleTypes.includes(consoleType as ConsoleType);
     }
     return false;
+}
+
+export function getConsoleRegion(data: string): string | null {
+    const regionMap: Record<string, string> = {
+        'NTSC-U': 'U',
+        'PAL': 'E',
+        'JAP': 'J',
+        'NTSC-J': 'J',
+        'KOR': 'K',
+    };
+
+    const regionLine = data.split('\n').find(line => line.trim().toLowerCase().startsWith('region:'));
+    if (!regionLine) return null;
+
+    for (const [key, value] of Object.entries(regionMap)) {
+        if (regionLine.toUpperCase().includes(key)) {
+            return value;
+        }
+    }
+
+    return null;
+}
+
+export function getHBCVersion(data: string): string | null {
+    const hbcLine = data.split('\n').find(line => line.includes(EnglishKeywords.HomebrewChannel));
+    if (!hbcLine) return null;
+
+    const match = hbcLine.match(/Homebrew Channel\s+([0-9.]+)/);
+    return match ? match[1] : null;
 }

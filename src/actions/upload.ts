@@ -1,6 +1,6 @@
 "use server"
 
-import { translateKeywordsToEnglish, validateConsoleType, validateSyscheckData } from "@/lib/helpers/syscheck-validation"
+import { getConsoleRegion, getHBCVersion, translateKeywordsToEnglish, validateConsoleType, validateSyscheckData } from "@/lib/helpers/syscheck-validation"
 import { z } from "zod"
 
 const MAX_FILE_SIZE = 5000000 // 5MB
@@ -18,6 +18,12 @@ const uploadSchema = z.object({
 })
 
 export async function uploadCsvFile(formData: FormData) {
+
+  const updateActiveIOS = false;
+  const extraBrickProtection = false; // When enabled, a patched IOS60 will be installed to other system menu IOS slots to prevent bricks from users manually up\downgrading Wii's
+  const cMIOS = false; // A cMIOS allows older non-chipped Wii's to play GameCube backup discs
+
+
   try {
     const file = formData.get("file") as File
     
@@ -54,30 +60,19 @@ export async function uploadCsvFile(formData: FormData) {
 
     copyData = translateKeywordsToEnglish(copyData);
 
-    if (!validateSyscheckData(copyData)) {
+    const syscheckValidationResult = validateUploadedSyscheck(copyData);
+    if (!syscheckValidationResult.success) {
       return {
-        success: false,
-        error: "The CSV file is not a valid SysCheck report"
+      success: false,
+      error: syscheckValidationResult.error
       }
     }
 
-    if(!validateConsoleType(copyData)) {
-      return {
-        success: false,
-        error: "The CSV file does not contain a valid console type"
-      }
-    }
+    const region = getConsoleRegion(copyData);
+    const hbcVersion = getHBCVersion(copyData);
 
-    // Here you can add more specific CSV validation logic based on your requirements
-    // For example, checking specific column names, data types, etc.
-
-    console.log("CSV file processed successfully:", {
-      filename: file.name,
-      size: file.size,
-    })
-
-    // You can process the CSV data here
-    // For example: parse it, validate business rules, save to database, etc.
+    console.log("Console Region:", region);
+    console.log("HBC Version:", hbcVersion);
 
     return {
       success: true,
@@ -85,15 +80,39 @@ export async function uploadCsvFile(formData: FormData) {
       data: {
         filename: file.name,
         size: file.size,
+        region: region || "Unknown",
+        hbcVersion: hbcVersion || "Unknown",
       }
     }
 
   } catch (error) {
-    
     console.error("Error processing CSV file:", error)
     return {
       success: false,
       error: "An error occurred while processing the file"
     }
   }
+}
+
+function validateUploadedSyscheck(csvContent: string) {
+  // Validate the SysCheck data
+  if (!validateSyscheckData(csvContent)) {
+    return {
+      success: false,
+      error: "The CSV file is not a valid SysCheck report"
+    }
+  }
+
+  // Validate console type
+  if (!validateConsoleType(csvContent)) {
+    return {
+      success: false,
+      error: `The CSV file does not contain a valid console type`
+    }
+  }
+
+  
+
+  // If all validations pass
+  return { success: true };
 }

@@ -43,7 +43,7 @@ type UploadResult = {
   data?: {
     filename: string
     size: number
-    rows: number
+
     columns: number
     separator: string
     preview: string[]
