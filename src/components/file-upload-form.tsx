@@ -18,9 +18,10 @@ import {
 } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
 import { cn } from "@/lib/utils"
+import { uploadCsvFile } from "@/actions/upload"
 
 const MAX_FILE_SIZE = 5000000 // 5MB
-const ACCEPTED_FILE_TYPES = ["image/jpeg", "image/png", "image/gif", "application/pdf"]
+const ACCEPTED_FILE_TYPES = ["text/csv", "application/vnd.ms-excel"]
 
 const formSchema = z.object({
   file: z
@@ -28,25 +29,77 @@ const formSchema = z.object({
     .refine((file): file is File => file instanceof File, "Please select a file")
     .refine((file: File) => file.size <= MAX_FILE_SIZE, "File size should be less than 5MB")
     .refine(
-      (file: File) => ACCEPTED_FILE_TYPES.includes(file.type),
-      "Only JPEG, PNG, GIF, and PDF files are allowed"
+      (file: File) => ACCEPTED_FILE_TYPES.includes(file.type) || file.name.endsWith('.csv'),
+      "Only CSV files are allowed"
     ),
 })
 
 type FormValues = z.infer<typeof formSchema>
 
+type UploadResult = {
+  success: boolean
+  message?: string
+  error?: string
+  data?: {
+    filename: string
+    size: number
+    rows: number
+    columns: number
+    separator: string
+    preview: string[]
+  }
+}
+
 interface FileUploadFormProps {
-  onSubmit: (data: FormValues) => void
+  onSubmit?: (data: FormValues) => void
+  onUploadSuccess?: (result: UploadResult) => void
+  onUploadError?: (error: string) => void
   className?: string
 }
 
-export function FileUploadForm({ onSubmit, className }: FileUploadFormProps) {
+export function FileUploadForm({ onSubmit, onUploadSuccess, onUploadError, className }: FileUploadFormProps) {
   const [selectedFile, setSelectedFile] = useState<File | null>(null)
   const [dragActive, setDragActive] = useState(false)
+  const [isUploading, setIsUploading] = useState(false)
 
   const form = useForm<FormValues>({
     resolver: zodResolver(formSchema),
   })
+
+  const handleFormSubmit = async (data: FormValues) => {
+    if (onSubmit) {
+      onSubmit(data)
+      return
+    }
+
+    // Default behavior: use server action
+    setIsUploading(true)
+    
+    try {
+      const formData = new FormData()
+      formData.append("file", data.file)
+      
+      const result = await uploadCsvFile(formData)
+      
+      if (result.success) {
+        onUploadSuccess?.(result)
+        // Reset form after successful upload
+        setSelectedFile(null)
+        form.reset()
+        const fileInput = document.getElementById("file-input") as HTMLInputElement
+        if (fileInput) {
+          fileInput.value = ""
+        }
+      } else {
+        onUploadError?.(result.error || "Upload failed")
+      }
+    } catch (error) {
+      console.error("Upload error:", error)
+      onUploadError?.("An unexpected error occurred")
+    } finally {
+      setIsUploading(false)
+    }
+  }
 
   const handleFileSelect = (file: File) => {
     setSelectedFile(file)
@@ -101,7 +154,7 @@ export function FileUploadForm({ onSubmit, className }: FileUploadFormProps) {
   return (
     <div className={cn("w-full max-w-md mx-auto", className)}>
       <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+        <form onSubmit={form.handleSubmit(handleFormSubmit)} className="space-y-6">
           <FormField
             control={form.control}
             name="file"
@@ -127,7 +180,7 @@ export function FileUploadForm({ onSubmit, className }: FileUploadFormProps) {
                       type="file"
                       className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
                       onChange={handleFileInputChange}
-                      accept="image/*,.pdf"
+                      accept=".csv,text/csv,application/vnd.ms-excel"
                     />
                     
                     {selectedFile ? (
@@ -162,7 +215,7 @@ export function FileUploadForm({ onSubmit, className }: FileUploadFormProps) {
                             drag and drop
                           </p>
                           <p className="text-xs text-gray-500 mt-1">
-                            PNG, JPG, GIF or PDF up to 5MB
+                            CSV files up to 5MB
                           </p>
                         </div>
                       </div>
@@ -170,7 +223,7 @@ export function FileUploadForm({ onSubmit, className }: FileUploadFormProps) {
                   </div>
                 </FormControl>
                 <FormDescription>
-                  Choose a file to upload. Supported formats: JPEG, PNG, GIF, PDF (max 5MB)
+                  Choose a CSV file to upload. Supported format: CSV (max 5MB)
                 </FormDescription>
                 <FormMessage />
               </FormItem>
@@ -180,9 +233,9 @@ export function FileUploadForm({ onSubmit, className }: FileUploadFormProps) {
           <Button
             type="submit"
             className="w-full"
-            disabled={!selectedFile || form.formState.isSubmitting}
+            disabled={!selectedFile || isUploading}
           >
-            {form.formState.isSubmitting ? "Uploading..." : "Upload File"}
+            {isUploading ? "Uploading..." : "Upload CSV File"}
           </Button>
         </form>
       </Form>
