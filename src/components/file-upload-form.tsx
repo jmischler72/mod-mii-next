@@ -19,6 +19,7 @@ import {
 import { Input } from "@/components/ui/input"
 import { cn } from "@/lib/utils"
 import { uploadCsvFile } from "@/actions/upload"
+import { UploadResult } from "@/types/upload"
 
 const MAX_FILE_SIZE = 5000000 // 5MB
 const ACCEPTED_FILE_TYPES = ["text/csv", "application/vnd.ms-excel"]
@@ -35,20 +36,6 @@ const formSchema = z.object({
 })
 
 type FormValues = z.infer<typeof formSchema>
-
-type UploadResult = {
-  success: boolean
-  message?: string
-  error?: string
-  data?: {
-    filename: string
-    size: number
-
-    columns: number
-    separator: string
-    preview: string[]
-  }
-}
 
 interface FileUploadFormProps {
   onSubmit?: (data: FormValues) => void

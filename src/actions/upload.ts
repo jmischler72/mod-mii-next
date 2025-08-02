@@ -2,6 +2,7 @@
 
 import { getConsoleRegion, getHBCVersion, translateKeywordsToEnglish, validateConsoleType, validateSyscheckData } from "@/lib/helpers/syscheck-validation"
 import { z } from "zod"
+import { UploadResult, SyscheckValidationResult } from "@/types/upload"
 
 const MAX_FILE_SIZE = 5000000 // 5MB
 const ACCEPTED_FILE_TYPES = ["text/csv", "application/vnd.ms-excel"]
@@ -17,13 +18,7 @@ const uploadSchema = z.object({
     ),
 })
 
-export async function uploadCsvFile(formData: FormData) {
-
-  const updateActiveIOS = false;
-  const extraBrickProtection = false; // When enabled, a patched IOS60 will be installed to other system menu IOS slots to prevent bricks from users manually up\downgrading Wii's
-  const cMIOS = false; // A cMIOS allows older non-chipped Wii's to play GameCube backup discs
-
-
+export async function uploadCsvFile(formData: FormData): Promise<UploadResult> {
   try {
     const file = formData.get("file") as File
     
@@ -94,7 +89,7 @@ export async function uploadCsvFile(formData: FormData) {
   }
 }
 
-function validateUploadedSyscheck(csvContent: string) {
+function validateUploadedSyscheck(csvContent: string): SyscheckValidationResult {
   // Validate the SysCheck data
   if (!validateSyscheckData(csvContent)) {
     return {

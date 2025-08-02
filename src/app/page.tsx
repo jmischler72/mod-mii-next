@@ -3,21 +3,13 @@
 import Image from "next/image";
 import { FileUploadForm } from "@/components/file-upload-form";
 import { useState } from "react";
-
-type UploadData = {
-  filename: string
-  size: number
-  rows: number
-  columns: number
-  separator: string
-  preview: string[]
-}
+import { UploadData, UploadResult } from "@/types/upload";
 
 export default function Home() {
   const [uploadMessage, setUploadMessage] = useState<string>("")
   const [uploadData, setUploadData] = useState<UploadData | null>(null)
 
-  const handleUploadSuccess = (result: { success: boolean; message?: string; data?: UploadData }) => {
+  const handleUploadSuccess = (result: UploadResult) => {
     setUploadMessage(result.message || "File uploaded successfully!")
     setUploadData(result.data || null)
     console.log("Upload successful:", result)
@@ -61,9 +53,8 @@ export default function Home() {
               <div className="text-sm text-blue-800 space-y-1">
                 <p><strong>Filename:</strong> {uploadData.filename}</p>
                 <p><strong>Size:</strong> {(uploadData.size / 1024).toFixed(2)} KB</p>
-                <p><strong>Rows:</strong> {uploadData.rows}</p>
-                <p><strong>Columns:</strong> {uploadData.columns}</p>
-                <p><strong>Separator:</strong> {uploadData.separator}</p>
+                <p><strong>Region:</strong> {uploadData.region}</p>
+                <p><strong>HBC Version:</strong> {uploadData.hbcVersion}</p>
               </div>
               {uploadData.preview && uploadData.preview.length > 0 && (
                 <div className="mt-3">
