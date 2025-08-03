@@ -1,6 +1,6 @@
 "use server"
 
-import { checkD2XCios, checkForMissingIOS, checkIfBootMiiInstalled, checkIfHBCIsOutdated, checkIfPriiloaderInstalled, translateKeywordsToEnglish, validateConsoleType, validateSyscheckData } from "@/helpers/syscheck-validation-helper"
+import { checkD2XCios, checkExtraProtection, checkForMissingIOS, checkIfBootMiiInstalled, checkIfHBCIsOutdated, checkIfPriiloaderInstalled, translateKeywordsToEnglish, validateConsoleType, validateSyscheckData } from "@/helpers/syscheck-validation-helper"
 import { z } from "zod"
 import { UploadResult } from "@/types/upload-type"
 import { getConsoleRegion, getConsoleType, getFirmware, getHBCVersion, getLatestSMVersion, getSystemMenuVersion } from "@/helpers/syscheck-info-helper"
@@ -172,7 +172,8 @@ function handleSyscheckData(data: string, options: { activeIOS?: boolean, extraP
     }
 
     if(options.extraProtection) {
-
+      const missingExtraProtection = checkExtraProtection(data);
+      wadToInstall.push(...missingExtraProtection);
     }
 
     if(wadToInstall.length > 0) {

@@ -214,6 +214,68 @@ export function checkForMissingIOS(data: string, region: string, consoleType: st
     return missingIOS;
 }
 
+export function checkExtraProtection(data: string) {
+    const extraProtectionChecks = [
+        { ios: 'IOS11P60', patterns: [
+            /^IOS11 \(rev 16174\): Trucha Bug, NAND Access$/m,
+            /^IOS11 \(rev 65535\): Trucha Bug, NAND Access$/m,
+            /^IOS11\[60\] \(rev \d+, Info: ModMii-IOS60-v6174\)$/m
+        ]},
+        { ios: 'IOS20P60', patterns: [
+            /^IOS20 \(rev 16174\): Trucha Bug, NAND Access$/m,
+            /^IOS20 \(rev 65535\): Trucha Bug, NAND Access$/m,
+            /^IOS20\[60\] \(rev \d+, Info: ModMii-IOS60-v6174\)$/m
+        ]},
+        { ios: 'IOS30P60', patterns: [
+            /^IOS30 \(rev 16174\): Trucha Bug, NAND Access$/m,
+            /^IOS30 \(rev 65535\): Trucha Bug, NAND Access$/m,
+            /^IOS30\[60\] \(rev \d+, Info: ModMii-IOS60-v6174\)$/m
+        ]},
+        { ios: 'IOS40P60', patterns: [
+            /^IOS40 \(rev 16174\): Trucha Bug, NAND Access$/m,
+            /^IOS40 \(rev 65535\): Trucha Bug, NAND Access$/m,
+            /^IOS40\[60\] \(rev \d+, Info: ModMii-IOS60-v6174\)$/m
+        ]},
+        { ios: 'IOS50P', patterns: [
+            /^IOS50 \(rev 16174\): Trucha Bug, NAND Access$/m,
+            /^IOS50 \(rev 65535\): Trucha Bug, NAND Access$/m,
+            /^IOS50\[60\] \(rev \d+, Info: ModMii-IOS60-v6174\)$/m
+        ]},
+        { ios: 'IOS52P', patterns: [
+            /^IOS52 \(rev 16174\): Trucha Bug, NAND Access$/m,
+            /^IOS52 \(rev 65535\): Trucha Bug, NAND Access$/m,
+            /^IOS52\[60\] \(rev \d+, Info: ModMii-IOS60-v6174\)$/m
+        ]},
+        { ios: 'IOS60P', patterns: [
+            /^IOS60 \(rev 16174\): Trucha Bug, NAND Access$/m,
+            /^IOS60 \(rev 65535\): Trucha Bug, NAND Access$/m,
+            /^IOS60 \(rev \d+, Info: ModMii-IOS60-v6174\)$/m
+        ]},
+        { ios: 'IOS70K', patterns: [
+            /^IOS70 \(rev 16174\): Trucha Bug, NAND Access$/m,
+            /^IOS70 \(rev 65535\): Trucha Bug, NAND Access$/m,
+            /^IOS70\[60\] \(rev \d+, Info: ModMii-IOS60-v6174\)$/m
+        ]},
+        { ios: 'IOS80K', patterns: [
+            /^IOS80 \(rev 16174\): Trucha Bug, NAND Access$/m,
+            /^IOS80 \(rev 65535\): Trucha Bug, NAND Access$/m,
+            /^IOS80\[60\] \(rev \d+, Info: ModMii-IOS60-v6174\)$/m
+        ]}
+    ];
+
+    const missingExtraProtection: string[] = [];
+
+    for (const check of extraProtectionChecks) {
+        const hasProtection = check.patterns.some(pattern => pattern.test(data));
+        if (!hasProtection) {
+            missingExtraProtection.push(check.ios);
+        }
+    }
+
+    return missingExtraProtection;
+
+}
+
 export function checkIfHBCIsOutdated(hbcVersion: string, consoleType: string): boolean {
   const requiredVersion = consoleType === "Wii" ? "1.1.2" : "1.1.3";
   const isGreater = hbcVersion.split('.').map(Number)
