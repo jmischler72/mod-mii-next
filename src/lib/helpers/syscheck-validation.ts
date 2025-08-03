@@ -111,7 +111,6 @@ export function checkD2XCios(data: string, consoleType: string): string[] {
             const line = match[0];
             const d2xVersionMatch = line.match(/d2x-v(\d+(\.\d+)?)/);
 
-            console.log("D2X Version Match:", d2xVersionMatch);
             if (d2xVersionMatch) {
                 matchedLines.push(line);
             }

@@ -3,10 +3,13 @@
 import { FileUploadForm } from "@/components/file-upload-form";
 import { useState } from "react";
 import { UploadData, UploadResult } from "@/types/upload";
+import { Button } from "@/components/ui/button";
+import { Download } from "lucide-react";
 
 export default function Home() {
   const [uploadMessage, setUploadMessage] = useState<string>("")
   const [uploadData, setUploadData] = useState<UploadData | null>(null)
+  const [isDownloading, setIsDownloading] = useState<string | null>(null)
 
   const handleUploadSuccess = (result: UploadResult) => {
     setUploadMessage(result.message || "File uploaded successfully!")
@@ -18,6 +21,34 @@ export default function Home() {
     setUploadMessage(`Error: ${error}`)
     setUploadData(null)
     console.error("Upload error:", error)
+  }
+
+  const handleDownload = async (filename: string) => {
+    setIsDownloading(filename)
+    try {
+      const response = await fetch(`/api/download?filename=${encodeURIComponent(filename)}`)
+      
+      if (!response.ok) {
+        const errorData = await response.json()
+        throw new Error(errorData.error || 'Download failed')
+      }
+
+      // Create blob and download
+      const blob = await response.blob()
+      const url = window.URL.createObjectURL(blob)
+      const a = document.createElement('a')
+      a.href = url
+      a.download = filename
+      document.body.appendChild(a)
+      a.click()
+      window.URL.revokeObjectURL(url)
+      document.body.removeChild(a)
+    } catch (error) {
+      console.error('Download error:', error)
+      setUploadMessage(`Error downloading ${filename}: ${error}`)
+    } finally {
+      setIsDownloading(null)
+    }
   }
 
   return (
@@ -56,6 +87,35 @@ export default function Home() {
                     {uploadData.preview.map((line, index) => (
                       <div key={index} className="font-mono">
                         {line}
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+              {uploadData.wadToInstall && uploadData.wadToInstall.length > 0 && (
+                <div className="mt-3">
+                  <h4 className="font-medium text-blue-900 mb-1">WADs to Install:</h4>
+                  <div className="bg-white p-2 rounded border text-xs text-gray-700">
+                    {uploadData.wadToInstall.join(', ')}
+                  </div>
+                </div>
+              )}
+              {uploadData.downloadedFiles && uploadData.downloadedFiles.length > 0 && (
+                <div className="mt-4">
+                  <h4 className="font-medium text-blue-900 mb-2">Downloaded Files:</h4>
+                  <div className="space-y-2">
+                    {uploadData.downloadedFiles.map((filename, index) => (
+                      <div key={index} className="flex items-center justify-between bg-white p-2 rounded border">
+                        <span className="text-sm text-gray-700 font-mono">{filename}</span>
+                        <Button
+                          onClick={() => handleDownload(filename)}
+                          disabled={isDownloading === filename}
+                          size="sm"
+                          className="ml-2"
+                        >
+                          <Download className="h-4 w-4 mr-1" />
+                          {isDownloading === filename ? 'Downloading...' : 'Download'}
+                        </Button>
                       </div>
                     ))}
                   </div>

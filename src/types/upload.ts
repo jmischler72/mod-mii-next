@@ -6,6 +6,7 @@ export interface UploadData {
   systemMenuVersion: string
   preview?: string[],
   wadToInstall?: string[]
+  downloadedFiles?: string[]
 }
 
 export interface UploadResult {

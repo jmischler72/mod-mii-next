@@ -1,11 +1,12 @@
 "use server"
 
-import { checkD2XCios, checkIfBootMiiInstalled, checkIfHBCIsOutdated, checkIfPriiloaderInstalled, checkPatchedVIOS80, translateKeywordsToEnglish, validateConsoleType, validateSyscheckData } from "@/lib/helpers/syscheck-validation"
+import { checkD2XCios, checkIfBootMiiInstalled, checkIfHBCIsOutdated, checkIfPriiloaderInstalled, translateKeywordsToEnglish, validateConsoleType, validateSyscheckData } from "@/lib/helpers/syscheck-validation"
 import { z } from "zod"
 import { UploadResult } from "@/types/upload"
 import { getConsoleRegion, getConsoleType, getFirmware, getHBCVersion, getLatestSMVersion, getSystemMenuVersion } from "@/lib/helpers/syscheck-info"
 import { CustomError } from "@/types/custom-error"
-import {  runWiiPy } from "@/lib/helpers/wiipy-wrapper"
+import { nusDownload } from "@/lib/helpers/wiipy-wrapper"
+import { getEntry } from "@/lib/helpers/database-helper"
 
 const MAX_FILE_SIZE = 5000000 // 5MB
 const ACCEPTED_FILE_TYPES = ["text/csv", "application/vnd.ms-excel"]
@@ -68,6 +69,31 @@ export async function uploadCsvFile(formData: FormData): Promise<UploadResult> {
     console.log("region:", systemInfos.firmware?.SMregion, "firm:", systemInfos.firmware?.firmware, "version:", systemInfos.firmware?.firmwareVersion);
     console.log("WADs to Install:", systemInfos.wadToInstall);
 
+    const downloadedFiles: string[] = [];
+    
+    const entry = getEntry("SM4.1U");
+    console.log("Entry from database:", entry);
+    
+    if(!entry) {
+      throw new CustomError("No entry found in the database for SM4.1U")
+    }
+
+    try {
+      const result = await nusDownload(
+        entry.code1,
+        entry.code2,
+        entry.version,
+        entry.wadname,
+      );
+      console.log("NUS Download Result:", result);
+      downloadedFiles.push(entry.wadname);
+    } catch (error) {
+      console.error("NUS Download Error:", error);
+      throw new CustomError(`Failed to download ${entry.wadname}: ${error}`);
+    }
+
+
+
     return {
       success: true,
       message: `CSV file "${file.name}" uploaded successfully`,
@@ -78,6 +104,7 @@ export async function uploadCsvFile(formData: FormData): Promise<UploadResult> {
         hbcVersion: systemInfos.hbcVersion || "Unknown",
         systemMenuVersion: systemInfos.systemMenuVersion || "Unknown",
         wadToInstall: systemInfos.wadToInstall || [],
+        downloadedFiles: downloadedFiles,
         preview: copyData.split('\n').slice(0, 5), // Preview first
       }
     }
@@ -148,8 +175,6 @@ function handleSyscheckData(data: string, options: { activeIOS?: boolean, extraP
     if(wadToInstall.length > 0) {
       wadToInstall.push("yawm");
     }
-
-    runWiiPy(["nus", "title", "test" , "-v 1","--wad /tmp/test"], { cwd: process.cwd() });
 
     return {
       region,
