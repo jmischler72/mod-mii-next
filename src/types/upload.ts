@@ -14,7 +14,3 @@ export interface UploadResult {
   data?: UploadData
 }
 
-export interface SyscheckValidationResult {
-  success: boolean
-  error?: string
-}

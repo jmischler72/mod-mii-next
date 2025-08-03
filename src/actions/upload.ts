@@ -1,8 +1,10 @@
 "use server"
 
-import { checkIfPriiloaderInstalled, getConsoleRegion, getFirmware, getHBCVersion, getLatestSMVersion, getSystemMenuVersion, translateKeywordsToEnglish, validateConsoleType, validateSyscheckData } from "@/lib/helpers/syscheck-validation"
+import { checkD2XCios, checkIfHBCIsOutdated, checkIfPriiloaderInstalled, checkPatchedVIOS80, translateKeywordsToEnglish, validateConsoleType, validateSyscheckData } from "@/lib/helpers/syscheck-validation"
 import { z } from "zod"
-import { UploadResult, SyscheckValidationResult } from "@/types/upload"
+import { UploadResult } from "@/types/upload"
+import { getConsoleRegion, getConsoleType, getFirmware, getHBCVersion, getLatestSMVersion, getSystemMenuVersion } from "@/lib/helpers/syscheck-info"
+import { CustomError } from "@/types/custom-error"
 
 const MAX_FILE_SIZE = 5000000 // 5MB
 const ACCEPTED_FILE_TYPES = ["text/csv", "application/vnd.ms-excel"]
@@ -23,20 +25,14 @@ export async function uploadCsvFile(formData: FormData): Promise<UploadResult> {
     const file = formData.get("file") as File
     
     if (!file) {
-      return {
-        success: false,
-        error: "No file provided"
-      }
+      throw new CustomError("No file provided")
     }
 
     // Validate the file
     const validation = uploadSchema.safeParse({ file })
     
     if (!validation.success) {
-      return {
-        success: false,
-        error: validation.error.issues[0].message
-      }
+      throw new CustomError(validation.error.issues[0].message)
     }
 
     // Read the CSV content
@@ -44,62 +40,85 @@ export async function uploadCsvFile(formData: FormData): Promise<UploadResult> {
     
     // Basic CSV validation - check if it has content and at least one comma or semicolon
     if (!csvContent.trim()) {
-      return {
-        success: false,
-        error: "The CSV file appears to be empty"
-      }
+      throw new CustomError("The CSV file appears to be empty")
     }
 
     // copy csv to copydata
     let copyData = csvContent;
 
     copyData = translateKeywordsToEnglish(copyData);
-
-    const syscheckValidationResult = validateUploadedSyscheck(copyData);
-    if (!syscheckValidationResult.success) {
-      return {
-      success: false,
-      error: syscheckValidationResult.error
-      }
+    
+    if (!validateSyscheckData(csvContent)) {
+      throw new CustomError("The CSV file is not a valid SysCheck report")
     }
 
     const region = getConsoleRegion(copyData);
     const hbcVersion = getHBCVersion(copyData);
     const systemMenuVersion = getSystemMenuVersion(copyData);
+    const firmware = systemMenuVersion && getFirmware(systemMenuVersion);
+    const consoleType = getConsoleType(copyData);
 
-    if (!region || !hbcVersion || !systemMenuVersion) {
-      return {
-        success: false,
-        error: "Could not extract necessary information from the CSV file"
-      }
+
+    if (!region  || !systemMenuVersion || !firmware || !consoleType) {
+      throw new CustomError("Could not extract necessary information from the CSV file")
     }
 
-    const firmware = getFirmware(systemMenuVersion);
-
-    if( firmware?.SMregion !== region ) {
-      return {
-        success: false,
-        error: `The firmware region "${firmware?.SMregion}" does not match the console region "${region}"`
-      }
+    if(!validateConsoleType(consoleType)) {
+      throw new CustomError("The CSV file does not contain a valid console type")
     }
 
-    const latestVersion = getLatestSMVersion(firmware);
-
-    if (!latestVersion.success) {
-      return {
-        success: false,
-        error: latestVersion.error
-      }
+    if( firmware.SMregion !== region ) {
+      throw new CustomError(`The firmware region "${firmware.SMregion}" does not match the console region "${region}"`)
     }
 
+    const wadToInstall = [];
+
+    if(!hbcVersion){
+      wadToInstall.push("OHBC113");
+      //also check if IOS58 is installed
+      const isIOS58Installed = copyData.includes("IOS58");
+      if(!isIOS58Installed) wadToInstall.push("IOS58");
+    }else{
+      const isHbcOutdated = checkIfHBCIsOutdated(hbcVersion, consoleType);
+      if(isHbcOutdated) wadToInstall.push("OHBC");
+    }
+
+    const latestFirmwareVersion = getLatestSMVersion(firmware);
+    if(latestFirmwareVersion !== firmware.firmware) wadToInstall.push(`SM${latestFirmwareVersion}${firmware.SMregion}`);
+
+    const updatePriiloader = false;
     const isPriiloaderInstalled = checkIfPriiloaderInstalled(copyData);
+
+    if (!isPriiloaderInstalled || (isPriiloaderInstalled && updatePriiloader)) wadToInstall.push("pri");
+
+
+    const isD2XCiosInstalled = checkD2XCios(copyData, consoleType);
+    console.log("Is D2X cIOS installed:", isD2XCiosInstalled);
+
+
+
+
+    // for vwii ==>
+
+    // const wadToInstall = [];
+
+
+    // const isPatchedVIOS80 = checkPatchedVIOS80(copyData);
+    // if(isPatchedVIOS80) wadToInstall.push("vIOS80P");
+
+
+
+
+
 
     console.log("Console Region:", region);
     console.log("HBC Version:", hbcVersion);
     console.log("System Menu Version:", systemMenuVersion);
     console.log("region:", firmware?.SMregion, "firm:", firmware?.firmware, "version:", firmware?.firmwareVersion);
-    console.log("Latest System Menu Version:", latestVersion);
+    console.log("Latest System Menu Version:", latestFirmwareVersion);
     console.log("Is Priiloader Installed:", isPriiloaderInstalled);
+    // console.log("Is Patched vIOS80:", isPatchedVIOS80);
+    console.log("WADs to Install:", wadToInstall);
 
     return {
       success: true,
@@ -118,30 +137,7 @@ export async function uploadCsvFile(formData: FormData): Promise<UploadResult> {
     console.error("Error processing CSV file:", error)
     return {
       success: false,
-      error: "An error occurred while processing the file"
+      error: error instanceof CustomError ? error.message : "An error occurred while getting the latest system menu version"
     }
   }
-}
-
-function validateUploadedSyscheck(csvContent: string): SyscheckValidationResult {
-  // Validate the SysCheck data
-  if (!validateSyscheckData(csvContent)) {
-    return {
-      success: false,
-      error: "The CSV file is not a valid SysCheck report"
-    }
-  }
-
-  // Validate console type
-  if (!validateConsoleType(csvContent)) {
-    return {
-      success: false,
-      error: `The CSV file does not contain a valid console type`
-    }
-  }
-
-  
-
-  // If all validations pass
-  return { success: true };
 }
