@@ -123,7 +123,7 @@ export function checkD2XCios(data: string, consoleType: string): string[] {
     return missingIOS;
 }
 
-export function checkForMissingIOS(data: string, region: string) {
+export function checkForMissingIOS(data: string, region: string, consoleType: string): string[] {
     const activeIOSChecks = [
         { ios: 'IOS9', pattern: /^IOS9 \(rev 1034\): No Patches$/m },
         { ios: 'IOS12', pattern: /^IOS12 \(rev 526\): No Patches$/m },
@@ -151,40 +151,66 @@ export function checkForMissingIOS(data: string, region: string) {
         { ios: 'IOS56', pattern: /^IOS56 \(rev 5662\): No Patches$/m },
         { ios: 'IOS57', pattern: /^IOS57 \(rev 5919\): No Patches$/m },
         { ios: 'IOS61', pattern: /^IOS61 \(rev 5662\): No Patches$/m },
-        { ios: 'IOS62', pattern: /^IOS62 \(rev 6430\): No Patches$/m }
+        { ios: 'IOS62', pattern: /^IOS62 \(rev 6430\): No Patches$/m },
+        { ios: 'IOS58', pattern:  [/^IOS58 \(rev 6176\): No Patches$/m, /^IOS58 \(rev 6176\): USB 2\.0$/m] },
+        { ios: 'BC', pattern: /^BC v6$/m },
+        { ios: 'IOS59', pattern: /^IOS59 \(rev 9249\): No Patches$/m, condition: region.toUpperCase() === "J" }
     ];
+
+    const vActiveIOSChecks = [
+        { ios: 'vIOS9', pattern: /^vIOS9 \(rev 1290\): No Patches$/m },
+        { ios: 'vIOS12', pattern: /^vIOS12 \(rev 782\): No Patches$/m },
+        { ios: 'vIOS13', pattern: /^vIOS13 \(rev 1288\): No Patches$/m },
+        { ios: 'vIOS14', pattern: /^vIOS14 \(rev 1288\): No Patches$/m },
+        { ios: 'vIOS15', pattern: /^vIOS15 \(rev 1288\): No Patches$/m },
+        { ios: 'vIOS17', pattern: /^vIOS17 \(rev 1288\): No Patches$/m },
+        { ios: 'vIOS21', pattern: /^vIOS21 \(rev 1295\): No Patches$/m },
+        { ios: 'vIOS22', pattern: /^vIOS22 \(rev 1550\): No Patches$/m },
+        { ios: 'vIOS28', pattern: /^vIOS28 \(rev 2063\): No Patches$/m },
+        { ios: 'vIOS31', pattern: /^vIOS31 \(rev 3864\): No Patches$/m },
+        { ios: 'vIOS33', pattern: /^vIOS33 \(rev 3864\): No Patches$/m },
+        { ios: 'vIOS34', pattern: /^vIOS34 \(rev 3864\): No Patches$/m },
+        { ios: 'vIOS35', pattern: /^vIOS35 \(rev 3864\): No Patches$/m },
+        { ios: 'vIOS36', pattern: /^vIOS36 \(rev 3864\): No Patches$/m },
+        { ios: 'vIOS37', pattern: /^vIOS37 \(rev 5919\): No Patches$/m },
+        { ios: 'vIOS38', pattern: /^vIOS38 \(rev 4380\): No Patches$/m },
+        { ios: 'vIOS41', pattern: /^vIOS41 \(rev 3863\): No Patches$/m },
+        { ios: 'vIOS43', pattern: /^vIOS43 \(rev 3863\): No Patches$/m },
+        { ios: 'vIOS45', pattern: /^vIOS45 \(rev 3863\): No Patches$/m },
+        { ios: 'vIOS46', pattern: /^vIOS46 \(rev 3863\): No Patches$/m },
+        { ios: 'vIOS48', pattern: /^vIOS48 \(rev 4380\): No Patches$/m },
+        { ios: 'vIOS53', pattern: /^vIOS53 \(rev 5919\): No Patches$/m },
+        { ios: 'vIOS55', pattern: /^vIOS55 \(rev 5919\): No Patches$/m },
+        { ios: 'vIOS56', pattern: /^vIOS56 \(rev 5918\): No Patches$/m },
+        { ios: 'vIOS57', pattern: /^vIOS57 \(rev 6175\): No Patches$/m },
+        { ios: 'vIOS59', pattern: /^vIOS59 \(rev 9249\): No Patches$/m },
+        { ios: 'vIOS61', pattern: /^vIOS61 \(rev 5918\)/m },
+        { ios: 'vIOS62', pattern: /^vIOS62 \(rev 6942\): No Patches$/m },
+        { ios: 'BCnand', pattern: /^vIOS512 \(rev 7\): No Patches$/m },
+        { ios: 'BCwfs', pattern: /^vIOS513 \(rev 1\): No Patches$/m }
+    ];
+
+    const checks = consoleType === "Wii" ? activeIOSChecks : vActiveIOSChecks;
 
     const missingIOS: string[] = [];
 
-    // Check for IOS58 with special conditions
-    const ios58Present = /^IOS58 \(rev 6176\): No Patches$/m.test(data) || 
-                        /^IOS58 \(rev 6176\): USB 2\.0$/m.test(data);
-    
-    if (!ios58Present) {
-        missingIOS.push('IOS58');
-    }
-
-    // Check BC
-    const bcPresent = /^BC v6$/m.test(data);
-    if (!bcPresent) {
-        missingIOS.push('BC');
-    }
-
-    // Check for IOS59 with region-specific logic
-    if (region.toUpperCase() === "J") {
-        const ios59Present = /^IOS59 \(rev 9249\): No Patches$/m.test(data);
-        if (!ios59Present) {
-            missingIOS.push('IOS59');
-        }
-    }
 
     // Check all standard IOS
-    for (const check of activeIOSChecks) {
-        if (!check.pattern.test(data)) {
-            missingIOS.push(check.ios);
+    for (const check of checks) {
+        if (Array.isArray(check.pattern)) {
+            // If there are multiple patterns, check each one
+            const isMissing = check.pattern.every(pattern => !pattern.test(data));
+            if (isMissing) {
+                missingIOS.push(check.ios);
+            }
+        } else {
+            // Check single pattern
+            if (!check.pattern.test(data) && ('condition' in check ? check.condition !== false : true)) {
+                missingIOS.push(check.ios);
+            }
         }
+        
     }
-
     return missingIOS;
 }
 

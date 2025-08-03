@@ -64,6 +64,7 @@ export async function uploadCsvFile(formData: FormData): Promise<UploadResult> {
     const systemInfos = handleSyscheckData(copyData, { activeIOS, extraProtection, cMios });
 
     console.log("Console Region:", systemInfos.region);
+    console.log("Console Type:", systemInfos.consoleType);
     console.log("HBC Version:", systemInfos.hbcVersion);
     console.log("System Menu Version:", systemInfos.systemMenuVersion);
     console.log("region:", systemInfos.firmware?.SMregion, "firm:", systemInfos.firmware?.firmware, "version:", systemInfos.firmware?.firmwareVersion);
@@ -166,7 +167,7 @@ function handleSyscheckData(data: string, options: { activeIOS?: boolean, extraP
     wadToInstall.push(...outdatedD2XCios);
 
     if(options.activeIOS){
-      const missingIOS = checkForMissingIOS(data, region);
+      const missingIOS = checkForMissingIOS(data, region, consoleType);
       wadToInstall.push(...missingIOS);
     }
 
