@@ -56,24 +56,23 @@ export function translateKeywordsToEnglish(csvContent: string): string {
 }
 
 export function validateSyscheckData(data: string): boolean {
-    if (data.includes('SysCheck HDE') || data.includes('SysCheck ME') || data.includes('sysCheck v2.1.0b')) {
+    const validSyscheckVersions = [
+        'SysCheck HDE',
+        'SysCheck ME',
+        'sysCheck v2.1.0b',
+    ];
+
+    if (validSyscheckVersions.some(version => data.includes(version))) {
         return true;
     }
 
     return false;
 }
 
-
-
 export function validateConsoleType(consoleType: string): boolean {
     const validConsoleTypes = ["Wii", "vWii"];
 
     return validConsoleTypes.includes(consoleType);
-}
-
-
-export function checkIfPriiloaderInstalled(data: string): boolean {
-    return data.includes('Priiloader');
 }
 
 export function checkPatchedVIOS80(data: string): boolean {
@@ -121,10 +120,6 @@ export function checkD2XCios(data: string, consoleType: string): string[] {
     return matchedLines;
 }
 
-export function checkIfBootMiiInstalled(data: string): boolean {
-    return data.includes('BootMii');
-}
-
 export function checkIfHBCIsOutdated(hbcVersion: string, consoleType: string): boolean {
   const requiredVersion = consoleType === "Wii" ? "1.1.2" : "1.1.3";
   const isGreater = hbcVersion.split('.').map(Number)
@@ -135,3 +130,12 @@ export function checkIfHBCIsOutdated(hbcVersion: string, consoleType: string): b
   }
   return true;
 }
+
+export function checkIfBootMiiInstalled(data: string): boolean {
+    return data.includes('BootMii');
+}
+
+export function checkIfPriiloaderInstalled(data: string): boolean {
+    return data.includes('Priiloader');
+}
+
