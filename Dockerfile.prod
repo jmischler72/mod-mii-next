@@ -1,9 +1,9 @@
 # syntax=docker.io/docker/dockerfile:1
-FROM python:3 AS python-base
-RUN git clone --branch v1.5.0 https://github.com/NinjaCheetah/WiiPy.git /WiiPy
-WORKDIR /WiiPy
-RUN pip install --no-cache-dir -r requirements.txt
 
+FROM python:3 AS python-base
+WORKDIR /WiiPy
+RUN git clone --branch v1.5.0 https://github.com/NinjaCheetah/WiiPy.git /WiiPy
+RUN pip install --no-cache-dir -r requirements.txt -t ./pip-packages
 
 FROM node:20-alpine AS base
 
@@ -59,7 +59,10 @@ COPY --from=builder /app/public ./public
 COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
 COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
 
+# Install Python dependencies
+RUN apt-get update || : && apt-get install python3 -y
 COPY --from=python-base /WiiPy /WiiPy
+ENV PYTHONPATH=$PYTHONPATH:/WiiPy/pip-packages
 
 USER nextjs
 

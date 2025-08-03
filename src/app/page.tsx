@@ -60,7 +60,7 @@ export default function Home() {
               {uploadData.preview && uploadData.preview.length > 0 && (
                 <div className="mt-3">
                   <h4 className="font-medium text-blue-900 mb-1">Preview:</h4>
-                  <div className="bg-white p-2 rounded border text-xs overflow-x-auto">
+                  <div className="bg-white p-2 rounded border text-xs overflow-x-auto text-gray-700">
                     {uploadData.preview.map((line, index) => (
                       <div key={index} className="font-mono">
                         {line}

@@ -2,15 +2,9 @@
 # syntax=docker.io/docker/dockerfile:1
 
 FROM python:3 AS python-base
-RUN git clone --branch v1.5.0 https://github.com/NinjaCheetah/WiiPy.git /WiiPy
 WORKDIR /WiiPy
-
-RUN python3 -m venv ./venv
-RUN chmod +x ./venv/bin/activate
-
-RUN . ./venv/bin/activate
-RUN pip install --no-cache-dir -r requirements.txt 
-
+RUN git clone --branch v1.5.0 https://github.com/NinjaCheetah/WiiPy.git /WiiPy
+RUN pip install --no-cache-dir -r requirements.txt -t ./pip-packages
 
 FROM node:20
 
@@ -19,7 +13,7 @@ WORKDIR /app
 # Install Python dependencies
 RUN apt-get update || : && apt-get install python3 -y
 COPY --from=python-base /WiiPy /WiiPy
-CMD . /WiiPy/venv/bin/activate
+ENV PYTHONPATH=$PYTHONPATH:/WiiPy/pip-packages
 
 # Install dependencies based on the preferred package manager
 COPY package.json yarn.lock* package-lock.json* pnpm-lock.yaml* .npmrc* ./
