@@ -218,6 +218,7 @@ export function FileUploadForm({ onSubmit, onUploadSuccess, onUploadError, class
           />
 
           <Button
+            variant="outline"
             type="submit"
             className="w-full"
             disabled={!selectedFile || isUploading}

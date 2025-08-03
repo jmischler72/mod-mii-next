@@ -3,15 +3,14 @@
 
 FROM python:3 AS python-base
 WORKDIR /WiiPy
-RUN git clone --branch v1.5.0 https://github.com/NinjaCheetah/WiiPy.git /WiiPy
+RUN git clone https://github.com/NinjaCheetah/WiiPy.git /WiiPy
 RUN pip install --no-cache-dir -r requirements.txt -t ./pip-packages
 
-FROM node:20
+FROM nikolaik/python-nodejs
 
 WORKDIR /app
 
 # Install Python dependencies
-RUN apt-get update || : && apt-get install python3 -y
 COPY --from=python-base /WiiPy /WiiPy
 ENV PYTHONPATH=$PYTHONPATH:/WiiPy/pip-packages
 

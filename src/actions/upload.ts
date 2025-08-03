@@ -149,7 +149,7 @@ function handleSyscheckData(data: string, options: { activeIOS?: boolean, extraP
       wadToInstall.push("yawm");
     }
 
-    runWiiPy(["-i", "wad", ...wadToInstall], { cwd: process.cwd() });
+    runWiiPy(["nus", "title", "test" , "-v 1","--wad /tmp/test"], { cwd: process.cwd() });
 
     return {
       region,
