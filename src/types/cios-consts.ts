@@ -1,1 +1,1 @@
-export const latestd2xVersion = "d2x-v11beta3";
+export const latestd2xVersion = "11beta3";

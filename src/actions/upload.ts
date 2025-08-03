@@ -1,6 +1,6 @@
 "use server"
 
-import { checkD2XCios, checkIfBootMiiInstalled, checkIfHBCIsOutdated, checkIfPriiloaderInstalled, translateKeywordsToEnglish, validateConsoleType, validateSyscheckData } from "@/helpers/syscheck-validation-helper"
+import { checkD2XCios, checkForMissingIOS, checkIfBootMiiInstalled, checkIfHBCIsOutdated, checkIfPriiloaderInstalled, translateKeywordsToEnglish, validateConsoleType, validateSyscheckData } from "@/helpers/syscheck-validation-helper"
 import { z } from "zod"
 import { UploadResult } from "@/types/upload-type"
 import { getConsoleRegion, getConsoleType, getFirmware, getHBCVersion, getLatestSMVersion, getSystemMenuVersion } from "@/helpers/syscheck-info-helper"
@@ -24,7 +24,7 @@ const uploadSchema = z.object({
 
 export async function uploadCsvFile(formData: FormData): Promise<UploadResult> {
 
-  const activeIOS = false; // Placeholder for active IOS check, if needed
+  const activeIOS = true; // Placeholder for active IOS check, if needed
   const extraProtection = false; // When enabled, a patched IOS60 will be installed to other system menu IOS slots to prevent bricks from users manually up\downgrading Wii's
   const cMios = false; // A cMIOS allows older non-chipped Wii's to play GameCube backup discs
   const active = activeIOS || extraProtection || cMios;
@@ -69,28 +69,28 @@ export async function uploadCsvFile(formData: FormData): Promise<UploadResult> {
     console.log("region:", systemInfos.firmware?.SMregion, "firm:", systemInfos.firmware?.firmware, "version:", systemInfos.firmware?.firmwareVersion);
     console.log("WADs to Install:", systemInfos.wadToInstall);
 
-    const downloadedFiles: string[] = [];
+    // const downloadedFiles: string[] = [];
     
-    const entry = getEntry("SM4.1U");
-    console.log("Entry from database:", entry);
+    // const entry = getEntry("SM4.1U");
+    // console.log("Entry from database:", entry);
     
-    if(!entry) {
-      throw new CustomError("No entry found in the database for SM4.1U")
-    }
+    // if(!entry) {
+    //   throw new CustomError("No entry found in the database for SM4.1U")
+    // }
 
-    try {
-      const result = await nusDownload(
-        entry.code1,
-        entry.code2,
-        entry.version,
-        entry.wadname,
-      );
-      console.log("NUS Download Result:", result);
-      downloadedFiles.push(entry.wadname);
-    } catch (error) {
-      console.error("NUS Download Error:", error);
-      throw new CustomError(`Failed to download ${entry.wadname}: ${error}`);
-    }
+    // try {
+    //   const result = await nusDownload(
+    //     entry.code1,
+    //     entry.code2,
+    //     entry.version,
+    //     entry.wadname,
+    //   );
+    //   console.log("NUS Download Result:", result);
+    //   downloadedFiles.push(entry.wadname);
+    // } catch (error) {
+    //   console.error("NUS Download Error:", error);
+    //   throw new CustomError(`Failed to download ${entry.wadname}: ${error}`);
+    // }
 
 
 
@@ -104,7 +104,7 @@ export async function uploadCsvFile(formData: FormData): Promise<UploadResult> {
         hbcVersion: systemInfos.hbcVersion || "Unknown",
         systemMenuVersion: systemInfos.systemMenuVersion || "Unknown",
         wadToInstall: systemInfos.wadToInstall || [],
-        downloadedFiles: downloadedFiles,
+        // downloadedFiles: downloadedFiles,
         preview: copyData.split('\n').slice(0, 5), // Preview first
       }
     }
@@ -162,14 +162,16 @@ function handleSyscheckData(data: string, options: { activeIOS?: boolean, extraP
     if (!isPriiloaderInstalled || (isPriiloaderInstalled && updatePriiloader)) wadToInstall.push("pri");
 
 
-    const isD2XCiosInstalled = checkD2XCios(data, consoleType);
-    console.log("Is D2X cIOS installed:", isD2XCiosInstalled);
+    const outdatedD2XCios = checkD2XCios(data, consoleType);
+    wadToInstall.push(...outdatedD2XCios);
 
     if(options.activeIOS){
-
+      const missingIOS = checkForMissingIOS(data, region);
+      wadToInstall.push(...missingIOS);
     }
 
     if(options.extraProtection) {
+
     }
 
     if(wadToInstall.length > 0) {
