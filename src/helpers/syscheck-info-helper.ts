@@ -78,7 +78,7 @@ export function getLatestSMVersion(data: { firmware: string, firmwareVersion: nu
 }
 
 export function getConsoleType(data: string): string | null {
-    const consoleTypeLine = data.split('\n').find(line => line.includes(EnglishKeywords.ConsoleType));
+    const consoleTypeLine = data.split('\n').find(line => line.includes('Console Type'));
     if (!consoleTypeLine) return null;
 
     const consoleType = consoleTypeLine.split(':')[1].trim();
