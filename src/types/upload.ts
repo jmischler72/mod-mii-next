@@ -4,7 +4,8 @@ export interface UploadData {
   region: string
   hbcVersion: string
   systemMenuVersion: string
-  preview?: string[]
+  preview?: string[],
+  wadToInstall?: string[]
 }
 
 export interface UploadResult {
