@@ -1,12 +1,12 @@
 "use server"
 
-import { checkD2XCios, checkIfBootMiiInstalled, checkIfHBCIsOutdated, checkIfPriiloaderInstalled, translateKeywordsToEnglish, validateConsoleType, validateSyscheckData } from "@/lib/helpers/syscheck-validation"
+import { checkD2XCios, checkIfBootMiiInstalled, checkIfHBCIsOutdated, checkIfPriiloaderInstalled, translateKeywordsToEnglish, validateConsoleType, validateSyscheckData } from "@/helpers/syscheck-validation-helper"
 import { z } from "zod"
-import { UploadResult } from "@/types/upload"
-import { getConsoleRegion, getConsoleType, getFirmware, getHBCVersion, getLatestSMVersion, getSystemMenuVersion } from "@/lib/helpers/syscheck-info"
+import { UploadResult } from "@/types/upload-type"
+import { getConsoleRegion, getConsoleType, getFirmware, getHBCVersion, getLatestSMVersion, getSystemMenuVersion } from "@/helpers/syscheck-info-helper"
 import { CustomError } from "@/types/custom-error"
-import { nusDownload } from "@/lib/helpers/wiipy-wrapper"
-import { getEntry } from "@/lib/helpers/database-helper"
+import { nusDownload } from "@/helpers/wiipy-wrapper"
+import { getEntry } from "@/helpers/database-helper"
 
 const MAX_FILE_SIZE = 5000000 // 5MB
 const ACCEPTED_FILE_TYPES = ["text/csv", "application/vnd.ms-excel"]

@@ -2,7 +2,7 @@
 
 import { FileUploadForm } from "@/components/file-upload-form";
 import { useState } from "react";
-import { UploadData, UploadResult } from "@/types/upload";
+import { UploadData, UploadResult } from "@/types/upload-type";
 import { Button } from "@/components/ui/button";
 import { Download } from "lucide-react";
 

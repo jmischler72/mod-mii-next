@@ -19,7 +19,7 @@ import {
 import { Input } from "@/components/ui/input"
 import { cn } from "@/lib/utils"
 import { uploadCsvFile } from "@/actions/upload"
-import { UploadResult } from "@/types/upload"
+import { UploadResult } from "@/types/upload-type"
 
 const MAX_FILE_SIZE = 5000000 // 5MB
 const ACCEPTED_FILE_TYPES = ["text/csv", "application/vnd.ms-excel"]

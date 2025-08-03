@@ -1,5 +1,4 @@
 import { CustomError } from "@/types/custom-error";
-import { EnglishKeywords } from "./english-keywords";
 
 export function getConsoleRegion(data: string): string | null {
     const regionMap: Record<string, string> = {
@@ -23,7 +22,7 @@ export function getConsoleRegion(data: string): string | null {
 }
 
 export function getHBCVersion(data: string): string | null {
-    const hbcLine = data.split('\n').find(line => line.includes(EnglishKeywords.HomebrewChannel));
+    const hbcLine = data.split('\n').find(line => line.includes('Homebrew Channel'));
     if (!hbcLine) return null;
 
     const match = hbcLine.match(/Homebrew Channel\s+([0-9.]+)/);
@@ -31,7 +30,7 @@ export function getHBCVersion(data: string): string | null {
 }
 
 export function getSystemMenuVersion(data: string): string | null {
-    const systemMenuLine = data.split('\n').find(line => line.includes(EnglishKeywords.SystemMenu));
+    const systemMenuLine = data.split('\n').find(line => line.includes('System Menu'));
     if (!systemMenuLine) return null;
 
     // Remove "System Menu " prefix, leading/trailing spaces, and any commas

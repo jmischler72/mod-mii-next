@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server"
 import fs from "fs"
 import path from "path"
-import { wadsDirectory } from "@/lib/helpers/wiipy-wrapper"
+import { wadsDirectory } from "@/helpers/wiipy-wrapper"
 
 export async function GET(request: NextRequest) {
   try {

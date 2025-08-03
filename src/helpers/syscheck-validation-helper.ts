@@ -1,51 +1,48 @@
-import { EnglishKeywords } from "./english-keywords";
-
 export function translateKeywordsToEnglish(csvContent: string): string {
-  // This function can be used to translate keywords in the CSV content if needed
-  // For now, it just returns the content as is
-
+    // This function is used to translate keywords in the CSV content so we can extract the system information
+    
     const replacements: [string, string][] = [
-        ['Chaine Homebrew', EnglishKeywords.HomebrewChannel],
-        ['Chaine Channel', EnglishKeywords.HomebrewChannel],
-        ['Canale Homebrew', EnglishKeywords.HomebrewChannel],
-        ['Canal Homebrew', EnglishKeywords.HomebrewChannel],
-        ['Homebrewkanal', EnglishKeywords.HomebrewChannel],
+        ['Chaine Homebrew', 'Homebrew Channel'],
+        ['Chaine Channel', 'Homebrew Channel'],
+        ['Canale Homebrew', 'Homebrew Channel'],
+        ['Canal Homebrew', 'Homebrew Channel'],
+        ['Homebrewkanal', 'Homebrew Channel'],
 
-        ['utilise', EnglishKeywords.RunningOn],
-        ["appoggiato all'", EnglishKeywords.RunningOn + ' '],
-        ['ejecutandose en', EnglishKeywords.RunningOn],
-        ['benutzt', EnglishKeywords.RunningOn],
+        ['utilise', 'running on'],
+        ["appoggiato all'", 'running on '],
+        ['ejecutandose en', 'running on'],
+        ['benutzt', 'running on'],
 
-        ['Systemmenue', EnglishKeywords.SystemMenu],
-        ['Menu Systeme', EnglishKeywords.SystemMenu],
-        ['Menu di sistema', EnglishKeywords.SystemMenu],
-        ['Menu de Sistema', EnglishKeywords.SystemMenu],
+        ['Systemmenue', 'System Menu'],
+        ['Menu Systeme', 'System Menu'],
+        ['Menu di sistema', 'System Menu'],
+        ['Menu de Sistema', 'System Menu'],
 
-        ['Pas de patches', EnglishKeywords.NoPatches],
-        ['Non patchato', EnglishKeywords.NoPatches],
-        ['Sin Parches', EnglishKeywords.NoPatches],
-        ['Keine Patches', EnglishKeywords.NoPatches],
+        ['Pas de patches', 'No Patches'],
+        ['Non patchato', 'No Patches'],
+        ['Sin Parches', 'No Patches'],
+        ['Keine Patches', 'No Patches'],
 
-        ['Bug Trucha', EnglishKeywords.TruchaBug],
+        ['Bug Trucha', 'Trucha Bug'],
 
-        ['Acces NAND', EnglishKeywords.NANDAccess],
-        ['Accesso NAND', EnglishKeywords.NANDAccess],
-        ['Acceso NAND', EnglishKeywords.NANDAccess],
-        ['NAND Zugriff', EnglishKeywords.NANDAccess],
+        ['Acces NAND', 'NAND Access'],
+        ['Accesso NAND', 'NAND Access'],
+        ['Acceso NAND', 'NAND Access'],
+        ['NAND Zugriff', 'NAND Access'],
 
-        ['Identificazione ES', EnglishKeywords.ESIdentify],
+        ['Identificazione ES', 'ES Identify'],
 
-        ['Type de Console', EnglishKeywords.ConsoleType],
-        ['Tipo Console', EnglishKeywords.ConsoleType],
-        ['Tipo de consola', EnglishKeywords.ConsoleType],
-        ['Konsolentyp', EnglishKeywords.ConsoleType],
+        ['Type de Console', 'Console Type'],
+        ['Tipo Console', 'Console Type'],
+        ['Tipo de consola', 'Console Type'],
+        ['Konsolentyp', 'Console Type'],
 
-        ['Regione', EnglishKeywords.Region],
+        ['Regione', 'Region'],
 
-        ['original region', EnglishKeywords.Originally],
-        ["region d'origine", EnglishKeywords.Originally],
-        ['regione originale', EnglishKeywords.Originally],
-        ['region de origen', EnglishKeywords.Originally],
+        ['original region', 'originally'],
+        ["region d'origine", 'originally'],
+        ['regione originale', 'originally'],
+        ['region de origen', 'originally'],
     ];
 
     for (const [pattern, replacement] of replacements) {
