@@ -121,6 +121,10 @@ export function checkD2XCios(data: string, consoleType: string): string[] {
     return matchedLines;
 }
 
+export function checkIfBootMiiInstalled(data: string): boolean {
+    return data.includes('BootMii');
+}
+
 export function checkIfHBCIsOutdated(hbcVersion: string, consoleType: string): boolean {
   const requiredVersion = consoleType === "Wii" ? "1.1.2" : "1.1.3";
   const isGreater = hbcVersion.split('.').map(Number)

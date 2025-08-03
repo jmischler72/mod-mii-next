@@ -1,6 +1,6 @@
 "use server"
 
-import { checkD2XCios, checkIfHBCIsOutdated, checkIfPriiloaderInstalled, checkPatchedVIOS80, translateKeywordsToEnglish, validateConsoleType, validateSyscheckData } from "@/lib/helpers/syscheck-validation"
+import { checkD2XCios, checkIfBootMiiInstalled, checkIfHBCIsOutdated, checkIfPriiloaderInstalled, checkPatchedVIOS80, translateKeywordsToEnglish, validateConsoleType, validateSyscheckData } from "@/lib/helpers/syscheck-validation"
 import { z } from "zod"
 import { UploadResult } from "@/types/upload"
 import { getConsoleRegion, getConsoleType, getFirmware, getHBCVersion, getLatestSMVersion, getSystemMenuVersion } from "@/lib/helpers/syscheck-info"
@@ -21,6 +21,13 @@ const uploadSchema = z.object({
 })
 
 export async function uploadCsvFile(formData: FormData): Promise<UploadResult> {
+
+  const activeIOS = false; // Placeholder for active IOS check, if needed
+  const extraProtection = false; // When enabled, a patched IOS60 will be installed to other system menu IOS slots to prevent bricks from users manually up\downgrading Wii's
+  const cMios = false; // A cMIOS allows older non-chipped Wii's to play GameCube backup discs
+  const active = activeIOS || extraProtection || cMios;
+
+
   try {
     const file = formData.get("file") as File
     
@@ -73,30 +80,42 @@ export async function uploadCsvFile(formData: FormData): Promise<UploadResult> {
 
     const wadToInstall = [];
 
-    if(!hbcVersion){
-      wadToInstall.push("OHBC113");
-      //also check if IOS58 is installed
-      const isIOS58Installed = copyData.includes("IOS58");
-      if(!isIOS58Installed) wadToInstall.push("IOS58");
+    const isBootMiiInstalled = checkIfBootMiiInstalled(copyData);
+    if (!isBootMiiInstalled) {
+      wadToInstall.push("HM");
     }else{
-      const isHbcOutdated = checkIfHBCIsOutdated(hbcVersion, consoleType);
-      if(isHbcOutdated) wadToInstall.push("OHBC");
-    }
+      if(!hbcVersion){
+        wadToInstall.push("OHBC113");
+        //also check if IOS58 is installed
+        const isIOS58Installed = copyData.includes("IOS58");
+        if(!isIOS58Installed && isBootMiiInstalled) wadToInstall.push("IOS58");
+      }else{
+        const isHbcOutdated = checkIfHBCIsOutdated(hbcVersion, consoleType);
+        if(isHbcOutdated) wadToInstall.push("OHBC");
+      }
+    }    
 
     const latestFirmwareVersion = getLatestSMVersion(firmware);
     if(latestFirmwareVersion !== firmware.firmware) wadToInstall.push(`SM${latestFirmwareVersion}${firmware.SMregion}`);
 
     const updatePriiloader = false;
     const isPriiloaderInstalled = checkIfPriiloaderInstalled(copyData);
-
     if (!isPriiloaderInstalled || (isPriiloaderInstalled && updatePriiloader)) wadToInstall.push("pri");
 
 
     const isD2XCiosInstalled = checkD2XCios(copyData, consoleType);
     console.log("Is D2X cIOS installed:", isD2XCiosInstalled);
 
+    if(activeIOS){
 
+    }
 
+    if(extraProtection) {
+    }
+
+    if(wadToInstall.length > 0) {
+      wadToInstall.push("yawm");
+    }
 
     // for vwii ==>
 
