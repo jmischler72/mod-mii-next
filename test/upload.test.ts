@@ -1,4 +1,4 @@
-import { uploadCsvFile } from '../src/actions/upload';
+import { uploadSyscheckFile } from '../src/actions/upload-syscheck-file';
 import { readFileSync } from 'fs';
 import { join } from 'path';
 import { mockSyscheckData, MockFile, MockFormData } from './helpers/testData';
@@ -21,7 +21,7 @@ describe('CSV Upload Tests', () => {
       formData.append('file', mockFile);
       
       // Test the upload function
-      const result = await uploadCsvFile(formData as unknown as FormData);
+      const result = await uploadSyscheckFile(formData as unknown as FormData);
       
       expect(result.success).toBe(true);
       expect(result.message).toContain('uploaded successfully');
@@ -35,7 +35,7 @@ describe('CSV Upload Tests', () => {
     it('should handle missing file', async () => {
       const formData = new MockFormData();
       
-      const result = await uploadCsvFile(formData as unknown as FormData);
+      const result = await uploadSyscheckFile(formData as unknown as FormData);
       
       expect(result.success).toBe(false);
       expect(result.error).toBe('No file provided');
@@ -49,7 +49,7 @@ describe('CSV Upload Tests', () => {
       const formData = new MockFormData();
       formData.append('file', mockFile);
       
-      const result = await uploadCsvFile(formData as unknown as FormData);
+      const result = await uploadSyscheckFile(formData as unknown as FormData);
       
       expect(result.success).toBe(false);
       expect(result.error).toContain('File size should be less than 5MB');
@@ -61,7 +61,7 @@ describe('CSV Upload Tests', () => {
       const formData = new MockFormData();
       formData.append('file', mockFile);
       
-      const result = await uploadCsvFile(formData as unknown as FormData);
+      const result = await uploadSyscheckFile(formData as unknown as FormData);
       
       expect(result.success).toBe(false);
       expect(result.error).toContain('empty');
@@ -73,7 +73,7 @@ describe('CSV Upload Tests', () => {
       const formData = new MockFormData();
       formData.append('file', mockFile);
       
-      const result = await uploadCsvFile(formData as unknown as FormData);
+      const result = await uploadSyscheckFile(formData as unknown as FormData);
       
       expect(result.success).toBe(false);
       expect(result.error).toContain('Only CSV files are allowed');
@@ -87,7 +87,7 @@ describe('CSV Upload Tests', () => {
       const formData = new MockFormData();
       formData.append('file', mockFile);
       
-      const result = await uploadCsvFile(formData as unknown as FormData);
+      const result = await uploadSyscheckFile(formData as unknown as FormData);
       
       expect(result.success).toBe(false);
       expect(result.error).toContain('valid SysCheck report');
@@ -99,7 +99,7 @@ describe('CSV Upload Tests', () => {
       const formData = new MockFormData();
       formData.append('file', mockFile);
       
-      const result = await uploadCsvFile(formData as unknown as FormData);
+      const result = await uploadSyscheckFile(formData as unknown as FormData);
       
       expect(result.success).toBe(true);
       expect(result.data?.region).toBe('PAL');
@@ -111,7 +111,7 @@ describe('CSV Upload Tests', () => {
       const formData = new MockFormData();
       formData.append('file', mockFile);
       
-      const result = await uploadCsvFile(formData as unknown as FormData);
+      const result = await uploadSyscheckFile(formData as unknown as FormData);
       
       expect(result.success).toBe(true);
       expect(result.data?.region).toBe('NTSC-U');
@@ -123,7 +123,7 @@ describe('CSV Upload Tests', () => {
       const formData = new MockFormData();
       formData.append('file', mockFile);
       
-      const result = await uploadCsvFile(formData as unknown as FormData);
+      const result = await uploadSyscheckFile(formData as unknown as FormData);
       
       expect(result.success).toBe(true);
       expect(result.data?.region).toBe('NTSC-J');
@@ -135,7 +135,7 @@ describe('CSV Upload Tests', () => {
       const formData = new MockFormData();
       formData.append('file', mockFile);
       
-      const result = await uploadCsvFile(formData as unknown as FormData);
+      const result = await uploadSyscheckFile(formData as unknown as FormData);
       
       expect(result.success).toBe(false);
       expect(result.error).toContain('valid console type');
@@ -149,7 +149,7 @@ describe('CSV Upload Tests', () => {
       const formData = new MockFormData();
       formData.append('file', mockFile);
       
-      const result = await uploadCsvFile(formData as unknown as FormData);
+      const result = await uploadSyscheckFile(formData as unknown as FormData);
       
       expect(result.success).toBe(true);
       expect(result.data?.filename).toBe('test.csv');
@@ -162,7 +162,7 @@ describe('CSV Upload Tests', () => {
       const formData = new MockFormData();
       formData.append('file', mockFile);
       
-      const result = await uploadCsvFile(formData as unknown as FormData);
+      const result = await uploadSyscheckFile(formData as unknown as FormData);
       
       expect(result.success).toBe(false);
       expect(result.error).toContain('empty');
@@ -174,7 +174,7 @@ describe('CSV Upload Tests', () => {
       const formData = new MockFormData();
       formData.append('file', mockFile);
       
-      const result = await uploadCsvFile(formData as unknown as FormData);
+      const result = await uploadSyscheckFile(formData as unknown as FormData);
       
       expect(result.success).toBe(true);
       expect(result.data?.filename).toBe('test-file_with-special@chars.csv');
@@ -186,7 +186,7 @@ describe('CSV Upload Tests', () => {
       const formData = new MockFormData();
       formData.append('file', mockFile);
       
-      const result = await uploadCsvFile(formData as unknown as FormData);
+      const result = await uploadSyscheckFile(formData as unknown as FormData);
       
       expect(result.success).toBe(true);
       expect(result.data?.filename).toBe('test.csv');
@@ -198,7 +198,7 @@ describe('CSV Upload Tests', () => {
       const formData = new MockFormData();
       formData.append('file', 'not-a-file');
       
-      const result = await uploadCsvFile(formData as unknown as FormData);
+      const result = await uploadSyscheckFile(formData as unknown as FormData);
       
       expect(result.success).toBe(false);
       expect(result.error).toBeDefined();
@@ -207,7 +207,7 @@ describe('CSV Upload Tests', () => {
     it('should return proper error structure', async () => {
       const formData = new MockFormData();
       
-      const result = await uploadCsvFile(formData as unknown as FormData);
+      const result = await uploadSyscheckFile(formData as unknown as FormData);
       
       expect(result).toHaveProperty('success');
       expect(result).toHaveProperty('error');
@@ -220,7 +220,7 @@ describe('CSV Upload Tests', () => {
       const formData = new MockFormData();
       formData.append('file', mockFile);
       
-      const result = await uploadCsvFile(formData as unknown as FormData);
+      const result = await uploadSyscheckFile(formData as unknown as FormData);
       
       expect(result).toHaveProperty('success');
       expect(result).toHaveProperty('message');

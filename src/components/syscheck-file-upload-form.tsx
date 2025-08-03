@@ -18,8 +18,8 @@ import {
 } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
 import { cn } from "@/lib/utils"
-import { uploadCsvFile } from "@/actions/upload"
-import { UploadResult } from "@/types/upload-type"
+import { uploadSyscheckFile } from "@/actions/upload-syscheck-file"
+import { UploadSyscheckResult } from "@/types/upload-syscheck-type"
 
 const MAX_FILE_SIZE = 5000000 // 5MB
 const ACCEPTED_FILE_TYPES = ["text/csv", "application/vnd.ms-excel"]
@@ -39,12 +39,12 @@ type FormValues = z.infer<typeof formSchema>
 
 interface FileUploadFormProps {
   onSubmit?: (data: FormValues) => void
-  onUploadSuccess?: (result: UploadResult) => void
+  onUploadSuccess?: (result: UploadSyscheckResult) => void
   onUploadError?: (error: string) => void
   className?: string
 }
 
-export function FileUploadForm({ onSubmit, onUploadSuccess, onUploadError, className }: FileUploadFormProps) {
+export function SyscheckFileUploadForm({ onSubmit, onUploadSuccess, onUploadError, className }: FileUploadFormProps) {
   const [selectedFile, setSelectedFile] = useState<File | null>(null)
   const [dragActive, setDragActive] = useState(false)
   const [isUploading, setIsUploading] = useState(false)
@@ -66,7 +66,7 @@ export function FileUploadForm({ onSubmit, onUploadSuccess, onUploadError, class
       const formData = new FormData()
       formData.append("file", data.file)
       
-      const result = await uploadCsvFile(formData)
+      const result = await uploadSyscheckFile(formData)
       
       if (result.success) {
         onUploadSuccess?.(result)

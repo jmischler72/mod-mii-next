@@ -1,17 +1,17 @@
 "use client"
 
-import { FileUploadForm } from "@/components/file-upload-form";
+import { SyscheckFileUploadForm } from "@/components/syscheck-file-upload-form";
 import { useState } from "react";
-import { UploadData, UploadResult } from "@/types/upload-type";
+import { UploadSyscheckData, UploadSyscheckResult } from "@/types/upload-syscheck-type";
 import { Button } from "@/components/ui/button";
 import { Download } from "lucide-react";
 
 export default function Home() {
   const [uploadMessage, setUploadMessage] = useState<string>("")
-  const [uploadData, setUploadData] = useState<UploadData | null>(null)
+  const [uploadData, setUploadData] = useState<UploadSyscheckData | null>(null)
   const [isDownloading, setIsDownloading] = useState<string | null>(null)
 
-  const handleUploadSuccess = (result: UploadResult) => {
+  const handleUploadSuccess = (result: UploadSyscheckResult) => {
     setUploadMessage(result.message || "File uploaded successfully!")
     setUploadData(result.data || null)
     console.log("Upload successful:", result)
@@ -33,7 +33,6 @@ export default function Home() {
         throw new Error(errorData.error || 'Download failed')
       }
 
-      // Create blob and download
       const blob = await response.blob()
       const url = window.URL.createObjectURL(blob)
       const a = document.createElement('a')
@@ -58,7 +57,7 @@ export default function Home() {
         
         <div className="w-full max-w-2xl">
           <h1 className="text-2xl font-bold text-center mb-8">CSV File Upload</h1>
-          <FileUploadForm 
+          <SyscheckFileUploadForm 
             onUploadSuccess={handleUploadSuccess}
             onUploadError={handleUploadError}
             className="mx-auto" 

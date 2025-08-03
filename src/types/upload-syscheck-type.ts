@@ -1,4 +1,4 @@
-export interface UploadData {
+export interface UploadSyscheckData {
   filename: string
   size: number
   region: string
@@ -9,10 +9,10 @@ export interface UploadData {
   downloadedFiles?: string[]
 }
 
-export interface UploadResult {
+export interface UploadSyscheckResult {
   success: boolean
   message?: string
   error?: string
-  data?: UploadData
+  data?: UploadSyscheckData
 }
 

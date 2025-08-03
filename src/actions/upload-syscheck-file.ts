@@ -2,7 +2,7 @@
 
 import { checkD2XCios, checkExtraProtection, checkForMissingIOS, checkIfBootMiiInstalled, checkIfHBCIsOutdated, checkIfPriiloaderInstalled, translateKeywordsToEnglish, validateConsoleType, validateSyscheckData } from "@/helpers/syscheck-validation-helper"
 import { z } from "zod"
-import { UploadResult } from "@/types/upload-type"
+import { UploadSyscheckResult } from "@/types/upload-syscheck-type"
 import { getConsoleRegion, getConsoleType, getFirmware, getHBCVersion, getLatestSMVersion, getSystemMenuVersion } from "@/helpers/syscheck-info-helper"
 import { CustomError } from "@/types/custom-error"
 import { nusDownload } from "@/helpers/wiipy-wrapper"
@@ -22,7 +22,7 @@ const uploadSchema = z.object({
     ),
 })
 
-export async function uploadCsvFile(formData: FormData): Promise<UploadResult> {
+export async function uploadSyscheckFile(formData: FormData): Promise<UploadSyscheckResult> {
 
   const activeIOS = true; // Placeholder for active IOS check, if needed
   const extraProtection = false; // When enabled, a patched IOS60 will be installed to other system menu IOS slots to prevent bricks from users manually up\downgrading Wii's
