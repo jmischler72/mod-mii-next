@@ -39,7 +39,7 @@ import fs from "fs";
 
 const wiipyCommand = "python3 /WiiPy/wiipy.py";
 const nusCommand = `${wiipyCommand} nus title`;
-export const wadsDirectory = "/tmp";
+export const wadsDirectory = path.join(process.cwd(), '.temp-downloads');
 
 export function nusDownload(
     code1: string,
@@ -47,16 +47,19 @@ export function nusDownload(
     version: string,
     wadname: string,
 ): Promise<string> {
-    console.log(`Downloading ${wadname}...`);
+    // Ensure directory exists
+    if (!fs.existsSync(wadsDirectory)) {
+        fs.mkdirSync(wadsDirectory, { recursive: true });
+    }
 
-    getCurrentWadsInDirectory().some((wad) => {
-        if (wad === wadname) {
-            console.log(`WAD ${wadname} already exists in ${wadsDirectory}`);
-            return new Promise(() => {}); // Stop searching if we found the WAD
-        }
-    });
+    // Check if WAD already exists
+    const wadPath = path.join(wadsDirectory, wadname);
+    if (fs.existsSync(wadPath)) {
+        console.log(`WAD ${wadname} already exists in cache`);
+        return Promise.resolve(`WAD ${wadname} found in cache`);
+    }
 
-    const fullCommand = `${nusCommand} ${code1}${code2} -v ${version} --wad ${path.join(wadsDirectory, wadname)}`;
+    const fullCommand = `${nusCommand} ${code1}${code2} -v ${version} --wad ${wadPath}`;
     const child = spawn(fullCommand, [], { shell: true });
 
     let output = '';

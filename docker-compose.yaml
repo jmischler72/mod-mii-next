@@ -1,3 +1,5 @@
+version: "3.8"
+
 services:
   next-app:
     container_name: next-app
@@ -6,13 +8,20 @@ services:
       dockerfile: Dockerfile.dev
 
     # Set environment variables directly in the compose file
-    # environment:
-    # ENV_VARIABLE: ${ENV_VARIABLE}
-    # NEXT_PUBLIC_ENV_VARIABLE: ${NEXT_PUBLIC_ENV_VARIABLE}
+    environment:
+      # MinIO Configuration
+      MINIO_ENDPOINT: minio
+      MINIO_PORT: 9000
+      MINIO_USE_SSL: false
+      MINIO_ACCESS_KEY: admin
+      MINIO_SECRET_KEY: password123
+      S3_BUCKET_NAME: wii-homebrew-files
 
-    # Set environment variables based on the .env file
-    # env_file:
-    #   - .env
+      # Download Configuration
+      MAX_CONCURRENT_DOWNLOADS: 2
+      DOWNLOAD_TIMEOUT: 300000 # Set environment variables based on the .env file (alternative)
+    env_file:
+      - .env
     volumes:
       - ./src:/app/src
       - ./public:/app/public
@@ -24,8 +33,46 @@ services:
 
   # Add more containers below (nginx, postgres, etc.)
 
+  minio:
+    image: minio/minio:latest
+    container_name: wii-homebrew-minio
+    ports:
+      - "9000:9000" # MinIO API
+      - "9001:9001" # MinIO Console
+    environment:
+      MINIO_ROOT_USER: admin
+      MINIO_ROOT_PASSWORD: password123
+    volumes:
+      - minio_data:/data
+    command: server /data --console-address ":9001"
+    restart: always
+    networks:
+      - my_network
+
+  # Optional: Create bucket on startup
+  createbuckets:
+    image: minio/mc:latest
+    container_name: minio-bucket-creator
+    depends_on:
+      - minio
+    networks:
+      - my_network
+    entrypoint: >
+      /bin/sh -c "
+      sleep 10;
+      /usr/bin/mc alias set myminio http://minio:9000 admin password123;
+      /usr/bin/mc mb myminio/wii-homebrew-files;
+      /usr/bin/mc anonymous set public myminio/wii-homebrew-files;
+      exit 0;
+      "
+    restart: "no"
+
 # Define a network, which allows containers to communicate
 # with each other, by using their container name as a hostname
 networks:
   my_network:
     external: true
+
+# Define volumes for persistent data storage
+volumes:
+  minio_data:

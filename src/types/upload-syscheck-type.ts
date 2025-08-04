@@ -1,3 +1,15 @@
+export interface DownloadSummary {
+  downloaded: number
+  cached: number
+  failed: number
+  failedFiles: string[]
+  s3Files: Array<{
+    wadname: string
+    s3Key?: string
+    s3Url?: string
+  }>
+}
+
 export interface UploadSyscheckData {
   filename: string
   size: number
@@ -6,7 +18,7 @@ export interface UploadSyscheckData {
   systemMenuVersion: string
   preview?: string[],
   wadToInstall?: string[]
-  downloadedFiles?: string[]
+  downloadSummary?: DownloadSummary
 }
 
 export interface UploadSyscheckResult {

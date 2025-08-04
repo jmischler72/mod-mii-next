@@ -5,8 +5,7 @@ import { z } from "zod"
 import { UploadSyscheckResult } from "@/types/upload-syscheck-type"
 import { getConsoleRegion, getConsoleType, getFirmware, getHBCVersion, getLatestSMVersion, getSystemMenuVersion } from "@/helpers/syscheck-info-helper"
 import { CustomError } from "@/types/custom-error"
-import { nusDownload } from "@/helpers/wiipy-wrapper"
-import { getEntry } from "@/helpers/database-helper"
+import { downloadMultipleWads } from "@/helpers/download-manager"
 
 const MAX_FILE_SIZE = 5000000 // 5MB
 const ACCEPTED_FILE_TYPES = ["text/csv", "application/vnd.ms-excel"]
@@ -27,7 +26,6 @@ export async function uploadSyscheckFile(formData: FormData): Promise<UploadSysc
   const activeIOS = true; // Placeholder for active IOS check, if needed
   const extraProtection = false; // When enabled, a patched IOS60 will be installed to other system menu IOS slots to prevent bricks from users manually up\downgrading Wii's
   const cMios = false; // A cMIOS allows older non-chipped Wii's to play GameCube backup discs
-  const active = activeIOS || extraProtection || cMios;
 
 
   try {
@@ -70,28 +68,15 @@ export async function uploadSyscheckFile(formData: FormData): Promise<UploadSysc
     console.log("region:", systemInfos.firmware?.SMregion, "firm:", systemInfos.firmware?.firmware, "version:", systemInfos.firmware?.firmwareVersion);
     console.log("WADs to Install:", systemInfos.wadToInstall);
 
-    // const downloadedFiles: string[] = [];
-    
-    // const entry = getEntry("SM4.1U");
-    // console.log("Entry from database:", entry);
-    
-    // if(!entry) {
-    //   throw new CustomError("No entry found in the database for SM4.1U")
-    // }
+    // Download all required WAD files
+    const downloadSummary = await downloadMultipleWads(systemInfos.wadToInstall, {
+      maxConcurrent: 2, // Download 2 files at a time to avoid overwhelming the server
+      onProgress: (completed, total, current) => {
+        console.log(`Download progress: ${completed}/${total} - Currently downloading: ${current}`);
+      }
+    });
 
-    // try {
-    //   const result = await nusDownload(
-    //     entry.code1,
-    //     entry.code2,
-    //     entry.version,
-    //     entry.wadname,
-    //   );
-    //   console.log("NUS Download Result:", result);
-    //   downloadedFiles.push(entry.wadname);
-    // } catch (error) {
-    //   console.error("NUS Download Error:", error);
-    //   throw new CustomError(`Failed to download ${entry.wadname}: ${error}`);
-    // }
+    console.log("Download Summary:", downloadSummary);
 
 
 
@@ -105,7 +90,17 @@ export async function uploadSyscheckFile(formData: FormData): Promise<UploadSysc
         hbcVersion: systemInfos.hbcVersion || "Unknown",
         systemMenuVersion: systemInfos.systemMenuVersion || "Unknown",
         wadToInstall: systemInfos.wadToInstall || [],
-        // downloadedFiles: downloadedFiles,
+        downloadSummary: {
+          downloaded: downloadSummary.downloaded,
+          cached: downloadSummary.cached,
+          failed: downloadSummary.failed,
+          failedFiles: downloadSummary.results.filter(r => !r.success).map(r => r.wadname),
+          s3Files: downloadSummary.results.filter(r => r.success && r.s3Key).map(r => ({
+            wadname: r.wadname,
+            s3Key: r.s3Key,
+            s3Url: r.s3Url
+          }))
+        },
         preview: copyData.split('\n').slice(0, 5), // Preview first
       }
     }
