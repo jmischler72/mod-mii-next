@@ -1,11 +1,12 @@
-import { getEntry } from '@/helpers/database-helper';
-import { nusDownload } from '@/helpers/wiipy-wrapper';
+import { DatabaseEntry, getEntry } from '@/helpers/database-helper';
+import { nusDownload } from '@/helpers/nus-download';
 import { fileExistsInS3, uploadFileToS3, generateWadS3Key, generatePresignedUrl } from '@/helpers/s3-storage';
 import fs from 'fs';
 import path from 'path';
+import { oscDownload } from './osc-download';
 
 // Temporary directory for downloads (will be deleted after S3 upload)
-const TEMP_DIRECTORY = path.join(process.cwd(), '.temp-downloads');
+export const TEMP_DIRECTORY = path.join(process.cwd(), '.temp-downloads');
 
 export interface DownloadResult {
 	success: boolean;
@@ -46,10 +47,37 @@ function cleanupTempFile(filePath: string): void {
 	}
 }
 
+async function downloadWadFile(entry: DatabaseEntry, tempPath: string) {
+	if (!entry.category) return;
+
+	let filePath;
+
+	switch (entry.category) {
+		case 'ios':
+			filePath = path.join(tempPath, entry.wadname);
+			console.log(`Downloading ${filePath}...`);
+
+			await nusDownload(entry, filePath);
+			break;
+		case 'OSC':
+			filePath = path.join(tempPath, `${entry.code1}.zip`);
+			console.log(`Downloading ${filePath}...`);
+
+			await oscDownload(entry, tempPath, filePath);
+			break;
+		// Handle Android-specific download logic
+		default:
+			// Handle default case
+			break;
+	}
+
+	return filePath;
+}
+
 /**
  * Download a single WAD file with S3-only storage
  */
-export async function downloadWadFile(wadId: string): Promise<DownloadResult> {
+export async function handleDownloadWadFile(wadId: string): Promise<DownloadResult> {
 	try {
 		const entry = getEntry(wadId);
 
@@ -80,16 +108,12 @@ export async function downloadWadFile(wadId: string): Promise<DownloadResult> {
 
 		// Download the file to temporary location
 		ensureTempDirectory();
-		const tempPath = path.join(TEMP_DIRECTORY, entry.wadname);
+		const tempPath = path.join(TEMP_DIRECTORY);
 
-		console.log(`Downloading ${entry.wadname}...`);
-		await nusDownload(entry.code1, entry.code2, entry.version.toString(), entry.wadname);
-
-		// Note: nusDownload should save to TEMP_DIRECTORY
-		// Update wiipy-wrapper to use TEMP_DIRECTORY instead of CACHE_DIRECTORY
+		const filePath = await downloadWadFile(entry, tempPath);
 
 		// Verify the file was downloaded
-		if (!fs.existsSync(tempPath)) {
+		if (!filePath || !fs.existsSync(filePath)) {
 			return {
 				success: false,
 				wadname: entry.wadname,
@@ -99,10 +123,10 @@ export async function downloadWadFile(wadId: string): Promise<DownloadResult> {
 		}
 
 		// Upload to S3
-		const s3Url = await uploadFileToS3(tempPath, s3Key, 'application/octet-stream');
+		await uploadFileToS3(filePath, s3Key, 'application/octet-stream');
 
 		// Clean up temporary file
-		cleanupTempFile(tempPath);
+		cleanupTempFile(filePath);
 
 		console.log(`Successfully uploaded ${entry.wadname} to S3`);
 
@@ -129,7 +153,7 @@ export async function downloadWadFile(wadId: string): Promise<DownloadResult> {
 /**
  * Download multiple WAD files with progress tracking
  */
-export async function downloadMultipleWads(
+export async function handleDownloadMultipleWads(
 	wadIds: string[],
 	options: {
 		maxConcurrent?: number;
@@ -152,7 +176,7 @@ export async function downloadMultipleWads(
 				onProgress(completed, total, wadId);
 			}
 
-			const result = await downloadWadFile(wadId);
+			const result = await handleDownloadWadFile(wadId);
 			completed++;
 
 			return result;

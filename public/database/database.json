@@ -1,9 +1,13 @@
 {
   "meta": {
     "DBversion": "25.06.19",
-    "converted": "2025-08-03T15:22:33.736Z",
+    "converted": "2025-08-05T09:32:58.590Z",
     "source": "DB.bat",
-    "creator": "https://github.com/xflak"
+    "creator": "https://github.com/xflak",
+    "working_categories": [
+      "ios",
+      "OSC"
+    ]
   },
   "entries": {
     "EULAU": {
@@ -12,7 +16,7 @@
       "code2": "48414B45",
       "version": 3,
       "md5": "e3158b73b02af6d0e02bdf6d5f4a42d3",
-      "md5alt": "%md5%",
+      "md5alt": "e3158b73b02af6d0e02bdf6d5f4a42d3",
       "category": "ios",
       "wadname": "EULA-NUS-v3[U].wad"
     },
@@ -22,7 +26,7 @@
       "code2": "48414B50",
       "version": 3,
       "md5": "c97ea64cb8282342f8a9078fe9acfcff",
-      "md5alt": "%md5%",
+      "md5alt": "c97ea64cb8282342f8a9078fe9acfcff",
       "category": "ios",
       "wadname": "EULA-NUS-v3[E].wad"
     },
@@ -32,7 +36,7 @@
       "code2": "48414B4A",
       "version": 3,
       "md5": "9e1d0905cc91f0feb416e0543dee904a",
-      "md5alt": "%md5%",
+      "md5alt": "9e1d0905cc91f0feb416e0543dee904a",
       "category": "ios",
       "wadname": "EULA-NUS-v3[J].wad"
     },
@@ -42,7 +46,7 @@
       "code2": "48414B4B",
       "version": 3,
       "md5": "3416c199d4fd33f51216fd84666278ef",
-      "md5alt": "%md5%",
+      "md5alt": "3416c199d4fd33f51216fd84666278ef",
       "category": "ios",
       "wadname": "EULA-NUS-v3[K].wad"
     },
@@ -53,7 +57,7 @@
       "version": 2,
       "wadname": "Region-Select-NUS-v2[U].wad",
       "md5": "5eb0bdc1cb48a251d91e96d13abaa49c",
-      "md5alt": "%md5%",
+      "md5alt": "5eb0bdc1cb48a251d91e96d13abaa49c",
       "category": "ios"
     },
     "RSE": {
@@ -63,7 +67,7 @@
       "version": 2,
       "wadname": "Region-Select-NUS-v2[E].wad",
       "md5": "4196dde6c23e25b01ea12c8fd23bd704",
-      "md5alt": "%md5%",
+      "md5alt": "4196dde6c23e25b01ea12c8fd23bd704",
       "category": "ios"
     },
     "RSJ": {
@@ -73,7 +77,7 @@
       "version": 2,
       "wadname": "Region-Select-NUS-v2[J].wad",
       "md5": "49f3bab10b39ecaac989729b5d7b131b",
-      "md5alt": "%md5%",
+      "md5alt": "49f3bab10b39ecaac989729b5d7b131b",
       "category": "ios"
     },
     "RSK": {
@@ -83,7 +87,7 @@
       "version": 2,
       "wadname": "Region-Select-NUS-v2[K].wad",
       "md5": "37e788846bcf599a7ffba400a5e60b6a",
-      "md5alt": "%md5%",
+      "md5alt": "37e788846bcf599a7ffba400a5e60b6a",
       "category": "ios"
     },
     "BCNUS": {
@@ -103,7 +107,7 @@
       "version": 513,
       "wadname": "SystemMenu_4.3U_v513.wad",
       "md5": "417358284cce02dbb0fed3ef30b0b59d",
-      "md5alt": "%md5%",
+      "md5alt": "417358284cce02dbb0fed3ef30b0b59d",
       "category": "ios"
     },
     "SM4.2U": {
@@ -113,7 +117,7 @@
       "version": 481,
       "wadname": "SystemMenu_4.2U_v481.wad",
       "md5": "b4eda5b30d090c9256b60441d83c9d65",
-      "md5alt": "%md5%",
+      "md5alt": "b4eda5b30d090c9256b60441d83c9d65",
       "category": "ios"
     },
     "SM4.1U": {
@@ -123,7 +127,7 @@
       "version": 449,
       "wadname": "SystemMenu_4.1U_v449.wad",
       "md5": "555d2c0bc92ccd05c6f6a57412ebbd37",
-      "md5alt": "%md5%",
+      "md5alt": "555d2c0bc92ccd05c6f6a57412ebbd37",
       "category": "ios"
     },
     "SM4.3E": {
@@ -133,7 +137,7 @@
       "version": 514,
       "wadname": "SystemMenu_4.3E_v514.wad",
       "md5": "cad93ca3ca41704b15bbee95b2e6aae2",
-      "md5alt": "%md5%",
+      "md5alt": "cad93ca3ca41704b15bbee95b2e6aae2",
       "category": "ios"
     },
     "SM4.2E": {
@@ -143,7 +147,7 @@
       "version": 482,
       "wadname": "SystemMenu_4.2E_v482.wad",
       "md5": "efd76ac375914bf5969c74f8fb4fef75",
-      "md5alt": "%md5%",
+      "md5alt": "efd76ac375914bf5969c74f8fb4fef75",
       "category": "ios"
     },
     "SM4.1E": {
@@ -153,7 +157,7 @@
       "version": 450,
       "wadname": "SystemMenu_4.1E_v450.wad",
       "md5": "d19af34181c46645002efb130f6ea44c",
-      "md5alt": "%md5%",
+      "md5alt": "d19af34181c46645002efb130f6ea44c",
       "category": "ios"
     },
     "SM4.3J": {
@@ -163,7 +167,7 @@
       "version": 512,
       "wadname": "SystemMenu_4.3J_v512.wad",
       "md5": "9552e63c8e0b6688e788639fb1c14e13",
-      "md5alt": "%md5%",
+      "md5alt": "9552e63c8e0b6688e788639fb1c14e13",
       "category": "ios"
     },
     "SM4.2J": {
@@ -173,7 +177,7 @@
       "version": 480,
       "wadname": "SystemMenu_4.2J_v480.wad",
       "md5": "ffa08cfaf2a9bb4f6adffa812ab535ac",
-      "md5alt": "%md5%",
+      "md5alt": "ffa08cfaf2a9bb4f6adffa812ab535ac",
       "category": "ios"
     },
     "SM4.1J": {
@@ -183,7 +187,7 @@
       "version": 448,
       "wadname": "SystemMenu_4.1J_v448.wad",
       "md5": "5574337ec2c36cd9a9c15b8008ca4dd2",
-      "md5alt": "%md5%",
+      "md5alt": "5574337ec2c36cd9a9c15b8008ca4dd2",
       "category": "ios"
     },
     "SM4.3K": {
@@ -193,7 +197,7 @@
       "version": 518,
       "wadname": "SystemMenu_4.3K_v518.wad",
       "md5": "775159a42dc1d12b9304fbbbe7415d80",
-      "md5alt": "%md5%",
+      "md5alt": "775159a42dc1d12b9304fbbbe7415d80",
       "category": "ios"
     },
     "SM4.2K": {
@@ -203,7 +207,7 @@
       "version": 486,
       "wadname": "SystemMenu_4.2K_v486.wad",
       "md5": "d225a6ff7130ea4cc63638b0d38a54e7",
-      "md5alt": "%md5%",
+      "md5alt": "d225a6ff7130ea4cc63638b0d38a54e7",
       "category": "ios"
     },
     "SM4.1K": {
@@ -213,7 +217,7 @@
       "version": 454,
       "wadname": "SystemMenu_4.1K_v454.wad",
       "md5": "6326365089b5d71f36907f7315364a5f",
-      "md5alt": "%md5%",
+      "md5alt": "6326365089b5d71f36907f7315364a5f",
       "category": "ios"
     },
     "SM4.3U-DWR": {
@@ -222,9 +226,9 @@
       "ciosslot": "unchanged",
       "md5alt": "%md5%",
       "basewad": "SystemMenu_4.3U_v513",
-      "basecios": "%basewad%",
+      "basecios": "SystemMenu_4.3U_v513",
       "md5base": "417358284cce02dbb0fed3ef30b0b59d",
-      "md5basealt": "%md5base%",
+      "md5basealt": "417358284cce02dbb0fed3ef30b0b59d",
       "code1": "00000001",
       "code2": "00000002",
       "mym1": "4-X_DarkWii_Red_NTSC.mym",
@@ -239,9 +243,9 @@
       "ciosslot": "unchanged",
       "md5alt": "%md5%",
       "basewad": "SystemMenu_4.2U_v481",
-      "basecios": "%basewad%",
+      "basecios": "SystemMenu_4.2U_v481",
       "md5base": "b4eda5b30d090c9256b60441d83c9d65",
-      "md5basealt": "%md5base%",
+      "md5basealt": "b4eda5b30d090c9256b60441d83c9d65",
       "code1": "00000001",
       "code2": "00000002",
       "mym1": "4-X_DarkWii_Red_NTSC.mym",
@@ -256,9 +260,9 @@
       "ciosslot": "unchanged",
       "md5alt": "%md5%",
       "basewad": "SystemMenu_4.1U_v449",
-      "basecios": "%basewad%",
+      "basecios": "SystemMenu_4.1U_v449",
       "md5base": "555d2c0bc92ccd05c6f6a57412ebbd37",
-      "md5basealt": "%md5base%",
+      "md5basealt": "555d2c0bc92ccd05c6f6a57412ebbd37",
       "code1": "00000001",
       "code2": "00000002",
       "mym1": "4-X_DarkWii_Red_NTSC.mym",
@@ -272,9 +276,9 @@
       "wadname": "SystemMenu_4.3E_v514_DarkWiiRed_%effect%",
       "ciosslot": "unchanged",
       "basewad": "SystemMenu_4.3E_v514",
-      "basecios": "%basewad%",
+      "basecios": "SystemMenu_4.3E_v514",
       "md5base": "cad93ca3ca41704b15bbee95b2e6aae2",
-      "md5basealt": "%md5base%",
+      "md5basealt": "cad93ca3ca41704b15bbee95b2e6aae2",
       "code1": "00000001",
       "code2": "00000002",
       "mym1": "DarkWii_Red_No-Spin_4.XE_V2.mym",
@@ -288,9 +292,9 @@
       "wadname": "SystemMenu_4.2E_v482_DarkWiiRed_%effect%",
       "ciosslot": "unchanged",
       "basewad": "SystemMenu_4.2E_v482",
-      "basecios": "%basewad%",
+      "basecios": "SystemMenu_4.2E_v482",
       "md5base": "efd76ac375914bf5969c74f8fb4fef75",
-      "md5basealt": "%md5base%",
+      "md5basealt": "efd76ac375914bf5969c74f8fb4fef75",
       "code1": "00000001",
       "code2": "00000002",
       "mym1": "DarkWii_Red_No-Spin_4.XE_V2.mym",
@@ -304,9 +308,9 @@
       "wadname": "SystemMenu_4.1E_v450_DarkWiiRed_%effect%",
       "ciosslot": "unchanged",
       "basewad": "SystemMenu_4.1E_v450",
-      "basecios": "%basewad%",
+      "basecios": "SystemMenu_4.1E_v450",
       "md5base": "d19af34181c46645002efb130f6ea44c",
-      "md5basealt": "%md5base%",
+      "md5basealt": "d19af34181c46645002efb130f6ea44c",
       "code1": "00000001",
       "code2": "00000002",
       "mym1": "DarkWii_Red_No-Spin_4.XE_V2.mym",
@@ -321,9 +325,9 @@
       "ciosslot": "unchanged",
       "md5alt": "%md5%",
       "basewad": "SystemMenu_4.3J_v512",
-      "basecios": "%basewad%",
+      "basecios": "SystemMenu_4.3J_v512",
       "md5base": "9552e63c8e0b6688e788639fb1c14e13",
-      "md5basealt": "%md5base%",
+      "md5basealt": "9552e63c8e0b6688e788639fb1c14e13",
       "code1": "00000001",
       "code2": "00000002",
       "mym1": "4-X_DarkWii_Red_JAP.mym",
@@ -338,9 +342,9 @@
       "ciosslot": "unchanged",
       "md5alt": "%md5%",
       "basewad": "SystemMenu_4.2J_v480",
-      "basecios": "%basewad%",
+      "basecios": "SystemMenu_4.2J_v480",
       "md5base": "ffa08cfaf2a9bb4f6adffa812ab535ac",
-      "md5basealt": "%md5base%",
+      "md5basealt": "ffa08cfaf2a9bb4f6adffa812ab535ac",
       "code1": "00000001",
       "code2": "00000002",
       "mym1": "4-X_DarkWii_Red_JAP.mym",
@@ -355,9 +359,9 @@
       "ciosslot": "unchanged",
       "md5alt": "%md5%",
       "basewad": "SystemMenu_4.1J_v448",
-      "basecios": "%basewad%",
+      "basecios": "SystemMenu_4.1J_v448",
       "md5base": "5574337ec2c36cd9a9c15b8008ca4dd2",
-      "md5basealt": "%md5base%",
+      "md5basealt": "5574337ec2c36cd9a9c15b8008ca4dd2",
       "code1": "00000001",
       "code2": "00000002",
       "mym1": "4-X_DarkWii_Red_JAP.mym",
@@ -372,9 +376,9 @@
       "ciosslot": "unchanged",
       "md5alt": "%md5%",
       "basewad": "SystemMenu_4.3K_v518",
-      "basecios": "%basewad%",
+      "basecios": "SystemMenu_4.3K_v518",
       "md5base": "775159a42dc1d12b9304fbbbe7415d80",
-      "md5basealt": "%md5base%",
+      "md5basealt": "775159a42dc1d12b9304fbbbe7415d80",
       "code1": "00000001",
       "code2": "00000002",
       "mym1": "4-X_DarkWii_Red_KOR.mym",
@@ -389,9 +393,9 @@
       "ciosslot": "unchanged",
       "md5alt": "%md5%",
       "basewad": "SystemMenu_4.2K_v486",
-      "basecios": "%basewad%",
+      "basecios": "SystemMenu_4.2K_v486",
       "md5base": "d225a6ff7130ea4cc63638b0d38a54e7",
-      "md5basealt": "%md5base%",
+      "md5basealt": "d225a6ff7130ea4cc63638b0d38a54e7",
       "code1": "00000001",
       "code2": "00000002",
       "mym1": "4-X_DarkWii_Red_KOR.mym",
@@ -406,9 +410,9 @@
       "ciosslot": "unchanged",
       "md5alt": "%md5%",
       "basewad": "SystemMenu_4.1K_v454",
-      "basecios": "%basewad%",
+      "basecios": "SystemMenu_4.1K_v454",
       "md5base": "6326365089b5d71f36907f7315364a5f",
-      "md5basealt": "%md5base%",
+      "md5basealt": "6326365089b5d71f36907f7315364a5f",
       "code1": "00000001",
       "code2": "00000002",
       "mym1": "4-X_DarkWii_Red_KOR.mym",
@@ -423,9 +427,9 @@
       "ciosslot": "unchanged",
       "md5alt": "%md5%",
       "basewad": "SystemMenu_4.3U_v513",
-      "basecios": "%basewad%",
+      "basecios": "SystemMenu_4.3U_v513",
       "md5base": "417358284cce02dbb0fed3ef30b0b59d",
-      "md5basealt": "%md5base%",
+      "md5basealt": "417358284cce02dbb0fed3ef30b0b59d",
       "code1": "00000001",
       "code2": "00000002",
       "mym1": "4-X_DarkWii_green_NTSC.mym",
@@ -440,9 +444,9 @@
       "ciosslot": "unchanged",
       "md5alt": "%md5%",
       "basewad": "SystemMenu_4.2U_v481",
-      "basecios": "%basewad%",
+      "basecios": "SystemMenu_4.2U_v481",
       "md5base": "b4eda5b30d090c9256b60441d83c9d65",
-      "md5basealt": "%md5base%",
+      "md5basealt": "b4eda5b30d090c9256b60441d83c9d65",
       "code1": "00000001",
       "code2": "00000002",
       "mym1": "4-X_DarkWii_green_NTSC.mym",
@@ -457,9 +461,9 @@
       "ciosslot": "unchanged",
       "md5alt": "%md5%",
       "basewad": "SystemMenu_4.1U_v449",
-      "basecios": "%basewad%",
+      "basecios": "SystemMenu_4.1U_v449",
       "md5base": "555d2c0bc92ccd05c6f6a57412ebbd37",
-      "md5basealt": "%md5base%",
+      "md5basealt": "555d2c0bc92ccd05c6f6a57412ebbd37",
       "code1": "00000001",
       "code2": "00000002",
       "mym1": "4-X_DarkWii_green_NTSC.mym",
@@ -473,9 +477,9 @@
       "wadname": "SystemMenu_4.3E_v514_DarkWiiGreen_%effect%",
       "ciosslot": "unchanged",
       "basewad": "SystemMenu_4.3E_v514",
-      "basecios": "%basewad%",
+      "basecios": "SystemMenu_4.3E_v514",
       "md5base": "cad93ca3ca41704b15bbee95b2e6aae2",
-      "md5basealt": "%md5base%",
+      "md5basealt": "cad93ca3ca41704b15bbee95b2e6aae2",
       "code1": "00000001",
       "code2": "00000002",
       "mym1": "DarkWii_Green_No-Spin_4.XE_V2.mym",
@@ -489,9 +493,9 @@
       "wadname": "SystemMenu_4.2E_v482_DarkWiiGreen_%effect%",
       "ciosslot": "unchanged",
       "basewad": "SystemMenu_4.2E_v482",
-      "basecios": "%basewad%",
+      "basecios": "SystemMenu_4.2E_v482",
       "md5base": "efd76ac375914bf5969c74f8fb4fef75",
-      "md5basealt": "%md5base%",
+      "md5basealt": "efd76ac375914bf5969c74f8fb4fef75",
       "code1": "00000001",
       "code2": "00000002",
       "mym1": "DarkWii_Green_No-Spin_4.XE_V2.mym",
@@ -505,9 +509,9 @@
       "wadname": "SystemMenu_4.1E_v450_DarkWiiGreen_%effect%",
       "ciosslot": "unchanged",
       "basewad": "SystemMenu_4.1E_v450",
-      "basecios": "%basewad%",
+      "basecios": "SystemMenu_4.1E_v450",
       "md5base": "d19af34181c46645002efb130f6ea44c",
-      "md5basealt": "%md5base%",
+      "md5basealt": "d19af34181c46645002efb130f6ea44c",
       "code1": "00000001",
       "code2": "00000002",
       "mym1": "DarkWii_Green_No-Spin_4.XE_V2.mym",
@@ -522,9 +526,9 @@
       "ciosslot": "unchanged",
       "md5alt": "%md5%",
       "basewad": "SystemMenu_4.3J_v512",
-      "basecios": "%basewad%",
+      "basecios": "SystemMenu_4.3J_v512",
       "md5base": "9552e63c8e0b6688e788639fb1c14e13",
-      "md5basealt": "%md5base%",
+      "md5basealt": "9552e63c8e0b6688e788639fb1c14e13",
       "code1": "00000001",
       "code2": "00000002",
       "mym1": "4-X_DarkWii_green_JAP.mym",
@@ -539,9 +543,9 @@
       "ciosslot": "unchanged",
       "md5alt": "%md5%",
       "basewad": "SystemMenu_4.2J_v480",
-      "basecios": "%basewad%",
+      "basecios": "SystemMenu_4.2J_v480",
       "md5base": "ffa08cfaf2a9bb4f6adffa812ab535ac",
-      "md5basealt": "%md5base%",
+      "md5basealt": "ffa08cfaf2a9bb4f6adffa812ab535ac",
       "code1": "00000001",
       "code2": "00000002",
       "mym1": "4-X_DarkWii_green_JAP.mym",
@@ -556,9 +560,9 @@
       "ciosslot": "unchanged",
       "md5alt": "%md5%",
       "basewad": "SystemMenu_4.1J_v448",
-      "basecios": "%basewad%",
+      "basecios": "SystemMenu_4.1J_v448",
       "md5base": "5574337ec2c36cd9a9c15b8008ca4dd2",
-      "md5basealt": "%md5base%",
+      "md5basealt": "5574337ec2c36cd9a9c15b8008ca4dd2",
       "code1": "00000001",
       "code2": "00000002",
       "mym1": "4-X_DarkWii_green_JAP.mym",
@@ -573,9 +577,9 @@
       "ciosslot": "unchanged",
       "md5alt": "%md5%",
       "basewad": "SystemMenu_4.3K_v518",
-      "basecios": "%basewad%",
+      "basecios": "SystemMenu_4.3K_v518",
       "md5base": "775159a42dc1d12b9304fbbbe7415d80",
-      "md5basealt": "%md5base%",
+      "md5basealt": "775159a42dc1d12b9304fbbbe7415d80",
       "code1": "00000001",
       "code2": "00000002",
       "mym1": "4-X_DarkWii_green_KOR.mym",
@@ -590,9 +594,9 @@
       "ciosslot": "unchanged",
       "md5alt": "%md5%",
       "basewad": "SystemMenu_4.2K_v486",
-      "basecios": "%basewad%",
+      "basecios": "SystemMenu_4.2K_v486",
       "md5base": "d225a6ff7130ea4cc63638b0d38a54e7",
-      "md5basealt": "%md5base%",
+      "md5basealt": "d225a6ff7130ea4cc63638b0d38a54e7",
       "code1": "00000001",
       "code2": "00000002",
       "mym1": "4-X_DarkWii_green_KOR.mym",
@@ -607,9 +611,9 @@
       "ciosslot": "unchanged",
       "md5alt": "%md5%",
       "basewad": "SystemMenu_4.1K_v454",
-      "basecios": "%basewad%",
+      "basecios": "SystemMenu_4.1K_v454",
       "md5base": "6326365089b5d71f36907f7315364a5f",
-      "md5basealt": "%md5base%",
+      "md5basealt": "6326365089b5d71f36907f7315364a5f",
       "code1": "00000001",
       "code2": "00000002",
       "mym1": "4-X_DarkWii_green_KOR.mym",
@@ -645,7 +649,7 @@
       "version": 2,
       "wadname": "Photo-Channel-1.1-dummy-HAZA.wad",
       "md5": "3066796c54bde03968248bd87383d40f",
-      "md5alt": "%md5%",
+      "md5alt": "3066796c54bde03968248bd87383d40f",
       "category": "ios"
     },
     "PHOTO": {
@@ -815,17 +819,17 @@
       "version": 512,
       "wadname": "Wii-Speak-Channel-NUS[K].wad",
       "md5": "31b2a3af9ea5f59e6c2815dee094bf0b",
-      "\"md5alt": "%md5%",
+      "md5alt": "31b2a3af9ea5f59e6c2815dee094bf0b",
       "category": "ios"
     },
     "SomeStubIOSs": {
-      "\"name": "Some Stub IOSs (%STUBSlist%)",
+      "name": "Some Stub IOSs (%STUBSlist%)",
       "code1": "00000001",
       "code2": "00000010",
       "version": 512,
       "wadname": "STUB-IOS16-64-v512.wad",
       "md5": "3c3431b05c47453151a9858c87f1a8af",
-      "md5alt": "%md5%",
+      "md5alt": "3c3431b05c47453151a9858c87f1a8af",
       "category": "STUBS"
     },
     "IOS9": {
@@ -1394,10 +1398,10 @@
       "version": 6943,
       "dlname": "0000000e.app",
       "wadname": "0000000e_IOS80.app",
-      "\"filename": "%wadname%",
+      "filename": "0000000e_IOS80.app",
       "path1": "SNEEKFILES\\",
       "md5": "4b3ad6d33707d55ec27583a84b2ecf2a",
-      "md5alt": "%md5%"
+      "md5alt": "4b3ad6d33707d55ec27583a84b2ecf2a"
     },
     "NUSGRABBER01_60": {
       "name": "00000001.app from IOS60 v6174 (SNEEK)",
@@ -1407,10 +1411,10 @@
       "version": 6174,
       "dlname": "00000001.app",
       "wadname": "00000001_IOS60.app",
-      "\"filename": "%wadname%",
+      "filename": "00000001_IOS60.app",
       "path1": "SNEEKFILES\\",
       "md5": "48e1be8f767feb59cbc51aa4329d735a",
-      "md5alt": "%md5%"
+      "md5alt": "48e1be8f767feb59cbc51aa4329d735a"
     },
     "NUSGRABBER0c": {
       "name": "0000000c.app from MIOS v10 (DIOS MIOS)",
@@ -1420,10 +1424,10 @@
       "version": 10,
       "dlname": "0000000c.app",
       "wadname": "0000000c.app",
-      "\"filename": "%wadname%",
+      "filename": "0000000c.app",
       "path1": "SNEEKFILES\\",
       "md5": "42634040d7cbb53057c577ec4c3c63f8",
-      "md5alt": "%md5%"
+      "md5alt": "42634040d7cbb53057c577ec4c3c63f8"
     },
     "NUSGRABBER78": {
       "name": "Theme content from System Menu 4.1J (00000078.app)",
@@ -1433,10 +1437,10 @@
       "version": 448,
       "dlname": "00000078.app",
       "wadname": "00000078_4.1J.app",
-      "\"filename": "%wadname%",
+      "filename": "00000078_4.1J.app",
       "path1": "themes\\",
       "md5": "f2eadf12d18e793373060222b870057d",
-      "md5alt": "%md5%"
+      "md5alt": "f2eadf12d18e793373060222b870057d"
     },
     "NUSGRABBER81": {
       "name": "Theme content from System Menu 4.1K (00000081.app)",
@@ -1446,10 +1450,10 @@
       "version": 454,
       "dlname": "00000081.app",
       "wadname": "00000081_4.1K.app",
-      "\"filename": "%wadname%",
+      "filename": "00000081_4.1K.app",
       "path1": "themes\\",
       "md5": "7eedbf1a146b29b63edbb55e04f81f98",
-      "md5alt": "%md5%"
+      "md5alt": "7eedbf1a146b29b63edbb55e04f81f98"
     },
     "NUSGRABBER7b": {
       "name": "Theme content from System Menu 4.1U (0000007b.app)",
@@ -1459,10 +1463,10 @@
       "version": 449,
       "dlname": "0000007b.app",
       "wadname": "0000007b_4.1U.app",
-      "\"filename": "%wadname%",
+      "filename": "0000007b_4.1U.app",
       "path1": "themes\\",
       "md5": "6b939de8222800733f4c44ae4eadb325",
-      "md5alt": "%md5%"
+      "md5alt": "6b939de8222800733f4c44ae4eadb325"
     },
     "NUSGRABBER7e": {
       "name": "Theme content from System Menu 4.1E (0000007e.app)",
@@ -1472,10 +1476,10 @@
       "version": 450,
       "dlname": "0000007e.app",
       "wadname": "0000007e_4.1E.app",
-      "\"filename": "%wadname%",
+      "filename": "0000007e_4.1E.app",
       "path1": "themes\\",
       "md5": "574a3a144971ea0ec61bf8cef8d7ff80",
-      "md5alt": "%md5%"
+      "md5alt": "574a3a144971ea0ec61bf8cef8d7ff80"
     },
     "NUSGRABBER84": {
       "name": "Theme content from System Menu 4.2J (00000084.app)",
@@ -1485,10 +1489,10 @@
       "version": 480,
       "dlname": "00000084.app",
       "wadname": "00000084_4.2J.app",
-      "\"filename": "%wadname%",
+      "filename": "00000084_4.2J.app",
       "path1": "themes\\",
       "md5": "b08998e582c48afba3a14f6d9e1e9373",
-      "md5alt": "%md5%"
+      "md5alt": "b08998e582c48afba3a14f6d9e1e9373"
     },
     "NUSGRABBER87": {
       "name": "Theme content from System Menu 4.2U (00000087.app)",
@@ -1498,10 +1502,10 @@
       "version": 481,
       "dlname": "00000087.app",
       "wadname": "00000087_4.2U.app",
-      "\"filename": "%wadname%",
+      "filename": "00000087_4.2U.app",
       "path1": "themes\\",
       "md5": "7079948c6aed8aae6009e4fdf27c7171",
-      "md5alt": "%md5%"
+      "md5alt": "7079948c6aed8aae6009e4fdf27c7171"
     },
     "NUSGRABBER8a": {
       "name": "Theme content from System Menu 4.2E (0000008a.app)",
@@ -1511,10 +1515,10 @@
       "version": 482,
       "dlname": "0000008a.app",
       "wadname": "0000008a_4.2E.app",
-      "\"filename": "%wadname%",
+      "filename": "0000008a_4.2E.app",
       "path1": "themes\\",
       "md5": "7e7994f78941afb51e9a20085deac305",
-      "md5alt": "%md5%"
+      "md5alt": "7e7994f78941afb51e9a20085deac305"
     },
     "NUSGRABBER8d": {
       "name": "Theme content from System Menu 4.2K (0000008d.app)",
@@ -1524,10 +1528,10 @@
       "version": 486,
       "dlname": "0000008d.app",
       "wadname": "0000008d_4.2K.app",
-      "\"filename": "%wadname%",
+      "filename": "0000008d_4.2K.app",
       "path1": "themes\\",
       "md5": "9d72a1966370e44cb4c456c17a077bec",
-      "md5alt": "%md5%"
+      "md5alt": "9d72a1966370e44cb4c456c17a077bec"
     },
     "NUSGRABBER94": {
       "name": "Theme content from System Menu 4.3J (00000094.app)",
@@ -1537,10 +1541,10 @@
       "version": 512,
       "dlname": "00000094.app",
       "wadname": "00000094_4.3J.app",
-      "\"filename": "%wadname%",
+      "filename": "00000094_4.3J.app",
       "path1": "themes\\",
       "md5": "5b3ee6942a3cda716badbce3665076fc",
-      "md5alt": "%md5%"
+      "md5alt": "5b3ee6942a3cda716badbce3665076fc"
     },
     "NUSGRABBER97": {
       "name": "Theme content from System Menu 4.3U (00000097.app)",
@@ -1550,10 +1554,10 @@
       "version": 513,
       "dlname": "00000097.app",
       "wadname": "00000097_4.3U.app",
-      "\"filename": "%wadname%",
+      "filename": "00000097_4.3U.app",
       "path1": "themes\\",
       "md5": "f388c9b11543ac2fe0912ab96064ee37",
-      "md5alt": "%md5%"
+      "md5alt": "f388c9b11543ac2fe0912ab96064ee37"
     },
     "NUSGRABBER9a": {
       "name": "Theme content from System Menu 4.3E (0000009a.app)",
@@ -1563,10 +1567,10 @@
       "version": 514,
       "dlname": "0000009a.app",
       "wadname": "0000009a_4.3E.app",
-      "\"filename": "%wadname%",
+      "filename": "0000009a_4.3E.app",
       "path1": "themes\\",
       "md5": "41310f79497c56850c37676074ee1237",
-      "md5alt": "%md5%"
+      "md5alt": "41310f79497c56850c37676074ee1237"
     },
     "NUSGRABBER9d": {
       "name": "Theme content from System Menu 4.3K (0000009d.app)",
@@ -1576,10 +1580,10 @@
       "version": 518,
       "dlname": "0000009d.app",
       "wadname": "0000009d_4.3K.app",
-      "\"filename": "%wadname%",
+      "filename": "0000009d_4.3K.app",
       "path1": "themes\\",
       "md5": "e6f2b0d4d5e0c095895f186009bf9516",
-      "md5alt": "%md5%"
+      "md5alt": "e6f2b0d4d5e0c095895f186009bf9516"
     },
     "A1c": {
       "name": "Theme content from vWii System Menu 4.3J (0000001c.app)",
@@ -1589,10 +1593,10 @@
       "version": 608,
       "dlname": "0000001c.app",
       "wadname": "0000001c_4.3J_vWii.app",
-      "\"filename": "%wadname%",
+      "filename": "0000001c_4.3J_vWii.app",
       "path1": "themes\\",
       "md5": "d6d6c4e315d499ac48f34e2eb523746d",
-      "md5alt": "%md5%"
+      "md5alt": "d6d6c4e315d499ac48f34e2eb523746d"
     },
     "A1f": {
       "name": "Theme content from vWii System Menu 4.3U (0000001f.app)",
@@ -1602,10 +1606,10 @@
       "version": 609,
       "dlname": "0000001f.app",
       "wadname": "0000001f_4.3U_vWii.app",
-      "\"filename": "%wadname%",
+      "filename": "0000001f_4.3U_vWii.app",
       "path1": "themes\\",
       "md5": "18e44d5ccab69896ea12b6d98614bb64",
-      "md5alt": "%md5%"
+      "md5alt": "18e44d5ccab69896ea12b6d98614bb64"
     },
     "A22": {
       "name": "Theme content from vWii System Menu 4.3E (00000022.app)",
@@ -1615,10 +1619,10 @@
       "version": 610,
       "dlname": "00000022.app",
       "wadname": "00000022_4.3E_vWii.app",
-      "\"filename": "%wadname%",
+      "filename": "00000022_4.3E_vWii.app",
       "path1": "themes\\",
       "md5": "f5292af0218bdee99e8e61548178a87d",
-      "md5alt": "%md5%"
+      "md5alt": "f5292af0218bdee99e8e61548178a87d"
     },
     "A0d": {
       "name": "0000000d.app from vWii IOS80 v7200 (SNEEK)",
@@ -1628,10 +1632,10 @@
       "version": 7200,
       "dlname": "0000000d.app",
       "wadname": "0000000d_IOS80_vWii.app",
-      "\"filename": "%wadname%",
+      "filename": "0000000d_IOS80_vWii.app",
       "path1": "SNEEKFILES\\",
       "md5": "e91a3ff336da5ffb46871fcc1cd72311",
-      "md5alt": "%md5%"
+      "md5alt": "e91a3ff336da5ffb46871fcc1cd72311"
     },
     "vSM4.3U": {
       "name": "System Menu 4.3U vWii (5.2.0)",
@@ -1640,7 +1644,7 @@
       "version": 609,
       "wadname": "SystemMenu_4.3U_v609_vWii.wad",
       "md5": "68acf76143eaff141d45b07b6c6672f6",
-      "md5alt": "%md5%",
+      "md5alt": "68acf76143eaff141d45b07b6c6672f6",
       "category": "ios"
     },
     "vSM4.3E": {
@@ -1650,7 +1654,7 @@
       "version": 610,
       "wadname": "SystemMenu_4.3E_v610_vWii.wad",
       "md5": "87c64187d8414490f6db9ef80f1b7c83",
-      "md5alt": "%md5%",
+      "md5alt": "87c64187d8414490f6db9ef80f1b7c83",
       "category": "ios"
     },
     "vSM4.3J": {
@@ -1660,7 +1664,7 @@
       "version": 608,
       "wadname": "SystemMenu_4.3J_v608_vWii.wad",
       "md5": "22d1a6cc9a0c0967ef47322c30790e01",
-      "md5alt": "%md5%",
+      "md5alt": "22d1a6cc9a0c0967ef47322c30790e01",
       "category": "ios"
     },
     "BCnand": {
@@ -1670,7 +1674,7 @@
       "version": 7,
       "wadname": "BC-NAND-NUS-v7-vWii.wad",
       "md5": "2bf9e6b65fc28b95e9144e11075a1cc4",
-      "md5alt": "%md5%",
+      "md5alt": "2bf9e6b65fc28b95e9144e11075a1cc4",
       "category": "ios"
     },
     "BCwfs": {
@@ -1680,7 +1684,7 @@
       "version": 1,
       "wadname": "BC-WFS-NUS-v1-vWii.wad",
       "md5": "a2af6dc815700f1c2ba70ebba75dfffe",
-      "md5alt": "%md5%",
+      "md5alt": "a2af6dc815700f1c2ba70ebba75dfffe",
       "category": "ios"
     },
     "vRSU": {
@@ -1690,7 +1694,7 @@
       "version": 2,
       "wadname": "vWii-Region-Select-NUS-v2[U].wad",
       "md5": "cdb0e5d4321486db78d57c09d2d70761",
-      "md5alt": "%md5%",
+      "md5alt": "cdb0e5d4321486db78d57c09d2d70761",
       "category": "ios"
     },
     "vRSE": {
@@ -1700,7 +1704,7 @@
       "version": 2,
       "wadname": "vWii-Region-Select-NUS-v2[E].wad",
       "md5": "e45a09cc09904466afb99679a2bc1408",
-      "md5alt": "%md5%",
+      "md5alt": "e45a09cc09904466afb99679a2bc1408",
       "category": "ios"
     },
     "vRSJ": {
@@ -1710,7 +1714,7 @@
       "version": 2,
       "wadname": "vWii-Region-Select-NUS-v2[J].wad",
       "md5": "4d9f168a71ecb1a340bba0a9b5456c3b",
-      "md5alt": "%md5%",
+      "md5alt": "4d9f168a71ecb1a340bba0a9b5456c3b",
       "category": "ios"
     },
     "vIOS9": {
@@ -1720,7 +1724,7 @@
       "version": 1290,
       "wadname": "vIOS9-64-v1290-vWii.wad",
       "md5": "b6dbc0e1f4182bc17269b2761d2dc50d",
-      "md5alt": "%md5%",
+      "md5alt": "b6dbc0e1f4182bc17269b2761d2dc50d",
       "category": "ios"
     },
     "vIOS12": {
@@ -1730,7 +1734,7 @@
       "version": 782,
       "wadname": "vIOS12-64-v782-vWii.wad",
       "md5": "1e0bd8cc339edc74c11da9b54019c5d6",
-      "md5alt": "%md5%",
+      "md5alt": "1e0bd8cc339edc74c11da9b54019c5d6",
       "category": "ios"
     },
     "vIOS13": {
@@ -1740,7 +1744,7 @@
       "version": 1288,
       "wadname": "vIOS13-64-v1288-vWii.wad",
       "md5": "da35829d433f5c8a08a0aaab184fd9eb",
-      "md5alt": "%md5%",
+      "md5alt": "da35829d433f5c8a08a0aaab184fd9eb",
       "category": "ios"
     },
     "vIOS14": {
@@ -1750,7 +1754,7 @@
       "version": 1288,
       "wadname": "vIOS14-64-v1288-vWii.wad",
       "md5": "6ee86727b021e08a32cd65e6f368fabb",
-      "md5alt": "%md5%",
+      "md5alt": "6ee86727b021e08a32cd65e6f368fabb",
       "category": "ios"
     },
     "vIOS15": {
@@ -1760,7 +1764,7 @@
       "version": 1288,
       "wadname": "vIOS15-64-v1288-vWii.wad",
       "md5": "aab661245b35ba1e411275edfc2cb9df",
-      "md5alt": "%md5%",
+      "md5alt": "aab661245b35ba1e411275edfc2cb9df",
       "category": "ios"
     },
     "vIOS17": {
@@ -1770,7 +1774,7 @@
       "version": 1288,
       "wadname": "vIOS17-64-v1288-vWii.wad",
       "md5": "967e47fdfa9ce3e33e7e6821894c8487",
-      "md5alt": "%md5%",
+      "md5alt": "967e47fdfa9ce3e33e7e6821894c8487",
       "category": "ios"
     },
     "vIOS21": {
@@ -1780,7 +1784,7 @@
       "version": 1295,
       "wadname": "vIOS21-64-v1295-vWii.wad",
       "md5": "acc87a247ce4e3314a2a8b47efcb6d4f",
-      "md5alt": "%md5%",
+      "md5alt": "acc87a247ce4e3314a2a8b47efcb6d4f",
       "category": "ios"
     },
     "vIOS22": {
@@ -1790,7 +1794,7 @@
       "version": 1550,
       "wadname": "vIOS22-64-v1550-vWii.wad",
       "md5": "4af6403a8fa4c3f9e7b08e032ca32097",
-      "md5alt": "%md5%",
+      "md5alt": "4af6403a8fa4c3f9e7b08e032ca32097",
       "category": "ios"
     },
     "vIOS28": {
@@ -1800,7 +1804,7 @@
       "version": 2063,
       "wadname": "vIOS28-64-v2063-vWii.wad",
       "md5": "ec593c264f8d2b871f06b814a62f40d9",
-      "md5alt": "%md5%",
+      "md5alt": "ec593c264f8d2b871f06b814a62f40d9",
       "category": "ios"
     },
     "vIOS31": {
@@ -1810,7 +1814,7 @@
       "version": 3864,
       "wadname": "vIOS31-64-v3864-vWii.wad",
       "md5": "8f78f87929c9f3d98cad9a7bad6e9179",
-      "md5alt": "%md5%",
+      "md5alt": "8f78f87929c9f3d98cad9a7bad6e9179",
       "category": "ios"
     },
     "vIOS33": {
@@ -1820,7 +1824,7 @@
       "version": 3864,
       "wadname": "vIOS33-64-v3864-vWii.wad",
       "md5": "1710937cc7fb7d95ec4cd3261c27f316",
-      "md5alt": "%md5%",
+      "md5alt": "1710937cc7fb7d95ec4cd3261c27f316",
       "category": "ios"
     },
     "vIOS34": {
@@ -1830,7 +1834,7 @@
       "version": 3864,
       "wadname": "vIOS34-64-v3864-vWii.wad",
       "md5": "5fbdbba73752d8dfdf41ff767af86056",
-      "md5alt": "%md5%",
+      "md5alt": "5fbdbba73752d8dfdf41ff767af86056",
       "category": "ios"
     },
     "vIOS35": {
@@ -1840,7 +1844,7 @@
       "version": 3864,
       "wadname": "vIOS35-64-v3864-vWii.wad",
       "md5": "6d8c8e897ee1497330e84978f6a8a78c",
-      "md5alt": "%md5%",
+      "md5alt": "6d8c8e897ee1497330e84978f6a8a78c",
       "category": "ios"
     },
     "vIOS36": {
@@ -1850,7 +1854,7 @@
       "version": 3864,
       "wadname": "vIOS36-64-v3864-vWii.wad",
       "md5": "e74726e377ac087a332acf0f603c59e8",
-      "md5alt": "%md5%",
+      "md5alt": "e74726e377ac087a332acf0f603c59e8",
       "category": "ios"
     },
     "vIOS37": {
@@ -1860,7 +1864,7 @@
       "version": 5919,
       "wadname": "vIOS37-64-v5919-vWii.wad",
       "md5": "0695a86ef9758ddb339ec4671a53b7b9",
-      "md5alt": "%md5%",
+      "md5alt": "0695a86ef9758ddb339ec4671a53b7b9",
       "category": "ios"
     },
     "vIOS38": {
@@ -1870,7 +1874,7 @@
       "version": 4380,
       "wadname": "vIOS38-64-v4380-vWii.wad",
       "md5": "d90930aad2fed6f356cd3fcf0c0a0b37",
-      "md5alt": "%md5%",
+      "md5alt": "d90930aad2fed6f356cd3fcf0c0a0b37",
       "category": "ios"
     },
     "vIOS41": {
@@ -1880,7 +1884,7 @@
       "version": 3863,
       "wadname": "vIOS41-64-v3863-vWii.wad",
       "md5": "61e7939e087e90df0e25610675320cd7",
-      "md5alt": "%md5%",
+      "md5alt": "61e7939e087e90df0e25610675320cd7",
       "category": "ios"
     },
     "vIOS43": {
@@ -1890,7 +1894,7 @@
       "version": 3863,
       "wadname": "vIOS43-64-v3863-vWii.wad",
       "md5": "c448af570d93f0a9005965f0bab14699",
-      "md5alt": "%md5%",
+      "md5alt": "c448af570d93f0a9005965f0bab14699",
       "category": "ios"
     },
     "vIOS45": {
@@ -1900,7 +1904,7 @@
       "version": 3863,
       "wadname": "vIOS45-64-v3863-vWii.wad",
       "md5": "fce7381da7cc241d74a833c6a41a12c9",
-      "md5alt": "%md5%",
+      "md5alt": "fce7381da7cc241d74a833c6a41a12c9",
       "category": "ios"
     },
     "vIOS46": {
@@ -1910,7 +1914,7 @@
       "version": 3863,
       "wadname": "vIOS46-64-v3863-vWii.wad",
       "md5": "961a9ea40f2df9836e335be8ecd53634",
-      "md5alt": "%md5%",
+      "md5alt": "961a9ea40f2df9836e335be8ecd53634",
       "category": "ios"
     },
     "vIOS48": {
@@ -1920,7 +1924,7 @@
       "version": 4380,
       "wadname": "vIOS48-64-v4380-vWii.wad",
       "md5": "3b9c40070c46e1d8f5b90f5bedf9597f",
-      "md5alt": "%md5%",
+      "md5alt": "3b9c40070c46e1d8f5b90f5bedf9597f",
       "category": "ios"
     },
     "vIOS53": {
@@ -1930,7 +1934,7 @@
       "version": 5919,
       "wadname": "vIOS53-64-v5919-vWii.wad",
       "md5": "3f3a147cebfd1b27ec5893f02b352ca3",
-      "md5alt": "%md5%",
+      "md5alt": "3f3a147cebfd1b27ec5893f02b352ca3",
       "category": "ios"
     },
     "vIOS55": {
@@ -1940,7 +1944,7 @@
       "version": 5919,
       "wadname": "vIOS55-64-v5919-vWii.wad",
       "md5": "1f956711c47bebfe988604a459a01f45",
-      "md5alt": "%md5%",
+      "md5alt": "1f956711c47bebfe988604a459a01f45",
       "category": "ios"
     },
     "vIOS56": {
@@ -1950,7 +1954,7 @@
       "version": 5918,
       "wadname": "vIOS56-64-v5918-vWii.wad",
       "md5": "680656b494cb283ed0c81b02ca609a83",
-      "md5alt": "%md5%",
+      "md5alt": "680656b494cb283ed0c81b02ca609a83",
       "category": "ios"
     },
     "vIOS61": {
@@ -1960,7 +1964,7 @@
       "version": 5918,
       "wadname": "cIOS61[56]-v5918-vWii.wad",
       "md5": "9af066bbefae4873599c11a717e511ef",
-      "md5alt": "%md5%",
+      "md5alt": "9af066bbefae4873599c11a717e511ef",
       "category": "ios"
     },
     "vIOS57": {
@@ -1970,7 +1974,7 @@
       "version": 6175,
       "wadname": "vIOS57-64-v6175-vWii.wad",
       "md5": "cdfd7b2e674c224132b87d6187465bed",
-      "md5alt": "%md5%",
+      "md5alt": "cdfd7b2e674c224132b87d6187465bed",
       "category": "ios"
     },
     "vIOS58": {
@@ -1980,7 +1984,7 @@
       "version": 6432,
       "wadname": "vIOS58-64-v6432-vWii.wad",
       "md5": "fcd1ef330e1a5e157f3882b7ff6d60c8",
-      "md5alt": "%md5%",
+      "md5alt": "fcd1ef330e1a5e157f3882b7ff6d60c8",
       "category": "ios"
     },
     "vIOS59": {
@@ -1990,7 +1994,7 @@
       "version": 9249,
       "wadname": "vIOS59-64-v9249-vWii.wad",
       "md5": "8d7f30002d456de372dd9ad000cd5189",
-      "md5alt": "%md5%",
+      "md5alt": "8d7f30002d456de372dd9ad000cd5189",
       "category": "ios"
     },
     "vIOS62": {
@@ -2000,7 +2004,7 @@
       "version": 6942,
       "wadname": "vIOS62-64-v6942-vWii.wad",
       "md5": "d730ba9734b23b79a92e2f61e0a4d6fb",
-      "md5alt": "%md5%",
+      "md5alt": "d730ba9734b23b79a92e2f61e0a4d6fb",
       "category": "ios"
     },
     "vIOS80": {
@@ -2010,7 +2014,7 @@
       "version": 7200,
       "wadname": "vIOS80-64-v7200-vWii.wad",
       "md5": "bb77730426bdf0eabe5509c291e86198",
-      "md5alt": "%md5%",
+      "md5alt": "bb77730426bdf0eabe5509c291e86198",
       "category": "ios"
     },
     "vIOS80P": {
@@ -2020,13 +2024,13 @@
       "version": 7200,
       "wadname": "vIOS80v7200[FS-ES-NP-VP]-vWii",
       "md5": "592c197ec1863e7a9adf86b03fbf61f1",
-      "md5alt": "%md5%",
+      "md5alt": "592c197ec1863e7a9adf86b03fbf61f1",
       "ciosslot": 80,
       "ciosversion": 7200,
       "category": "patchios",
       "basewad": "vIOS80-64-v7200-vWii",
       "md5base": "bb77730426bdf0eabe5509c291e86198",
-      "md5basealt": "%md5base%"
+      "md5basealt": "bb77730426bdf0eabe5509c291e86198"
     },
     "Bannerbomb1": {
       "name": "Bannerbomb v1 (for 3.0 - 4.1 Wii's)",
@@ -2053,8 +2057,8 @@
       "name": "Any Region Changer ModMii Edition",
       "category": "OSC",
       "code1": "ARCME",
-      "\"dlname": "%code1%.zip",
-      "\"wadname": "%dlname%"
+      "dlname": "ARCME.zip",
+      "wadname": "ARCME.zip"
     },
     "KK": {
       "name": "KoreanKii",
@@ -2082,8 +2086,8 @@
       "name": "CleanRip",
       "category": "OSC",
       "code1": "CleanRip",
-      "\"dlname": "%code1%.zip",
-      "\"wadname": "%dlname%"
+      "dlname": "CleanRip.zip",
+      "wadname": "CleanRip.zip"
     },
     "HM": {
       "name": "HackMii Installer v1.2",
@@ -2124,8 +2128,8 @@
       "name": "SysCheck ModMii Edition",
       "category": "OSC",
       "code1": "SysCheckME",
-      "\"dlname": "%code1%.zip",
-      "\"wadname": "%dlname%"
+      "dlname": "SysCheckME.zip",
+      "wadname": "SysCheckME.zip"
     },
     "SIP": {
       "category": "fullextract",
@@ -2134,7 +2138,7 @@
       "code2": "https://raw.githubusercontent.com/modmii/modmii.github.io/master/temp/sip_v1.14_.zip",
       "version": "*",
       "dlname": "sip_v1.14_.zip",
-      "\"wadname": "%dlname%",
+      "wadname": "sip_v1.14_.zip",
       "filename": "boot.dol",
       "md5": "5a76e9069ddaab13793692fc20c57b40",
       "path1": "apps\\SIP\\"
@@ -2239,8 +2243,8 @@
       "name": "nanddumper@IOS",
       "category": "OSC",
       "code1": "nanddumper_ios",
-      "\"dlname": "%code1%.zip",
-      "\"wadname": "%dlname%"
+      "dlname": "nanddumper_ios.zip",
+      "wadname": "nanddumper_ios.zip"
     },
     "locked": {
       "name": "Locked Apps Folder for HBC (PASS=UDLRAB)",
@@ -2269,29 +2273,29 @@
       "name": "USB Loader GX",
       "category": "OSC",
       "code1": "usbloader_gx",
-      "\"dlname": "%code1%.zip",
-      "\"wadname": "%dlname%"
+      "dlname": "usbloader_gx.zip",
+      "wadname": "usbloader_gx.zip"
     },
     "Nintendont": {
       "name": "Nintendont",
       "category": "OSC",
       "code1": "Nintendont",
-      "\"dlname": "%code1%.zip",
-      "\"wadname": "%dlname%"
+      "dlname": "Nintendont.zip",
+      "wadname": "Nintendont.zip"
     },
     "MyM": {
       "name": "MyMenuifyMod",
       "category": "OSC",
       "code1": "MyMenuifyMod",
-      "\"dlname": "%code1%.zip",
-      "\"wadname": "%dlname%"
+      "dlname": "MyMenuifyMod.zip",
+      "wadname": "MyMenuifyMod.zip"
     },
     "csminstaller": {
       "name": "csm-installer",
       "category": "OSC",
       "code1": "csm-installer",
-      "\"dlname": "%code1%.zip",
-      "\"wadname": "%dlname%"
+      "dlname": "csm-installer.zip",
+      "wadname": "csm-installer.zip"
     },
     "bootmiisd": {
       "name": "Bootmii SD Files",
@@ -2303,7 +2307,7 @@
       "wadname": "bootmii_sd_files.zip",
       "filename": "ppcboot.elf",
       "md5": "cad3fad8e5d20cc41168dbb04bd5cde1",
-      "md5alt": "%md5%",
+      "md5alt": "cad3fad8e5d20cc41168dbb04bd5cde1",
       "path1": "bootmii\\"
     },
     "neogamma": {
@@ -2322,22 +2326,22 @@
       "name": "Yet Another Wad Manager ModMii Edition",
       "category": "OSC",
       "code1": "yawmME",
-      "\"dlname": "%code1%.zip",
-      "\"wadname": "%dlname%"
+      "dlname": "yawmME.zip",
+      "wadname": "yawmME.zip"
     },
     "usbfolder": {
       "name": "Configurable USB-Loader",
       "category": "OSC",
       "code1": "usb-loader",
-      "\"dlname": "%code1%.zip",
-      "\"wadname": "%dlname%"
+      "dlname": "usb-loader.zip",
+      "wadname": "usb-loader.zip"
     },
     "FLOW": {
       "name": "WiiFlow",
       "category": "OSC",
       "code1": "wiiflow",
-      "\"dlname": "%code1%.zip",
-      "\"wadname": "%dlname%"
+      "dlname": "wiiflow.zip",
+      "wadname": "wiiflow.zip"
     },
     "CheatCodes": {
       "name": "Copy of Cheat Codes for AccioHacks",
@@ -2353,7 +2357,7 @@
       "wadname": "WiiBackupManager.zip",
       "filename": "WiiBackupManager_Win32.exe",
       "md5": "8ee733c1c126260962bcc83926d3cea6",
-      "\"path1": "Program Files\\WiiBackupManager\\"
+      "path1": "Program Files\\WiiBackupManager\\"
     },
     "USBX": {
       "name": "USB-Loader Forwarder Channel\\dol",
@@ -2364,7 +2368,7 @@
       "wadname": "USBLoader(s)-ahbprot58-SD-USB-v14-IDCL-(Wii+vWii)_.zip",
       "filename": "USBLoader(s)-ahbprot58-SD-USB-v14-IDCL-(Wii+vWii).wad",
       "md5": "f2f2bdebf7c6e68d4b08c1a26fd167a2",
-      "md5alt": "%md5%",
+      "md5alt": "f2f2bdebf7c6e68d4b08c1a26fd167a2",
       "category": "fullextract",
       "path1": "\\WAD\\"
     },
@@ -2377,7 +2381,7 @@
       "wadname": "WiiFlow_Forwarder_wad_dol_v14_Wii+vWii.zip",
       "filename": "WiiFlow-FIX94v14-forwarder-BWFA-Wii+vWii.wad",
       "md5": "4313c66e14e681d0decf933d679e6474",
-      "md5alt": "%md5%",
+      "md5alt": "4313c66e14e681d0decf933d679e6474",
       "category": "fullextract",
       "path1": "WAD\\"
     },
@@ -2390,7 +2394,7 @@
       "wadname": "switch2uneek_ModMiiBundle_v12_.zip",
       "filename": "switch2uneek-4EMUNand-v12-S2RL.wad",
       "md5": "24a7d692c26ddaa177ec7890c3881d4f",
-      "md5alt": "%md5%",
+      "md5alt": "24a7d692c26ddaa177ec7890c3881d4f",
       "category": "fullextract",
       "path1": "WAD\\"
     },
@@ -2399,11 +2403,11 @@
       "code1": "ZIP",
       "code2": "https://raw.githubusercontent.com/modmii/modmii.github.io/master/temp/neek2o_ModMii_BK2O_nSwitch_v4.2.wad",
       "version": "*",
-      "\"dlname": "neek2o_ModMii_BK2O_nSwitch_v4.2.wad",
+      "dlname": "neek2o_ModMii_BK2O_nSwitch_v4.2.wad",
       "wadname": "neek2o_ModMii_BK2O_nSwitch_v4.2.wad",
       "filename": "neek2o_ModMii_BK2O_nSwitch_v4.2.wad",
       "md5": "e880a65e4293c4fbba976257afcc2188",
-      "md5alt": "%md5%",
+      "md5alt": "e880a65e4293c4fbba976257afcc2188",
       "category": "fullextract",
       "path1": "WAD\\"
     },
@@ -2416,46 +2420,46 @@
       "wadname": "postLoader_ModMii_Forwarder_BOST-Wii+vWii.wad",
       "filename": "postLoader_ModMii_Forwarder_BOST-Wii+vWii.wad",
       "md5": "ec6e4602a6c45ccbdf590cafba68f0da",
-      "md5alt": "%md5%",
+      "md5alt": "ec6e4602a6c45ccbdf590cafba68f0da",
       "category": "fullextract",
       "path1": "WAD\\"
     },
     "OHBC": {
-      "\"name": "Open Homebrew Channel WAD (LULZ v1.1.5)",
+      "name": "Open Homebrew Channel WAD (LULZ v1.1.5)",
       "code1": "ZIP",
       "code2": "https://github.com/Wii-Mini-Hacking/hbc/releases/download/v1.1.5/Open_HBC_1.1.5_LULZ.wad",
       "version": "*",
-      "\"dlname": "Open_HBC_1.1.5_LULZ.wad",
-      "\"wadname": "%dlname%",
-      "\"filename": "%wadname%",
+      "dlname": "Open_HBC_1.1.5_LULZ.wad",
+      "wadname": "Open_HBC_1.1.5_LULZ.wad",
+      "filename": "Open_HBC_1.1.5_LULZ.wad",
       "md5": "4c01410c52b353a372e2533dec539c91",
-      "md5alt": "%md5%",
+      "md5alt": "4c01410c52b353a372e2533dec539c91",
       "category": "fullextract",
       "path1": "WAD\\"
     },
     "OHBC113": {
-      "\"name": "Open Homebrew Channel WAD (OHBC v1.1.3)",
+      "name": "Open Homebrew Channel WAD (OHBC v1.1.3)",
       "code1": "ZIP",
       "code2": "https://raw.githubusercontent.com/modmii/modmii.github.io/master/temp/Open_HBC_1.1.3_OHBC.wad",
       "version": "*",
-      "\"dlname": "Open_HBC_1.1.3_OHBC.wad",
-      "\"wadname": "Open_HBC_1.1.3_OHBC.wad",
-      "\"filename": "%wadname%",
+      "dlname": "Open_HBC_1.1.3_OHBC.wad",
+      "wadname": "Open_HBC_1.1.3_OHBC.wad",
+      "filename": "Open_HBC_1.1.3_OHBC.wad",
       "md5": "7a1762f39e6051affa4a4f558bae8c3a",
-      "md5alt": "%md5%",
+      "md5alt": "7a1762f39e6051affa4a4f558bae8c3a",
       "category": "fullextract",
       "path1": "WAD\\"
     },
     "OHBC114": {
-      "\"name": "Open Homebrew Channel WAD (OHBC v1.1.4-1)",
+      "name": "Open Homebrew Channel WAD (OHBC v1.1.4-1)",
       "code1": "ZIP",
       "code2": "https://github.com/FIX94/hbc/releases/download/1.1.4-1/Homebrew.Channel.-.OHBC.wad",
       "version": "*",
-      "\"dlname": "Homebrew.Channel.-.OHBC.wad",
-      "\"wadname": "Open_HBC_1.1.4-1_OHBC.wad",
-      "\"filename": "%wadname%",
+      "dlname": "Homebrew.Channel.-.OHBC.wad",
+      "wadname": "Open_HBC_1.1.4-1_OHBC.wad",
+      "filename": "Open_HBC_1.1.4-1_OHBC.wad",
       "md5": "7feaa2493bdaef8c37d48811964a6f81",
-      "md5alt": "%md5%",
+      "md5alt": "7feaa2493bdaef8c37d48811964a6f81",
       "category": "fullextract",
       "path1": "WAD\\"
     },
@@ -2469,7 +2473,7 @@
       "wadname": "FAT32_GUI_Formatter.exe",
       "filename": "FAT32_GUI_Formatter.exe",
       "md5": "2459a629ace148286360b860442221a2",
-      "\"path1": "Program Files\\FAT32_GUI_Formatter\\"
+      "path1": "Program Files\\FAT32_GUI_Formatter\\"
     },
     "RC24": {
       "name": "RiiConnect24 Patcher",
@@ -2480,7 +2484,7 @@
       "dlname": "RiiConnect24Patcher.bat",
       "wadname": "RiiConnect24Patcher.bat",
       "filename": "RiiConnect24Patcher.bat",
-      "\"path1": "Program Files\\RiiConnect24Patcher\\"
+      "path1": "Program Files\\RiiConnect24Patcher\\"
     },
     "WiiLink": {
       "name": "WiiLink Patcher",
@@ -2491,7 +2495,7 @@
       "dlname": "latest",
       "wadname": "latest.json",
       "filename": "WiiLinkPatcher.exe",
-      "\"path1": "Program Files\\WiiLinkPatcher\\"
+      "path1": "Program Files\\WiiLinkPatcher\\"
     },
     "Cemu": {
       "name": "Cemu",
@@ -2503,7 +2507,7 @@
       "wadname": "latest.json",
       "zipname": "cemu-windows-x64.zip",
       "filename": "Cemu.exe",
-      "\"path1": "Program Files\\Cemu\\"
+      "path1": "Program Files\\Cemu\\"
     },
     "NUSGet": {
       "name": "NUSGet",
@@ -2511,10 +2515,10 @@
       "code1": "PC",
       "code2": "https://github.com/NinjaCheetah/NUSGet/releases/latest/download/NUSGet-Windows-x86_64-bin.zip",
       "version": "*",
-      "\"dlname": "NUSGet-Windows-x86_64-bin.zip",
-      "\"wadname": "%dlname%",
+      "dlname": "NUSGet-Windows-x86_64-bin.zip",
+      "wadname": "NUSGet-Windows-x86_64-bin.zip",
       "filename": "NUSGet.exe",
-      "\"path1": "Program Files\\NUSGet\\"
+      "path1": "Program Files\\NUSGet\\"
     },
     "Diskitude": {
       "name": "Diskitude",
@@ -2525,7 +2529,7 @@
       "dlname": "Diskitude.exe",
       "wadname": "Diskitude.exe",
       "filename": "Diskitude.exe",
-      "\"path1": "Program Files\\Diskitude\\"
+      "path1": "Program Files\\Diskitude\\"
     },
     "hxd": {
       "name": "HxD",
@@ -2535,7 +2539,7 @@
       "version": "*",
       "dlname": "HxD.zip",
       "wadname": "HxD.zip",
-      "\"path1": "Program Files\\HxD\\"
+      "path1": "Program Files\\HxD\\"
     },
     "Nkit": {
       "name": "NKit Processing App",
@@ -2547,7 +2551,7 @@
       "wadname": "NKit_v1.4.zip",
       "filename": "NKitProcessingApp.exe",
       "md5": "b4b1ceb6fc02596f8138eee183f50fcb",
-      "\"path1": "Program Files\\NKit\\"
+      "path1": "Program Files\\NKit\\"
     },
     "GCBM": {
       "name": "GameCube Backup Manager",
@@ -2555,10 +2559,10 @@
       "code1": "PC",
       "code2": "https://github.com/AxionDrak/GameCube-Backup-Manager/releases/latest/download/gcbm.zip",
       "version": "*",
-      "\"dlname": "gcbm.zip",
-      "\"wadname": "%dlname%",
+      "dlname": "gcbm.zip",
+      "wadname": "gcbm.zip",
       "filename": "GCBM.exe",
-      "\"path1": "Program Files\\GCBM\\"
+      "path1": "Program Files\\GCBM\\"
     },
     "ThemeMiiMod": {
       "name": "ThemeMii Mod",
@@ -2570,7 +2574,7 @@
       "wadname": "ThemeMii_MOD.zip",
       "filename": "ThemeMii.exe",
       "md5": "6f0bd5fa4a7b59c45571c057d7d348ee",
-      "\"path1": "Program Files\\ThemeMii\\"
+      "path1": "Program Files\\ThemeMii\\"
     },
     "UStealth": {
       "name": "UStealth",
@@ -2582,18 +2586,18 @@
       "wadname": "UStealth.zip",
       "filename": "Ustealth_R8.exe",
       "md5": "6d223fd62bbb7984e78c6316e7b2d7fb",
-      "\"path1": "Program Files\\UStealth\\"
+      "path1": "Program Files\\UStealth\\"
     },
     "UWUVCI": {
-      "\"name": "Ultimate Wii U VC Injectors (UWUVCI)",
+      "name": "Ultimate Wii U VC Injectors (UWUVCI)",
       "category": "auto",
       "code1": "fullextract",
       "code2": "https://github.com/stuff-by-3-random-dudes/UWUVCI-AIO-WPF/releases/latest/download/UWUVCI.zip",
       "version": "*",
       "dlname": "UWUVCI.zip",
       "wadname": "UWUVCI.zip",
-      "\"filename": "UWUVCI AIO.exe",
-      "\"path1": "Program Files\\UWUVCI AIO\\"
+      "filename": "UWUVCI AIO.exe",
+      "path1": "Program Files\\UWUVCI AIO\\"
     },
     "SDTEST": {
       "name": "H2testw",
@@ -2605,7 +2609,7 @@
       "wadname": "h2testw.zip",
       "filename": "h2testw.exe",
       "md5": "303d10037dbbd1f502ad01ad829a6df8",
-      "\"path1": "Program Files\\h2testw\\"
+      "path1": "Program Files\\h2testw\\"
     },
     "SMW": {
       "name": "ShowMiiWads",
@@ -2617,7 +2621,7 @@
       "wadname": "ShowMiiWads-Mod-1.5.2.zip",
       "filename": "ShowMiiWads_Win64.exe",
       "md5": "4bd77dd6199faa886fd7f3d76cc701c9",
-      "\"path1": "Program Files\\ShowMiiWads\\"
+      "path1": "Program Files\\ShowMiiWads\\"
     },
     "CustomizeMii": {
       "name": "Customize Mii",
@@ -2629,7 +2633,7 @@
       "wadname": "CustomizeMii 3.11.rar",
       "filename": "CustomizeMii.exe",
       "md5": "e35d75c3ad0a058149bdf45155595cfc",
-      "\"path1": "Program Files\\CustomizeMii\\"
+      "path1": "Program Files\\CustomizeMii\\"
     },
     "WiiGSC": {
       "name": "Wii Game Shortcut Creator",
@@ -2641,7 +2645,7 @@
       "wadname": "WiiGSC.zip",
       "filename": "WiiGSC.exe",
       "md5": "ce0e85d332f1d56d2c01e25b0409df90",
-      "\"path1": "Program Files\\WiiGSC\\"
+      "path1": "Program Files\\WiiGSC\\"
     },
     "ohnes": {
       "name": "ohneschwanzenegger",
@@ -2653,7 +2657,7 @@
       "wadname": "ohneschwanzenegger.zip",
       "filename": "ohneschwanzenegger.exe",
       "md5": "4823707a511105678c8d6f909d022617",
-      "\"path1": "Program Files\\ohneschwanzenegger\\"
+      "path1": "Program Files\\ohneschwanzenegger\\"
     },
     "Dolphin": {
       "name": "Dolphin",
@@ -2664,7 +2668,7 @@
       "dlname": "Dolphin",
       "wadname": "Dolphin.7z",
       "filename": "Dolphin.exe",
-      "\"path1": "Program Files\\Dolphin-x64\\"
+      "path1": "Program Files\\Dolphin-x64\\"
     },
     "FILEZILLA": {
       "name": "FileZilla",
@@ -2672,9 +2676,9 @@
       "code1": "PC",
       "code2": "https://raw.githubusercontent.com/modmii/modmii.github.io/master/temp/%dlname%",
       "version": 2,
-      "\"wadname": "%dlname%",
+      "wadname": "%dlname%",
       "filename": "filezilla.exe",
-      "\"path1": "Program Files\\%dlname:~0,-4%\\"
+      "path1": "Program Files\\%dlname:~0,-4%\\"
     },
     "HashMF": {
       "name": "HashMyFiles",
@@ -2682,9 +2686,9 @@
       "code1": "PC",
       "code2": "https://www.nirsoft.net/utils/%dlname%",
       "version": "*",
-      "\"wadname": "%dlname%",
+      "wadname": "%dlname%",
       "filename": "hashmyfiles.exe",
-      "\"path1": "Program Files\\%dlname:~0,-4%\\"
+      "path1": "Program Files\\%dlname:~0,-4%\\"
     },
     "OSC": {
       "name": "Open Shop Channel",
@@ -2695,14 +2699,14 @@
       "dlname": "oscdl-standalone",
       "wadname": "oscdl-standalone.exe",
       "filename": "oscdl-standalone.exe",
-      "\"path1": "Program Files\\OpenShopChannel\\"
+      "path1": "Program Files\\OpenShopChannel\\"
     },
     "WIIMC": {
       "name": "WiiMC-SS (Media Player)",
       "category": "OSC",
       "code1": "WiiMC-SS",
-      "\"dlname": "%code1%.zip",
-      "\"wadname": "%dlname%"
+      "dlname": "WiiMC-SS.zip",
+      "wadname": "WiiMC-SS.zip"
     },
     "CheatZip": {
       "name": "Cheat Codes (txtcodes)",
@@ -2711,142 +2715,142 @@
       "code2": "https://raw.githubusercontent.com/modmii/modmii.github.io/master/temp/txt.zip",
       "version": "*",
       "dlname": "txt.zip",
-      "\"wadname": "%dlname%",
+      "wadname": "txt.zip",
       "filename": "SMNP01.txt",
       "md5": "030fd3bfe73f46d2dd73180f287ead03",
-      "md5alt": "%md5%",
+      "md5alt": "030fd3bfe73f46d2dd73180f287ead03",
       "path1": "txtcodes\\"
     },
     "OSClib": {
       "name": "OSC Complete Wii App Library",
       "category": "OSC",
       "code1": "all",
-      "\"wadname": "%dlname%"
+      "wadname": "%dlname%"
     },
     "vWii80Installer": {
       "name": "Patched IOS80 Installer for vWii",
       "category": "OSC",
       "code1": "Patched_IOS80_Installer_for_vWii",
-      "\"dlname": "%code1%.zip",
-      "\"wadname": "%dlname%"
+      "dlname": "Patched_IOS80_Installer_for_vWii.zip",
+      "wadname": "Patched_IOS80_Installer_for_vWii.zip"
     },
     "v43DB": {
       "name": "ww-43db-patcher",
       "category": "OSC",
       "code1": "ww-43db-patcher",
-      "\"dlname": "%code1%.zip",
-      "\"wadname": "%dlname%"
+      "dlname": "ww-43db-patcher.zip",
+      "wadname": "ww-43db-patcher.zip"
     },
     "SCR": {
       "name": "System Channel Restorer",
       "category": "OSC",
       "code1": "system-channel-restorer",
-      "\"dlname": "%code1%.zip",
-      "\"wadname": "%dlname%"
+      "dlname": "system-channel-restorer.zip",
+      "wadname": "system-channel-restorer.zip"
     },
     "fceugx": {
       "name": "FCEUGX (NES Emulator)",
       "category": "OSC",
       "code1": "fceugx",
-      "\"dlname": "%code1%.zip",
-      "\"wadname": "%dlname%"
+      "dlname": "fceugx.zip",
+      "wadname": "fceugx.zip"
     },
     "HBASlib": {
       "name": "HBAS Complete WiiU App Library",
       "category": "HBAS",
       "code1": "all",
-      "\"wadname": "%dlname%"
+      "wadname": "%dlname%"
     },
     "Bloopair": {
       "name": "Bloopair",
       "category": "HBAS",
       "code1": "Bloopair-Tiramisu",
-      "\"dlname": "%code1%.zip",
-      "\"wadname": "%dlname%"
+      "dlname": "Bloopair-Tiramisu.zip",
+      "wadname": "Bloopair-Tiramisu.zip"
     },
     "AccountSwap": {
       "name": "Wii U Account Swap",
       "category": "HBAS",
       "code1": "Wii-U-Account-Swap",
-      "\"dlname": "%code1%.zip",
-      "\"wadname": "%dlname%"
+      "dlname": "Wii-U-Account-Swap.zip",
+      "wadname": "Wii-U-Account-Swap.zip"
     },
     "Inkay": {
       "name": "Inkay for Pretendo",
       "category": "HBAS",
       "code1": "Inkay",
-      "\"dlname": "%code1%.zip",
-      "\"wadname": "%dlname%"
+      "dlname": "Inkay.zip",
+      "wadname": "Inkay.zip"
     },
     "wup_installer_gx2_wuhb": {
       "name": "WUP Installer GX2",
       "category": "HBAS",
       "code1": "wup_installer_gx2_wuhb",
-      "\"dlname": "%code1%.zip",
-      "\"wadname": "%dlname%"
+      "dlname": "wup_installer_gx2_wuhb.zip",
+      "wadname": "wup_installer_gx2_wuhb.zip"
     },
     "wudd": {
       "name": "WiiU Disc Dumper",
       "category": "HBAS",
       "code1": "wudd",
-      "\"dlname": "%code1%.zip",
-      "\"wadname": "%dlname%"
+      "dlname": "wudd.zip",
+      "wadname": "wudd.zip"
     },
     "GiveMiiYouTube": {
       "name": "GiveMiiYouTube",
       "category": "HBAS",
       "code1": "GiveMiiYouTube",
-      "\"dlname": "%code1%.zip",
-      "\"wadname": "%dlname%"
+      "dlname": "GiveMiiYouTube.zip",
+      "wadname": "GiveMiiYouTube.zip"
     },
     "CompatTitleInstaller": {
       "name": "Compat Title Installer",
       "category": "HBAS",
       "code1": "CompatTitleInstaller",
-      "\"dlname": "%code1%.zip",
-      "\"wadname": "%dlname%"
+      "dlname": "CompatTitleInstaller.zip",
+      "wadname": "CompatTitleInstaller.zip"
     },
     "Screenshot_WUPS": {
       "name": "Screenshot Plugin",
       "category": "HBAS",
       "code1": "Screenshot_WUPS",
-      "\"dlname": "%code1%.zip",
-      "\"wadname": "%dlname%"
+      "dlname": "Screenshot_WUPS.zip",
+      "wadname": "Screenshot_WUPS.zip"
     },
     "evWii": {
       "name": "evWii",
       "category": "HBAS",
       "code1": "evWii",
-      "\"dlname": "%code1%.zip",
-      "\"wadname": "%dlname%"
+      "dlname": "evWii.zip",
+      "wadname": "evWii.zip"
     },
     "WiiVCLaunch": {
       "name": "WiiVCLaunch",
       "category": "HBAS",
       "code1": "WiiVCLaunch",
-      "\"dlname": "%code1%.zip",
-      "\"wadname": "%dlname%"
+      "dlname": "WiiVCLaunch.zip",
+      "wadname": "WiiVCLaunch.zip"
     },
     "appstore": {
       "name": "WiiU Homebrew App Store",
       "category": "HBAS",
       "code1": "appstore",
-      "\"dlname": "%code1%.zip",
-      "\"wadname": "%dlname%"
+      "dlname": "appstore.zip",
+      "wadname": "appstore.zip"
     },
     "WiiUIdent": {
       "name": "WiiUIdent",
       "category": "HBAS",
       "code1": "WiiUIdent",
-      "\"dlname": "%code1%.zip",
-      "\"wadname": "%dlname%"
+      "dlname": "WiiUIdent.zip",
+      "wadname": "WiiUIdent.zip"
     },
     "SaveMiiModWUTPort": {
       "name": "SaveMii Mod WUT Port",
       "category": "HBAS",
       "code1": "SaveMiiModWUTPort",
-      "\"dlname": "%code1%.zip",
-      "\"wadname": "%dlname%"
+      "dlname": "SaveMiiModWUTPort.zip",
+      "wadname": "SaveMiiModWUTPort.zip"
     },
     "Aroma": {
       "name": "Aroma",
@@ -2855,7 +2859,7 @@
       "code2": "https://aroma.foryour.cafe/api/download/base",
       "version": "*",
       "dlname": "base-aroma.zip",
-      "\"wadname": "%dlname%",
+      "wadname": "base-aroma.zip",
       "filename": "root.rpx",
       "path1": "wiiu\\environments\\aroma\\"
     },
@@ -2866,7 +2870,7 @@
       "code2": "https://aroma.foryour.cafe/api/download?packages=wiiu-nanddumper-payload",
       "version": "*",
       "dlname": "wiiu-nanddumper-payload.zip",
-      "\"wadname": "%dlname%",
+      "wadname": "wiiu-nanddumper-payload.zip",
       "filename": "payload.elf",
       "path1": "wiiu\\payloads\\nanddumper\\"
     },
@@ -2877,7 +2881,7 @@
       "code2": "https://aroma.foryour.cafe/api/download?packages=environmentloader",
       "version": "*",
       "dlname": "environmentloader.zip",
-      "\"wadname": "%dlname%",
+      "wadname": "environmentloader.zip",
       "filename": "payload.elf",
       "path1": "wiiu\\payloads\\default\\"
     },
@@ -2888,7 +2892,7 @@
       "code2": "https://github.com/wiiu-env/Tiramisu/releases/download/v0.1.4/environmentloader-ba9c126+wiiu-nanddumper-payload-5c5ec09+fw_img_loader-c2da326+payloadloaderinstaller-ec7176d+tiramisu-f1b479d.zip",
       "version": "*",
       "dlname": "Tiramisu_v0.1.4.zip",
-      "\"wadname": "%dlname%",
+      "wadname": "Tiramisu_v0.1.4.zip",
       "filename": "root.rpx",
       "md5": "5c9f07733ee6b037c4c022ae89f8ec36",
       "path1": "wiiu\\environments\\tiramisu\\"
@@ -2897,36 +2901,36 @@
       "name": "SNES9xGX (SNES Emulator)",
       "category": "OSC",
       "code1": "snes9xgx",
-      "\"dlname": "%code1%.zip",
-      "\"wadname": "%dlname%"
+      "dlname": "snes9xgx.zip",
+      "wadname": "snes9xgx.zip"
     },
     "vbagx": {
       "name": "Visual Boy Advance GX (GB/GBA Emulator)",
       "category": "OSC",
       "code1": "vbagx",
-      "\"dlname": "%code1%.zip",
-      "\"wadname": "%dlname%"
+      "dlname": "vbagx.zip",
+      "wadname": "vbagx.zip"
     },
     "SGM": {
       "name": "SaveGame Manager GX",
       "category": "OSC",
       "code1": "SaveGame_Manager_GX",
-      "\"dlname": "%code1%.zip",
-      "\"wadname": "%dlname%"
+      "dlname": "SaveGame_Manager_GX.zip",
+      "wadname": "SaveGame_Manager_GX.zip"
     },
     "WII64": {
       "name": "Wii64 (N64 Emulator)",
       "category": "OSC",
       "code1": "wii64",
-      "\"dlname": "%code1%.zip",
-      "\"wadname": "%dlname%"
+      "dlname": "wii64.zip",
+      "wadname": "wii64.zip"
     },
     "Not64": {
       "name": "Not64 (N64 Emulator)",
       "category": "OSC",
       "code1": "not64",
-      "\"dlname": "%code1%.zip",
-      "\"wadname": "%dlname%"
+      "dlname": "not64.zip",
+      "wadname": "not64.zip"
     },
     "postLoader": {
       "name": "postLoader",
@@ -2944,22 +2948,22 @@
       "name": "ftpii",
       "category": "OSC",
       "code1": "ftpii",
-      "\"dlname": "%code1%.zip",
-      "\"wadname": "%dlname%"
+      "dlname": "ftpii.zip",
+      "wadname": "ftpii.zip"
     },
     "WIIX": {
       "name": "WiiXplorer",
       "category": "OSC",
       "code1": "wiixplorer",
-      "\"dlname": "%code1%.zip",
-      "\"wadname": "%dlname%"
+      "dlname": "wiixplorer.zip",
+      "wadname": "wiixplorer.zip"
     },
     "HBB": {
       "name": "Homebrew Browser",
       "category": "OSC",
       "code1": "homebrew_browser",
-      "\"dlname": "%code1%.zip",
-      "\"wadname": "%dlname%"
+      "dlname": "homebrew_browser.zip",
+      "wadname": "homebrew_browser.zip"
     },
     "Casper": {
       "name": "Casper",
@@ -2988,22 +2992,22 @@
       "name": "WiiSXRX (Playstation 1 Emulator)",
       "category": "OSC",
       "code1": "WiiSXRX",
-      "\"dlname": "%code1%.zip",
-      "\"wadname": "%dlname%"
+      "dlname": "WiiSXRX.zip",
+      "wadname": "WiiSXRX.zip"
     },
     "Priiloader": {
       "name": "Priiloader Installer",
       "category": "OSC",
       "code1": "priiloader",
-      "\"dlname": "%code1%.zip",
-      "\"wadname": "%dlname%"
+      "dlname": "priiloader.zip",
+      "wadname": "priiloader.zip"
     },
     "LoadPriiloader": {
       "name": "Load Priiloader",
       "category": "OSC",
       "code1": "LoadPriiloader",
-      "\"dlname": "%code1%.zip",
-      "\"wadname": "%dlname%"
+      "dlname": "LoadPriiloader.zip",
+      "wadname": "LoadPriiloader.zip"
     },
     "CIOSDATABASE": {},
     "cIOS222[38]-v4": {
@@ -3019,7 +3023,7 @@
       "code2": "00000026",
       "version": 3610,
       "basecios": "cIOS222[38]-v4",
-      "diffpath": "%basecios%",
+      "diffpath": "cIOS222[38]-v4",
       "code2new": "000000de",
       "lastbasemodule": "0000000e",
       "cIOSFamilyName": "hermes",
@@ -3044,7 +3048,7 @@
       "code2b": "00000026",
       "versionb": 3610,
       "basecios": "cIOS223[37-38]-v4",
-      "diffpath": "%basecios%",
+      "diffpath": "cIOS223[37-38]-v4",
       "code2new": "000000df",
       "lastbasemodule": "0000000e",
       "cIOSFamilyName": "hermes",
@@ -3069,7 +3073,7 @@
       "code2b": "00000101",
       "versionb": 10,
       "basecios": "cBC-NMMv0.2a",
-      "diffpath": "%basecios%",
+      "diffpath": "cBC-NMMv0.2a",
       "code2new": "00000100",
       "URL": "https://raw.githubusercontent.com/modmii/modmii.github.io/master/temp/NMMv0.2a-cred.rar",
       "dlname": "NMMv0.2a-cred.rar"
@@ -3083,7 +3087,7 @@
       "wadname": "DIOSMIOSLite_2.11.wad",
       "filename": "DIOSMIOSLite_2.11.wad",
       "md5": "2f962f2a5cce33be6ebf1baa5255d90d",
-      "md5alt": "%md5%",
+      "md5alt": "2f962f2a5cce33be6ebf1baa5255d90d",
       "category": "fullextract",
       "path1": "WAD\\"
     },
@@ -3096,7 +3100,7 @@
       "wadname": "DIOSMIOS_2.11.wad",
       "filename": "DIOSMIOS_2.11.wad",
       "md5": "c65cf269f0f876b99e288a83c353a8f3",
-      "md5alt": "%md5%",
+      "md5alt": "c65cf269f0f876b99e288a83c353a8f3",
       "category": "fullextract",
       "path1": "WAD\\"
     },
@@ -3113,7 +3117,7 @@
       "code2": "00000026",
       "version": 3867,
       "basecios": "cIOS222[38]-v5",
-      "diffpath": "%basecios%",
+      "diffpath": "cIOS222[38]-v5",
       "code2new": "000000de",
       "lastbasemodule": "0000000e",
       "cIOSFamilyName": "hermes",
@@ -3127,12 +3131,12 @@
       "md5alt": "7c4f560c8e606b154f1c6f2bd1104517",
       "basewad": "IOS37-64-v3869",
       "md5base": "e3ead7b8ec59ce8859be3b37dbc9bc3d",
-      "md5basealt": "%md5base%",
+      "md5basealt": "e3ead7b8ec59ce8859be3b37dbc9bc3d",
       "code1": "00000001",
       "code2": "00000025",
       "version": 3869,
       "basecios": "cIOS223[37]-v5",
-      "diffpath": "%basecios%",
+      "diffpath": "cIOS223[37]-v5",
       "code2new": "000000df",
       "lastbasemodule": "0000000e",
       "cIOSFamilyName": "hermes",
@@ -3151,7 +3155,7 @@
       "code2": "00000039",
       "version": 5661,
       "basecios": "cIOS224[57]-v5",
-      "diffpath": "%basecios%",
+      "diffpath": "cIOS224[57]-v5",
       "code2new": "000000e0",
       "lastbasemodule": "00000012",
       "cIOSFamilyName": "hermes",
@@ -3170,7 +3174,7 @@
       "code2": "0000003C",
       "version": 6174,
       "basecios": "cIOS202[60]-v5.1R",
-      "diffpath": "%basecios%",
+      "diffpath": "cIOS202[60]-v5.1R",
       "code2new": "000000ca",
       "lastbasemodule": "0000000e",
       "cIOSFamilyName": "hermesrodries",
@@ -3189,7 +3193,7 @@
       "code2": "00000026",
       "version": 3867,
       "basecios": "cIOS222[38]-v5.1R",
-      "diffpath": "%basecios%",
+      "diffpath": "cIOS222[38]-v5.1R",
       "code2new": "000000de",
       "lastbasemodule": "0000000e",
       "cIOSFamilyName": "hermesrodries",
@@ -3203,12 +3207,12 @@
       "md5alt": "4a992816d5c2e6f7a529f302e1761b6c",
       "basewad": "IOS37-64-v3869",
       "md5base": "e3ead7b8ec59ce8859be3b37dbc9bc3d",
-      "md5basealt": "%md5base%",
+      "md5basealt": "e3ead7b8ec59ce8859be3b37dbc9bc3d",
       "code1": "00000001",
       "code2": "00000025",
       "version": 3869,
       "basecios": "cIOS223[37]-v5.1R",
-      "diffpath": "%basecios%",
+      "diffpath": "cIOS223[37]-v5.1R",
       "code2new": "000000df",
       "lastbasemodule": "0000000e",
       "cIOSFamilyName": "hermesrodries",
@@ -3227,7 +3231,7 @@
       "code2": "00000039",
       "version": 5661,
       "basecios": "cIOS224[57]-v5.1R",
-      "diffpath": "%basecios%",
+      "diffpath": "cIOS224[57]-v5.1R",
       "code2new": "000000e0",
       "lastbasemodule": "00000012",
       "cIOSFamilyName": "hermesrodries",
@@ -3246,7 +3250,7 @@
       "code2": "00000026",
       "version": 3610,
       "basecios": "cIOS249-v14",
-      "diffpath": "%basecios%",
+      "diffpath": "cIOS249-v14",
       "code2new": "000000f9",
       "lastbasemodule": "0000000e",
       "cIOSFamilyName": "waninkoko",
@@ -3266,7 +3270,7 @@
       "code2": "00000026",
       "version": 3610,
       "basecios": "cIOS249-v14",
-      "diffpath": "%basecios%",
+      "diffpath": "cIOS249-v14",
       "code2new": "000000f9",
       "lastbasemodule": "0000000e",
       "cIOSFamilyName": "waninkoko",
@@ -3285,7 +3289,7 @@
       "code2": "00000026",
       "version": 3867,
       "basecios": "cIOS249-v17b",
-      "diffpath": "%basecios%",
+      "diffpath": "cIOS249-v17b",
       "code2new": "000000f9",
       "lastbasemodule": "0000000e",
       "cIOSFamilyName": "waninkoko",
@@ -3305,7 +3309,7 @@
       "code2": "00000026",
       "version": 3867,
       "basecios": "cIOS249-v17b",
-      "diffpath": "%basecios%",
+      "diffpath": "cIOS249-v17b",
       "code2new": "000000f9",
       "lastbasemodule": "0000000e",
       "cIOSFamilyName": "waninkoko",
@@ -3319,12 +3323,12 @@
       "md5alt": "3f4379eeb001bfff89ccd38e40450d67",
       "basewad": "IOS37-64-v3869",
       "md5base": "e3ead7b8ec59ce8859be3b37dbc9bc3d",
-      "md5basealt": "%md5base%",
+      "md5basealt": "e3ead7b8ec59ce8859be3b37dbc9bc3d",
       "code1": "00000001",
       "code2": "00000025",
       "version": 3869,
       "basecios": "cIOS249[37]-v19",
-      "diffpath": "%basecios%",
+      "diffpath": "cIOS249[37]-v19",
       "code2new": "000000f9",
       "lastbasemodule": "0000000e",
       "cIOSFamilyName": "waninkoko",
@@ -3339,12 +3343,12 @@
       "md5alt": "98a79eaba9e6a0177c8eb11f728f93f1",
       "basewad": "IOS37-64-v3869",
       "md5base": "e3ead7b8ec59ce8859be3b37dbc9bc3d",
-      "md5basealt": "%md5base%",
+      "md5basealt": "e3ead7b8ec59ce8859be3b37dbc9bc3d",
       "code1": "00000001",
       "code2": "00000025",
       "version": 3869,
       "basecios": "cIOS249[37]-v19",
-      "diffpath": "%basecios%",
+      "diffpath": "cIOS249[37]-v19",
       "code2new": "000000f9",
       "lastbasemodule": "0000000e",
       "cIOSFamilyName": "waninkoko",
@@ -3363,7 +3367,7 @@
       "code2": "00000026",
       "version": 3867,
       "basecios": "cIOS249[38]-v19",
-      "diffpath": "%basecios%",
+      "diffpath": "cIOS249[38]-v19",
       "code2new": "000000f9",
       "lastbasemodule": "0000000e",
       "cIOSFamilyName": "waninkoko",
@@ -3383,7 +3387,7 @@
       "code2": "00000026",
       "version": 3867,
       "basecios": "cIOS249[38]-v19",
-      "diffpath": "%basecios%",
+      "diffpath": "cIOS249[38]-v19",
       "code2new": "000000f9",
       "lastbasemodule": "0000000e",
       "cIOSFamilyName": "waninkoko",
@@ -3399,7 +3403,7 @@
       "md5base": "757a3c6fd8a2eb449afd949cd7dc2507",
       "md5basealt": "7caaabeb823e76ecb47a6dcf29e4da95",
       "basecios": "cIOS249[57]-v19",
-      "diffpath": "%basecios%",
+      "diffpath": "cIOS249[57]-v19",
       "code1": "00000001",
       "code2": "00000039",
       "version": 5661,
@@ -3419,7 +3423,7 @@
       "md5base": "757a3c6fd8a2eb449afd949cd7dc2507",
       "md5basealt": "7caaabeb823e76ecb47a6dcf29e4da95",
       "basecios": "cIOS249[57]-v19",
-      "diffpath": "%basecios%",
+      "diffpath": "cIOS249[57]-v19",
       "code1": "00000001",
       "code2": "00000039",
       "version": 5661,
@@ -3441,7 +3445,7 @@
       "code2": "00000026",
       "version": 4123,
       "basecios": "cIOS249[38]-v20",
-      "diffpath": "%basecios%",
+      "diffpath": "cIOS249[38]-v20",
       "code2new": "000000f9",
       "lastbasemodule": "0000000e",
       "cIOSFamilyName": "waninkoko",
@@ -3461,7 +3465,7 @@
       "code2": "00000026",
       "version": 4123,
       "basecios": "cIOS249[38]-v20",
-      "diffpath": "%basecios%",
+      "diffpath": "cIOS249[38]-v20",
       "code2new": "000000f9",
       "lastbasemodule": "0000000e",
       "cIOSFamilyName": "waninkoko",
@@ -3480,7 +3484,7 @@
       "code2": "00000038",
       "version": 5661,
       "basecios": "cIOS249[56]-v20",
-      "diffpath": "%basecios%",
+      "diffpath": "cIOS249[56]-v20",
       "code2new": "000000f9",
       "lastbasemodule": "0000000e",
       "cIOSFamilyName": "waninkoko",
@@ -3500,7 +3504,7 @@
       "code2": "00000038",
       "version": 5661,
       "basecios": "cIOS249[56]-v20",
-      "diffpath": "%basecios%",
+      "diffpath": "cIOS249[56]-v20",
       "code2new": "000000f9",
       "lastbasemodule": "0000000e",
       "cIOSFamilyName": "waninkoko",
@@ -3519,7 +3523,7 @@
       "code2": "00000039",
       "version": 5918,
       "basecios": "cIOS249[57]-v20",
-      "diffpath": "%basecios%",
+      "diffpath": "cIOS249[57]-v20",
       "code2new": "000000f9",
       "lastbasemodule": "00000012",
       "cIOSFamilyName": "waninkoko",
@@ -3539,7 +3543,7 @@
       "code2": "00000039",
       "version": 5918,
       "basecios": "cIOS249[57]-v20",
-      "diffpath": "%basecios%",
+      "diffpath": "cIOS249[57]-v20",
       "code2new": "000000f9",
       "lastbasemodule": "00000012",
       "cIOSFamilyName": "waninkoko",
@@ -3558,7 +3562,7 @@
       "code2": "00000025",
       "version": 5662,
       "basecios": "cIOS249[37]-v21",
-      "diffpath": "%basecios%",
+      "diffpath": "cIOS249[37]-v21",
       "code2new": "000000f9",
       "lastbasemodule": "0000000e",
       "cIOSFamilyName": "waninkoko",
@@ -3578,7 +3582,7 @@
       "code2": "00000025",
       "version": 5662,
       "basecios": "cIOS249[37]-v21",
-      "diffpath": "%basecios%",
+      "diffpath": "cIOS249[37]-v21",
       "code2new": "000000f9",
       "lastbasemodule": "0000000e",
       "cIOSFamilyName": "waninkoko",
@@ -3597,7 +3601,7 @@
       "code2": "00000026",
       "version": 4123,
       "basecios": "cIOS249[38]-v21",
-      "diffpath": "%basecios%",
+      "diffpath": "cIOS249[38]-v21",
       "code2new": "000000f9",
       "lastbasemodule": "0000000e",
       "cIOSFamilyName": "waninkoko",
@@ -3617,7 +3621,7 @@
       "code2": "00000026",
       "version": 4123,
       "basecios": "cIOS249[38]-v21",
-      "diffpath": "%basecios%",
+      "diffpath": "cIOS249[38]-v21",
       "code2new": "000000f9",
       "lastbasemodule": "0000000e",
       "cIOSFamilyName": "waninkoko",
@@ -3636,7 +3640,7 @@
       "code2": "00000035",
       "version": 5662,
       "basecios": "cIOS249[53]-v21",
-      "diffpath": "%basecios%",
+      "diffpath": "cIOS249[53]-v21",
       "code2new": "000000f9",
       "lastbasemodule": "0000000e",
       "cIOSFamilyName": "waninkoko",
@@ -3656,7 +3660,7 @@
       "code2": "00000035",
       "version": 5662,
       "basecios": "cIOS249[53]-v21",
-      "diffpath": "%basecios%",
+      "diffpath": "cIOS249[53]-v21",
       "code2new": "000000f9",
       "lastbasemodule": "0000000e",
       "cIOSFamilyName": "waninkoko",
@@ -3675,7 +3679,7 @@
       "code2": "00000037",
       "version": 5662,
       "basecios": "cIOS249[55]-v21",
-      "diffpath": "%basecios%",
+      "diffpath": "cIOS249[55]-v21",
       "code2new": "000000f9",
       "lastbasemodule": "0000000e",
       "cIOSFamilyName": "waninkoko",
@@ -3695,7 +3699,7 @@
       "code2": "00000037",
       "version": 5662,
       "basecios": "cIOS249[55]-v21",
-      "diffpath": "%basecios%",
+      "diffpath": "cIOS249[55]-v21",
       "code2new": "000000f9",
       "lastbasemodule": "0000000e",
       "cIOSFamilyName": "waninkoko",
@@ -3714,7 +3718,7 @@
       "code2": "00000038",
       "version": 5661,
       "basecios": "cIOS249[56]-v21",
-      "diffpath": "%basecios%",
+      "diffpath": "cIOS249[56]-v21",
       "code2new": "000000f9",
       "lastbasemodule": "0000000e",
       "cIOSFamilyName": "waninkoko",
@@ -3734,7 +3738,7 @@
       "code2": "00000038",
       "version": 5661,
       "basecios": "cIOS249[56]-v21",
-      "diffpath": "%basecios%",
+      "diffpath": "cIOS249[56]-v21",
       "code2new": "000000f9",
       "lastbasemodule": "0000000e",
       "cIOSFamilyName": "waninkoko",
@@ -3753,7 +3757,7 @@
       "code2": "00000039",
       "version": 5918,
       "basecios": "cIOS249[57]-v21",
-      "diffpath": "%basecios%",
+      "diffpath": "cIOS249[57]-v21",
       "code2new": "000000f9",
       "lastbasemodule": "00000012",
       "cIOSFamilyName": "waninkoko",
@@ -3773,7 +3777,7 @@
       "code2": "00000039",
       "version": 5918,
       "basecios": "cIOS249[57]-v21",
-      "diffpath": "%basecios%",
+      "diffpath": "cIOS249[57]-v21",
       "code2new": "000000f9",
       "lastbasemodule": "00000012",
       "cIOSFamilyName": "waninkoko",
@@ -3792,7 +3796,7 @@
       "code2": "0000003a",
       "version": 6175,
       "basecios": "cIOS249[58]-v21",
-      "diffpath": "%basecios%",
+      "diffpath": "cIOS249[58]-v21",
       "code2new": "000000f9",
       "lastbasemodule": "00000012",
       "cIOSFamilyName": "waninkoko",
@@ -3812,7 +3816,7 @@
       "code2": "0000003a",
       "version": 6175,
       "basecios": "cIOS249[58]-v21",
-      "diffpath": "%basecios%",
+      "diffpath": "cIOS249[58]-v21",
       "code2new": "000000f9",
       "lastbasemodule": "00000012",
       "cIOSFamilyName": "waninkoko",
@@ -4216,63 +4220,63 @@
     },
     "cIOS248[38]-d2x-vWii": {
       "name": "cIOS248[38]-d2x-v11-beta3-vWii",
-      "\"wadname": "%name%",
+      "wadname": "cIOS248[38]-d2x-v11-beta3-vWii",
       "ciosslot": 248,
       "ciosversion": "65535",
       "md5": "4ab18ac0e49ac3d69ca42ee90a96ea86",
-      "md5alt": "%md5%",
+      "md5alt": "4ab18ac0e49ac3d69ca42ee90a96ea86",
       "basewad": "vIOS38-64-v4380-vWii",
       "md5base": "d90930aad2fed6f356cd3fcf0c0a0b37",
-      "md5basealt": "%md5base%",
+      "md5basealt": "d90930aad2fed6f356cd3fcf0c0a0b37",
       "code1": "00000007",
       "code2": "00000026",
       "version": 4380,
-      "\"basecios": "%name%"
+      "basecios": "cIOS248[38]-d2x-v11-beta3-vWii"
     },
     "cIOS249[56]-d2x-vWii": {
       "name": "cIOS249[56]-d2x-v11-beta3-vWii",
-      "\"wadname": "%name%",
+      "wadname": "cIOS249[56]-d2x-v11-beta3-vWii",
       "ciosslot": 249,
       "ciosversion": "65535",
       "md5": "2c251cf33f5f1c0fe0a138e23b0cf52c",
-      "md5alt": "%md5%",
+      "md5alt": "2c251cf33f5f1c0fe0a138e23b0cf52c",
       "basewad": "vIOS56-64-v5918-vWii",
       "md5base": "680656b494cb283ed0c81b02ca609a83",
-      "md5basealt": "%md5base%",
+      "md5basealt": "680656b494cb283ed0c81b02ca609a83",
       "code1": "00000007",
       "code2": "00000038",
       "version": 5918,
-      "\"basecios": "%name%"
+      "basecios": "cIOS249[56]-d2x-v11-beta3-vWii"
     },
     "cIOS250[57]-d2x-vWii": {
       "name": "cIOS250[57]-d2x-v11-beta3-vWii",
-      "\"wadname": "%name%",
+      "wadname": "cIOS250[57]-d2x-v11-beta3-vWii",
       "ciosslot": 250,
       "ciosversion": "65535",
       "md5": "f78a70de9228c748411edd6c98d6e0b5",
-      "md5alt": "%md5%",
+      "md5alt": "f78a70de9228c748411edd6c98d6e0b5",
       "basewad": "vIOS57-64-v6175-vWii",
       "md5base": "cdfd7b2e674c224132b87d6187465bed",
-      "md5basealt": "%md5base%",
+      "md5basealt": "cdfd7b2e674c224132b87d6187465bed",
       "code1": "00000007",
       "code2": "00000039",
       "version": 6175,
-      "\"basecios": "%name%"
+      "basecios": "cIOS250[57]-d2x-v11-beta3-vWii"
     },
     "cIOS251[58]-d2x-vWii": {
       "name": "cIOS251[58]-d2x-v11-beta3-vWii",
-      "\"wadname": "%name%",
+      "wadname": "cIOS251[58]-d2x-v11-beta3-vWii",
       "ciosslot": 251,
       "ciosversion": "65535",
       "md5": "349c745c596e1d25757a4c2e2195c645",
-      "md5alt": "%md5%",
+      "md5alt": "349c745c596e1d25757a4c2e2195c645",
       "basewad": "vIOS58-64-v6432-vWii",
       "md5base": "fcd1ef330e1a5e157f3882b7ff6d60c8",
-      "md5basealt": "%md5base%",
+      "md5basealt": "fcd1ef330e1a5e157f3882b7ff6d60c8",
       "code1": "00000007",
       "code2": "0000003a",
       "version": 6432,
-      "\"basecios": "%name%"
+      "basecios": "cIOS251[58]-d2x-v11-beta3-vWii"
     },
     "RVL-cMIOS-v65535(v10)_WiiGator_WiiPower_v0.2": {
       "name": "WiiGator+WiiPower cMIOS-v65535(v10)",
@@ -4287,7 +4291,7 @@
       "code2": "00000101",
       "version": 10,
       "basecios": "RVL-cMIOS-v65535(v10)_WiiGator_WiiPower_v0.2",
-      "diffpath": "%basecios%",
+      "diffpath": "RVL-cMIOS-v65535(v10)_WiiGator_WiiPower_v0.2",
       "code2new": "00000101"
     },
     "Swiss_cMIOS": {
@@ -4295,7 +4299,7 @@
       "wadname": "RVL-cMIOS[10]_Swiss_r1788",
       "ciosslot": "unchanged",
       "md5": "4bdeff6b69a25047e707f6600e462cef",
-      "md5alt": "%md5%",
+      "md5alt": "4bdeff6b69a25047e707f6600e462cef",
       "basewad": "RVL-mios-v10",
       "md5base": "2359fe4eca6a25d84326e9da610576a6",
       "md5basealt": "cf6cf98634891f70677a90ac968c094c",
@@ -4303,7 +4307,7 @@
       "code2": "00000101",
       "version": 10,
       "basecios": "RVL-cMIOS[10]_Swiss_r1788",
-      "diffpath": "%basecios%",
+      "diffpath": "RVL-cMIOS[10]_Swiss_r1788",
       "code2new": "00000101"
     },
     "RVL-cmios-v4_WiiGator_GCBL_v0.2": {
@@ -4319,7 +4323,7 @@
       "code2": "00000101",
       "version": 4,
       "basecios": "RVL-cmios-v4_WiiGator_GCBL_v0.2",
-      "diffpath": "%basecios%",
+      "diffpath": "RVL-cmios-v4_WiiGator_GCBL_v0.2",
       "code2new": "00000101"
     },
     "RVL-cmios-v4_Waninkoko_rev5": {
@@ -4335,7 +4339,7 @@
       "code2": "00000101",
       "version": 4,
       "basecios": "RVL-cmios-v4_Waninkoko_rev5",
-      "diffpath": "%basecios%",
+      "diffpath": "RVL-cmios-v4_Waninkoko_rev5",
       "code2new": "00000101"
     },
     "DarkWii_Red_4.1U": {
@@ -4776,9 +4780,9 @@
       "ciosslot": "unchanged",
       "md5alt": "%md5%",
       "basewad": "SystemMenu_4.3U_v513",
-      "basecios": "%basewad%",
+      "basecios": "SystemMenu_4.3U_v513",
       "md5base": "417358284cce02dbb0fed3ef30b0b59d",
-      "md5basealt": "%md5base%",
+      "md5basealt": "417358284cce02dbb0fed3ef30b0b59d",
       "code1": "00000001",
       "code2": "00000002",
       "mym1": "4-X_DarkWii_darkblue_NTSC.mym",
@@ -4793,9 +4797,9 @@
       "ciosslot": "unchanged",
       "md5alt": "%md5%",
       "basewad": "SystemMenu_4.2U_v481",
-      "basecios": "%basewad%",
+      "basecios": "SystemMenu_4.2U_v481",
       "md5base": "b4eda5b30d090c9256b60441d83c9d65",
-      "md5basealt": "%md5base%",
+      "md5basealt": "b4eda5b30d090c9256b60441d83c9d65",
       "code1": "00000001",
       "code2": "00000002",
       "mym1": "4-X_DarkWii_darkblue_NTSC.mym",
@@ -4810,9 +4814,9 @@
       "ciosslot": "unchanged",
       "md5alt": "%md5%",
       "basewad": "SystemMenu_4.1U_v449",
-      "basecios": "%basewad%",
+      "basecios": "SystemMenu_4.1U_v449",
       "md5base": "555d2c0bc92ccd05c6f6a57412ebbd37",
-      "md5basealt": "%md5base%",
+      "md5basealt": "555d2c0bc92ccd05c6f6a57412ebbd37",
       "code1": "00000001",
       "code2": "00000002",
       "mym1": "4-X_DarkWii_darkblue_NTSC.mym",
@@ -4826,9 +4830,9 @@
       "wadname": "SystemMenu_4.3E_v514_DarkWiiBlue_%effect%",
       "ciosslot": "unchanged",
       "basewad": "SystemMenu_4.3E_v514",
-      "basecios": "%basewad%",
+      "basecios": "SystemMenu_4.3E_v514",
       "md5base": "cad93ca3ca41704b15bbee95b2e6aae2",
-      "md5basealt": "%md5base%",
+      "md5basealt": "cad93ca3ca41704b15bbee95b2e6aae2",
       "code1": "00000001",
       "code2": "00000002",
       "mym1": "DarkWii_Blue_No-Spin_4.XE_V2.mym",
@@ -4842,9 +4846,9 @@
       "wadname": "SystemMenu_4.2E_v482_DarkWiiBlue_%effect%",
       "ciosslot": "unchanged",
       "basewad": "SystemMenu_4.2E_v482",
-      "basecios": "%basewad%",
+      "basecios": "SystemMenu_4.2E_v482",
       "md5base": "efd76ac375914bf5969c74f8fb4fef75",
-      "md5basealt": "%md5base%",
+      "md5basealt": "efd76ac375914bf5969c74f8fb4fef75",
       "code1": "00000001",
       "code2": "00000002",
       "mym1": "DarkWii_Blue_No-Spin_4.XE_V2.mym",
@@ -4858,9 +4862,9 @@
       "wadname": "SystemMenu_4.1E_v450_DarkWiiBlue_%effect%",
       "ciosslot": "unchanged",
       "basewad": "SystemMenu_4.1E_v450",
-      "basecios": "%basewad%",
+      "basecios": "SystemMenu_4.1E_v450",
       "md5base": "d19af34181c46645002efb130f6ea44c",
-      "md5basealt": "%md5base%",
+      "md5basealt": "d19af34181c46645002efb130f6ea44c",
       "code1": "00000001",
       "code2": "00000002",
       "mym1": "DarkWii_Blue_No-Spin_4.XE_V2.mym",
@@ -4875,9 +4879,9 @@
       "ciosslot": "unchanged",
       "md5alt": "%md5%",
       "basewad": "SystemMenu_4.3J_v512",
-      "basecios": "%basewad%",
+      "basecios": "SystemMenu_4.3J_v512",
       "md5base": "9552e63c8e0b6688e788639fb1c14e13",
-      "md5basealt": "%md5base%",
+      "md5basealt": "9552e63c8e0b6688e788639fb1c14e13",
       "code1": "00000001",
       "code2": "00000002",
       "mym1": "4-X_DarkWii_darkblue_JAP.mym",
@@ -4892,9 +4896,9 @@
       "ciosslot": "unchanged",
       "md5alt": "%md5%",
       "basewad": "SystemMenu_4.2J_v480",
-      "basecios": "%basewad%",
+      "basecios": "SystemMenu_4.2J_v480",
       "md5base": "ffa08cfaf2a9bb4f6adffa812ab535ac",
-      "md5basealt": "%md5base%",
+      "md5basealt": "ffa08cfaf2a9bb4f6adffa812ab535ac",
       "code1": "00000001",
       "code2": "00000002",
       "mym1": "4-X_DarkWii_darkblue_JAP.mym",
@@ -4909,9 +4913,9 @@
       "ciosslot": "unchanged",
       "md5alt": "%md5%",
       "basewad": "SystemMenu_4.1J_v448",
-      "basecios": "%basewad%",
+      "basecios": "SystemMenu_4.1J_v448",
       "md5base": "5574337ec2c36cd9a9c15b8008ca4dd2",
-      "md5basealt": "%md5base%",
+      "md5basealt": "5574337ec2c36cd9a9c15b8008ca4dd2",
       "code1": "00000001",
       "code2": "00000002",
       "mym1": "4-X_DarkWii_darkblue_JAP.mym",
@@ -4926,9 +4930,9 @@
       "ciosslot": "unchanged",
       "md5alt": "%md5%",
       "basewad": "SystemMenu_4.3K_v518",
-      "basecios": "%basewad%",
+      "basecios": "SystemMenu_4.3K_v518",
       "md5base": "775159a42dc1d12b9304fbbbe7415d80",
-      "md5basealt": "%md5base%",
+      "md5basealt": "775159a42dc1d12b9304fbbbe7415d80",
       "code1": "00000001",
       "code2": "00000002",
       "mym1": "4-X_DarkWii_darkblue_KOR.mym",
@@ -4943,9 +4947,9 @@
       "ciosslot": "unchanged",
       "md5alt": "%md5%",
       "basewad": "SystemMenu_4.2K_v486",
-      "basecios": "%basewad%",
+      "basecios": "SystemMenu_4.2K_v486",
       "md5base": "d225a6ff7130ea4cc63638b0d38a54e7",
-      "md5basealt": "%md5base%",
+      "md5basealt": "d225a6ff7130ea4cc63638b0d38a54e7",
       "code1": "00000001",
       "code2": "00000002",
       "mym1": "4-X_DarkWii_darkblue_KOR.mym",
@@ -4960,9 +4964,9 @@
       "ciosslot": "unchanged",
       "md5alt": "%md5%",
       "basewad": "SystemMenu_4.1K_v454",
-      "basecios": "%basewad%",
+      "basecios": "SystemMenu_4.1K_v454",
       "md5base": "6326365089b5d71f36907f7315364a5f",
-      "md5basealt": "%md5base%",
+      "md5basealt": "6326365089b5d71f36907f7315364a5f",
       "code1": "00000001",
       "code2": "00000002",
       "mym1": "4-X_DarkWii_darkblue_KOR.mym",
@@ -5121,9 +5125,9 @@
       "ciosslot": "unchanged",
       "md5alt": "%md5%",
       "basewad": "SystemMenu_4.3U_v513",
-      "basecios": "%basewad%",
+      "basecios": "SystemMenu_4.3U_v513",
       "md5base": "417358284cce02dbb0fed3ef30b0b59d",
-      "md5basealt": "%md5base%",
+      "md5basealt": "417358284cce02dbb0fed3ef30b0b59d",
       "code1": "00000001",
       "code2": "00000002",
       "mym1": "4-X_DarkWii_orange_NTSC.mym",
@@ -5138,9 +5142,9 @@
       "ciosslot": "unchanged",
       "md5alt": "%md5%",
       "basewad": "SystemMenu_4.2U_v481",
-      "basecios": "%basewad%",
+      "basecios": "SystemMenu_4.2U_v481",
       "md5base": "b4eda5b30d090c9256b60441d83c9d65",
-      "md5basealt": "%md5base%",
+      "md5basealt": "b4eda5b30d090c9256b60441d83c9d65",
       "code1": "00000001",
       "code2": "00000002",
       "mym1": "4-X_DarkWii_orange_NTSC.mym",
@@ -5155,9 +5159,9 @@
       "ciosslot": "unchanged",
       "md5alt": "%md5%",
       "basewad": "SystemMenu_4.1U_v449",
-      "basecios": "%basewad%",
+      "basecios": "SystemMenu_4.1U_v449",
       "md5base": "555d2c0bc92ccd05c6f6a57412ebbd37",
-      "md5basealt": "%md5base%",
+      "md5basealt": "555d2c0bc92ccd05c6f6a57412ebbd37",
       "code1": "00000001",
       "code2": "00000002",
       "mym1": "4-X_DarkWii_orange_NTSC.mym",
@@ -5171,9 +5175,9 @@
       "wadname": "SystemMenu_4.3E_v514_DarkWiiOrange_%effect%",
       "ciosslot": "unchanged",
       "basewad": "SystemMenu_4.3E_v514",
-      "basecios": "%basewad%",
+      "basecios": "SystemMenu_4.3E_v514",
       "md5base": "cad93ca3ca41704b15bbee95b2e6aae2",
-      "md5basealt": "%md5base%",
+      "md5basealt": "cad93ca3ca41704b15bbee95b2e6aae2",
       "code1": "00000001",
       "code2": "00000002",
       "mym1": "DarkWii_Orange_No-Spin_4.XE_V2.mym",
@@ -5187,9 +5191,9 @@
       "wadname": "SystemMenu_4.2E_v482_DarkWiiOrange_%effect%",
       "ciosslot": "unchanged",
       "basewad": "SystemMenu_4.2E_v482",
-      "basecios": "%basewad%",
+      "basecios": "SystemMenu_4.2E_v482",
       "md5base": "efd76ac375914bf5969c74f8fb4fef75",
-      "md5basealt": "%md5base%",
+      "md5basealt": "efd76ac375914bf5969c74f8fb4fef75",
       "code1": "00000001",
       "code2": "00000002",
       "mym1": "DarkWii_Orange_No-Spin_4.XE_V2.mym",
@@ -5203,9 +5207,9 @@
       "wadname": "SystemMenu_4.1E_v450_DarkWiiOrange_%effect%",
       "ciosslot": "unchanged",
       "basewad": "SystemMenu_4.1E_v450",
-      "basecios": "%basewad%",
+      "basecios": "SystemMenu_4.1E_v450",
       "md5base": "d19af34181c46645002efb130f6ea44c",
-      "md5basealt": "%md5base%",
+      "md5basealt": "d19af34181c46645002efb130f6ea44c",
       "code1": "00000001",
       "code2": "00000002",
       "mym1": "DarkWii_Orange_No-Spin_4.XE_V2.mym",
@@ -5220,9 +5224,9 @@
       "ciosslot": "unchanged",
       "md5alt": "%md5%",
       "basewad": "SystemMenu_4.3J_v512",
-      "basecios": "%basewad%",
+      "basecios": "SystemMenu_4.3J_v512",
       "md5base": "9552e63c8e0b6688e788639fb1c14e13",
-      "md5basealt": "%md5base%",
+      "md5basealt": "9552e63c8e0b6688e788639fb1c14e13",
       "code1": "00000001",
       "code2": "00000002",
       "mym1": "4-X_DarkWii_orange_JAP.mym",
@@ -5237,9 +5241,9 @@
       "ciosslot": "unchanged",
       "md5alt": "%md5%",
       "basewad": "SystemMenu_4.2J_v480",
-      "basecios": "%basewad%",
+      "basecios": "SystemMenu_4.2J_v480",
       "md5base": "ffa08cfaf2a9bb4f6adffa812ab535ac",
-      "md5basealt": "%md5base%",
+      "md5basealt": "ffa08cfaf2a9bb4f6adffa812ab535ac",
       "code1": "00000001",
       "code2": "00000002",
       "mym1": "4-X_DarkWii_orange_JAP.mym",
@@ -5254,9 +5258,9 @@
       "ciosslot": "unchanged",
       "md5alt": "%md5%",
       "basewad": "SystemMenu_4.1J_v448",
-      "basecios": "%basewad%",
+      "basecios": "SystemMenu_4.1J_v448",
       "md5base": "5574337ec2c36cd9a9c15b8008ca4dd2",
-      "md5basealt": "%md5base%",
+      "md5basealt": "5574337ec2c36cd9a9c15b8008ca4dd2",
       "code1": "00000001",
       "code2": "00000002",
       "mym1": "4-X_DarkWii_orange_JAP.mym",
@@ -5271,9 +5275,9 @@
       "ciosslot": "unchanged",
       "md5alt": "%md5%",
       "basewad": "SystemMenu_4.3K_v518",
-      "basecios": "%basewad%",
+      "basecios": "SystemMenu_4.3K_v518",
       "md5base": "775159a42dc1d12b9304fbbbe7415d80",
-      "md5basealt": "%md5base%",
+      "md5basealt": "775159a42dc1d12b9304fbbbe7415d80",
       "code1": "00000001",
       "code2": "00000002",
       "mym1": "4-X_DarkWii_orange_KOR.mym",
@@ -5288,9 +5292,9 @@
       "ciosslot": "unchanged",
       "md5alt": "%md5%",
       "basewad": "SystemMenu_4.2K_v486",
-      "basecios": "%basewad%",
+      "basecios": "SystemMenu_4.2K_v486",
       "md5base": "d225a6ff7130ea4cc63638b0d38a54e7",
-      "md5basealt": "%md5base%",
+      "md5basealt": "d225a6ff7130ea4cc63638b0d38a54e7",
       "code1": "00000001",
       "code2": "00000002",
       "mym1": "4-X_DarkWii_orange_KOR.mym",
@@ -5305,9 +5309,9 @@
       "ciosslot": "unchanged",
       "md5alt": "%md5%",
       "basewad": "SystemMenu_4.1K_v454",
-      "basecios": "%basewad%",
+      "basecios": "SystemMenu_4.1K_v454",
       "md5base": "6326365089b5d71f36907f7315364a5f",
-      "md5basealt": "%md5base%",
+      "md5basealt": "6326365089b5d71f36907f7315364a5f",
       "code1": "00000001",
       "code2": "00000002",
       "mym1": "4-X_DarkWii_orange_KOR.mym",

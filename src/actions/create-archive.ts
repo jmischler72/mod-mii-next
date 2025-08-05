@@ -1,21 +1,17 @@
-import { NextRequest, NextResponse } from 'next/server';
+'use server';
+
 import archiver from 'archiver';
 
-export async function POST(request: NextRequest) {
+export async function createArchive(
+	availableFiles: Array<{ wadname: string; s3Url: string }>,
+	downloadSummary?: {
+		downloaded: number;
+		cached: number;
+		failed: number;
+		results: Array<{ success: boolean; wadname: string }>;
+	},
+) {
 	try {
-		const { s3Files } = await request.json();
-
-		if (!s3Files || !Array.isArray(s3Files)) {
-			return NextResponse.json({ error: 's3Files array is required' }, { status: 400 });
-		}
-
-		// Filter files that have s3Url
-		const availableFiles = s3Files.filter((file) => file.s3Url);
-
-		if (availableFiles.length === 0) {
-			return NextResponse.json({ error: 'No downloadable files found' }, { status: 400 });
-		}
-
 		// Create a zip archive
 		const archive = archiver('zip', {
 			zlib: { level: 9 }, // Sets the compression level
@@ -66,16 +62,18 @@ export async function POST(request: NextRequest) {
 
 		const zipBuffer = Buffer.concat(chunks);
 
-		// Return the zip file
-		return new NextResponse(zipBuffer, {
-			headers: {
-				'Content-Type': 'application/zip',
-				'Content-Disposition': 'attachment; filename="wad-files.zip"',
-				'Content-Length': zipBuffer.length.toString(),
-			},
+		// Add download summary to response headers if available
+		if (!downloadSummary) throw new Error('Download summary is required');
+
+		return JSON.stringify({
+			zipBuffer: zipBuffer,
+			downloaded: downloadSummary.downloaded,
+			cached: downloadSummary.cached,
+			failed: downloadSummary.failed,
+			failedFiles: downloadSummary.results.filter((r) => !r.success).map((r) => r.wadname),
 		});
 	} catch (error) {
 		console.error('Error creating archive:', error);
-		return NextResponse.json({ error: 'Failed to create archive' }, { status: 500 });
+		throw error;
 	}
 }

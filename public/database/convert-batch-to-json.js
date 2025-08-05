@@ -25,6 +25,40 @@ https.get(downloadUrl, (response) => {
   console.error('Download failed:', err.message);
 });
 
+function evaluateVariables(entry) {
+  // Keep evaluating until no more substitutions can be made
+  let changed = true;
+  let iterations = 0;
+  const maxIterations = 10; // Prevent infinite loops
+
+  while (changed && iterations < maxIterations) {
+    changed = false;
+    iterations++;
+
+    for (const key in entry) {
+      let value = entry[key];
+
+      // Only process string values that contain variable references
+      if (typeof value === 'string' && value.includes('%')) {
+        const originalValue = value;
+
+        // Replace all variable references in the format %variableName%
+        value = value.replace(/%([^%]+)%/g, (match, varName) => {
+          if (entry.hasOwnProperty(varName)) {
+            return entry[varName];
+          }
+          return match; // Keep original if variable not found
+        });
+
+        if (value !== originalValue) {
+          entry[key] = value;
+          changed = true;
+        }
+      }
+    }
+  }
+}
+
 function processDBFile() {
   const batchContent = fs.readFileSync(dbFilePath, 'utf8');
   const lines = batchContent.split('\n').map(line => line.trim()).filter(line => line);
@@ -34,7 +68,11 @@ function processDBFile() {
       DBversion: null,
       converted: new Date().toISOString(),
       source: 'DB.bat',
-      creator: "https://github.com/xflak"
+      creator: "https://github.com/xflak",
+      working_categories: [
+        'ios',
+        'OSC',
+      ]
     },
     entries: {}
   };
@@ -83,7 +121,13 @@ function processDBFile() {
 
     // Process set commands within entries
     if (inEntry && currentEntry && line.startsWith('set ')) {
-      const setCommand = line.substring(4); // Remove 'set '
+      let setCommand = line.substring(4); // Remove 'set '
+
+      // Handle quoted set commands like: set "dlname=%code1%.zip"
+      if (setCommand.startsWith('"') && setCommand.includes('=') && setCommand.endsWith('"')) {
+        setCommand = setCommand.slice(1, -1); // Remove surrounding quotes
+      }
+
       const equalIndex = setCommand.indexOf('=');
 
       if (equalIndex !== -1) {
@@ -104,6 +148,12 @@ function processDBFile() {
         result.entries[currentEntry][key] = value;
       }
     }
+  }
+
+  // Post-process all entries to evaluate variables
+  for (const entryKey in result.entries) {
+    const entry = result.entries[entryKey];
+    evaluateVariables(entry);
   }
 
   const outputFilePath = path.join(__dirname, 'database.json');

@@ -24,22 +24,24 @@ export default function Home() {
 	};
 
 	const handleDownloadArchive = async () => {
-		if (!uploadData?.downloadSummary?.s3Files) {
+		if (!uploadData?.wadsInfos) {
 			setUploadMessage('No files available for archive');
 			return;
 		}
 
+		console.log('Creating archive with files:', uploadData.wadsInfos);
 		setIsCreatingArchive(true);
 		try {
-			const response = await fetch('/api/wads/archive', {
+			const response = await fetch('/api/wads/create-archive', {
 				method: 'POST',
 				headers: {
 					'Content-Type': 'application/json',
 				},
 				body: JSON.stringify({
-					s3Files: uploadData.downloadSummary.s3Files,
+					wadnames: uploadData.wadsInfos.filter((file) => file.wadname !== undefined).map((file) => file.wadId),
 				}),
 			});
+			console.log('Archive creation response:', response);
 
 			if (!response.ok) {
 				const errorData = await response.json();
@@ -104,78 +106,27 @@ export default function Home() {
 									<strong>System Menu Version:</strong> {uploadData.systemMenuVersion}
 								</p>
 							</div>
-							{uploadData.preview && uploadData.preview.length > 0 && (
-								<div className='mt-3'>
-									<h4 className='mb-1 font-medium text-blue-900'>Preview:</h4>
-									<div className='overflow-x-auto rounded border bg-white p-2 text-xs text-gray-700'>
-										{uploadData.preview.map((line, index) => (
-											<div key={index} className='font-mono'>
-												{line}
+							{uploadData.wadsInfos && uploadData.wadsInfos.length > 0 && (
+								<div className='border-t pt-3'>
+									<div className='mb-2 flex items-center justify-between'>
+										<h5 className='font-medium text-blue-800'>Available Files:</h5>
+										<Button
+											onClick={handleDownloadArchive}
+											disabled={isCreatingArchive}
+											size='sm'
+											variant='outline'
+											className='ml-2'
+										>
+											<Archive className='mr-1 h-4 w-4' />
+											{isCreatingArchive ? 'Creating Archive...' : 'Download All as ZIP'}
+										</Button>
+									</div>
+									<div className='space-y-2'>
+										{uploadData.wadsInfos.map((file, index) => (
+											<div key={index} className='flex items-center justify-between rounded bg-gray-50 p-2'>
+												<span className='font-mono text-sm text-gray-700'>{file.wadname}</span>
 											</div>
 										))}
-									</div>
-								</div>
-							)}
-							{uploadData.wadToInstall && uploadData.wadToInstall.length > 0 && (
-								<div className='mt-3'>
-									<h4 className='mb-1 font-medium text-blue-900'>WADs to Install:</h4>
-									<div className='rounded border bg-white p-2 text-xs text-gray-700'>
-										{uploadData.wadToInstall.join(', ')}
-									</div>
-								</div>
-							)}
-							{uploadData.downloadSummary && (
-								<div className='mt-4'>
-									<h4 className='mb-2 font-medium text-blue-900'>Download Summary:</h4>
-									<div className='rounded border bg-white p-3'>
-										<div className='mb-3 grid grid-cols-3 gap-4 text-sm'>
-											<div className='text-center'>
-												<div className='font-semibold text-green-600'>{uploadData.downloadSummary.downloaded}</div>
-												<div className='text-gray-600'>Downloaded</div>
-											</div>
-											<div className='text-center'>
-												<div className='font-semibold text-blue-600'>{uploadData.downloadSummary.cached}</div>
-												<div className='text-gray-600'>Cached</div>
-											</div>
-											<div className='text-center'>
-												<div className='font-semibold text-red-600'>{uploadData.downloadSummary.failed}</div>
-												<div className='text-gray-600'>Failed</div>
-											</div>
-										</div>
-
-										{uploadData.downloadSummary.s3Files && uploadData.downloadSummary.s3Files.length > 0 && (
-											<div className='border-t pt-3'>
-												<div className='mb-2 flex items-center justify-between'>
-													<h5 className='font-medium text-blue-800'>Available Files:</h5>
-													<Button
-														onClick={handleDownloadArchive}
-														disabled={isCreatingArchive}
-														size='sm'
-														variant='outline'
-														className='ml-2'
-													>
-														<Archive className='mr-1 h-4 w-4' />
-														{isCreatingArchive ? 'Creating Archive...' : 'Download All as ZIP'}
-													</Button>
-												</div>
-												<div className='space-y-2'>
-													{uploadData.downloadSummary.s3Files.map((file, index) => (
-														<div key={index} className='flex items-center justify-between rounded bg-gray-50 p-2'>
-															<span className='font-mono text-sm text-gray-700'>{file.wadname}</span>
-														</div>
-													))}
-												</div>
-											</div>
-										)}
-
-										{uploadData.downloadSummary.failedFiles && uploadData.downloadSummary.failedFiles.length > 0 && (
-											<div className='mt-3 border-t pt-3'>
-												<h5 className='mb-2 font-medium text-red-800'>Failed Downloads:</h5>
-												<div className='rounded bg-red-50 p-2 text-sm text-red-700'>
-													{uploadData.downloadSummary.failedFiles.join(', ')}
-												</div>
-											</div>
-										)}
 									</div>
 								</div>
 							)}
