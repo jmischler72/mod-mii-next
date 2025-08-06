@@ -4,7 +4,8 @@ import { SyscheckFileUploadForm } from '@/components/syscheck-file-upload-form';
 import { useState } from 'react';
 import { UploadSyscheckData, UploadSyscheckResult } from '@/types/upload-syscheck-type';
 import { Button } from '@/components/ui/button';
-import { Download, Archive } from 'lucide-react';
+import { Archive, Info } from 'lucide-react';
+import Link from 'next/link';
 
 export default function Home() {
 	const [uploadMessage, setUploadMessage] = useState<string>('');
@@ -41,7 +42,6 @@ export default function Home() {
 					wadnames: uploadData.wadsInfos.filter((file) => file.wadname !== undefined).map((file) => file.wadId),
 				}),
 			});
-			console.log('Archive creation response:', response);
 
 			if (!response.ok) {
 				const errorData = await response.json();
@@ -68,10 +68,18 @@ export default function Home() {
 	};
 
 	return (
-		<div className='grid min-h-screen grid-rows-[20px_1fr_20px] items-center justify-items-center gap-16 p-8 pb-20 font-sans sm:p-20'>
-			<main className='row-start-2 flex flex-col items-center gap-[32px] sm:items-start'>
-				<div className='w-full max-w-2xl'>
-					<h1 className='mb-8 text-center text-2xl font-bold'>CSV File Upload</h1>
+		<div className='flex min-h-screen items-center justify-center p-4 font-sans sm:p-6'>
+			<main className='w-full max-w-4xl'>
+				<div className='w-full'>
+					<div className='mb-4 flex items-center justify-between'>
+						<h1 className='flex-1 text-center text-xl font-bold'>Wii Syscheck Updater</h1>
+						<Link href='/about'>
+							<Button variant='outline' size='sm'>
+								<Info className='mr-1 h-4 w-4' />
+								About
+							</Button>
+						</Link>
+					</div>
 					<SyscheckFileUploadForm
 						onUploadSuccess={handleUploadSuccess}
 						onUploadError={handleUploadError}
@@ -80,18 +88,18 @@ export default function Home() {
 
 					{uploadMessage && (
 						<div
-							className={`mt-4 rounded-lg p-4 ${uploadMessage.startsWith('Error') ? 'bg-red-50 text-red-700' : 'bg-green-50 text-green-700'}`}
+							className={`mt-2 rounded-lg p-3 ${uploadMessage.startsWith('Error') ? 'bg-red-50 text-red-700' : 'bg-green-50 text-green-700'}`}
 						>
-							<p className='font-medium'>{uploadMessage}</p>
+							<p className='text-sm font-medium'>{uploadMessage}</p>
 						</div>
 					)}
 
 					{uploadData && (
-						<div className='mt-6 space-y-4'>
+						<div className='mt-4 grid gap-3 lg:grid-cols-2'>
 							{/* Basic File Information */}
-							<div className='rounded-lg bg-blue-50 p-4'>
-								<h3 className='mb-2 font-semibold text-blue-900'>File Information</h3>
-								<div className='space-y-1 text-sm text-blue-800'>
+							<div className='rounded-lg bg-blue-50 p-3'>
+								<h3 className='mb-2 text-sm font-semibold text-blue-900'>File Information</h3>
+								<div className='space-y-1 text-xs text-blue-800'>
 									<p>
 										<strong>Filename:</strong> {uploadData.filename}
 									</p>
@@ -102,56 +110,64 @@ export default function Home() {
 							</div>
 
 							{/* System Information */}
-							<div className='rounded-lg bg-green-50 p-4'>
-								<h3 className='mb-2 font-semibold text-green-900'>System Information</h3>
-								<div className='grid grid-cols-1 gap-2 text-sm text-green-800 md:grid-cols-2'>
+							<div className='rounded-lg bg-green-50 p-3'>
+								<h3 className='mb-2 text-sm font-semibold text-green-900'>System Information</h3>
+								<div className='grid grid-cols-2 gap-1 text-xs text-green-800'>
 									<p>
-										<strong>Console Type:</strong> {uploadData.consoleType}
+										<strong>Console:</strong> {uploadData.consoleType}
 									</p>
 									<p>
 										<strong>Region:</strong> {uploadData.region}
 									</p>
 									<p>
-										<strong>System Menu Version:</strong> {uploadData.systemMenuVersion}
+										<strong>System Menu:</strong> {uploadData.systemMenuVersion}
 									</p>
 									<p>
-										<strong>HBC Version:</strong> {uploadData.hbcVersion}
+										<strong>HBC:</strong> {uploadData.hbcVersion}
 									</p>
 									<p>
 										<strong>Firmware:</strong> {uploadData.firmware.firmware}
 									</p>
 									<p>
-										<strong>Firmware Version:</strong> {uploadData.firmware.firmwareVersion}
+										<strong>Version:</strong> {uploadData.firmware.firmwareVersion}
 									</p>
 								</div>
 							</div>
 
 							{/* System Status */}
-							<div className='rounded-lg bg-yellow-50 p-4'>
-								<h3 className='mb-2 font-semibold text-yellow-900'>System Status</h3>
-								<div className='space-y-2 text-sm text-yellow-800'>
+							<div className='rounded-lg bg-yellow-50 p-3'>
+								<h3 className='mb-2 text-sm font-semibold text-yellow-900'>System Status</h3>
+								<div className='space-y-1 text-xs text-yellow-800'>
 									<div className='flex items-center gap-2'>
-										<span className={`h-2 w-2 rounded-full ${uploadData.systemChecks.isBootMiiInstalled ? 'bg-green-500' : 'bg-red-500'}`}></span>
+										<span
+											className={`h-2 w-2 rounded-full ${uploadData.systemChecks.isBootMiiInstalled ? 'bg-green-500' : 'bg-red-500'}`}
+										></span>
 										<span>BootMii: {uploadData.systemChecks.isBootMiiInstalled ? 'Installed' : 'Not Installed'}</span>
 									</div>
 									<div className='flex items-center gap-2'>
-										<span className={`h-2 w-2 rounded-full ${uploadData.systemChecks.isPriiloaderInstalled ? 'bg-green-500' : 'bg-red-500'}`}></span>
-										<span>Priiloader: {uploadData.systemChecks.isPriiloaderInstalled ? 'Installed' : 'Not Installed'}</span>
+										<span
+											className={`h-2 w-2 rounded-full ${uploadData.systemChecks.isPriiloaderInstalled ? 'bg-green-500' : 'bg-red-500'}`}
+										></span>
+										<span>
+											Priiloader: {uploadData.systemChecks.isPriiloaderInstalled ? 'Installed' : 'Not Installed'}
+										</span>
 									</div>
 									<div className='flex items-center gap-2'>
-										<span className={`h-2 w-2 rounded-full ${!uploadData.systemChecks.isHbcOutdated ? 'bg-green-500' : 'bg-yellow-500'}`}></span>
+										<span
+											className={`h-2 w-2 rounded-full ${!uploadData.systemChecks.isHbcOutdated ? 'bg-green-500' : 'bg-yellow-500'}`}
+										></span>
 										<span>HBC: {uploadData.systemChecks.isHbcOutdated ? 'Outdated' : 'Up to Date'}</span>
 									</div>
-									
+
 									{uploadData.systemChecks.missingIOS.length > 0 && (
-										<div className='mt-2'>
+										<div className='mt-1'>
 											<p className='font-medium'>Missing IOS:</p>
 											<p className='text-xs'>{uploadData.systemChecks.missingIOS.join(', ')}</p>
 										</div>
 									)}
-									
+
 									{uploadData.systemChecks.outdatedD2XCios.length > 0 && (
-										<div className='mt-2'>
+										<div className='mt-1'>
 											<p className='font-medium'>Outdated d2x cIOS:</p>
 											<p className='text-xs'>{uploadData.systemChecks.outdatedD2XCios.join(', ')}</p>
 										</div>
@@ -161,9 +177,11 @@ export default function Home() {
 
 							{/* WAD Files */}
 							{uploadData.wadsInfos && uploadData.wadsInfos.length > 0 && (
-								<div className='rounded-lg bg-purple-50 p-4'>
+								<div className='rounded-lg bg-purple-50 p-3'>
 									<div className='mb-2 flex items-center justify-between'>
-										<h3 className='font-semibold text-purple-900'>Required WAD Files ({uploadData.wadsInfos.length})</h3>
+										<h3 className='text-sm font-semibold text-purple-900'>
+											Required WAD Files ({uploadData.wadsInfos.length})
+										</h3>
 										<Button
 											onClick={handleDownloadArchive}
 											disabled={isCreatingArchive}
@@ -171,14 +189,14 @@ export default function Home() {
 											variant='outline'
 											className='ml-2'
 										>
-											<Archive className='mr-1 h-4 w-4' />
-											{isCreatingArchive ? 'Creating Archive...' : 'Download All as ZIP'}
+											<Archive className='mr-1 h-3 w-3' />
+											{isCreatingArchive ? 'Creating...' : 'Download ZIP'}
 										</Button>
 									</div>
-									<div className='space-y-2'>
+									<div className='max-h-32 space-y-1 overflow-y-auto'>
 										{uploadData.wadsInfos.map((file, index) => (
 											<div key={index} className='flex items-center justify-between rounded bg-white p-2 shadow-sm'>
-												<span className='font-mono text-sm text-gray-700'>{file.wadname}</span>
+												<span className='font-mono text-xs text-gray-700'>{file.wadname}</span>
 												<span className='text-xs text-gray-500'>{file.wadId}</span>
 											</div>
 										))}
