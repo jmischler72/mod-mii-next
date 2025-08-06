@@ -6,20 +6,6 @@ export default function About() {
 	return (
 		<div className='min-h-screen bg-black p-4 font-sans sm:p-6'>
 			<div className='mx-auto max-w-4xl'>
-				<div className='mb-6'>
-					<Link href='/'>
-						<Button
-							variant='outline'
-							size='sm'
-							className='mb-4 border-white text-white hover:bg-white hover:text-black'
-						>
-							<ArrowLeft className='mr-2 h-4 w-4' />
-							Back to Home
-						</Button>
-					</Link>
-					<h1 className='mb-4 text-3xl font-bold text-white'>About Wii Syscheck Updater</h1>
-				</div>
-
 				<div className='space-y-6'>
 					{/* What is this project */}
 					<section className='rounded-lg border border-gray-700 bg-gray-900 p-6 shadow-sm'>

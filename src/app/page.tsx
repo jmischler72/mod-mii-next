@@ -4,8 +4,7 @@ import { SyscheckFileUploadForm } from '@/components/syscheck-file-upload-form';
 import { useState } from 'react';
 import { UploadSyscheckData, UploadSyscheckResult } from '@/types/upload-syscheck-type';
 import { Button } from '@/components/ui/button';
-import { Archive, Info } from 'lucide-react';
-import Link from 'next/link';
+import { Archive } from 'lucide-react';
 
 export default function Home() {
 	const [uploadMessage, setUploadMessage] = useState<string>('');
@@ -68,19 +67,9 @@ export default function Home() {
 	};
 
 	return (
-		<div className='flex min-h-screen items-center justify-center bg-black p-4 font-sans sm:p-6'>
+		<div className='my-auto flex h-full items-center justify-center p-4 font-sans sm:p-6'>
 			<main className='w-full max-w-4xl'>
 				<div className='w-full'>
-					<div className='mb-4 flex items-center justify-between'>
-						<h1 className='flex-1 text-center text-xl font-bold text-white'>Wii Syscheck Updater</h1>
-						<Link href='/about'>
-							<Button variant='outline' size='sm' className='border-white text-white hover:bg-white hover:text-black'>
-								<Info className='mr-1 h-4 w-4' />
-								About
-							</Button>
-						</Link>
-					</div>
-
 					{/* Upload Form Section */}
 					<div className='rounded-lg border border-gray-700 bg-gray-900 p-6'>
 						<SyscheckFileUploadForm
