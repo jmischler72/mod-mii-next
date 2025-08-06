@@ -4,7 +4,8 @@ import { SyscheckFileUploadForm } from '@/components/syscheck-file-upload-form';
 import { useState } from 'react';
 import { UploadSyscheckData, UploadSyscheckResult } from '@/types/upload-syscheck-type';
 import { Button } from '@/components/ui/button';
-import { Archive } from 'lucide-react';
+import { Archive, Info } from 'lucide-react';
+import Link from 'next/link';
 
 export default function Home() {
 	const [uploadMessage, setUploadMessage] = useState<string>('');
@@ -47,6 +48,34 @@ export default function Home() {
 				throw new Error(errorData.error || 'Failed to create archive');
 			}
 
+			// Extract download summary from response headers
+			const downloadSummaryHeader = response.headers.get('X-Download-Summary');
+			let summaryMessage = 'Archive downloaded successfully!';
+			
+			if (downloadSummaryHeader) {
+				try {
+					const summary = JSON.parse(downloadSummaryHeader);
+					const totalFiles = summary.downloaded + summary.cached + summary.failed;
+					
+					summaryMessage = `✅ Archive downloaded successfully!
+
+📊 Download Summary:
+• Total files requested: ${totalFiles}
+• Downloaded: ${summary.downloaded} files
+• Cached: ${summary.cached} files
+• Failed: ${summary.failed} files`;
+					
+					if (summary.failedFiles && summary.failedFiles.length > 0) {
+						summaryMessage += `
+
+❌ Failed files:
+${summary.failedFiles.map((file: string) => `• ${file}`).join('\n')}`;
+					}
+				} catch (error) {
+					console.error('Failed to parse download summary:', error);
+				}
+			}
+
 			const blob = await response.blob();
 			const url = window.URL.createObjectURL(blob);
 			const a = document.createElement('a');
@@ -57,7 +86,7 @@ export default function Home() {
 			window.URL.revokeObjectURL(url);
 			document.body.removeChild(a);
 
-			setUploadMessage('Archive downloaded successfully!');
+			setUploadMessage(summaryMessage);
 		} catch (error) {
 			console.error('Archive error:', error);
 			setUploadMessage(`Error creating archive: ${error}`);
@@ -83,7 +112,7 @@ export default function Home() {
 						<div
 							className={`mt-2 rounded-lg p-3 ${uploadMessage.startsWith('Error') ? 'bg-red-50 text-red-700' : 'bg-green-50 text-green-700'}`}
 						>
-							<p className='text-sm font-medium'>{uploadMessage}</p>
+							<p className='text-sm font-medium whitespace-pre-line'>{uploadMessage}</p>
 						</div>
 					)}
 

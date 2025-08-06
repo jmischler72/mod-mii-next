@@ -4,6 +4,7 @@ import { fileExistsInS3, uploadFileToS3, generateWadS3Key, generatePresignedUrl 
 import fs from 'fs';
 import path from 'path';
 import { oscDownload } from './osc-download';
+import { CustomError } from '@/types/custom-error';
 
 // Temporary directory for downloads (will be deleted after S3 upload)
 export const TEMP_DIRECTORY = path.join(process.cwd(), '.temp-downloads');
@@ -48,8 +49,7 @@ function cleanupTempFile(filePath: string): void {
 }
 
 async function downloadWadFile(entry: DatabaseEntry, filePath: string) {
-	if (!entry.category) return;
-
+	if (!entry.category) throw new CustomError(`Unsupported category for download: ${entry.category}`);
 	switch (entry.category) {
 		case 'ios':
 			await nusDownload(entry, filePath);
@@ -189,6 +189,11 @@ export async function handleDownloadMultipleWads(
 	};
 
 	console.log(`Download summary: ${summary.downloaded} downloaded, ${summary.cached} cached, ${summary.failed} failed`);
+	
+	if (summary.failed > 0) {
+		const failedFiles = results.filter((r) => !r.success).map((r) => r.wadname);
+		console.log(`Failed downloads: ${failedFiles.join(', ')}`);
+	}
 
 	return summary;
 }

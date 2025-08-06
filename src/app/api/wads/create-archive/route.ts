@@ -39,7 +39,7 @@ export async function POST(request: NextRequest) {
 			);
 		}
 
-		const zipBuffer = await createArchive(availableFiles, downloadSummary);
+		const zipBuffer = await createArchive(availableFiles);
 
 		return new NextResponse(zipBuffer, {
 			headers: {

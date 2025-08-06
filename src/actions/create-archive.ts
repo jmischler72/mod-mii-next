@@ -2,15 +2,7 @@
 
 import archiver from 'archiver';
 
-export async function createArchive(
-	availableFiles: Array<{ wadname: string; s3Url: string }>,
-	downloadSummary?: {
-		downloaded: number;
-		cached: number;
-		failed: number;
-		results: Array<{ success: boolean; wadname: string }>;
-	},
-) {
+export async function createArchive(availableFiles: Array<{ wadname: string; s3Url: string }>) {
 	try {
 		// Create a zip archive
 		const archive = archiver('zip', {
@@ -62,16 +54,7 @@ export async function createArchive(
 
 		const zipBuffer = Buffer.concat(chunks);
 
-		// Add download summary to response headers if available
-		if (!downloadSummary) throw new Error('Download summary is required');
-
-		return JSON.stringify({
-			zipBuffer: zipBuffer,
-			downloaded: downloadSummary.downloaded,
-			cached: downloadSummary.cached,
-			failed: downloadSummary.failed,
-			failedFiles: downloadSummary.results.filter((r) => !r.success).map((r) => r.wadname),
-		});
+		return zipBuffer;
 	} catch (error) {
 		console.error('Error creating archive:', error);
 		throw error;
