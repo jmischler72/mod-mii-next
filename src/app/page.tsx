@@ -87,29 +87,83 @@ export default function Home() {
 					)}
 
 					{uploadData && (
-						<div className='mt-6 rounded-lg bg-blue-50 p-4'>
-							<h3 className='mb-2 font-semibold text-blue-900'>File Information</h3>
-							<div className='space-y-1 text-sm text-blue-800'>
-								<p>
-									<strong>Filename:</strong> {uploadData.filename}
-								</p>
-								<p>
-									<strong>Size:</strong> {(uploadData.size / 1024).toFixed(2)} KB
-								</p>
-								<p>
-									<strong>Region:</strong> {uploadData.region}
-								</p>
-								<p>
-									<strong>HBC Version:</strong> {uploadData.hbcVersion}
-								</p>
-								<p>
-									<strong>System Menu Version:</strong> {uploadData.systemMenuVersion}
-								</p>
+						<div className='mt-6 space-y-4'>
+							{/* Basic File Information */}
+							<div className='rounded-lg bg-blue-50 p-4'>
+								<h3 className='mb-2 font-semibold text-blue-900'>File Information</h3>
+								<div className='space-y-1 text-sm text-blue-800'>
+									<p>
+										<strong>Filename:</strong> {uploadData.filename}
+									</p>
+									<p>
+										<strong>Size:</strong> {(uploadData.size / 1024).toFixed(2)} KB
+									</p>
+								</div>
 							</div>
+
+							{/* System Information */}
+							<div className='rounded-lg bg-green-50 p-4'>
+								<h3 className='mb-2 font-semibold text-green-900'>System Information</h3>
+								<div className='grid grid-cols-1 gap-2 text-sm text-green-800 md:grid-cols-2'>
+									<p>
+										<strong>Console Type:</strong> {uploadData.consoleType}
+									</p>
+									<p>
+										<strong>Region:</strong> {uploadData.region}
+									</p>
+									<p>
+										<strong>System Menu Version:</strong> {uploadData.systemMenuVersion}
+									</p>
+									<p>
+										<strong>HBC Version:</strong> {uploadData.hbcVersion}
+									</p>
+									<p>
+										<strong>Firmware:</strong> {uploadData.firmware.firmware}
+									</p>
+									<p>
+										<strong>Firmware Version:</strong> {uploadData.firmware.firmwareVersion}
+									</p>
+								</div>
+							</div>
+
+							{/* System Status */}
+							<div className='rounded-lg bg-yellow-50 p-4'>
+								<h3 className='mb-2 font-semibold text-yellow-900'>System Status</h3>
+								<div className='space-y-2 text-sm text-yellow-800'>
+									<div className='flex items-center gap-2'>
+										<span className={`h-2 w-2 rounded-full ${uploadData.systemChecks.isBootMiiInstalled ? 'bg-green-500' : 'bg-red-500'}`}></span>
+										<span>BootMii: {uploadData.systemChecks.isBootMiiInstalled ? 'Installed' : 'Not Installed'}</span>
+									</div>
+									<div className='flex items-center gap-2'>
+										<span className={`h-2 w-2 rounded-full ${uploadData.systemChecks.isPriiloaderInstalled ? 'bg-green-500' : 'bg-red-500'}`}></span>
+										<span>Priiloader: {uploadData.systemChecks.isPriiloaderInstalled ? 'Installed' : 'Not Installed'}</span>
+									</div>
+									<div className='flex items-center gap-2'>
+										<span className={`h-2 w-2 rounded-full ${!uploadData.systemChecks.isHbcOutdated ? 'bg-green-500' : 'bg-yellow-500'}`}></span>
+										<span>HBC: {uploadData.systemChecks.isHbcOutdated ? 'Outdated' : 'Up to Date'}</span>
+									</div>
+									
+									{uploadData.systemChecks.missingIOS.length > 0 && (
+										<div className='mt-2'>
+											<p className='font-medium'>Missing IOS:</p>
+											<p className='text-xs'>{uploadData.systemChecks.missingIOS.join(', ')}</p>
+										</div>
+									)}
+									
+									{uploadData.systemChecks.outdatedD2XCios.length > 0 && (
+										<div className='mt-2'>
+											<p className='font-medium'>Outdated d2x cIOS:</p>
+											<p className='text-xs'>{uploadData.systemChecks.outdatedD2XCios.join(', ')}</p>
+										</div>
+									)}
+								</div>
+							</div>
+
+							{/* WAD Files */}
 							{uploadData.wadsInfos && uploadData.wadsInfos.length > 0 && (
-								<div className='border-t pt-3'>
+								<div className='rounded-lg bg-purple-50 p-4'>
 									<div className='mb-2 flex items-center justify-between'>
-										<h5 className='font-medium text-blue-800'>Available Files:</h5>
+										<h3 className='font-semibold text-purple-900'>Required WAD Files ({uploadData.wadsInfos.length})</h3>
 										<Button
 											onClick={handleDownloadArchive}
 											disabled={isCreatingArchive}
@@ -123,8 +177,9 @@ export default function Home() {
 									</div>
 									<div className='space-y-2'>
 										{uploadData.wadsInfos.map((file, index) => (
-											<div key={index} className='flex items-center justify-between rounded bg-gray-50 p-2'>
+											<div key={index} className='flex items-center justify-between rounded bg-white p-2 shadow-sm'>
 												<span className='font-mono text-sm text-gray-700'>{file.wadname}</span>
+												<span className='text-xs text-gray-500'>{file.wadId}</span>
 											</div>
 										))}
 									</div>

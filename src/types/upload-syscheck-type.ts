@@ -16,6 +16,20 @@ export interface UploadSyscheckData {
 	region: string;
 	hbcVersion: string;
 	systemMenuVersion: string;
+	firmware: {
+		SMregion: string;
+		firmware: string;
+		firmwareVersion: number;
+	};
+	consoleType: string;
+	systemChecks: {
+		isBootMiiInstalled: boolean;
+		isPriiloaderInstalled: boolean;
+		isHbcOutdated: boolean;
+		missingIOS: string[];
+		outdatedD2XCios: string[];
+		needsExtraProtection: string[];
+	};
 	wadsInfos: {
 		wadname: string;
 		wadId: string;

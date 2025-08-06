@@ -89,6 +89,9 @@ export async function uploadSyscheckFile(formData: FormData): Promise<UploadSysc
 				region: systemInfos.region || 'Unknown',
 				hbcVersion: systemInfos.hbcVersion || 'Unknown',
 				systemMenuVersion: systemInfos.systemMenuVersion || 'Unknown',
+				firmware: systemInfos.firmware,
+				consoleType: systemInfos.consoleType,
+				systemChecks: systemInfos.systemChecks,
 				wadsInfos: wadsInfos || [],
 			},
 		};
@@ -126,7 +129,14 @@ function handleSyscheckData(
 
 	const wadToInstall = [];
 
+	// Check system components
 	const isBootMiiInstalled = checkIfBootMiiInstalled(data);
+	const isPriiloaderInstalled = checkIfPriiloaderInstalled(data);
+	const isHbcOutdated = hbcVersion ? checkIfHBCIsOutdated(hbcVersion, consoleType) : false;
+	const outdatedD2XCios = checkD2XCios(data, consoleType);
+	const missingIOS = options.activeIOS ? checkForMissingIOS(data, region, consoleType) : [];
+	const needsExtraProtection = options.extraProtection ? checkExtraProtection(data) : [];
+
 	if (!isBootMiiInstalled) {
 		wadToInstall.push('HM');
 	} else {
@@ -136,7 +146,6 @@ function handleSyscheckData(
 			const isIOS58Installed = data.includes('IOS58');
 			if (!isIOS58Installed && isBootMiiInstalled) wadToInstall.push('IOS58');
 		} else {
-			const isHbcOutdated = checkIfHBCIsOutdated(hbcVersion, consoleType);
 			if (isHbcOutdated) wadToInstall.push('OHBC');
 		}
 	}
@@ -145,20 +154,16 @@ function handleSyscheckData(
 	if (latestFirmwareVersion !== firmware.firmware) wadToInstall.push(`SM${latestFirmwareVersion}${firmware.SMregion}`);
 
 	const updatePriiloader = false;
-	const isPriiloaderInstalled = checkIfPriiloaderInstalled(data);
 	if (!isPriiloaderInstalled || (isPriiloaderInstalled && updatePriiloader)) wadToInstall.push('pri');
 
-	const outdatedD2XCios = checkD2XCios(data, consoleType);
 	wadToInstall.push(...outdatedD2XCios);
 
 	if (options.activeIOS) {
-		const missingIOS = checkForMissingIOS(data, region, consoleType);
 		wadToInstall.push(...missingIOS);
 	}
 
 	if (options.extraProtection) {
-		const missingExtraProtection = checkExtraProtection(data);
-		wadToInstall.push(...missingExtraProtection);
+		wadToInstall.push(...needsExtraProtection);
 	}
 
 	if (wadToInstall.length > 0) {
@@ -175,6 +180,14 @@ function handleSyscheckData(
 			firmwareVersion: firmware.firmwareVersion,
 		},
 		consoleType,
+		systemChecks: {
+			isBootMiiInstalled,
+			isPriiloaderInstalled,
+			isHbcOutdated,
+			missingIOS,
+			outdatedD2XCios,
+			needsExtraProtection,
+		},
 		wadToInstall,
 	};
 }
