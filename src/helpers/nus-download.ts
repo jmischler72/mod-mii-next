@@ -1,6 +1,5 @@
 import { CustomError } from '@/types/custom-error';
 import { spawn } from 'child_process';
-import path from 'path';
 import fs from 'fs';
 import { DatabaseEntry } from './database-helper';
 

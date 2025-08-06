@@ -21,8 +21,6 @@ export async function POST(request: NextRequest) {
 			},
 		});
 
-		console.log('Download Summary:', downloadSummary);
-
 		// Use the successfully downloaded files for archiving
 		const availableFiles = downloadSummary.results
 			.filter((r) => r.success && r.s3Key && r.s3Url)

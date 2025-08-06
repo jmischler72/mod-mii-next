@@ -47,23 +47,15 @@ function cleanupTempFile(filePath: string): void {
 	}
 }
 
-async function downloadWadFile(entry: DatabaseEntry, tempPath: string) {
+async function downloadWadFile(entry: DatabaseEntry, filePath: string) {
 	if (!entry.category) return;
-
-	let filePath;
 
 	switch (entry.category) {
 		case 'ios':
-			filePath = path.join(tempPath, entry.wadname);
-			console.log(`Downloading ${filePath}...`);
-
 			await nusDownload(entry, filePath);
 			break;
 		case 'OSC':
-			filePath = path.join(tempPath, `${entry.code1}.zip`);
-			console.log(`Downloading ${filePath}...`);
-
-			await oscDownload(entry, tempPath, filePath);
+			await oscDownload(entry, filePath);
 			break;
 		// Handle Android-specific download logic
 		default:
@@ -71,7 +63,7 @@ async function downloadWadFile(entry: DatabaseEntry, tempPath: string) {
 			break;
 	}
 
-	return filePath;
+	return;
 }
 
 /**
@@ -110,7 +102,9 @@ export async function handleDownloadWadFile(wadId: string): Promise<DownloadResu
 		ensureTempDirectory();
 		const tempPath = path.join(TEMP_DIRECTORY);
 
-		const filePath = await downloadWadFile(entry, tempPath);
+		const filePath = path.join(tempPath, entry.wadname);
+
+		await downloadWadFile(entry, filePath);
 
 		// Verify the file was downloaded
 		if (!filePath || !fs.existsSync(filePath)) {
