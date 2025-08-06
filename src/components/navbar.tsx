@@ -12,8 +12,10 @@ export function Navbar() {
 					{/* Logo/Brand */}
 					<div className='flex items-center'>
 						<Link href='/' className='flex items-center space-x-2'>
-							<Home className='h-6 w-6 text-white' />
-							<span className='text-xl font-bold text-white'>Wii Syscheck Updater</span>
+							<div className='flex h-8 w-8 items-center justify-center rounded-md bg-gradient-to-br from-blue-500 to-purple-600'>
+								<span className='text-sm font-bold text-white'>M</span>
+							</div>
+							<span className='text-xl font-bold text-white'>ModMiiNext</span>
 						</Link>
 					</div>
 
