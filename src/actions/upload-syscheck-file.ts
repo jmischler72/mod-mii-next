@@ -46,21 +46,20 @@ export async function uploadSyscheckFile(formData: FormData): Promise<UploadSysc
 	try {
 		const file = formData.get('file') as File;
 
+		// Validate the file
+
 		if (!file) {
 			throw new CustomError('No file provided');
 		}
 
-		// Validate the file
 		const validation = uploadSchema.safeParse({ file });
 
 		if (!validation.success) {
 			throw new CustomError(validation.error.issues[0].message);
 		}
 
-		// Read the CSV content
 		const csvContent = await file.text();
 
-		// Basic CSV validation - check if it has content and at least one comma or semicolon
 		if (!csvContent.trim()) {
 			throw new CustomError('The CSV file appears to be empty');
 		}
@@ -99,8 +98,7 @@ export async function uploadSyscheckFile(formData: FormData): Promise<UploadSysc
 		console.error('Error processing CSV file:', error);
 		return {
 			success: false,
-			error:
-				error instanceof CustomError ? error.message : 'An error occurred while getting the latest system menu version',
+			error: error instanceof CustomError ? error.message : 'An error occurred while processing the syscheck file',
 		};
 	}
 }

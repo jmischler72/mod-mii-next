@@ -11,7 +11,7 @@ export default function About() {
 					<section className='rounded-lg border border-gray-700 bg-gray-900 p-6 shadow-sm'>
 						<h2 className='mb-4 text-xl font-semibold text-white'>What is this project?</h2>
 						<p className='mb-4 text-gray-300'>
-							ModMiiNext aims to be a modern version of the original ModMii project But currently, it can analyze your
+							ModMiiNext aims to be a modern version of the original ModMii project. Currently, it can analyze your
 							Nintendo Wii console&apos;s system configuration and automatically provide the exact WAD files needed to
 							update your system&apos;s homebrew components.
 						</p>
@@ -70,7 +70,7 @@ export default function About() {
 									<li>• Cross-platform compatibility (Windows, Mac, Linux)</li>
 									<li>• No installation required</li>
 									<li>• Always up-to-date</li>
-									<li>• Handle download and handling of wad files in the backend</li>
+									<li>• Handle download and handling of WAD files</li>
 								</ul>
 							</div>
 							<div className='rounded-lg border border-gray-600 bg-gray-800 p-4'>
