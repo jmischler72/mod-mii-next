@@ -42,7 +42,7 @@ RUN \
   fi
 
 # Production image, copy all the files and run next
-FROM base AS runner
+FROM nikolaik/python-nodejs AS runner
 WORKDIR /app
 
 ENV NODE_ENV=production
@@ -60,7 +60,6 @@ COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
 COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
 
 # Install Python dependencies
-RUN apt-get update || : && apt-get install python3 -y
 COPY --from=python-base /WiiPy /WiiPy
 ENV PYTHONPATH=$PYTHONPATH:/WiiPy/pip-packages
 

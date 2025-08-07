@@ -62,7 +62,7 @@ export default function Home() {
 📊 Download Summary:
 • Total files requested: ${totalFiles}
 • Downloaded: ${summary.downloaded} files
-• Cached: ${summary.cached} files
+• Downloaded from S3: ${summary.cached} files
 • Failed: ${summary.failed} files`;
 
 					if (summary.failedFiles && summary.failedFiles.length > 0) {

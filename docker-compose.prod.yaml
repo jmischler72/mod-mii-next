@@ -5,19 +5,17 @@ services:
     container_name: next-app
     build:
       context: .
-      dockerfile: Dockerfile.dev
+      dockerfile: Dockerfile.prod
     env_file:
       - .env
     volumes:
-      - ./src:/app/src
-      - ./public:/app/public
+      - temp_data:/mod-mii-next/.temp-downloads
+      - ./public:/mod-mii-next/public
     restart: always
     ports:
       - 3000:3000
     networks:
-      - my_network
-
-  # Add more containers below (nginx, postgres, etc.)
+      - mod-mii-next-network
 
   minio:
     image: minio/minio:latest
@@ -32,7 +30,7 @@ services:
     command: server /data --console-address ":9001"
     restart: always
     networks:
-      - my_network
+      - mod-mii-next-network
 
   # Optional: Create bucket on startup
   createbuckets:
@@ -41,7 +39,7 @@ services:
     depends_on:
       - minio
     networks:
-      - my_network
+      - mod-mii-next-network
     env_file:
       - .env
     entrypoint: >
@@ -49,7 +47,7 @@ services:
       sleep 10;
       /usr/bin/mc alias set myminio http://minio:9000 $MINIO_ROOT_USER $MINIO_ROOT_PASSWORD;
       /usr/bin/mc mb myminio/$S3_BUCKET_NAME;
-      /usr/bin/mc anonymous set public myminio/wii-homebrew-files;
+      /usr/bin/mc anonymous set public myminio/$S3_BUCKET_NAME;
       exit 0;
       "
     restart: "no"
@@ -57,9 +55,9 @@ services:
 # Define a network, which allows containers to communicate
 # with each other, by using their container name as a hostname
 networks:
-  my_network:
-    external: true
+  mod-mii-next-network:
 
 # Define volumes for persistent data storage
 volumes:
   minio_data:
+  temp_data:

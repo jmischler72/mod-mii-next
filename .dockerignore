@@ -1,0 +1,4 @@
+test/**
+test-syscheck.csv
+node_modules
+.next

@@ -3,7 +3,7 @@ import { spawn } from 'child_process';
 import fs from 'fs';
 import { DatabaseEntry } from './database-helper';
 
-const wiipyCommand = 'python3 /WiiPy/wiipy.py';
+const wiipyCommand = process.env.PYTHON_COMMAND + ' ' + process.env.WIIPY_PATH || 'python3 /WiiPy/wiipy.py';
 const nusCommand = `${wiipyCommand} nus title`;
 
 export function nusDownload(databaseEntry: DatabaseEntry, wadPath: string): Promise<string> {

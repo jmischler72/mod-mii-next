@@ -7,7 +7,7 @@ import { oscDownload } from './osc-download';
 import { CustomError } from '@/types/custom-error';
 
 // Temporary directory for downloads (will be deleted after S3 upload)
-export const TEMP_DIRECTORY = path.join(process.cwd(), '.temp-downloads');
+export const TEMP_DIRECTORY = process.env.TEMP_DIRECTORY || path.join(process.cwd(), 'temp-downloads');
 
 export interface DownloadResult {
 	success: boolean;
@@ -189,7 +189,7 @@ export async function handleDownloadMultipleWads(
 	};
 
 	console.log(`Download summary: ${summary.downloaded} downloaded, ${summary.cached} cached, ${summary.failed} failed`);
-	
+
 	if (summary.failed > 0) {
 		const failedFiles = results.filter((r) => !r.success).map((r) => r.wadname);
 		console.log(`Failed downloads: ${failedFiles.join(', ')}`);
