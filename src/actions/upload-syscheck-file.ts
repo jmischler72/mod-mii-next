@@ -19,6 +19,7 @@ import {
 	getFirmware,
 	getHBCVersion,
 	getLatestSMVersion,
+	getRegionShortCode,
 	getSystemMenuVersion,
 } from '@/helpers/syscheck-info-helper';
 import { CustomError } from '@/types/custom-error';
@@ -113,16 +114,19 @@ function handleSyscheckData(
 	const firmware = systemMenuVersion && getFirmware(systemMenuVersion);
 	const consoleType = getConsoleType(data);
 
-	if (!region || !systemMenuVersion || !firmware || !consoleType) {
+	if (!region || !systemMenuVersion || !firmware) {
 		throw new CustomError('Could not extract necessary information from the CSV file');
 	}
 
-	if (!validateConsoleType(consoleType)) {
+	if (!consoleType || !validateConsoleType(consoleType)) {
 		throw new CustomError('The CSV file does not contain a valid console type');
 	}
 
-	if (firmware.SMregion !== region) {
-		throw new CustomError(`The firmware region "${firmware.SMregion}" does not match the console region "${region}"`);
+	const regionShortCode = getRegionShortCode(region);
+	if (firmware.SMregion !== regionShortCode) {
+		throw new CustomError(
+			`The firmware region "${firmware.SMregion}" does not match the console region "${regionShortCode}"`,
+		);
 	}
 
 	const wadToInstall = [];
