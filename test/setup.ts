@@ -8,3 +8,8 @@ global.console = {
 	info: jest.fn(),
 	debug: jest.fn(),
 };
+
+// Polyfill setImmediate for Node.js environments that need it
+if (typeof setImmediate === 'undefined') {
+	(global as unknown as { setImmediate: typeof setTimeout }).setImmediate = setTimeout;
+}
