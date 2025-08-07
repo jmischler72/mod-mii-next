@@ -1,0 +1,70 @@
+SysCheck ME v2.5.0 par blackb0x, JoostinOnline, Double_A, R2-D2199 et Nano
+...tourne sous l'IOS58 (rev 6176).
+
+Region: PAL
+Menu Systeme 4.3E (v514)
+Priiloader installe
+Date de disque: 02.13.2007
+Chaine Channel 1.1.2 utilise IOS58
+
+Hollywood v0x11
+Identifiant de la console: 104526876
+Type de Console: cWii
+Pays de la chaine boutique: France (77)
+Boot2 v4
+154 titres trouves.
+50 IOS trouves sur cette console. 12 sont des stubs.
+
+IOS4 (rev 65280): Stub
+IOS9 (rev 1034): Trucha Bug
+IOS10 (rev 768): Stub
+IOS11 (rev 256): Stub
+IOS12 (rev 526): Trucha Bug
+IOS13 (rev 1032): Pas de patches
+IOS14 (rev 1032): Pas de patches
+IOS15 (rev 1032): Pas de patches
+IOS16 (rev 512): Stub
+IOS17 (rev 1032): Pas de patches
+IOS20 (rev 256): Stub
+IOS21 (rev 1039): Pas de patches
+IOS22 (rev 1294): Pas de patches
+IOS28 (rev 1807): Pas de patches
+IOS30 (rev 2816): Stub
+IOS31 (rev 3608): Pas de patches
+IOS33 (rev 3608): Pas de patches
+IOS34 (rev 3608): Pas de patches
+IOS35 (rev 3608): Pas de patches
+IOS36 (rev 3608): Pas de patches
+IOS37 (rev 5663): Pas de patches
+IOS38 (rev 4124): Pas de patches
+IOS40 (rev 3072): Stub
+IOS41 (rev 3607): Pas de patches
+IOS43 (rev 3607): Pas de patches
+IOS45 (rev 3607): Pas de patches
+IOS46 (rev 3607): Pas de patches
+IOS48 (rev 4124): Pas de patches
+IOS50 (rev 5120): Trucha Bug
+IOS51 (rev 4864): Stub
+IOS52 (rev 5888): Stub
+IOS53 (rev 5663): Pas de patches
+IOS55 (rev 5663): Pas de patches
+IOS56 (rev 5662): Pas de patches
+IOS57 (rev 5919): Pas de patches
+IOS58 (rev 6176): USB 2.0
+IOS60 (rev 6400): Trucha Bug
+IOS61 (rev 5662): Pas de patches
+IOS62 (rev 6430): Pas de patches
+IOS70 (rev 6912): Stub
+IOS80 (rev 6944): Pas de patches
+IOS222 (rev 65280): Stub
+IOS223 (rev 65280): Stub
+IOS224[57] (rev 65535, Info: Hermes-v55.1): Trucha Bug, Acces NAND, USB 2.0
+IOS236 (rev 65535): Trucha Bug, ES Identify, Acces NAND
+IOS248[38] (rev 65535, Info: d2x-v10beta3): Trucha Bug, ES Identify, Acces NAND
+IOS249[56] (rev 65535, Info: d2x-v11beta3): Trucha Bug, Acces NAND, USB 2.0
+IOS250[57] (rev 65535, Info: d2x-v11beta3): Trucha Bug, Acces NAND, USB 2.0
+IOS251[58] (rev 65535, Info: d2x-v11beta3): Trucha Bug, Acces NAND, USB 2.0
+IOS254 (rev 65281): BootMii
+BC v6
+MIOS v10 (DIOS MIOS 2.0)
+Rapport genere le 2025/07/30.

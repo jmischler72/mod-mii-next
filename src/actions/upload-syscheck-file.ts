@@ -152,7 +152,7 @@ function handleSyscheckData(
 	if (latestFirmwareVersion !== firmware.firmware) wadToInstall.push(`SM${latestFirmwareVersion}${firmware.SMregion}`);
 
 	const updatePriiloader = false;
-	if (!isPriiloaderInstalled || (isPriiloaderInstalled && updatePriiloader)) wadToInstall.push('pri');
+	if (!isPriiloaderInstalled || (isPriiloaderInstalled && updatePriiloader)) wadToInstall.push('prii');
 
 	wadToInstall.push(...outdatedD2XCios);
 
