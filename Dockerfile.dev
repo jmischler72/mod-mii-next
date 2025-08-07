@@ -5,11 +5,12 @@ WORKDIR /WiiPy
 RUN git clone https://github.com/NinjaCheetah/WiiPy.git /WiiPy
 RUN pip install --no-cache-dir -r requirements.txt -t ./pip-packages
 
-FROM nikolaik/python-nodejs
+FROM node:20-alpine
 
 WORKDIR /app
 
 # Install Python dependencies
+RUN apk add --no-cache python3 py3-pip
 COPY --from=python-base /WiiPy /WiiPy
 ENV PYTHONPATH=$PYTHONPATH:/WiiPy/pip-packages
 
