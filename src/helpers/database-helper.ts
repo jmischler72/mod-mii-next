@@ -8,6 +8,9 @@ export type DatabaseEntry = {
 	code2: string;
 	category?: string;
 	version: number;
+	ciosslot?: string;
+	ciosversion?: string;
+	basewad?: string;
 };
 
 export function getEntry(entry: string): DatabaseEntry | null {

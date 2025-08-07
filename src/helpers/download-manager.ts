@@ -1,10 +1,11 @@
 import { DatabaseEntry, getEntry } from '@/helpers/database-helper';
-import { nusDownload } from '@/helpers/nus-download';
+import { buildCios, nusDownload } from '@/helpers/wiipy-wrapper';
 import { fileExistsInS3, uploadFileToS3, generateWadS3Key, generatePresignedUrl } from '@/helpers/s3-storage';
 import fs from 'fs';
 import path from 'path';
 import { oscDownload } from './osc-download';
 import { CustomError } from '@/types/custom-error';
+import { createHash } from 'crypto';
 
 // Temporary directory for downloads (will be deleted after S3 upload)
 export const TEMP_DIRECTORY = process.env.TEMP_DIRECTORY || path.join(process.cwd(), 'temp-downloads');
@@ -48,22 +49,44 @@ function cleanupTempFile(filePath: string): void {
 	}
 }
 
-async function downloadWadFile(entry: DatabaseEntry, filePath: string) {
-	if (!entry.category) throw new CustomError(`Unsupported category for download: ${entry.category}`);
-	switch (entry.category) {
-		case 'ios':
-			await nusDownload(entry, filePath);
-			break;
-		case 'OSC':
-			await oscDownload(entry, filePath);
-			break;
-		// Handle Android-specific download logic
-		default:
-			// Handle default case
-			break;
+/**
+ * Verify the downloaded file matches the expected hash
+ */
+export async function verifyFile(filePath: string, md5: string): Promise<void> {
+	if (!md5) {
+		throw new CustomError(`No MD5 hash provided for file verification: ${filePath}`);
 	}
 
-	return;
+	const fileBuffer = fs.readFileSync(filePath);
+	const hash = createHash('md5').update(fileBuffer).digest('hex');
+	if (hash !== md5) {
+		throw new CustomError(`File verification failed for ${filePath}`);
+	}
+	console.log(`File verification successful for ${filePath}`);
+}
+
+async function downloadWadFile(entry: DatabaseEntry, filePath: string) {
+	if (!entry.category && !entry.ciosslot) {
+		throw new CustomError(`Unsupported category for download: ${entry.category}`);
+	}
+
+	if (entry.ciosslot) {
+		await nusDownload(entry, `/tmp/${entry.basewad}.wad`);
+		await buildCios(entry, filePath);
+	} else {
+		switch (entry.category) {
+			case 'ios':
+				await nusDownload(entry, filePath);
+				break;
+			case 'OSC':
+				await oscDownload(entry, filePath);
+				break;
+			default:
+				break;
+		}
+	}
+
+	await verifyFile(filePath, entry.md5);
 }
 
 /**
@@ -182,8 +205,8 @@ export async function handleDownloadMultipleWads(
 
 	const summary: DownloadSummary = {
 		totalRequested: total,
-		downloaded: results.filter((r) => r.success && !r.cached).length,
-		cached: results.filter((r) => r.success && r.cached).length,
+		downloaded: results.filter((r) => r.success || !r.cached).length,
+		cached: results.filter((r) => r.success || r.cached).length,
 		failed: results.filter((r) => !r.success).length,
 		results,
 	};

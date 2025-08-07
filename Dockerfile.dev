@@ -1,8 +1,18 @@
 # syntax=docker.io/docker/dockerfile:1
 
-FROM python:3 AS python-base
-WORKDIR /WiiPy
-RUN git clone https://github.com/NinjaCheetah/WiiPy.git /WiiPy
+FROM python:3 AS deps
+WORKDIR /wiipy
+
+RUN apt-get update && apt-get install -y git wget jq
+RUN mkdir -p /modmii && \
+    cd /modmii && \
+    for url in $(curl -s https://api.github.com/repos/modmii/modmii.github.io/contents/Support/d2xModules | jq -r '.[] | select(.type=="file") | .download_url'); do \
+      wget $url; \
+    done
+
+RUN ls -la /modmii 
+
+RUN git clone https://github.com/NinjaCheetah/wiipy.git /wiipy
 RUN pip install --no-cache-dir -r requirements.txt -t ./pip-packages
 
 FROM node:20-alpine
@@ -11,8 +21,9 @@ WORKDIR /app
 
 # Install Python dependencies
 RUN apk add --no-cache python3 py3-pip
-COPY --from=python-base /WiiPy /WiiPy
-ENV PYTHONPATH=$PYTHONPATH:/WiiPy/pip-packages
+COPY --from=deps /wiipy /wiipy
+COPY --from=deps /modmii /modmii
+ENV PYTHONPATH=$PYTHONPATH:/wiipy/pip-packages
 
 # Install dependencies based on the preferred package manager
 COPY package.json yarn.lock* package-lock.json* pnpm-lock.yaml* .npmrc* ./
