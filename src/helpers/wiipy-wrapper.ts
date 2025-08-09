@@ -3,17 +3,20 @@ import { spawn } from 'child_process';
 import fs from 'fs';
 import { DatabaseEntry } from './database-helper';
 
-const wiipyCommand = process.env.PYTHON_COMMAND + ' ' + process.env.WIIPY_PATH || 'python3 /WiiPy/wiipy.py';
+const WIIPY_PATH = process.env.WIIPY_PATH || '/wiipy';
+const MODMII_PATH = process.env.MODMII_PATH || '/modmii';
+
+const wiipyCommand = `python3 ${WIIPY_PATH}/wiipy.py`;
 const nusCommand = `${wiipyCommand} nus title`;
 
-export function nusDownload(databaseEntry: DatabaseEntry, wadPath: string) {
+export function nusDownload(databaseEntry: DatabaseEntry, outputPath: string) {
 	// Check if WAD already exists
-	if (fs.existsSync(wadPath)) {
+	if (fs.existsSync(outputPath)) {
 		console.log(`WAD ${databaseEntry.wadname} already exists in cache`);
 		return Promise.resolve(`WAD ${databaseEntry.wadname} found in cache`);
 	}
 
-	const fullCommand = `${nusCommand} ${databaseEntry.code1}${databaseEntry.code2} -v ${databaseEntry.version} --wad ${wadPath}`;
+	const fullCommand = `${nusCommand} ${databaseEntry.code1}${databaseEntry.code2} -v ${databaseEntry.version} --wad ${outputPath}`;
 	const child = spawn(fullCommand, [], { shell: true });
 
 	child.stdout.on('data', (data) => {
@@ -35,17 +38,13 @@ export function nusDownload(databaseEntry: DatabaseEntry, wadPath: string) {
 	});
 }
 
-export async function buildCios(entry: DatabaseEntry, outputPath: string) {
-	//%WiiPy% cios "temp\%basewad%.wad" "%xml%" "%Drive%\WAD\%wadname%.wad" --cios-ver %cios-ver:~0,24% --modules %d2xFolder% -s %ciosslot% -v %ciosversion%
+export async function buildCios(entry: DatabaseEntry, outputPath: string, baseWadPath: string) {
+	const d2xModules = `${MODMII_PATH}/Support/d2xModules`;
+	const ciosMapPath = `${d2xModules}/ciosmaps.xml`;
 
-	const d2xModules = process.env.MODMII_PATH + '/Support/d2xModules';
-	const ciosMapPath = d2xModules + '/ciosmaps.xml';
+	const ciosVersion = entry.wadname.substring(12).replace('.wad', '');
 
-	const baseWadPath = `/tmp/${entry.basewad}.wad`;
-	const ciosVersion = entry.wadname.substring(12);
-	const d2xFolder = process.env.D2X_FOLDER;
-
-	const args = ` --cios-ver ${ciosVersion} --modules ${d2xFolder} --slot ${entry.ciosslot} --version ${entry.ciosversion} `;
+	const args = ` --cios-ver ${ciosVersion} --modules ${d2xModules} --slot ${entry.ciosslot} --version ${entry.ciosversion} `;
 
 	const ciosBuilderCommand = `${wiipyCommand} cios ${baseWadPath} ${ciosMapPath} ${outputPath} ${args}`;
 

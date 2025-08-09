@@ -1,19 +1,22 @@
 # syntax=docker.io/docker/dockerfile:1
-
-FROM python:3 AS deps
-WORKDIR /wiipy
+FROM python:3 AS python-deps
 
 RUN apt-get update && apt-get install -y git wget jq
-RUN mkdir -p /modmii && \
-    cd /modmii && \
-    for url in $(curl -s https://api.github.com/repos/modmii/modmii.github.io/contents/Support/d2xModules | jq -r '.[] | select(.type=="file") | .download_url'); do \
+
+WORKDIR /wiipy
+
+RUN git clone https://github.com/NinjaCheetah/wiipy.git .
+RUN pip install --no-cache-dir -r requirements.txt -t ./pip-packages
+
+WORKDIR /modmii
+
+ENV D2XMODULESDIR=Support/d2xModules
+# Download d2x cIOS files from modmii.github.io
+RUN mkdir -p $D2XMODULESDIR && \
+    cd $D2XMODULESDIR && \
+    for url in $(curl -s https://api.github.com/repos/modmii/modmii.github.io/contents/$D2XMODULESDIR | jq -r '.[] | select(.type=="file") | .download_url'); do \
       wget $url; \
     done
-
-RUN ls -la /modmii 
-
-RUN git clone https://github.com/NinjaCheetah/wiipy.git /wiipy
-RUN pip install --no-cache-dir -r requirements.txt -t ./pip-packages
 
 FROM node:20-alpine
 
@@ -21,8 +24,8 @@ WORKDIR /app
 
 # Install Python dependencies
 RUN apk add --no-cache python3 py3-pip
-COPY --from=deps /wiipy /wiipy
-COPY --from=deps /modmii /modmii
+COPY --from=python-deps /wiipy /wiipy
+COPY --from=python-deps /modmii /modmii
 ENV PYTHONPATH=$PYTHONPATH:/wiipy/pip-packages
 
 # Install dependencies based on the preferred package manager

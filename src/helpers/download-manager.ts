@@ -65,28 +65,33 @@ export async function verifyFile(filePath: string, md5: string): Promise<void> {
 	console.log(`File verification successful for ${filePath}`);
 }
 
-async function downloadWadFile(entry: DatabaseEntry, filePath: string) {
+async function downloadWadFile(entry: DatabaseEntry, outputPath: string) {
 	if (!entry.category && !entry.ciosslot) {
 		throw new CustomError(`Unsupported category for download: ${entry.category}`);
 	}
 
 	if (entry.ciosslot) {
-		await nusDownload(entry, `/tmp/${entry.basewad}.wad`);
-		await buildCios(entry, filePath);
+		const baseWadPath = `/tmp/${entry.basewad}.wad`;
+		await nusDownload(entry, baseWadPath);
+		await buildCios(entry, outputPath, baseWadPath);
 	} else {
 		switch (entry.category) {
 			case 'ios':
-				await nusDownload(entry, filePath);
+				await nusDownload(entry, outputPath);
 				break;
 			case 'OSC':
-				await oscDownload(entry, filePath);
+				await oscDownload(entry, outputPath);
 				break;
 			default:
 				break;
 		}
 	}
 
-	await verifyFile(filePath, entry.md5);
+	if (entry.md5) {
+		await verifyFile(outputPath, entry.md5);
+	} else {
+		console.warn(`No MD5 hash provided for file verification: ${outputPath}`);
+	}
 }
 
 /**
@@ -103,6 +108,11 @@ export async function handleDownloadWadFile(wadId: string): Promise<DownloadResu
 				cached: false,
 				error: `No entry found in database for ${wadId}`,
 			};
+		}
+
+		// if wadname has no extension, add .wad
+		if (path.extname(entry.wadname) === '') {
+			entry.wadname += '.wad';
 		}
 
 		const s3Key = generateWadS3Key(entry.wadname);
@@ -125,12 +135,12 @@ export async function handleDownloadWadFile(wadId: string): Promise<DownloadResu
 		ensureTempDirectory();
 		const tempPath = path.join(TEMP_DIRECTORY);
 
-		const filePath = path.join(tempPath, entry.wadname);
+		const outputPath = path.join(tempPath, entry.wadname);
 
-		await downloadWadFile(entry, filePath);
+		await downloadWadFile(entry, outputPath);
 
 		// Verify the file was downloaded
-		if (!filePath || !fs.existsSync(filePath)) {
+		if (!outputPath || !fs.existsSync(outputPath)) {
 			return {
 				success: false,
 				wadname: entry.wadname,
@@ -140,10 +150,10 @@ export async function handleDownloadWadFile(wadId: string): Promise<DownloadResu
 		}
 
 		// Upload to S3
-		await uploadFileToS3(filePath, s3Key, 'application/octet-stream');
+		await uploadFileToS3(outputPath, s3Key, 'application/octet-stream');
 
 		// Clean up temporary file
-		cleanupTempFile(filePath);
+		cleanupTempFile(outputPath);
 
 		console.log(`Successfully uploaded ${entry.wadname} to S3`);
 
