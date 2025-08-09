@@ -8,7 +8,7 @@ import Link from 'next/link';
 import { DatabaseEntry, DatabaseData } from '@/types/database';
 import { useToast } from '@/hooks/use-toast';
 import { useDownload } from '@/hooks/use-download';
-import { isDownloadableCategory } from '@/utils/database-utils';
+import { isDownloadableCategory, getCategoryColors } from '@/utils/database-utils';
 
 export default function EntryDetailPage() {
 	const { toast } = useToast();
@@ -126,13 +126,7 @@ export default function EntryDetailPage() {
 						</div>
 						{entry.category && (
 							<span
-								className={`rounded-full px-3 py-1 text-sm ${
-									entry.category === 'ios'
-										? 'bg-blue-600 text-blue-100'
-										: entry.category === 'OSC'
-											? 'bg-green-600 text-green-100'
-											: 'bg-gray-600 text-gray-100'
-								}`}
+								className={`rounded-full px-3 py-1 text-sm ${getCategoryColors(entry.category).bg} ${getCategoryColors(entry.category).text}`}
 							>
 								{entry.category.toUpperCase()}
 							</span>

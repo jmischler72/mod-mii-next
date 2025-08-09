@@ -3,13 +3,13 @@
 import { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { Search, Download, Filter, Eye } from 'lucide-react';
+import { Search, Download, Filter, Eye, ChevronDown } from 'lucide-react';
 import Link from 'next/link';
 import { DatabaseEntry, DatabaseData } from '@/types/database';
 import { DatabaseInfoDialog } from '@/components/database-info-dialog';
 import { useToast } from '@/hooks/use-toast';
 import { useDownload } from '@/hooks/use-download';
-import { isDownloadableCategory } from '@/utils/database-utils';
+import { isDownloadableCategory, getCategoryColors, hasCustomColor } from '@/utils/database-utils';
 import { Toaster } from '@/components/ui/toaster';
 
 export default function BrowsePage() {
@@ -23,6 +23,7 @@ export default function BrowsePage() {
 	const [error, setError] = useState('');
 	const [currentPage, setCurrentPage] = useState(1);
 	const [itemsPerPage] = useState(24);
+	const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
 	useEffect(() => {
 		const loadDatabase = async () => {
@@ -73,14 +74,34 @@ export default function BrowsePage() {
 		setCurrentPage(1); // Reset to first page when filters change
 	}, [database, searchTerm, selectedCategory]);
 
+	// Close dropdown when clicking outside
+	useEffect(() => {
+		const handleClickOutside = (event: MouseEvent) => {
+			if (isDropdownOpen && !(event.target as Element).closest('.category-dropdown')) {
+				setIsDropdownOpen(false);
+			}
+		};
+
+		document.addEventListener('mousedown', handleClickOutside);
+		return () => document.removeEventListener('mousedown', handleClickOutside);
+	}, [isDropdownOpen]);
+
 	const getUniqueCategories = () => {
 		if (!database) return [];
 		const categories = new Set(
 			Object.values(database.entries)
 				.map((entry) => entry.category)
-				.filter(Boolean),
+				.filter((category): category is string => Boolean(category)),
 		);
-		return Array.from(categories).sort();
+		return Array.from(categories).sort((a, b) => {
+			const aHasColor = isDownloadableCategory(a);
+			const bHasColor = isDownloadableCategory(b);
+
+			// Sort by color first (colored categories first), then alphabetically
+			if (aHasColor && !bHasColor) return -1;
+			if (!aHasColor && bHasColor) return 1;
+			return a.localeCompare(b);
+		});
 	};
 
 	// Pagination calculations
@@ -161,18 +182,52 @@ export default function BrowsePage() {
 					</div>
 					<div className='flex items-center space-x-2'>
 						<Filter className='h-4 w-4 text-gray-400' />
-						<select
-							value={selectedCategory}
-							onChange={(e) => setSelectedCategory(e.target.value)}
-							className='rounded-md border border-gray-700 bg-gray-800 px-3 py-2 text-white'
-						>
-							<option value='all'>All Categories</option>
-							{getUniqueCategories().map((category) => (
-								<option key={category} value={category}>
-									{category?.toUpperCase()}
-								</option>
-							))}
-						</select>
+						<div className='category-dropdown relative'>
+							<button
+								onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+								className='flex w-48 items-center justify-between rounded-md border border-gray-700 bg-gray-800 px-3 py-2 text-white hover:bg-gray-700'
+							>
+								<div className='flex items-center space-x-2'>
+									{selectedCategory === 'all' ? (
+										<span>All Categories</span>
+									) : (
+										<>
+											<span
+												className={`inline-block h-3 w-3 rounded-full ${getCategoryColors(selectedCategory).bg}`}
+											></span>
+											<span>{selectedCategory.toUpperCase()}</span>
+										</>
+									)}
+								</div>
+								<ChevronDown className='h-4 w-4' />
+							</button>
+							{isDropdownOpen && (
+								<div className='absolute top-full left-0 z-10 mt-1 w-full rounded-md border border-gray-700 bg-gray-800 shadow-lg'>
+									<button
+										onClick={() => {
+											setSelectedCategory('all');
+											setIsDropdownOpen(false);
+										}}
+										className='flex w-full items-center space-x-2 px-3 py-2 text-left text-white hover:bg-gray-700'
+									>
+										<span>All Categories</span>
+									</button>
+									{getUniqueCategories().map((category) => (
+										<button
+											key={category}
+											onClick={() => {
+												setSelectedCategory(category || '');
+												setIsDropdownOpen(false);
+											}}
+											className='flex w-full items-center space-x-2 px-3 py-2 text-left text-white hover:bg-gray-700'
+										>
+											<span className={`inline-block h-3 w-3 rounded-full ${getCategoryColors(category).bg}`}></span>
+											<span>{category?.toUpperCase()}</span>
+										</button>
+									))}
+								</div>
+							)}
+						</div>
 					</div>
 				</div>
 
@@ -201,17 +256,7 @@ export default function BrowsePage() {
 								<h3 className='truncate text-lg font-semibold text-white'>{entry.name}</h3>
 								{entry.category && (
 									<span
-										className={`rounded-full px-2 py-1 text-xs ${
-											entry.category === 'ios'
-												? 'bg-blue-600 text-blue-100'
-												: entry.category === 'OSC'
-													? 'bg-green-600 text-green-100'
-													: entry.category === 'cios'
-														? 'bg-purple-600 text-purple-100'
-														: entry.category === 'd2x'
-															? 'bg-orange-600 text-orange-100'
-															: 'bg-gray-600 text-gray-100'
-										}`}
+										className={`rounded-full px-2 py-1 text-xs ${getCategoryColors(entry.category).bg} ${getCategoryColors(entry.category).text}`}
 									>
 										{entry.category.toUpperCase()}
 									</span>
