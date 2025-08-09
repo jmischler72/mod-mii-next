@@ -59,6 +59,37 @@ function evaluateVariables(entry) {
   }
 }
 
+function categorizeEntry(entryId, entry) {
+  // Skip if entry already has a category
+  if (entry.category) {
+    return;
+  }
+
+  const name = entry.name || '';
+  const entryIdLower = entryId.toLowerCase();
+  const nameLower = name.toLowerCase();
+
+  // Check if it's a d2x entry (contains "d2x" in the name or entry ID)
+  if (nameLower.includes('d2x') || entryIdLower.includes('d2x')) {
+    entry.category = 'd2x';
+    return;
+  }
+
+  // Check if it's a cIOS entry
+  if (
+    nameLower.includes('cios') ||
+    entryIdLower.includes('cios') ||
+    entry.ciosslot ||
+    entry.ciosversion ||
+    entry.cIOSFamilyName ||
+    entry.basecios ||
+    entry.diffpath
+  ) {
+    entry.category = 'cios';
+    return;
+  }
+}
+
 function processDBFile() {
   const batchContent = fs.readFileSync(dbFilePath, 'utf8');
   const lines = batchContent.split('\n').map(line => line.trim()).filter(line => line);
@@ -69,10 +100,6 @@ function processDBFile() {
       converted: new Date().toISOString(),
       source: 'DB.bat',
       creator: "https://github.com/xflak",
-      working_categories: [
-        'ios',
-        'OSC',
-      ]
     },
     entries: {}
   };
@@ -150,13 +177,18 @@ function processDBFile() {
     }
   }
 
-  // Post-process all entries to evaluate variables
+  // Post-process all entries to evaluate variables and categorize
   for (const entryKey in result.entries) {
     const entry = result.entries[entryKey];
     evaluateVariables(entry);
+    categorizeEntry(entryKey, entry);
+    // Remove empty entries
+    if (Object.keys(entry).length === 0 || (Object.keys(entry).length === 1 && entry.name === undefined)) {
+      delete result.entries[entryKey];
+    }
   }
 
-  const outputFilePath = path.join(__dirname, 'database.json');
+  const outputFilePath = path.join(__dirname, '../public/database.json');
   // Write the JSON file
   fs.writeFileSync(
     outputFilePath,
@@ -164,6 +196,6 @@ function processDBFile() {
     'utf8'
   );
 
-  console.log('Conversion completed! Output written to database.json');
+  console.log('Conversion completed! Output written to public/database.json');
   console.log(`Converted ${Object.keys(result.entries).length} entries`);
 }

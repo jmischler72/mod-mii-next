@@ -1,23 +1,8 @@
 import fs from 'fs';
 import path from 'path';
+import { DatabaseEntry } from '@/types/database';
 
-export type DatabaseEntry = {
-	wadname: string;
-	md5: string;
-	md5alt?: string;
-	code1: string;
-	code2: string;
-	category?: string;
-	version: number;
-	// cIOS or patchios
-	ciosslot?: string;
-	ciosversion?: string;
-	basewad?: string;
-	md5base?: string;
-	md5basealt?: string;
-};
-
-const dbPath = path.resolve(process.cwd(), 'public/database/database.json');
+const dbPath = path.resolve(process.cwd(), 'public/database.json');
 const database = JSON.parse(fs.readFileSync(dbPath, 'utf-8'));
 
 export function getDatabaseEntry(entry: string): DatabaseEntry | null {

@@ -31,7 +31,7 @@ export function SyscheckFileUploadForm({ onSubmit, onUploadSuccess, onUploadErro
 		mode: 'onChange',
 		defaultValues: {
 			activeIOS: true,
-			extraProtection: true,
+			extraProtection: false,
 		},
 	});
 
@@ -214,10 +214,10 @@ export function SyscheckFileUploadForm({ onSubmit, onUploadSuccess, onUploadErro
 						render={({ field }) => (
 							<FormItem className='flex flex-row items-start space-y-0 space-x-3'>
 								<FormControl>
-									<Checkbox checked={field.value} onCheckedChange={field.onChange} />
+									<Checkbox disabled checked={field.value} onCheckedChange={field.onChange} />
 								</FormControl>
 								<div className='space-y-1 leading-none'>
-									<FormLabel>Extra Protection</FormLabel>
+									<FormLabel>Extra Protection (Disabled for now)</FormLabel>
 									<FormDescription>
 										Install patched IOS60 to protect against bricks from manual system menu upgrades/downgrades.
 									</FormDescription>

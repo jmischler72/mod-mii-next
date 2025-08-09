@@ -1,13 +1,9 @@
 {
   "meta": {
     "DBversion": "25.06.19",
-    "converted": "2025-08-05T09:32:58.590Z",
+    "converted": "2025-08-09T21:46:34.089Z",
     "source": "DB.bat",
-    "creator": "https://github.com/xflak",
-    "working_categories": [
-      "ios",
-      "OSC"
-    ]
+    "creator": "https://github.com/xflak"
   },
   "entries": {
     "EULAU": {
@@ -1378,7 +1374,8 @@
       "cIOSFamilyName": "rev 3351",
       "diffpath": "cIOS236",
       "code2new": "000000ec",
-      "lastbasemodule": "0000000e"
+      "lastbasemodule": "0000000e",
+      "category": "cios"
     },
     "M10": {
       "name": "MIOS v10",
@@ -3009,7 +3006,6 @@
       "dlname": "LoadPriiloader.zip",
       "wadname": "LoadPriiloader.zip"
     },
-    "CIOSDATABASE": {},
     "cIOS222[38]-v4": {
       "name": "cIOS222[38]-v4",
       "wadname": "cIOS222[38]-v4",
@@ -3027,7 +3023,8 @@
       "code2new": "000000de",
       "lastbasemodule": "0000000e",
       "cIOSFamilyName": "hermes",
-      "cIOSversionNum": 4
+      "cIOSversionNum": 4,
+      "category": "cios"
     },
     "cIOS223[37-38]-v4": {
       "name": "cIOS223[37-38]-v4",
@@ -3052,7 +3049,8 @@
       "code2new": "000000df",
       "lastbasemodule": "0000000e",
       "cIOSFamilyName": "hermes",
-      "cIOSversionNum": 4
+      "cIOSversionNum": 4,
+      "category": "cios"
     },
     "NMM": {
       "name": "cBC-NMMv0.2a",
@@ -3076,7 +3074,8 @@
       "diffpath": "cBC-NMMv0.2a",
       "code2new": "00000100",
       "URL": "https://raw.githubusercontent.com/modmii/modmii.github.io/master/temp/NMMv0.2a-cred.rar",
-      "dlname": "NMMv0.2a-cred.rar"
+      "dlname": "NMMv0.2a-cred.rar",
+      "category": "cios"
     },
     "DML": {
       "name": "DML",
@@ -3121,7 +3120,8 @@
       "code2new": "000000de",
       "lastbasemodule": "0000000e",
       "cIOSFamilyName": "hermes",
-      "cIOSversionNum": 5
+      "cIOSversionNum": 5,
+      "category": "cios"
     },
     "cIOS223[37]-v5": {
       "name": "cIOS223[37]-v5",
@@ -3140,7 +3140,8 @@
       "code2new": "000000df",
       "lastbasemodule": "0000000e",
       "cIOSFamilyName": "hermes",
-      "cIOSversionNum": 5
+      "cIOSversionNum": 5,
+      "category": "cios"
     },
     "cIOS224[57]-v5": {
       "name": "cIOS224[57]-v5",
@@ -3159,7 +3160,8 @@
       "code2new": "000000e0",
       "lastbasemodule": "00000012",
       "cIOSFamilyName": "hermes",
-      "cIOSversionNum": 5
+      "cIOSversionNum": 5,
+      "category": "cios"
     },
     "cIOS202[60]-v5.1R": {
       "name": "cIOS202[60]-v5.1R",
@@ -3178,7 +3180,8 @@
       "code2new": "000000ca",
       "lastbasemodule": "0000000e",
       "cIOSFamilyName": "hermesrodries",
-      "cIOSversionNum": 6
+      "cIOSversionNum": 6,
+      "category": "cios"
     },
     "cIOS222[38]-v5.1R": {
       "name": "cIOS222[38]-v5.1R",
@@ -3197,7 +3200,8 @@
       "code2new": "000000de",
       "lastbasemodule": "0000000e",
       "cIOSFamilyName": "hermesrodries",
-      "cIOSversionNum": 6
+      "cIOSversionNum": 6,
+      "category": "cios"
     },
     "cIOS223[37]-v5.1R": {
       "name": "cIOS223[37]-v5.1R",
@@ -3216,7 +3220,8 @@
       "code2new": "000000df",
       "lastbasemodule": "0000000e",
       "cIOSFamilyName": "hermesrodries",
-      "cIOSversionNum": 6
+      "cIOSversionNum": 6,
+      "category": "cios"
     },
     "cIOS224[57]-v5.1R": {
       "name": "cIOS224[57]-v5.1R",
@@ -3235,7 +3240,8 @@
       "code2new": "000000e0",
       "lastbasemodule": "00000012",
       "cIOSFamilyName": "hermesrodries",
-      "cIOSversionNum": 6
+      "cIOSversionNum": 6,
+      "category": "cios"
     },
     "cIOS249-v14": {
       "name": "cIOS249-v14",
@@ -3254,7 +3260,8 @@
       "code2new": "000000f9",
       "lastbasemodule": "0000000e",
       "cIOSFamilyName": "waninkoko",
-      "cIOSversionNum": 14
+      "cIOSversionNum": 14,
+      "category": "cios"
     },
     "cIOS250-v14": {
       "name": "cIOS250-v14",
@@ -3274,7 +3281,8 @@
       "code2new": "000000f9",
       "lastbasemodule": "0000000e",
       "cIOSFamilyName": "waninkoko",
-      "cIOSversionNum": 14
+      "cIOSversionNum": 14,
+      "category": "cios"
     },
     "cIOS249-v17b": {
       "name": "cIOS249-v17b",
@@ -3293,7 +3301,8 @@
       "code2new": "000000f9",
       "lastbasemodule": "0000000e",
       "cIOSFamilyName": "waninkoko",
-      "cIOSversionNum": 17
+      "cIOSversionNum": 17,
+      "category": "cios"
     },
     "cIOS250-v17b": {
       "name": "cIOS250-v17b",
@@ -3313,7 +3322,8 @@
       "code2new": "000000f9",
       "lastbasemodule": "0000000e",
       "cIOSFamilyName": "waninkoko",
-      "cIOSversionNum": 17
+      "cIOSversionNum": 17,
+      "category": "cios"
     },
     "cIOS249[37]-v19": {
       "name": "cIOS249[37]-v19",
@@ -3332,7 +3342,8 @@
       "code2new": "000000f9",
       "lastbasemodule": "0000000e",
       "cIOSFamilyName": "waninkoko",
-      "cIOSversionNum": 19
+      "cIOSversionNum": 19,
+      "category": "cios"
     },
     "cIOS250[37]-v19": {
       "name": "cIOS250[37]-v19",
@@ -3352,7 +3363,8 @@
       "code2new": "000000f9",
       "lastbasemodule": "0000000e",
       "cIOSFamilyName": "waninkoko",
-      "cIOSversionNum": 19
+      "cIOSversionNum": 19,
+      "category": "cios"
     },
     "cIOS249[38]-v19": {
       "name": "cIOS249[38]-v19",
@@ -3371,7 +3383,8 @@
       "code2new": "000000f9",
       "lastbasemodule": "0000000e",
       "cIOSFamilyName": "waninkoko",
-      "cIOSversionNum": 19
+      "cIOSversionNum": 19,
+      "category": "cios"
     },
     "cIOS250[38]-v19": {
       "name": "cIOS250[38]-v19",
@@ -3391,7 +3404,8 @@
       "code2new": "000000f9",
       "lastbasemodule": "0000000e",
       "cIOSFamilyName": "waninkoko",
-      "cIOSversionNum": 19
+      "cIOSversionNum": 19,
+      "category": "cios"
     },
     "cIOS249[57]-v19": {
       "name": "cIOS249[57]-v19",
@@ -3410,7 +3424,8 @@
       "code2new": "000000f9",
       "lastbasemodule": "00000012",
       "cIOSFamilyName": "waninkoko",
-      "cIOSversionNum": 19
+      "cIOSversionNum": 19,
+      "category": "cios"
     },
     "cIOS250[57]-v19": {
       "name": "cIOS250[57]-v19",
@@ -3430,7 +3445,8 @@
       "code2new": "000000f9",
       "lastbasemodule": "00000012",
       "cIOSFamilyName": "waninkoko",
-      "cIOSversionNum": 19
+      "cIOSversionNum": 19,
+      "category": "cios"
     },
     "cIOS249[38]-v20": {
       "name": "cIOS249[38]-v20",
@@ -3449,7 +3465,8 @@
       "code2new": "000000f9",
       "lastbasemodule": "0000000e",
       "cIOSFamilyName": "waninkoko",
-      "cIOSversionNum": 20
+      "cIOSversionNum": 20,
+      "category": "cios"
     },
     "cIOS250[38]-v20": {
       "name": "cIOS250[38]-v20",
@@ -3469,7 +3486,8 @@
       "code2new": "000000f9",
       "lastbasemodule": "0000000e",
       "cIOSFamilyName": "waninkoko",
-      "cIOSversionNum": 20
+      "cIOSversionNum": 20,
+      "category": "cios"
     },
     "cIOS249[56]-v20": {
       "name": "cIOS249[56]-v20",
@@ -3488,7 +3506,8 @@
       "code2new": "000000f9",
       "lastbasemodule": "0000000e",
       "cIOSFamilyName": "waninkoko",
-      "cIOSversionNum": 20
+      "cIOSversionNum": 20,
+      "category": "cios"
     },
     "cIOS250[56]-v20": {
       "name": "cIOS250[56]-v20",
@@ -3508,7 +3527,8 @@
       "code2new": "000000f9",
       "lastbasemodule": "0000000e",
       "cIOSFamilyName": "waninkoko",
-      "cIOSversionNum": 20
+      "cIOSversionNum": 20,
+      "category": "cios"
     },
     "cIOS249[57]-v20": {
       "name": "cIOS249[57]-v20",
@@ -3527,7 +3547,8 @@
       "code2new": "000000f9",
       "lastbasemodule": "00000012",
       "cIOSFamilyName": "waninkoko",
-      "cIOSversionNum": 20
+      "cIOSversionNum": 20,
+      "category": "cios"
     },
     "cIOS250[57]-v20": {
       "name": "cIOS250[57]-v20",
@@ -3547,7 +3568,8 @@
       "code2new": "000000f9",
       "lastbasemodule": "00000012",
       "cIOSFamilyName": "waninkoko",
-      "cIOSversionNum": 20
+      "cIOSversionNum": 20,
+      "category": "cios"
     },
     "cIOS249[37]-v21": {
       "name": "cIOS249[37]-v21",
@@ -3566,7 +3588,8 @@
       "code2new": "000000f9",
       "lastbasemodule": "0000000e",
       "cIOSFamilyName": "waninkoko",
-      "cIOSversionNum": 21
+      "cIOSversionNum": 21,
+      "category": "cios"
     },
     "cIOS250[37]-v21": {
       "name": "cIOS250[37]-v21",
@@ -3586,7 +3609,8 @@
       "code2new": "000000f9",
       "lastbasemodule": "0000000e",
       "cIOSFamilyName": "waninkoko",
-      "cIOSversionNum": 21
+      "cIOSversionNum": 21,
+      "category": "cios"
     },
     "cIOS249[38]-v21": {
       "name": "cIOS249[38]-v21",
@@ -3605,7 +3629,8 @@
       "code2new": "000000f9",
       "lastbasemodule": "0000000e",
       "cIOSFamilyName": "waninkoko",
-      "cIOSversionNum": 21
+      "cIOSversionNum": 21,
+      "category": "cios"
     },
     "cIOS250[38]-v21": {
       "name": "cIOS250[38]-v21",
@@ -3625,7 +3650,8 @@
       "code2new": "000000f9",
       "lastbasemodule": "0000000e",
       "cIOSFamilyName": "waninkoko",
-      "cIOSversionNum": 21
+      "cIOSversionNum": 21,
+      "category": "cios"
     },
     "cIOS249[53]-v21": {
       "name": "cIOS249[53]-v21",
@@ -3644,7 +3670,8 @@
       "code2new": "000000f9",
       "lastbasemodule": "0000000e",
       "cIOSFamilyName": "waninkoko",
-      "cIOSversionNum": 21
+      "cIOSversionNum": 21,
+      "category": "cios"
     },
     "cIOS250[53]-v21": {
       "name": "cIOS250[53]-v21",
@@ -3664,7 +3691,8 @@
       "code2new": "000000f9",
       "lastbasemodule": "0000000e",
       "cIOSFamilyName": "waninkoko",
-      "cIOSversionNum": 21
+      "cIOSversionNum": 21,
+      "category": "cios"
     },
     "cIOS249[55]-v21": {
       "name": "cIOS249[55]-v21",
@@ -3683,7 +3711,8 @@
       "code2new": "000000f9",
       "lastbasemodule": "0000000e",
       "cIOSFamilyName": "waninkoko",
-      "cIOSversionNum": 21
+      "cIOSversionNum": 21,
+      "category": "cios"
     },
     "cIOS250[55]-v21": {
       "name": "cIOS250[55]-v21",
@@ -3703,7 +3732,8 @@
       "code2new": "000000f9",
       "lastbasemodule": "0000000e",
       "cIOSFamilyName": "waninkoko",
-      "cIOSversionNum": 21
+      "cIOSversionNum": 21,
+      "category": "cios"
     },
     "cIOS249[56]-v21": {
       "name": "cIOS249[56]-v21",
@@ -3722,7 +3752,8 @@
       "code2new": "000000f9",
       "lastbasemodule": "0000000e",
       "cIOSFamilyName": "waninkoko",
-      "cIOSversionNum": 21
+      "cIOSversionNum": 21,
+      "category": "cios"
     },
     "cIOS250[56]-v21": {
       "name": "cIOS250[56]-v21",
@@ -3742,7 +3773,8 @@
       "code2new": "000000f9",
       "lastbasemodule": "0000000e",
       "cIOSFamilyName": "waninkoko",
-      "cIOSversionNum": 21
+      "cIOSversionNum": 21,
+      "category": "cios"
     },
     "cIOS249[57]-v21": {
       "name": "cIOS249[57]-v21",
@@ -3761,7 +3793,8 @@
       "code2new": "000000f9",
       "lastbasemodule": "00000012",
       "cIOSFamilyName": "waninkoko",
-      "cIOSversionNum": 21
+      "cIOSversionNum": 21,
+      "category": "cios"
     },
     "cIOS250[57]-v21": {
       "name": "cIOS250[57]-v21",
@@ -3781,7 +3814,8 @@
       "code2new": "000000f9",
       "lastbasemodule": "00000012",
       "cIOSFamilyName": "waninkoko",
-      "cIOSversionNum": 21
+      "cIOSversionNum": 21,
+      "category": "cios"
     },
     "cIOS249[58]-v21": {
       "name": "cIOS249[58]-v21",
@@ -3800,7 +3834,8 @@
       "code2new": "000000f9",
       "lastbasemodule": "00000012",
       "cIOSFamilyName": "waninkoko",
-      "cIOSversionNum": 21
+      "cIOSversionNum": 21,
+      "category": "cios"
     },
     "cIOS250[58]-v21": {
       "name": "cIOS250[58]-v21",
@@ -3820,7 +3855,8 @@
       "code2new": "000000f9",
       "lastbasemodule": "00000012",
       "cIOSFamilyName": "waninkoko",
-      "cIOSversionNum": 21
+      "cIOSversionNum": 21,
+      "category": "cios"
     },
     "cIOS249[37]-d2x-v10-beta52": {
       "name": "cIOS249[37]-d2x-v11-beta3",
@@ -3838,7 +3874,8 @@
       "basecios": "cIOS249[37]-d2x-v11-beta3",
       "diffpath": "cIOS249[37]-v21",
       "code2new": "000000f9",
-      "lastbasemodule": "0000000e"
+      "lastbasemodule": "0000000e",
+      "category": "d2x"
     },
     "cIOS250[37]-d2x-v10-beta52": {
       "name": "cIOS250[37]-d2x-v11-beta3",
@@ -3856,7 +3893,8 @@
       "basecios": "cIOS249[37]-d2x-v11-beta3",
       "diffpath": "cIOS249[37]-v21",
       "code2new": "000000f9",
-      "lastbasemodule": "0000000e"
+      "lastbasemodule": "0000000e",
+      "category": "d2x"
     },
     "cIOS249[38]-d2x-v10-beta52": {
       "name": "cIOS249[38]-d2x-v11-beta3",
@@ -3874,7 +3912,8 @@
       "basecios": "cIOS249[38]-d2x-v11-beta3",
       "diffpath": "cIOS249[38]-v21",
       "code2new": "000000f9",
-      "lastbasemodule": "0000000e"
+      "lastbasemodule": "0000000e",
+      "category": "d2x"
     },
     "cIOS250[38]-d2x-v10-beta52": {
       "name": "cIOS250[38]-d2x-v11-beta3",
@@ -3892,7 +3931,8 @@
       "basecios": "cIOS249[38]-d2x-v11-beta3",
       "diffpath": "cIOS249[38]-v21",
       "code2new": "000000f9",
-      "lastbasemodule": "0000000e"
+      "lastbasemodule": "0000000e",
+      "category": "d2x"
     },
     "cIOS248[38]-d2x-v10-beta52": {
       "name": "cIOS248[38]-d2x-v11-beta3",
@@ -3910,7 +3950,8 @@
       "basecios": "cIOS249[38]-d2x-v11-beta3",
       "diffpath": "cIOS249[38]-v21",
       "code2new": "000000f9",
-      "lastbasemodule": "0000000e"
+      "lastbasemodule": "0000000e",
+      "category": "d2x"
     },
     "cIOS249[53]-d2x-v10-beta52": {
       "name": "cIOS249[53]-d2x-v11-beta3",
@@ -3928,7 +3969,8 @@
       "basecios": "cIOS249[53]-d2x-v11-beta3",
       "diffpath": "cIOS249[53]-v21",
       "code2new": "000000f9",
-      "lastbasemodule": "0000000e"
+      "lastbasemodule": "0000000e",
+      "category": "d2x"
     },
     "cIOS250[53]-d2x-v10-beta52": {
       "name": "cIOS250[53]-d2x-v11-beta3",
@@ -3946,7 +3988,8 @@
       "basecios": "cIOS249[53]-d2x-v11-beta3",
       "diffpath": "cIOS249[53]-v21",
       "code2new": "000000f9",
-      "lastbasemodule": "0000000e"
+      "lastbasemodule": "0000000e",
+      "category": "d2x"
     },
     "cIOS249[55]-d2x-v10-beta52": {
       "name": "cIOS249[55]-d2x-v11-beta3",
@@ -3964,7 +4007,8 @@
       "basecios": "cIOS249[55]-d2x-v11-beta3",
       "diffpath": "cIOS249[55]-v21",
       "code2new": "000000f9",
-      "lastbasemodule": "0000000e"
+      "lastbasemodule": "0000000e",
+      "category": "d2x"
     },
     "cIOS250[55]-d2x-v10-beta52": {
       "name": "cIOS250[55]-d2x-v11-beta3",
@@ -3982,7 +4026,8 @@
       "basecios": "cIOS249[55]-d2x-v11-beta3",
       "diffpath": "cIOS249[55]-v21",
       "code2new": "000000f9",
-      "lastbasemodule": "0000000e"
+      "lastbasemodule": "0000000e",
+      "category": "d2x"
     },
     "cIOS249[56]-d2x-v10-beta52": {
       "name": "cIOS249[56]-d2x-v11-beta3",
@@ -4000,7 +4045,8 @@
       "basecios": "cIOS249[56]-d2x-v11-beta3",
       "diffpath": "cIOS249[56]-v21",
       "code2new": "000000f9",
-      "lastbasemodule": "0000000e"
+      "lastbasemodule": "0000000e",
+      "category": "d2x"
     },
     "cIOS250[56]-d2x-v10-beta52": {
       "name": "cIOS250[56]-d2x-v11-beta3",
@@ -4018,7 +4064,8 @@
       "basecios": "cIOS249[56]-d2x-v11-beta3",
       "diffpath": "cIOS249[56]-v21",
       "code2new": "000000f9",
-      "lastbasemodule": "0000000e"
+      "lastbasemodule": "0000000e",
+      "category": "d2x"
     },
     "cIOS249[57]-d2x-v10-beta52": {
       "name": "cIOS249[57]-d2x-v11-beta3",
@@ -4036,7 +4083,8 @@
       "basecios": "cIOS249[57]-d2x-v11-beta3",
       "diffpath": "cIOS249[57]-v21",
       "code2new": "000000f9",
-      "lastbasemodule": "00000012"
+      "lastbasemodule": "00000012",
+      "category": "d2x"
     },
     "cIOS250[57]-d2x-v10-beta52": {
       "name": "cIOS250[57]-d2x-v11-beta3",
@@ -4054,7 +4102,8 @@
       "basecios": "cIOS249[57]-d2x-v11-beta3",
       "diffpath": "cIOS249[57]-v21",
       "code2new": "000000f9",
-      "lastbasemodule": "00000012"
+      "lastbasemodule": "00000012",
+      "category": "d2x"
     },
     "cIOS249[58]-d2x-v10-beta52": {
       "name": "cIOS249[58]-d2x-v11-beta3",
@@ -4072,7 +4121,8 @@
       "basecios": "cIOS249[58]-d2x-v11-beta3",
       "diffpath": "cIOS249[58]-v21",
       "code2new": "000000f9",
-      "lastbasemodule": "00000012"
+      "lastbasemodule": "00000012",
+      "category": "d2x"
     },
     "cIOS250[58]-d2x-v10-beta52": {
       "name": "cIOS250[58]-d2x-v11-beta3",
@@ -4090,7 +4140,8 @@
       "basecios": "cIOS249[58]-d2x-v11-beta3",
       "diffpath": "cIOS249[58]-v21",
       "code2new": "000000f9",
-      "lastbasemodule": "00000012"
+      "lastbasemodule": "00000012",
+      "category": "d2x"
     },
     "cIOS251[58]-d2x-v10-beta52": {
       "name": "cIOS251[58]-d2x-v11-beta3",
@@ -4108,7 +4159,8 @@
       "basecios": "cIOS249[58]-d2x-v11-beta3",
       "diffpath": "cIOS249[58]-v21",
       "code2new": "000000f9",
-      "lastbasemodule": "00000012"
+      "lastbasemodule": "00000012",
+      "category": "d2x"
     },
     "cIOS249[60]-d2x-v10-beta52": {
       "name": "cIOS249[60]-d2x-v11-beta3",
@@ -4126,7 +4178,8 @@
       "basecios": "cIOS249[60]-d2x-v11-beta3",
       "diffpath": "cIOS249[60]-v21",
       "code2new": "000000f9",
-      "lastbasemodule": "0000000e"
+      "lastbasemodule": "0000000e",
+      "category": "d2x"
     },
     "cIOS250[60]-d2x-v10-beta52": {
       "name": "cIOS250[60]-d2x-v11-beta3",
@@ -4144,7 +4197,8 @@
       "basecios": "cIOS249[60]-d2x-v11-beta3",
       "diffpath": "cIOS249[60]-v21",
       "code2new": "000000f9",
-      "lastbasemodule": "0000000e"
+      "lastbasemodule": "0000000e",
+      "category": "d2x"
     },
     "cIOS249[70]-d2x-v10-beta52": {
       "name": "cIOS249[70]-d2x-v11-beta3",
@@ -4162,7 +4216,8 @@
       "basecios": "cIOS249[70]-d2x-v11-beta3",
       "diffpath": "cIOS249[70]-v21",
       "code2new": "000000f9",
-      "lastbasemodule": "0000000e"
+      "lastbasemodule": "0000000e",
+      "category": "d2x"
     },
     "cIOS250[70]-d2x-v10-beta52": {
       "name": "cIOS250[70]-d2x-v11-beta3",
@@ -4180,7 +4235,8 @@
       "basecios": "cIOS249[70]-d2x-v11-beta3",
       "diffpath": "cIOS249[70]-v21",
       "code2new": "000000f9",
-      "lastbasemodule": "0000000e"
+      "lastbasemodule": "0000000e",
+      "category": "d2x"
     },
     "cIOS249[80]-d2x-v10-beta52": {
       "name": "cIOS249[80]-d2x-v11-beta3",
@@ -4198,7 +4254,8 @@
       "basecios": "cIOS249[80]-d2x-v11-beta3",
       "diffpath": "cIOS249[80]-v21",
       "code2new": "000000f9",
-      "lastbasemodule": "0000000e"
+      "lastbasemodule": "0000000e",
+      "category": "d2x"
     },
     "cIOS250[80]-d2x-v10-beta52": {
       "name": "cIOS250[80]-d2x-v11-beta3",
@@ -4216,7 +4273,8 @@
       "basecios": "cIOS249[80]-d2x-v11-beta3",
       "diffpath": "cIOS249[80]-v21",
       "code2new": "000000f9",
-      "lastbasemodule": "0000000e"
+      "lastbasemodule": "0000000e",
+      "category": "d2x"
     },
     "cIOS248[38]-d2x-vWii": {
       "name": "cIOS248[38]-d2x-v11-beta3-vWii",
@@ -4231,7 +4289,8 @@
       "code1": "00000007",
       "code2": "00000026",
       "version": 4380,
-      "basecios": "cIOS248[38]-d2x-v11-beta3-vWii"
+      "basecios": "cIOS248[38]-d2x-v11-beta3-vWii",
+      "category": "d2x"
     },
     "cIOS249[56]-d2x-vWii": {
       "name": "cIOS249[56]-d2x-v11-beta3-vWii",
@@ -4246,7 +4305,8 @@
       "code1": "00000007",
       "code2": "00000038",
       "version": 5918,
-      "basecios": "cIOS249[56]-d2x-v11-beta3-vWii"
+      "basecios": "cIOS249[56]-d2x-v11-beta3-vWii",
+      "category": "d2x"
     },
     "cIOS250[57]-d2x-vWii": {
       "name": "cIOS250[57]-d2x-v11-beta3-vWii",
@@ -4261,7 +4321,8 @@
       "code1": "00000007",
       "code2": "00000039",
       "version": 6175,
-      "basecios": "cIOS250[57]-d2x-v11-beta3-vWii"
+      "basecios": "cIOS250[57]-d2x-v11-beta3-vWii",
+      "category": "d2x"
     },
     "cIOS251[58]-d2x-vWii": {
       "name": "cIOS251[58]-d2x-v11-beta3-vWii",
@@ -4276,7 +4337,8 @@
       "code1": "00000007",
       "code2": "0000003a",
       "version": 6432,
-      "basecios": "cIOS251[58]-d2x-v11-beta3-vWii"
+      "basecios": "cIOS251[58]-d2x-v11-beta3-vWii",
+      "category": "d2x"
     },
     "RVL-cMIOS-v65535(v10)_WiiGator_WiiPower_v0.2": {
       "name": "WiiGator+WiiPower cMIOS-v65535(v10)",
@@ -4292,7 +4354,8 @@
       "version": 10,
       "basecios": "RVL-cMIOS-v65535(v10)_WiiGator_WiiPower_v0.2",
       "diffpath": "RVL-cMIOS-v65535(v10)_WiiGator_WiiPower_v0.2",
-      "code2new": "00000101"
+      "code2new": "00000101",
+      "category": "cios"
     },
     "Swiss_cMIOS": {
       "name": "Swiss cMIOS r1788",
@@ -4308,7 +4371,8 @@
       "version": 10,
       "basecios": "RVL-cMIOS[10]_Swiss_r1788",
       "diffpath": "RVL-cMIOS[10]_Swiss_r1788",
-      "code2new": "00000101"
+      "code2new": "00000101",
+      "category": "cios"
     },
     "RVL-cmios-v4_WiiGator_GCBL_v0.2": {
       "name": "cMIOS-v4 WiiGator GCBL v0.2",
@@ -4324,7 +4388,8 @@
       "version": 4,
       "basecios": "RVL-cmios-v4_WiiGator_GCBL_v0.2",
       "diffpath": "RVL-cmios-v4_WiiGator_GCBL_v0.2",
-      "code2new": "00000101"
+      "code2new": "00000101",
+      "category": "cios"
     },
     "RVL-cmios-v4_Waninkoko_rev5": {
       "name": "cMIOS-v4 Waninkoko rev5",
@@ -4340,7 +4405,8 @@
       "version": 4,
       "basecios": "RVL-cmios-v4_Waninkoko_rev5",
       "diffpath": "RVL-cmios-v4_Waninkoko_rev5",
-      "code2new": "00000101"
+      "code2new": "00000101",
+      "category": "cios"
     },
     "DarkWii_Red_4.1U": {
       "name": "DarkWii Red Theme (4.1U) - %effect%",

@@ -26,6 +26,11 @@ export function Navbar() {
 								Home
 							</Button>
 						</Link>
+						<Link href='/browse'>
+							<Button variant='ghost' className='text-white hover:bg-gray-800 hover:text-white'>
+								Browse Database
+							</Button>
+						</Link>
 						<Link href='/about'>
 							<Button variant='outline' size='sm' className='border-white text-white hover:bg-white hover:text-black'>
 								<Info className='mr-1 h-4 w-4' />

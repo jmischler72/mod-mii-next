@@ -94,6 +94,8 @@ function handleSyscheckData(
 	data: string,
 	options: { activeIOS?: boolean; extraProtection?: boolean; cMios?: boolean },
 ) {
+	options.extraProtection = false; // Extra protection is disabled for now
+
 	const region = getConsoleRegion(data);
 	const hbcVersion = getHBCVersion(data);
 	const systemMenuVersion = getSystemMenuVersion(data);
