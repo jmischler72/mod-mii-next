@@ -76,7 +76,7 @@ async function downloadWadFile(entry: DatabaseEntry, outputPath: string) {
 		throw new Error(`Unsupported category for download: ${entry.category}`);
 	}
 
-	if (entry.ciosslot && !entry.category) {
+	if (entry.category === 'cios' || entry.category === 'd2x') {
 		// this means the wad is a patched ios or cios so we need to build it using base wad
 		const baseWadPath = `/tmp/${entry.basewad}.wad`;
 		await nusDownload(entry, baseWadPath);
@@ -105,11 +105,7 @@ async function downloadWadFile(entry: DatabaseEntry, outputPath: string) {
 		}
 	}
 
-	if (entry.md5) {
-		await verifyFile(outputPath, entry.md5, entry.md5alt);
-	} else {
-		console.warn(`No MD5 hash provided for file verification: ${outputPath}`);
-	}
+	await verifyFile(outputPath, entry.md5, entry.md5alt);
 }
 
 /**
