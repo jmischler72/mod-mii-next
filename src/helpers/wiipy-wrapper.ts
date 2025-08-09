@@ -9,23 +9,33 @@ const MODMII_PATH = process.env.MODMII_PATH || '/modmii';
 
 const wiipyCommand = `python3 ${WIIPY_PATH}/wiipy.py`;
 
-export async function runCommand(args: string): Promise<string> {
+export async function runCommand(args: string, outputStr?: string): Promise<string> {
 	return new Promise((resolve, reject) => {
+		const callerId = args.split(' ')[0] + (outputStr ? ` (${outputStr})` : '');
+
 		const child = spawn(wiipyCommand, [args], { shell: true });
 
 		child.stdout.on('data', (data) => {
-			console.log(`Output: ${data}`);
+			data
+				.toString()
+				.split('\n')
+				.filter((line: string) => line.trim() !== '')
+				.forEach((line: string) => console.log(`[${callerId}] Out: ${line}`));
 		});
 
 		child.stderr.on('data', (data) => {
-			console.error(`Error: ${data}`);
+			data
+				.toString()
+				.split('\n')
+				.filter((line: string) => line.trim() !== '')
+				.forEach((line: string) => console.error(`[${callerId}] Err: ${line}`));
 		});
 
 		child.on('close', (code) => {
 			if (code === 0) {
-				resolve(`Command "${wiipyCommand} ${args}" executed successfully`);
+				resolve(`[${callerId}] Command "${wiipyCommand} ${args}" executed successfully`);
 			} else {
-				reject(new CustomError(`Command "${wiipyCommand} ${args}" failed with code ${code}`));
+				reject(new CustomError(`[${callerId}] Command "${wiipyCommand} ${args}" failed with code ${code}`));
 			}
 		});
 	});
@@ -89,7 +99,7 @@ export async function patchIos(entry: DatabaseEntry, outputPath: string, baseWad
 
 	const args = `iospatch -fs -ei -na -vd -s ${entry.ciosslot} -v ${entry.ciosversion} ${baseWadPath} -o ${tmpOutputPath}`;
 
-	return await runCommand(args).then(() => {
+	return await runCommand(args, entry.wadname).then(() => {
 		return copyFileSync(tmpOutputPath, outputPath);
 	});
 }
