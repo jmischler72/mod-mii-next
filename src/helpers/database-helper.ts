@@ -17,15 +17,26 @@ export type DatabaseEntry = {
 	md5basealt?: string;
 };
 
-export function getDatabaseEntry(entry: string): DatabaseEntry | null {
-	const dbPath = path.resolve(process.cwd(), 'public/database/database.json');
+const dbPath = path.resolve(process.cwd(), 'public/database/database.json');
+const database = JSON.parse(fs.readFileSync(dbPath, 'utf-8'));
 
-	const data = JSON.parse(fs.readFileSync(dbPath, 'utf-8'));
-	const entryData = data.entries[entry] || null;
+export function getDatabaseEntry(entry: string): DatabaseEntry | null {
+	const entryData = database.entries[entry] || null;
 
 	// if wadname has no extension, add .wad
-	if (path.extname(entryData.wadname) === '') {
+	if (entryData && path.extname(entryData.wadname) === '') {
 		entryData.wadname += '.wad';
 	}
+	return entryData;
+}
+
+export function getDatabaseEntryFromWadname(wadname: string): DatabaseEntry | null {
+	if (!wadname.endsWith('.wad')) {
+		wadname += '.wad';
+	}
+	const entryData =
+		(Object.values(database.entries) as DatabaseEntry[]).find((entry: DatabaseEntry) => entry.wadname === wadname) ||
+		null;
+
 	return entryData;
 }

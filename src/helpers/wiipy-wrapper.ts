@@ -2,6 +2,8 @@ import { CustomError } from '@/types/custom-error';
 import { spawn } from 'child_process';
 import fs, { copyFileSync } from 'fs';
 import { DatabaseEntry } from './database-helper';
+import { verify } from 'crypto';
+import { verifyFile } from './download-manager';
 
 const WIIPY_PATH = process.env.WIIPY_PATH || '/wiipy';
 const MODMII_PATH = process.env.MODMII_PATH || '/modmii';
@@ -30,18 +32,28 @@ export async function runCommand(args: string): Promise<string> {
 	});
 }
 
-export function nusDownload(databaseEntry: DatabaseEntry, outputPath: string) {
-	// Check if WAD already exists
+export async function nusDownload(entry: DatabaseEntry, outputPath: string) {
 	if (fs.existsSync(outputPath)) {
-		console.log(`WAD ${databaseEntry.wadname} already exists in cache`);
-		return Promise.resolve(`WAD ${databaseEntry.wadname} found in cache`);
+		await verifyFile(outputPath, entry.md5, entry.md5alt);
+
+		return Promise.resolve(`WAD ${entry.wadname} found in cache`);
 	}
 
-	const args = `nus title ${databaseEntry.code1}${databaseEntry.code2} -v ${databaseEntry.version} --wad ${outputPath}`;
+	const args = `nus title ${entry.code1}${entry.code2} -v ${entry.version} --wad ${outputPath}`;
 	return runCommand(args);
 }
 
 export async function buildCios(entry: DatabaseEntry, outputPath: string, baseWadPath: string) {
+	if (fs.existsSync(outputPath)) {
+		await verifyFile(outputPath, entry.md5, entry.md5alt);
+		return Promise.resolve(`WAD ${entry.wadname} found in cache`);
+	}
+	if (!entry.ciosslot || !entry.ciosversion) {
+		throw new CustomError(`Missing cIOS slot or version for ${entry.wadname}`);
+	}
+	if (!fs.existsSync(baseWadPath)) {
+		throw new CustomError(`Base WAD file not found: ${baseWadPath}`);
+	}
 	const d2xModules = `${MODMII_PATH}/Support/d2xModules`;
 	const ciosMapPath = `${d2xModules}/ciosmaps.xml`;
 
@@ -53,11 +65,20 @@ export async function buildCios(entry: DatabaseEntry, outputPath: string, baseWa
 }
 
 export async function patchIos(entry: DatabaseEntry, outputPath: string, baseWadPath: string) {
+	if (fs.existsSync(outputPath)) {
+		await verifyFile(outputPath, entry.md5, entry.md5alt);
+		return Promise.resolve(`WAD ${entry.wadname} found in cache`);
+	}
+	if (!entry.ciosslot || !entry.ciosversion) {
+		throw new CustomError(`Missing cIOS slot or version for ${entry.wadname}`);
+	}
+	if (!fs.existsSync(baseWadPath)) {
+		throw new CustomError(`Base WAD file not found: ${baseWadPath}`);
+	}
 	const tmpOutputPath = `${outputPath}`.replace('(', '').replace(')', ''); // wiipy does not like parentheses in file paths
-	const isLastBaseModule = true;
-	const lastBaseModule = isLastBaseModule ? `-s ${entry.ciosslot} -v ${entry.ciosversion}` : '';
 
-	const args = `iospatch -fs -ei -na -vd ${lastBaseModule} ${baseWadPath} -o ${tmpOutputPath}`;
+	const args = `iospatch -fs -ei -na -vd -s ${entry.ciosslot} -v ${entry.ciosversion} ${baseWadPath} -o ${tmpOutputPath}`;
+
 	return await runCommand(args).then(() => {
 		return copyFileSync(tmpOutputPath, outputPath);
 	});

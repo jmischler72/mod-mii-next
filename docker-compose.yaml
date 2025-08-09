@@ -15,7 +15,7 @@ services:
     ports:
       - 3000:3000
     networks:
-      - my_network
+      - mod-mii-next-network
 
   # Add more containers below (nginx, postgres, etc.)
 
@@ -32,7 +32,7 @@ services:
     command: server /data --console-address ":9001"
     restart: always
     networks:
-      - my_network
+      - mod-mii-next-network
 
   # Optional: Create bucket on startup
   createbuckets:
@@ -41,7 +41,7 @@ services:
     depends_on:
       - minio
     networks:
-      - my_network
+      - mod-mii-next-network
     env_file:
       - .env
     entrypoint: >
@@ -56,8 +56,7 @@ services:
 # Define a network, which allows containers to communicate
 # with each other, by using their container name as a hostname
 networks:
-  my_network:
-    external: true
+  mod-mii-next-network:
 
 # Define volumes for persistent data storage
 volumes:
