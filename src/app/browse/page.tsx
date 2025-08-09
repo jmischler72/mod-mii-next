@@ -7,8 +7,11 @@ import { Search, Download, Filter, Eye } from 'lucide-react';
 import Link from 'next/link';
 import { DatabaseEntry, DatabaseData } from '@/types/database';
 import { DatabaseInfoDialog } from '@/components/database-info-dialog';
+import { useToast } from '@/hooks/use-toast';
+import { Toaster } from '@/components/ui/toaster';
 
 export default function BrowsePage() {
+	const { toast } = useToast();
 	const [database, setDatabase] = useState<DatabaseData | null>(null);
 	const [filteredEntries, setFilteredEntries] = useState<Array<DatabaseEntry & { id: string }>>([]);
 	const [searchTerm, setSearchTerm] = useState('');
@@ -17,6 +20,7 @@ export default function BrowsePage() {
 	const [error, setError] = useState('');
 	const [currentPage, setCurrentPage] = useState(1);
 	const [itemsPerPage] = useState(24);
+	const [downloadingFiles, setDownloadingFiles] = useState<Set<string>>(new Set());
 
 	useEffect(() => {
 		const loadDatabase = async () => {
@@ -77,10 +81,134 @@ export default function BrowsePage() {
 		return Array.from(categories).sort();
 	};
 
-	const handleDownload = async (wadname: string) => {
-		// This would integrate with your existing download functionality
-		console.log('Download requested for:', wadname);
-		// You can integrate this with your existing download manager
+	// Check if a category supports downloading
+	const isDownloadableCategory = (category: string | undefined): boolean => {
+		if (!category) return false;
+		return ['ios', 'cios', 'd2x', 'OSC', 'patchios'].includes(category.toLowerCase());
+	};
+
+	const handleDownload = async (wadId: string, wadname: string) => {
+		if (downloadingFiles.has(wadId)) {
+			toast({
+				title: 'Download in progress',
+				description: `${wadname} is already being downloaded`,
+				variant: 'default',
+			});
+			return;
+		}
+
+		setDownloadingFiles((prev) => new Set(prev).add(wadId));
+
+		try {
+			console.log('Download requested for:', wadname, 'with ID:', wadId);
+
+			toast({
+				title: 'Starting download',
+				description: `Preparing ${wadname} for download...`,
+				variant: 'default',
+			});
+
+			// Add timeout for the request
+			const controller = new AbortController();
+			const timeoutId = setTimeout(() => controller.abort(), 30000); // 30 second timeout
+
+			const response = await fetch('/api/wads/download', {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json',
+				},
+				body: JSON.stringify({ wadId }),
+				signal: controller.signal,
+			});
+
+			clearTimeout(timeoutId);
+
+			if (!response.ok) {
+				let errorMessage = `Download failed: ${response.status} ${response.statusText}`;
+
+				try {
+					const errorData = await response.json();
+					errorMessage = errorData.error || errorMessage;
+				} catch {
+					// If response is not JSON, use the status text
+				}
+
+				throw new Error(errorMessage);
+			}
+
+			// Check if the response has content
+			const contentLength = response.headers.get('content-length');
+			if (contentLength === '0' || contentLength === null) {
+				throw new Error('Downloaded file is empty or corrupted');
+			}
+
+			// Get the file as a blob
+			const blob = await response.blob();
+
+			if (blob.size === 0) {
+				throw new Error('Downloaded file is empty');
+			}
+
+			// Create a download link
+			const url = window.URL.createObjectURL(blob);
+			const link = document.createElement('a');
+			link.href = url;
+			link.download = wadname;
+
+			// Ensure the link is added to the DOM before clicking
+			document.body.appendChild(link);
+			link.click();
+
+			// Clean up
+			document.body.removeChild(link);
+			window.URL.revokeObjectURL(url);
+
+			console.log('Download completed for:', wadname);
+
+			toast({
+				title: 'Download successful',
+				description: `${wadname} has been downloaded successfully`,
+				variant: 'success',
+			});
+		} catch (error) {
+			console.error('Download error:', error);
+
+			let errorMessage = 'Unknown download error occurred';
+			let errorTitle = 'Download failed';
+
+			if (error instanceof Error) {
+				if (error.name === 'AbortError') {
+					errorTitle = 'Download timeout';
+					errorMessage = 'Download request timed out. Please check your connection and try again.';
+				} else if (error.message.includes('Failed to fetch')) {
+					errorTitle = 'Network error';
+					errorMessage = 'Unable to connect to the server. Please check your internet connection.';
+				} else if (error.message.includes('404')) {
+					errorTitle = 'File not found';
+					errorMessage = 'The requested file could not be found on the server.';
+				} else if (error.message.includes('403')) {
+					errorTitle = 'Access denied';
+					errorMessage = 'You do not have permission to download this file.';
+				} else if (error.message.includes('500')) {
+					errorTitle = 'Server error';
+					errorMessage = 'The server encountered an error while processing your request.';
+				} else {
+					errorMessage = error.message;
+				}
+			}
+
+			toast({
+				title: errorTitle,
+				description: `Failed to download ${wadname}: ${errorMessage}`,
+				variant: 'destructive',
+			});
+		} finally {
+			setDownloadingFiles((prev) => {
+				const newSet = new Set(prev);
+				newSet.delete(wadId);
+				return newSet;
+			});
+		}
 	};
 
 	// Pagination calculations
@@ -97,6 +225,7 @@ export default function BrowsePage() {
 	if (loading) {
 		return (
 			<div className='flex min-h-screen items-center justify-center bg-black text-white'>
+				<Toaster />
 				<div className='text-center'>
 					<div className='mx-auto mb-4 h-32 w-32 animate-spin rounded-full border-b-2 border-white'></div>
 					<p className='text-lg'>Loading database...</p>
@@ -108,8 +237,14 @@ export default function BrowsePage() {
 	if (error) {
 		return (
 			<div className='flex min-h-screen items-center justify-center bg-black text-white'>
-				<div className='text-center'>
-					<p className='text-lg text-red-400'>{error}</p>
+				<Toaster />
+				<div className='max-w-md text-center'>
+					<div className='mb-4 text-6xl'>⚠️</div>
+					<h1 className='mb-4 text-2xl font-bold text-red-400'>Database Error</h1>
+					<p className='mb-6 text-gray-300'>{error}</p>
+					<Button onClick={() => window.location.reload()} className='bg-blue-600 text-white hover:bg-blue-700'>
+						Try Again
+					</Button>
 				</div>
 			</div>
 		);
@@ -117,6 +252,7 @@ export default function BrowsePage() {
 
 	return (
 		<div className='min-h-screen bg-black text-white'>
+			<Toaster />
 			<div className='container mx-auto px-4 py-8'>
 				{/* Header */}
 				<div className='mb-8'>
@@ -261,14 +397,17 @@ export default function BrowsePage() {
 										View Details
 									</Button>
 								</Link>
-								<Button
-									size='sm'
-									onClick={() => handleDownload(entry.wadname)}
-									className='flex-1 bg-blue-600 text-white hover:bg-blue-700'
-								>
-									<Download className='mr-2 h-4 w-4' />
-									Download
-								</Button>
+								{isDownloadableCategory(entry.category) && (
+									<Button
+										size='sm'
+										onClick={() => handleDownload(entry.id, entry.wadname)}
+										disabled={downloadingFiles.has(entry.id)}
+										className='flex-1 bg-blue-600 text-white hover:bg-blue-700 disabled:cursor-not-allowed disabled:opacity-50'
+									>
+										<Download className='mr-2 h-4 w-4' />
+										{downloadingFiles.has(entry.id) ? 'Downloading...' : 'Download'}
+									</Button>
+								)}
 							</div>
 						</div>
 					))}

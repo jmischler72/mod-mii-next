@@ -6,8 +6,10 @@ import { Button } from '@/components/ui/button';
 import { ArrowLeft, Download, Copy, Check } from 'lucide-react';
 import Link from 'next/link';
 import { DatabaseEntry, DatabaseData } from '@/types/database';
+import { useToast } from '@/hooks/use-toast';
 
 export default function EntryDetailPage() {
+	const { toast } = useToast();
 	const params = useParams();
 	const router = useRouter();
 	const entryId = decodeURIComponent(params.id as string);
@@ -16,6 +18,7 @@ export default function EntryDetailPage() {
 	const [loading, setLoading] = useState(true);
 	const [error, setError] = useState('');
 	const [copiedField, setCopiedField] = useState<string>('');
+	const [isDownloading, setIsDownloading] = useState(false);
 
 	useEffect(() => {
 		const loadEntry = async () => {
@@ -54,9 +57,114 @@ export default function EntryDetailPage() {
 		}
 	};
 
-	const handleDownload = async (wadname: string) => {
-		console.log('Download requested for:', wadname);
-		// Integrate with your existing download functionality
+	// Check if a category supports downloading
+	const isDownloadableCategory = (category: string | undefined): boolean => {
+		if (!category) return false;
+		return ['ios', 'cios', 'd2x', 'OSC', 'patchios'].includes(category.toLowerCase());
+	};
+
+	const handleDownload = async (wadId: string, wadname: string) => {
+		if (isDownloading) {
+			toast({
+				title: 'Download in progress',
+				description: 'Please wait for the current download to complete',
+				variant: 'default',
+			});
+			return;
+		}
+
+		setIsDownloading(true);
+
+		try {
+			console.log('Download requested for:', wadname, 'with ID:', wadId);
+
+			toast({
+				title: 'Starting download',
+				description: `Preparing ${wadname} for download...`,
+				variant: 'default',
+			});
+
+			const controller = new AbortController();
+			const timeoutId = setTimeout(() => controller.abort(), 30000);
+
+			const response = await fetch('/api/wads/download', {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json',
+				},
+				body: JSON.stringify({ wadId }),
+				signal: controller.signal,
+			});
+
+			clearTimeout(timeoutId);
+
+			if (!response.ok) {
+				let errorMessage = `Download failed: ${response.status} ${response.statusText}`;
+
+				try {
+					const errorData = await response.json();
+					errorMessage = errorData.error || errorMessage;
+				} catch {
+					// If response is not JSON, use the status text
+				}
+
+				throw new Error(errorMessage);
+			}
+
+			const contentLength = response.headers.get('content-length');
+			if (contentLength === '0' || contentLength === null) {
+				throw new Error('Downloaded file is empty or corrupted');
+			}
+
+			const blob = await response.blob();
+
+			if (blob.size === 0) {
+				throw new Error('Downloaded file is empty');
+			}
+
+			const url = window.URL.createObjectURL(blob);
+			const link = document.createElement('a');
+			link.href = url;
+			link.download = wadname;
+			document.body.appendChild(link);
+			link.click();
+
+			document.body.removeChild(link);
+			window.URL.revokeObjectURL(url);
+
+			console.log('Download completed for:', wadname);
+
+			toast({
+				title: 'Download successful',
+				description: `${wadname} has been downloaded successfully`,
+				variant: 'success',
+			});
+		} catch (error) {
+			console.error('Download error:', error);
+
+			let errorMessage = 'Unknown download error occurred';
+			let errorTitle = 'Download failed';
+
+			if (error instanceof Error) {
+				if (error.name === 'AbortError') {
+					errorTitle = 'Download timeout';
+					errorMessage = 'Download request timed out. Please check your connection and try again.';
+				} else if (error.message.includes('Failed to fetch')) {
+					errorTitle = 'Network error';
+					errorMessage = 'Unable to connect to the server. Please check your internet connection.';
+				} else {
+					errorMessage = error.message;
+				}
+			}
+
+			toast({
+				title: errorTitle,
+				description: `Failed to download ${wadname}: ${errorMessage}`,
+				variant: 'destructive',
+			});
+		} finally {
+			setIsDownloading(false);
+		}
 	};
 
 	if (loading) {
@@ -189,14 +297,20 @@ export default function EntryDetailPage() {
 				</div>
 
 				{/* Download Section */}
-				<div className='mt-8 rounded-lg border border-gray-700 bg-gray-800 p-6'>
-					<h2 className='mb-4 text-xl font-semibold text-white'>Download</h2>
-					<p className='mb-4 text-gray-400'>Download this entry to use with your Wii homebrew setup.</p>
-					<Button onClick={() => handleDownload(entry.wadname)} className='bg-blue-600 text-white hover:bg-blue-700'>
-						<Download className='mr-2 h-4 w-4' />
-						Download {entry.wadname}
-					</Button>
-				</div>
+				{isDownloadableCategory(entry.category) && (
+					<div className='mt-8 rounded-lg border border-gray-700 bg-gray-800 p-6'>
+						<h2 className='mb-4 text-xl font-semibold text-white'>Download</h2>
+						<p className='mb-4 text-gray-400'>Download this entry to use with your Wii homebrew setup.</p>
+						<Button
+							onClick={() => handleDownload(entryId, entry.wadname)}
+							disabled={isDownloading}
+							className='bg-blue-600 text-white hover:bg-blue-700 disabled:cursor-not-allowed disabled:opacity-50'
+						>
+							<Download className='mr-2 h-4 w-4' />
+							{isDownloading ? 'Downloading...' : `Download ${entry.wadname}`}
+						</Button>
+					</div>
+				)}
 			</div>
 		</div>
 	);
