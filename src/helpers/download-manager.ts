@@ -4,7 +4,6 @@ import { fileExistsInS3, uploadFileToS3, generateWadS3Key, generatePresignedUrl 
 import fs from 'fs';
 import path from 'path';
 import { oscDownload } from './osc-download';
-import { CustomError } from '@/types/custom-error';
 import { createHash } from 'crypto';
 
 // Temporary directory for downloads (will be deleted after S3 upload)
@@ -56,7 +55,7 @@ function cleanupTempFile(filePath: string): void {
  */
 export async function verifyFile(filePath: string, md5: string, md5alt?: string): Promise<void> {
 	if (!md5 && !md5alt) {
-		throw new CustomError(`No MD5 hash provided for file verification: ${filePath}`);
+		throw new Error(`No MD5 hash provided for file verification: ${filePath}`);
 	}
 
 	const fileBuffer = fs.readFileSync(filePath);
@@ -67,18 +66,21 @@ export async function verifyFile(filePath: string, md5: string, md5alt?: string)
 	const altHash = createHash('md5').update(fileBuffer).digest('hex');
 	if (altHash === md5alt) return;
 
-	throw new CustomError(`File verification failed for ${filePath}`);
+	throw new Error(
+		`File verification failed for ${filePath}, expected MD5: ${md5}, got: ${hash}, alternative MD5: ${md5alt}, got: ${altHash}`,
+	);
 }
 
 async function downloadWadFile(entry: DatabaseEntry, outputPath: string) {
 	if (!entry.category && !entry.ciosslot) {
-		throw new CustomError(`Unsupported category for download: ${entry.category}`);
+		throw new Error(`Unsupported category for download: ${entry.category}`);
 	}
 
 	if (entry.ciosslot && !entry.category) {
 		// this means the wad is a patched ios or cios so we need to build it using base wad
 		const baseWadPath = `/tmp/${entry.basewad}.wad`;
 		await nusDownload(entry, baseWadPath);
+		await verifyFile(baseWadPath, entry.md5base!, entry.md5basealt);
 		await buildCios(entry, outputPath, baseWadPath);
 	} else {
 		switch (entry.category) {
@@ -89,9 +91,8 @@ async function downloadWadFile(entry: DatabaseEntry, outputPath: string) {
 				await oscDownload(entry, outputPath);
 				break;
 			case 'patchios':
-				if (!entry.basewad) throw new CustomError(`Base WAD not specified for patching: ${entry.wadname}`);
 				const baseWadPath = `/tmp/${entry.basewad}.wad`;
-				const baseEntry = getDatabaseEntryFromWadname(entry.basewad);
+				const baseEntry = getDatabaseEntryFromWadname(entry.basewad!);
 				if (!baseEntry) throw new Error(`Base WAD entry not found: ${entry.basewad}`);
 
 				await nusDownload(baseEntry, baseWadPath);
@@ -118,7 +119,7 @@ export async function handleDownloadWadFile(wadId: string): Promise<DownloadResu
 	const databaseEntry = getDatabaseEntry(wadId);
 
 	if (!databaseEntry) {
-		throw new CustomError(`No entry found in database for ${wadId}`);
+		throw new Error(`No entry found in database for ${wadId}`);
 	}
 	console.log(`Downloading: ${databaseEntry?.wadname}`);
 
@@ -136,7 +137,7 @@ export async function handleDownloadWadFile(wadId: string): Promise<DownloadResu
 
 		// Verify the file was downloaded
 		if (!outputPath || !fs.existsSync(outputPath)) {
-			throw new CustomError(`File was not created after download: ${databaseEntry.wadname}`);
+			throw new Error(`File was not created after download: ${databaseEntry.wadname}`);
 		}
 
 		// Upload to S3

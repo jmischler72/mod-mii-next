@@ -2,7 +2,6 @@ import { CustomError } from '@/types/custom-error';
 import { spawn } from 'child_process';
 import fs, { copyFileSync } from 'fs';
 import { DatabaseEntry } from './database-helper';
-import { verify } from 'crypto';
 import { verifyFile } from './download-manager';
 
 const WIIPY_PATH = process.env.WIIPY_PATH || '/wiipy';
@@ -34,9 +33,12 @@ export async function runCommand(args: string): Promise<string> {
 
 export async function nusDownload(entry: DatabaseEntry, outputPath: string) {
 	if (fs.existsSync(outputPath)) {
-		await verifyFile(outputPath, entry.md5, entry.md5alt);
-
-		return Promise.resolve(`WAD ${entry.wadname} found in cache`);
+		try {
+			await verifyFile(outputPath, entry.md5, entry.md5alt);
+			return Promise.resolve(`WAD ${entry.wadname} found in cache`);
+		} catch (err) {
+			console.warn('NUS: Cached file verification failed, re-downloading');
+		}
 	}
 
 	const args = `nus title ${entry.code1}${entry.code2} -v ${entry.version} --wad ${outputPath}`;
@@ -45,8 +47,12 @@ export async function nusDownload(entry: DatabaseEntry, outputPath: string) {
 
 export async function buildCios(entry: DatabaseEntry, outputPath: string, baseWadPath: string) {
 	if (fs.existsSync(outputPath)) {
-		await verifyFile(outputPath, entry.md5, entry.md5alt);
-		return Promise.resolve(`WAD ${entry.wadname} found in cache`);
+		try {
+			await verifyFile(outputPath, entry.md5, entry.md5alt);
+			return Promise.resolve(`WAD ${entry.wadname} found in cache`);
+		} catch (err) {
+			console.warn('NUS: Cached file verification failed, re-downloading');
+		}
 	}
 	if (!entry.ciosslot || !entry.ciosversion) {
 		throw new CustomError(`Missing cIOS slot or version for ${entry.wadname}`);
@@ -66,8 +72,12 @@ export async function buildCios(entry: DatabaseEntry, outputPath: string, baseWa
 
 export async function patchIos(entry: DatabaseEntry, outputPath: string, baseWadPath: string) {
 	if (fs.existsSync(outputPath)) {
-		await verifyFile(outputPath, entry.md5, entry.md5alt);
-		return Promise.resolve(`WAD ${entry.wadname} found in cache`);
+		try {
+			await verifyFile(outputPath, entry.md5, entry.md5alt);
+			return Promise.resolve(`WAD ${entry.wadname} found in cache`);
+		} catch (err) {
+			console.warn('NUS: Cached file verification failed, re-downloading');
+		}
 	}
 	if (!entry.ciosslot || !entry.ciosversion) {
 		throw new CustomError(`Missing cIOS slot or version for ${entry.wadname}`);
