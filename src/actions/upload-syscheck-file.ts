@@ -23,7 +23,7 @@ import {
 	getSystemMenuVersion,
 } from '@/helpers/syscheck-info-helper';
 import { CustomError } from '@/types/custom-error';
-import { getEntry } from '@/helpers/database-helper';
+import { getDatabaseEntry } from '@/helpers/database-helper';
 
 const MAX_FILE_SIZE = 5000000; // 5MB
 const ACCEPTED_FILE_TYPES = ['text/csv', 'application/vnd.ms-excel'];
@@ -41,7 +41,7 @@ const uploadSchema = z.object({
 
 export async function uploadSyscheckFile(formData: FormData): Promise<UploadSyscheckResult> {
 	const activeIOS = true; // Placeholder for active IOS check, if needed
-	const extraProtection = false; // When enabled, a patched IOS60 will be installed to other system menu IOS slots to prevent bricks from users manually up\downgrading Wii's
+	const extraProtection = true; // When enabled, a patched IOS60 will be installed to other system menu IOS slots to prevent bricks from users manually up\downgrading Wii's
 	const cMios = false; // A cMIOS allows older non-chipped Wii's to play GameCube backup discs
 
 	try {
@@ -77,7 +77,7 @@ export async function uploadSyscheckFile(formData: FormData): Promise<UploadSysc
 		const systemInfos = handleSyscheckData(copyData, { activeIOS, extraProtection, cMios });
 
 		const wadsInfos = systemInfos.wadToInstall.map((wadId) => {
-			return { wadname: getEntry(wadId)?.wadname || 'Unknown', wadId };
+			return { wadname: getDatabaseEntry(wadId)?.wadname || 'Unknown', wadId };
 		});
 
 		return {

@@ -6,7 +6,7 @@ const OSC_URL = 'https://hbb1.oscwii.org/api/contents/';
 
 export async function oscDownload(databaseEntry: DatabaseEntry, filePath: string) {
 	if (fs.existsSync(filePath)) {
-		console.log(`WAD ${databaseEntry.wadname} already exists in cache`);
+		console.log(`OSC ${databaseEntry.wadname} already exists in cache`);
 		return Promise.resolve(`WAD ${databaseEntry.wadname} found in cache`);
 	}
 

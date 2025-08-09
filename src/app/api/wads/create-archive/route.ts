@@ -16,9 +16,6 @@ export async function POST(request: NextRequest) {
 		// Download all required WAD files
 		const downloadSummary = await handleDownloadMultipleWads(wadnames, {
 			maxConcurrent: 2, // Download 2 files at a time to avoid overwhelming the server
-			onProgress: (completed, total, current) => {
-				console.log(`Download progress: ${completed}/${total} - Currently downloading: ${current}`);
-			},
 		});
 
 		// Use the successfully downloaded files for archiving
