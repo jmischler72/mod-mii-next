@@ -1,15 +1,15 @@
 import { CustomError } from '@/types/custom-error';
 import { spawn } from 'child_process';
 import fs, { copyFileSync } from 'fs';
-import { DatabaseEntry } from './database-helper';
 import { verifyFile } from './download-manager';
+import { DatabaseEntry } from '@/types/database';
 
 const WIIPY_PATH = process.env.WIIPY_PATH || '/wiipy';
 const MODMII_PATH = process.env.MODMII_PATH || '/modmii';
 
 const wiipyCommand = `python3 ${WIIPY_PATH}/wiipy.py`;
 
-export async function runCommand(args: string, outputStr?: string): Promise<string> {
+export async function runCommand(args: string, outputStr?: string, debug: boolean = false): Promise<string> {
 	return new Promise((resolve, reject) => {
 		const callerId = args.split(' ')[0] + (outputStr ? ` (${outputStr})` : '');
 
@@ -77,7 +77,7 @@ export async function buildCios(entry: DatabaseEntry, outputPath: string, baseWa
 
 	const args = `cios --cios-ver ${ciosVersion} --modules ${d2xModules} --slot ${entry.ciosslot} --version ${entry.ciosversion} ${baseWadPath} ${ciosMapPath} ${outputPath}`;
 
-	return runCommand(args);
+	return runCommand(args, entry.wadname, true);
 }
 
 export async function patchIos(entry: DatabaseEntry, outputPath: string, baseWadPath: string) {
@@ -99,7 +99,7 @@ export async function patchIos(entry: DatabaseEntry, outputPath: string, baseWad
 
 	const args = `iospatch -fs -ei -na -vd -s ${entry.ciosslot} -v ${entry.ciosversion} ${baseWadPath} -o ${tmpOutputPath}`;
 
-	return await runCommand(args, entry.wadname).then(() => {
+	return await runCommand(args, entry.wadname, true).then(() => {
 		return copyFileSync(tmpOutputPath, outputPath);
 	});
 }
