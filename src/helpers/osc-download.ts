@@ -23,11 +23,6 @@ export async function oscDownload(databaseEntry: DatabaseEntry, filePath: string
 		const buffer = await response.arrayBuffer();
 		await fs.promises.writeFile(filePath, Buffer.from(buffer));
 		console.log('OSC download process completed');
-
-		// Extract the downloaded file using extract-zip
-		await extract(filePath, { dir: filePath.replace('.zip', '') });
-		console.log(`Extracted ${databaseEntry.wadname} to ${filePath.replace('.zip', '')}`);
-		console.log(fs.readdirSync(filePath.replace('.zip', '')));
 	} catch (error) {
 		console.error('OSC download failed:', error);
 		throw error;
