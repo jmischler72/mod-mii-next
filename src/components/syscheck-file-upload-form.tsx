@@ -3,34 +3,19 @@
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { z } from 'zod';
 import { Upload, X, FileIcon } from 'lucide-react';
 
 import { Button } from '@/components/ui/button';
 import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
+import { Checkbox } from '@/components/ui/checkbox';
 import { cn } from '@/lib/utils';
 import { uploadSyscheckFile } from '@/actions/upload-syscheck-file';
 import { UploadSyscheckResult } from '@/types/upload-syscheck-type';
-
-const MAX_FILE_SIZE = 5000000; // 5MB
-const ACCEPTED_FILE_TYPES = ['text/csv', 'application/vnd.ms-excel'];
-
-const formSchema = z.object({
-	file: z
-		.any()
-		.refine((file): file is File => file instanceof File, 'Please select a file')
-		.refine((file: File) => file.size <= MAX_FILE_SIZE, 'File size should be less than 5MB')
-		.refine(
-			(file: File) => ACCEPTED_FILE_TYPES.includes(file.type) || file.name.endsWith('.csv'),
-			'Only CSV files are allowed',
-		),
-});
-
-type FormValues = z.infer<typeof formSchema>;
+import { uploadFormSchema, type UploadFormValues, MAX_FILE_SIZE } from '@/schemas/upload-schema';
 
 interface FileUploadFormProps {
-	onSubmit?: (data: FormValues) => void;
+	onSubmit?: (data: UploadFormValues) => void;
 	onUploadSuccess?: (result: UploadSyscheckResult) => void;
 	onUploadError?: (error: string) => void;
 	className?: string;
@@ -41,11 +26,16 @@ export function SyscheckFileUploadForm({ onSubmit, onUploadSuccess, onUploadErro
 	const [dragActive, setDragActive] = useState(false);
 	const [isUploading, setIsUploading] = useState(false);
 
-	const form = useForm<FormValues>({
-		resolver: zodResolver(formSchema),
+	const form = useForm<UploadFormValues>({
+		resolver: zodResolver(uploadFormSchema),
+		mode: 'onChange',
+		defaultValues: {
+			activeIOS: true,
+			extraProtection: true,
+		},
 	});
 
-	const handleFormSubmit = async (data: FormValues) => {
+	const handleFormSubmit = async (data: UploadFormValues) => {
 		if (onSubmit) {
 			onSubmit(data);
 			return;
@@ -57,6 +47,8 @@ export function SyscheckFileUploadForm({ onSubmit, onUploadSuccess, onUploadErro
 		try {
 			const formData = new FormData();
 			formData.append('file', data.file);
+			formData.append('activeIOS', data.activeIOS.toString());
+			formData.append('extraProtection', data.extraProtection.toString());
 
 			const result = await uploadSyscheckFile(formData);
 
@@ -71,7 +63,7 @@ export function SyscheckFileUploadForm({ onSubmit, onUploadSuccess, onUploadErro
 		} finally {
 			// Reset form after upload attempt (success or error)
 			setSelectedFile(null);
-			form.reset();
+			form.resetField('file');
 			const fileInput = document.getElementById('file-input') as HTMLInputElement;
 			if (fileInput) {
 				fileInput.value = '';
@@ -194,6 +186,42 @@ export function SyscheckFileUploadForm({ onSubmit, onUploadSuccess, onUploadErro
 								</FormControl>
 								<FormDescription>Choose a CSV file to upload. Supported format: CSV (max 5MB)</FormDescription>
 								<FormMessage />
+							</FormItem>
+						)}
+					/>
+
+					<FormField
+						control={form.control}
+						name='activeIOS'
+						render={({ field }) => (
+							<FormItem className='flex flex-row items-start space-y-0 space-x-3'>
+								<FormControl>
+									<Checkbox checked={field.value} onCheckedChange={field.onChange} />
+								</FormControl>
+								<div className='space-y-1 leading-none'>
+									<FormLabel>Install Active IOS</FormLabel>
+									<FormDescription>
+										Install all IOS versions needed for various homebrew applications to function properly.
+									</FormDescription>
+								</div>
+							</FormItem>
+						)}
+					/>
+
+					<FormField
+						control={form.control}
+						name='extraProtection'
+						render={({ field }) => (
+							<FormItem className='flex flex-row items-start space-y-0 space-x-3'>
+								<FormControl>
+									<Checkbox checked={field.value} onCheckedChange={field.onChange} />
+								</FormControl>
+								<div className='space-y-1 leading-none'>
+									<FormLabel>Extra Protection</FormLabel>
+									<FormDescription>
+										Install patched IOS60 to protect against bricks from manual system menu upgrades/downgrades.
+									</FormDescription>
+								</div>
 							</FormItem>
 						)}
 					/>
