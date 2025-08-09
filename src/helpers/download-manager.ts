@@ -105,6 +105,7 @@ async function downloadWadFile(entry: DatabaseEntry, outputPath: string) {
 		}
 	}
 
+	if (!entry.md5 && entry.category === 'OSC') return;
 	await verifyFile(outputPath, entry.md5, entry.md5alt);
 }
 
