@@ -55,7 +55,7 @@ export default function Home() {
 			if (downloadSummaryHeader) {
 				try {
 					const summary = JSON.parse(downloadSummaryHeader);
-					const totalFiles = summary.downloaded + summary.cached + summary.failed;
+					const totalFiles = summary.totalRequested;
 
 					summaryMessage = `✅ Archive downloaded successfully!
 

@@ -47,6 +47,7 @@ export async function POST(request: NextRequest) {
 				'Content-Disposition': 'attachment; filename="wad-files.zip"',
 				'Content-Length': zipBuffer.length.toString(),
 				'X-Download-Summary': JSON.stringify({
+					totalRequested: downloadSummary.totalRequested,
 					downloaded: downloadSummary.downloaded,
 					cached: downloadSummary.cached,
 					failed: downloadSummary.failed,

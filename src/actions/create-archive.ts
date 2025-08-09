@@ -24,20 +24,9 @@ export async function createArchive(availableFiles: Array<{ wadname: string; s3U
 
 		// Download and add files to archive
 		const downloadPromises = availableFiles.map(async (file) => {
-			try {
-				console.log(`Downloading ${file.wadname} from ${file.s3Url}`);
-				const response = await fetch(file.s3Url);
-				if (response.ok) {
-					const buffer = await response.arrayBuffer();
-					archive.append(Buffer.from(buffer), { name: file.wadname });
-					console.log(`Added ${file.wadname} to archive`);
-				} else {
-					console.error(`Failed to download ${file.wadname}: ${response.status}`);
-				}
-			} catch (error) {
-				console.error(`Error downloading ${file.wadname}:`, error);
-				// Continue with other files
-			}
+			const response = await fetch(file.s3Url);
+			const buffer = await response.arrayBuffer();
+			archive.append(Buffer.from(buffer), { name: file.wadname });
 		});
 
 		// Wait for all downloads to complete

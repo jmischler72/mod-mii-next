@@ -215,8 +215,8 @@ export async function handleDownloadMultipleWads(
 
 	const summary: DownloadSummary = {
 		totalRequested: total,
-		downloaded: results.filter((r) => r.success || !r.cached).length,
-		cached: results.filter((r) => r.success || r.cached).length,
+		downloaded: results.filter((r) => r.success && !r.cached).length,
+		cached: results.filter((r) => r.success && r.cached).length,
 		failed: results.filter((r) => !r.success).length,
 		results,
 	};
