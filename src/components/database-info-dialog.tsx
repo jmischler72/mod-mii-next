@@ -24,15 +24,14 @@ export function DatabaseInfoDialog() {
 			</DialogTrigger>
 			<DialogContent className='max-w-2xl'>
 				<DialogHeader>
-					<DialogTitle>About the Database</DialogTitle>
-					<DialogDescription>Learn about how this database is created and maintained</DialogDescription>
+					<DialogTitle>How is this database created and maintained ?</DialogTitle>
 				</DialogHeader>
 				<div className='space-y-4 text-sm text-gray-300'>
 					<div>
 						<h3 className='mb-2 font-semibold text-white'>Source</h3>
 						<p>
-							This database is automatically generated from the original ModMii batch files that contain the WAD
-							information. The data comes from the official ModMii toolkit created by XFlak.
+							The data comes from the official ModMii toolkit created by XFlak and is automatically generated from the
+							original ModMii batch files that contain the WAD information.
 						</p>
 					</div>
 
@@ -43,8 +42,7 @@ export function DatabaseInfoDialog() {
 								The original <code className='rounded bg-gray-700 px-1'>DB.bat</code> file from ModMii is parsed to
 								extract WAD definitions
 							</li>
-							<li>Each SET command is analyzed to build individual database entries</li>
-							<li>Variables are resolved and entries are automatically categorized (iOS, OSC, cIOS, d2x)</li>
+							<li>Each SET command are resolved and entries are categorized</li>
 							<li>The final database is exported as a JSON file for web consumption</li>
 						</ol>
 					</div>
@@ -54,7 +52,7 @@ export function DatabaseInfoDialog() {
 						<div className='space-y-2'>
 							<div className='flex items-center space-x-2'>
 								<span className='rounded-full bg-blue-600 px-2 py-1 text-xs text-blue-100'>IOS</span>
-								<span>Standard Nintendo Internet Channel and other iOS</span>
+								<span>Standard Nintendo iOS downloaded from NUS</span>
 							</div>
 							<div className='flex items-center space-x-2'>
 								<span className='rounded-full bg-green-600 px-2 py-1 text-xs text-green-100'>OSC</span>
@@ -66,7 +64,7 @@ export function DatabaseInfoDialog() {
 							</div>
 							<div className='flex items-center space-x-2'>
 								<span className='rounded-full bg-orange-600 px-2 py-1 text-xs text-orange-100'>D2X</span>
-								<span>d2x cIOS variants for enhanced functionality</span>
+								<span>d2x cIOS variants</span>
 							</div>
 						</div>
 					</div>
@@ -81,7 +79,7 @@ export function DatabaseInfoDialog() {
 								<strong>Name:</strong> Human-readable title
 							</div>
 							<div>
-								<strong>Code1/Code2:</strong> Nintendo title IDs
+								<strong>Code1/Code2:</strong> NUS title IDs
 							</div>
 							<div>
 								<strong>Version:</strong> Software version
@@ -90,7 +88,7 @@ export function DatabaseInfoDialog() {
 								<strong>WAD Name:</strong> Filename of the WAD
 							</div>
 							<div>
-								<strong>MD5:</strong> File checksum for verification
+								<strong>MD5/MD5alt:</strong> File checksum for verification
 							</div>
 							<div>
 								<strong>cIOS Slot:</strong> Installation slot (cIOS only)
@@ -104,8 +102,14 @@ export function DatabaseInfoDialog() {
 					<div>
 						<h3 className='mb-2 font-semibold text-white'>Updates</h3>
 						<p>
-							The database is updated whenever new entries are added to the ModMii toolkit. The conversion script
-							automatically processes changes and maintains backward compatibility.
+							A conversion script{' '}
+							<a
+								href='https://github.com/jmischler72/mod-mii-next/tree/main/scripts'
+								className='text-blue-400 underline'
+							>
+								in the repo of this project
+							</a>{' '}
+							can be used to automatically processes changes and maintains backward compatibility.
 						</p>
 					</div>
 
