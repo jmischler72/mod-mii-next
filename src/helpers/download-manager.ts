@@ -1,10 +1,11 @@
-import { DatabaseEntry, getDatabaseEntry, getDatabaseEntryFromWadname } from '@/helpers/database-helper';
+import { getDatabaseEntry, getDatabaseEntryFromWadname } from '@/helpers/database-helper';
 import { buildCios, nusDownload, patchIos } from '@/helpers/wiipy-wrapper';
 import { fileExistsInS3, uploadFileToS3, generateWadS3Key, generatePresignedUrl } from '@/helpers/s3-storage';
 import fs from 'fs';
 import path from 'path';
 import { oscDownload } from './osc-download';
 import { createHash } from 'crypto';
+import { DatabaseEntry } from '@/types/database';
 
 // Temporary directory for downloads (will be deleted after S3 upload)
 export const TEMP_DIRECTORY = process.env.TEMP_DIRECTORY || path.join(process.cwd(), 'temp-downloads');

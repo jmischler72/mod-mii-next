@@ -24,7 +24,7 @@ export async function POST(request: NextRequest) {
 		const fileBuffer = await getFileBufferFromS3(s3Key);
 
 		// Return the file as a direct download
-		return new NextResponse(fileBuffer, {
+		return new NextResponse(Uint8Array.from(fileBuffer), {
 			headers: {
 				'Content-Type': 'application/octet-stream',
 				'Content-Disposition': `attachment; filename="${downloadResult.wadname}"`,

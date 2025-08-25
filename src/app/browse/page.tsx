@@ -9,7 +9,7 @@ import { DatabaseEntry, DatabaseData } from '@/types/database';
 import { DatabaseInfoDialog } from '@/components/database-info-dialog';
 import { useToast } from '@/hooks/use-toast';
 import { useDownload } from '@/hooks/use-download';
-import { isDownloadableCategory, getCategoryColors, hasCustomColor } from '@/utils/database-utils';
+import { isDownloadableCategory, getCategoryColors } from '@/utils/database-utils';
 import { Toaster } from '@/components/ui/toaster';
 
 export default function BrowsePage() {
