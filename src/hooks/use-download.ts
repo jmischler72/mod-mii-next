@@ -61,11 +61,13 @@ export function useDownload(options: UseDownloadOptions = {}) {
 				throw new Error(errorMessage);
 			}
 
+			// commented rn because cloudflare seems to remove content-length header
+			
 			// Check if the response has content
-			const contentLength = response.headers.get('content-length');
-			if (contentLength === '0' || contentLength === null) {
-				throw new Error('Downloaded file is empty or corrupted');
-			}
+			// const contentLength = response.headers.get('content-length');
+			// if (contentLength === '0' || contentLength === null) {
+			// 	throw new Error('Downloaded file is empty or corrupted');
+			// }
 
 			// Get the file as a blob
 			const blob = await response.blob();
