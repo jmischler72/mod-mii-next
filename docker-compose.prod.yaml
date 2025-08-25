@@ -12,17 +12,12 @@ services:
       - temp_data:/mod-mii-next/.temp-downloads
       - ./public:/mod-mii-next/public
     restart: always
-    ports:
-      - 3000:3000
     networks:
       - mod-mii-next-network
 
   minio:
     image: minio/minio:latest
     container_name: wii-homebrew-minio
-    ports:
-      - "9000:9000" # MinIO API
-      - "9001:9001" # MinIO Console
     env_file:
       - .env
     volumes:
