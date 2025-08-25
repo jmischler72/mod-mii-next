@@ -1,46 +1,5 @@
 # Mod Mii Next
 
-## Contributing
-
-We welcome contributions from the community! To help improve ModMiiNext, please follow these guidelines:
-
-### How to contribute
-
-1. **Start the development environment**
-
-   - Run `pnpm docker:dev` to start the local development environment.
-
-2. **Fork and clone the repository**
-
-   - Fork the project on GitHub and clone your fork locally.
-
-3. **Create a new branch**
-
-   - Use a descriptive branch name for your feature or fix (e.g. `fix/md5_validation_extra_protec`).
-
-4. **Make your changes**
-
-   - Follow the code style and conventions used in the project.
-   - Add tests if applicable and make sure all tests pass.
-
-5. **Commit and push**
-
-   - Write clear, concise commit messages.
-   - Push your branch to your forked repository.
-
-6. **Open a pull request**
-
-   - Submit a pull request to the main repository. Describe your changes and reference any related issues.
-
-7. **Discuss and update**
-   - Participate in the review, make any requested changes, and help keep the project high quality.
-
-### Code of Conduct
-
-Please be respectful and constructive in all interactions. This project is open to everyone and strives to maintain a welcoming environment.
-
----
-
 ## What is this project?
 
 ModMiiNext aims to be a modern version of the original ModMii project. Currently, it can analyze your Nintendo Wii console's system configuration and automatically provide the exact WAD files needed to update your system's homebrew components.
@@ -105,3 +64,31 @@ Built with Next.js, TypeScript, and Tailwind CSS. Open source and available on G
 > **Use this software at your own risk!** Always make a NAND backup before modifying your Wii console.
 >
 > This is an independent project and is not officially affiliated with or endorsed by the original ModMii project or its developers.
+
+---
+
+## Contributing
+
+We welcome contributions from the community! To help improve ModMiiNext, please follow these guidelines:
+
+### How to contribute
+
+**Start the development environment**
+
+- Run `pnpm docker:dev` to start the local development environment.
+
+**Fork and clone the repository**
+
+- Fork the project on GitHub and clone your fork locally.
+
+**Create a new branch**
+
+- Use a descriptive branch name for your feature or fix (e.g. `fix/md5_validation_extra_protec`).
+
+**Open a pull request**
+
+- Submit a pull request to the main repository. Describe your changes and reference any related issues.
+
+### Code of Conduct
+
+Please be respectful and constructive in all interactions. This project is open to everyone and strives to maintain a welcoming environment.

@@ -107,7 +107,7 @@ export default function About() {
 								<div className='mx-auto mb-3 flex h-12 w-12 items-center justify-center rounded-full border border-gray-600 bg-gray-700'>
 									<span className='text-lg font-bold text-white'>2</span>
 								</div>
-								<h3 className='mb-2 font-semibold text-white'>WAD "Caching"</h3>
+								<h3 className='mb-2 font-semibold text-white'>WAD &quot;Caching&quot;</h3>
 								<p className='text-sm text-gray-300'>
 									It downloads the necessary WAD files from ModMii sources and stores them in a s3 for easy access.
 								</p>
