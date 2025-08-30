@@ -11,7 +11,6 @@ import {
 	validateConsoleType,
 	validateSyscheckData,
 } from '@/helpers/syscheck-validation-helper';
-import { z } from 'zod';
 import { UploadSyscheckResult } from '@/types/upload-syscheck-type';
 import {
 	getConsoleRegion,
@@ -24,42 +23,29 @@ import {
 } from '@/helpers/syscheck-info-helper';
 import { CustomError } from '@/types/custom-error';
 import { getDatabaseEntry } from '@/helpers/database-helper';
-
-const MAX_FILE_SIZE = 5000000; // 5MB
-const ACCEPTED_FILE_TYPES = ['text/csv', 'application/vnd.ms-excel'];
-
-// Schema for validating the uploaded file
-const uploadSchema = z.object({
-	file: z
-		.instanceof(File)
-		.refine((file) => file.size <= MAX_FILE_SIZE, 'File size should be less than 5MB')
-		.refine(
-			(file) => ACCEPTED_FILE_TYPES.includes(file.type) || file.name.endsWith('.csv'),
-			'Only CSV files are allowed',
-		),
-});
+import { uploadFormDataSchema } from '@/schemas/upload-schema';
 
 export async function uploadSyscheckFile(formData: FormData): Promise<UploadSyscheckResult> {
-	const activeIOS = true; // Placeholder for active IOS check, if needed
-	const extraProtection = true; // When enabled, a patched IOS60 will be installed to other system menu IOS slots to prevent bricks from users manually up\downgrading Wii's
-	const cMios = false; // A cMIOS allows older non-chipped Wii's to play GameCube backup discs
-
 	try {
 		const file = formData.get('file') as File;
+		const activeIOSStr = formData.get('activeIOS') as string;
+		const extraProtectionStr = formData.get('extraProtection') as string;
 
-		// Validate the file
+		// Validate the form data using the shared schema
+		const validationResult = uploadFormDataSchema.safeParse({
+			file,
+			activeIOS: activeIOSStr,
+			extraProtection: extraProtectionStr,
+		});
 
-		if (!file) {
-			throw new CustomError('No file provided');
+		if (!validationResult.success) {
+			throw new CustomError(validationResult.error.issues[0].message);
 		}
 
-		const validation = uploadSchema.safeParse({ file });
+		const { file: validatedFile, activeIOS, extraProtection } = validationResult.data;
+		const cMios = false; // A cMIOS allows older non-chipped Wii's to play GameCube backup discs
 
-		if (!validation.success) {
-			throw new CustomError(validation.error.issues[0].message);
-		}
-
-		const csvContent = await file.text();
+		const csvContent = await validatedFile.text();
 
 		if (!csvContent.trim()) {
 			throw new CustomError('The CSV file appears to be empty');
@@ -82,10 +68,10 @@ export async function uploadSyscheckFile(formData: FormData): Promise<UploadSysc
 
 		return {
 			success: true,
-			message: `CSV file "${file.name}" uploaded successfully`,
+			message: `CSV file "${validatedFile.name}" uploaded successfully`,
 			data: {
-				filename: file.name,
-				size: file.size,
+				filename: validatedFile.name,
+				size: validatedFile.size,
 				region: systemInfos.region || 'Unknown',
 				hbcVersion: systemInfos.hbcVersion || 'Unknown',
 				systemMenuVersion: systemInfos.systemMenuVersion || 'Unknown',
@@ -108,6 +94,8 @@ function handleSyscheckData(
 	data: string,
 	options: { activeIOS?: boolean; extraProtection?: boolean; cMios?: boolean },
 ) {
+	options.extraProtection = false; // Extra protection is disabled for now
+
 	const region = getConsoleRegion(data);
 	const hbcVersion = getHBCVersion(data);
 	const systemMenuVersion = getSystemMenuVersion(data);

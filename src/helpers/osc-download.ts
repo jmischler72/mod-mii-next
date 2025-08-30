@@ -1,5 +1,4 @@
-import extract from 'extract-zip';
-import { DatabaseEntry } from './database-helper';
+import { DatabaseEntry } from '@/types/database';
 import fs from 'fs';
 
 const OSC_URL = 'https://hbb1.oscwii.org/api/contents/';

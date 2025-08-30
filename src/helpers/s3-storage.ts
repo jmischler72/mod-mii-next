@@ -109,6 +109,32 @@ export function getPublicMinioUrl(s3Key: string): string {
 }
 
 /**
+ * Get file buffer from S3 for direct streaming
+ */
+export async function getFileBufferFromS3(s3Key: string): Promise<Buffer> {
+	const client = getMinioClient();
+
+	const stream = await client.getObject(BUCKET_NAME, s3Key);
+
+	return new Promise((resolve, reject) => {
+		const chunks: Buffer[] = [];
+
+		stream.on('data', (chunk: Buffer) => {
+			chunks.push(chunk);
+		});
+
+		stream.on('end', () => {
+			const buffer = Buffer.concat(chunks);
+			resolve(buffer);
+		});
+
+		stream.on('error', (error: Error) => {
+			reject(error);
+		});
+	});
+}
+
+/**
  * Initialize MinIO bucket (call this on startup)
  */
 export async function initializeS3(): Promise<void> {

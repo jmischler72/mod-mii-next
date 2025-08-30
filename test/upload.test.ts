@@ -12,14 +12,22 @@ describe('CSV Upload Tests', () => {
 		validSyscheckContent = readFileSync(join(__dirname, '..', 'test-syscheck.csv'), 'utf-8');
 	});
 
+	// Helper function to create FormData with default checkbox values
+	const createFormDataWithFile = (file: MockFile | string, activeIOS = 'true', extraProtection = 'true') => {
+		const formData = new MockFormData();
+		formData.append('file', file);
+		formData.append('activeIOS', activeIOS);
+		formData.append('extraProtection', extraProtection);
+		return formData;
+	};
+
 	describe('uploadCsvFile - Basic Functionality', () => {
 		it('should successfully process a valid SysCheck CSV file', async () => {
 			// Create a mock file
 			const mockFile = new MockFile(validSyscheckContent, 'test-syscheck.csv', { type: 'text/csv' });
 
 			// Create mock FormData
-			const formData = new MockFormData();
-			formData.append('file', mockFile);
+			const formData = createFormDataWithFile(mockFile);
 
 			// Test the upload function
 			const result = await uploadSyscheckFile(formData as unknown as FormData);
@@ -35,6 +43,8 @@ describe('CSV Upload Tests', () => {
 
 		it('should handle missing file', async () => {
 			const formData = new MockFormData();
+			formData.append('activeIOS', 'true');
+			formData.append('extraProtection', 'true');
 
 			const result = await uploadSyscheckFile(formData as unknown as FormData);
 
@@ -47,8 +57,7 @@ describe('CSV Upload Tests', () => {
 			const largeContent = 'a'.repeat(5000001);
 			const mockFile = new MockFile(largeContent, 'large-file.csv', { type: 'text/csv' });
 
-			const formData = new MockFormData();
-			formData.append('file', mockFile);
+			const formData = createFormDataWithFile(mockFile);
 
 			const result = await uploadSyscheckFile(formData as unknown as FormData);
 
@@ -59,8 +68,7 @@ describe('CSV Upload Tests', () => {
 		it('should reject empty files', async () => {
 			const mockFile = new MockFile('', 'empty.csv', { type: 'text/csv' });
 
-			const formData = new MockFormData();
-			formData.append('file', mockFile);
+			const formData = createFormDataWithFile(mockFile);
 
 			const result = await uploadSyscheckFile(formData as unknown as FormData);
 
@@ -71,8 +79,7 @@ describe('CSV Upload Tests', () => {
 		it('should reject files with wrong extension', async () => {
 			const mockFile = new MockFile('some content', 'test.txt', { type: 'text/plain' });
 
-			const formData = new MockFormData();
-			formData.append('file', mockFile);
+			const formData = createFormDataWithFile(mockFile);
 
 			const result = await uploadSyscheckFile(formData as unknown as FormData);
 
@@ -85,8 +92,7 @@ describe('CSV Upload Tests', () => {
 		it('should reject invalid SysCheck data', async () => {
 			const mockFile = new MockFile(mockSyscheckData.invalid, 'invalid.csv', { type: 'text/csv' });
 
-			const formData = new MockFormData();
-			formData.append('file', mockFile);
+			const formData = createFormDataWithFile(mockFile);
 
 			const result = await uploadSyscheckFile(formData as unknown as FormData);
 
@@ -97,8 +103,7 @@ describe('CSV Upload Tests', () => {
 		it('should detect PAL region from the test file', async () => {
 			const mockFile = new MockFile(validSyscheckContent, 'test-syscheck.csv', { type: 'text/csv' });
 
-			const formData = new MockFormData();
-			formData.append('file', mockFile);
+			const formData = createFormDataWithFile(mockFile);
 
 			const result = await uploadSyscheckFile(formData as unknown as FormData);
 

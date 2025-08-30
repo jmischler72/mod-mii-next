@@ -1,11 +1,11 @@
-import { DatabaseEntry, getDatabaseEntry } from '@/helpers/database-helper';
+import { getDatabaseEntry, getDatabaseEntryFromWadname } from '@/helpers/database-helper';
 import { buildCios, nusDownload, patchIos } from '@/helpers/wiipy-wrapper';
 import { fileExistsInS3, uploadFileToS3, generateWadS3Key, generatePresignedUrl } from '@/helpers/s3-storage';
 import fs from 'fs';
 import path from 'path';
 import { oscDownload } from './osc-download';
-import { CustomError } from '@/types/custom-error';
 import { createHash } from 'crypto';
+import { DatabaseEntry } from '@/types/database';
 
 // Temporary directory for downloads (will be deleted after S3 upload)
 export const TEMP_DIRECTORY = process.env.TEMP_DIRECTORY || path.join(process.cwd(), 'temp-downloads');
@@ -56,35 +56,32 @@ function cleanupTempFile(filePath: string): void {
  */
 export async function verifyFile(filePath: string, md5: string, md5alt?: string): Promise<void> {
 	if (!md5 && !md5alt) {
-		throw new CustomError(`No MD5 hash provided for file verification: ${filePath}`);
+		throw new Error(`No MD5 hash provided for file verification: ${filePath}`);
 	}
 
 	const fileBuffer = fs.readFileSync(filePath);
+
 	const hash = createHash('md5').update(fileBuffer).digest('hex');
-	if (hash !== md5) {
-		if (md5alt) {
-			console.log('verifying with alternative MD5 hash');
-			const altHash = createHash('md5').update(fileBuffer).digest('hex');
-			if (altHash !== md5alt) {
-				throw new CustomError(`File verification failed for ${filePath}`);
-			}
-		} else {
-			throw new CustomError(`File verification failed for ${filePath}`);
-		}
-	} else {
-		console.log(`MD5 Verification successful for ${filePath} `);
-	}
+	if (hash === md5) return;
+
+	const altHash = createHash('md5').update(fileBuffer).digest('hex');
+	if (altHash === md5alt) return;
+
+	throw new Error(
+		`File verification failed for ${filePath}, expected MD5: ${md5}, got: ${hash}, alternative MD5: ${md5alt}, got: ${altHash}`,
+	);
 }
 
 async function downloadWadFile(entry: DatabaseEntry, outputPath: string) {
 	if (!entry.category && !entry.ciosslot) {
-		throw new CustomError(`Unsupported category for download: ${entry.category}`);
+		throw new Error(`Unsupported category for download: ${entry.category}`);
 	}
 
-	if (entry.ciosslot && !entry.category) {
+	if (entry.category === 'cios' || entry.category === 'd2x') {
 		// this means the wad is a patched ios or cios so we need to build it using base wad
 		const baseWadPath = `/tmp/${entry.basewad}.wad`;
 		await nusDownload(entry, baseWadPath);
+		await verifyFile(baseWadPath, entry.md5base!, entry.md5basealt);
 		await buildCios(entry, outputPath, baseWadPath);
 	} else {
 		switch (entry.category) {
@@ -96,8 +93,12 @@ async function downloadWadFile(entry: DatabaseEntry, outputPath: string) {
 				break;
 			case 'patchios':
 				const baseWadPath = `/tmp/${entry.basewad}.wad`;
-				await nusDownload(entry, baseWadPath);
+				const baseEntry = getDatabaseEntryFromWadname(entry.basewad!);
+				if (!baseEntry) throw new Error(`Base WAD entry not found: ${entry.basewad}`);
+
+				await nusDownload(baseEntry, baseWadPath);
 				await verifyFile(baseWadPath, entry.md5base!, entry.md5basealt);
+
 				await patchIos(entry, outputPath, baseWadPath);
 				break;
 			default:
@@ -105,40 +106,27 @@ async function downloadWadFile(entry: DatabaseEntry, outputPath: string) {
 		}
 	}
 
-	if (entry.md5) {
-		await verifyFile(outputPath, entry.md5, entry.md5alt);
-	} else {
-		console.warn(`No MD5 hash provided for file verification: ${outputPath}`);
-	}
+	if (!entry.md5 && entry.category === 'OSC') return;
+	await verifyFile(outputPath, entry.md5, entry.md5alt);
 }
 
 /**
  * Download a single WAD file with S3-only storage
  */
 export async function handleDownloadWadFile(wadId: string): Promise<DownloadResult> {
-	try {
-		const databaseEntry = getDatabaseEntry(wadId);
+	const databaseEntry = getDatabaseEntry(wadId);
 
-		if (!databaseEntry) {
-			throw new CustomError(`No entry found in database for ${wadId}`);
-		}
-		console.log(`Downloading: ${databaseEntry?.wadname}`);
+	if (!databaseEntry) {
+		throw new Error(`No entry found in database for ${wadId}`);
+	}
+	console.log(`Downloading: ${databaseEntry?.wadname}`);
 
-		const s3Key = generateWadS3Key(databaseEntry.wadname);
+	const s3Key = generateWadS3Key(databaseEntry.wadname);
 
-		// Check if file already exists in S3
-		if (await fileExistsInS3(s3Key)) {
-			const presignedUrl = await generatePresignedUrl(s3Key, 86400); // 24 hours
+	// Check if file already exists in S3
+	const existsInS3 = await fileExistsInS3(s3Key);
 
-			return {
-				success: true,
-				wadname: databaseEntry.wadname,
-				cached: true,
-				s3Key,
-				s3Url: presignedUrl,
-			};
-		}
-
+	if (!existsInS3) {
 		// Download the file to temporary location
 		const tempPath = ensureTempDirectory();
 		const outputPath = path.join(tempPath, databaseEntry.wadname);
@@ -147,7 +135,7 @@ export async function handleDownloadWadFile(wadId: string): Promise<DownloadResu
 
 		// Verify the file was downloaded
 		if (!outputPath || !fs.existsSync(outputPath)) {
-			throw new CustomError(`File was not created after download: ${databaseEntry.wadname}`);
+			throw new Error(`File was not created after download: ${databaseEntry.wadname}`);
 		}
 
 		// Upload to S3
@@ -157,25 +145,17 @@ export async function handleDownloadWadFile(wadId: string): Promise<DownloadResu
 		cleanupTempFile(outputPath);
 
 		console.log(`Successfully uploaded ${databaseEntry.wadname} to S3`);
-
-		const presignedUrl = await generatePresignedUrl(s3Key, 86400);
-
-		return {
-			success: true,
-			wadname: databaseEntry.wadname,
-			cached: false,
-			s3Key,
-			s3Url: presignedUrl,
-		};
-	} catch (error) {
-		console.error(`Failed to download ${wadId}:`);
-		return {
-			success: false,
-			wadname: wadId,
-			cached: false,
-			error: error instanceof Error ? error.message : 'Unknown error',
-		};
 	}
+
+	const presignedUrl = await generatePresignedUrl(s3Key, 86400);
+
+	return {
+		success: true,
+		wadname: databaseEntry.wadname,
+		cached: existsInS3,
+		s3Key,
+		s3Url: presignedUrl,
+	};
 }
 
 /**
@@ -199,7 +179,14 @@ export async function handleDownloadMultipleWads(
 		const batch = wadIds.slice(i, i + maxConcurrent);
 
 		const batchPromises = batch.map(async (wadId) => {
-			return await handleDownloadWadFile(wadId);
+			return await handleDownloadWadFile(wadId).catch((error) => {
+				console.error(`Error downloading ${wadId}: ${error.message}`);
+				return {
+					success: false,
+					wadname: wadId,
+					cached: false,
+				};
+			});
 		});
 
 		const batchResults = await Promise.all(batchPromises);

@@ -43,15 +43,14 @@ export default function About() {
 							>
 								ModMii by XFlak
 							</a>
-							, the comprehensive Windows application that has been the go-to tool for Wii homebrew management since its
-							inception.
+							, the Windows application that has been the go-to tool for Wii homebrew management.
 						</p>
 						<div className='mb-4 rounded-lg border border-gray-600 bg-gray-800 p-4'>
 							<h3 className='mb-2 font-semibold text-white'>What is ModMii?</h3>
 							<p className='text-sm text-gray-400'>
-								ModMii is a powerful Windows application that can softmod any Wii, WiiU, or vWii console. It downloads
-								all necessary files, generates custom guides, updates outdated homebrew, and performs many other Wii
-								hacking functions including USB-loader setup and emulated NAND creation.
+								ModMii is a Windows application that can softmod any Wii, WiiU, or vWii console. It downloads all
+								necessary files, generates custom guides, updates outdated homebrew, and performs many other Wii hacking
+								functions including USB-loader setup and emulated NAND creation.
 							</p>
 						</div>
 						<p className='text-gray-300'>
@@ -67,7 +66,7 @@ export default function About() {
 							<div className='rounded-lg border border-gray-600 bg-gray-800 p-4'>
 								<h3 className='mb-2 font-semibold text-white'>✅ Advantages</h3>
 								<ul className='space-y-1 text-sm text-gray-300'>
-									<li>• Cross-platform compatibility (Windows, Mac, Linux)</li>
+									<li>• Cross-platform compatibility</li>
 									<li>• No installation required</li>
 									<li>• Always up-to-date</li>
 									<li>• Handle download and handling of WAD files</li>
@@ -85,7 +84,7 @@ export default function About() {
 					{/* How it works */}
 					<section className='rounded-lg border border-gray-700 bg-gray-900 p-6 shadow-sm'>
 						<h2 className='mb-4 text-xl font-semibold text-white'>How it works</h2>
-						<div className='grid gap-4 md:grid-cols-3'>
+						<div className='grid gap-4 md:grid-cols-4'>
 							<div className='text-center'>
 								<div className='mx-auto mb-3 flex h-12 w-12 items-center justify-center rounded-full border border-gray-600 bg-gray-700'>
 									<span className='text-lg font-bold text-white'>1</span>
@@ -102,7 +101,15 @@ export default function About() {
 								<h3 className='mb-2 font-semibold text-white'>Analysis</h3>
 								<p className='text-sm text-gray-300'>
 									The server analyzes your console&apos;s configuration and identifies missing or outdated components.
-									It then downloads the necessary WAD files from ModMii sources and stores them in a s3 for easy access.
+								</p>
+							</div>
+							<div className='text-center'>
+								<div className='mx-auto mb-3 flex h-12 w-12 items-center justify-center rounded-full border border-gray-600 bg-gray-700'>
+									<span className='text-lg font-bold text-white'>2</span>
+								</div>
+								<h3 className='mb-2 font-semibold text-white'>WAD &quot;Caching&quot;</h3>
+								<p className='text-sm text-gray-300'>
+									It downloads the necessary WAD files from ModMii sources and stores them in a s3 for easy access.
 								</p>
 							</div>
 							<div className='text-center'>

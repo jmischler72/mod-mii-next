@@ -18,10 +18,6 @@ export class MockFile extends File {
 		}
 		return buffer;
 	}
-
-	async bytes(): Promise<Uint8Array> {
-		return new TextEncoder().encode(this.content);
-	}
 }
 
 export class MockFormData {
