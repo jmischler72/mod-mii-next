@@ -1,7 +1,7 @@
 # syntax=docker.io/docker/dockerfile:1
 FROM ubuntu AS deps
 
-RUN apt-get update && apt-get install -y wget unzip \
+RUN apt-get update && apt-get install -y wget unzip wine \
     && wget https://github.com/modmii/modmii.github.io/releases/download/8.0.4/ModMii.zip \
     && unzip ModMii.zip -d /modmii \
     && rm ModMii.zip \

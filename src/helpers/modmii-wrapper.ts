@@ -3,7 +3,7 @@ import { spawn } from 'child_process';
 
 const MODMII_PATH = process.env.MODMII_PATH || '/modmii';
 
-const modmiiCommand = `${MODMII_PATH}/ModMii.exe`;
+const modmiiCommand = `wine ${MODMII_PATH}/ModMii.exe`;
 
 export async function runCommand(args: string, outputStr?: string, debug: boolean = false): Promise<string> {
 	return new Promise((resolve, reject) => {
