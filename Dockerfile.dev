@@ -1,32 +1,18 @@
 # syntax=docker.io/docker/dockerfile:1
-FROM python:3 AS python-deps
+FROM ubuntu AS deps
 
-RUN apt-get update && apt-get install -y git wget jq
-
-WORKDIR /wiipy
-
-RUN git clone https://github.com/NinjaCheetah/wiipy.git .
-RUN pip install --no-cache-dir -r requirements.txt -t ./pip-packages
-
-WORKDIR /modmii
-
-ENV D2XMODULESDIR=Support/d2xModules
-# Download d2x cIOS files from modmii.github.io
-RUN mkdir -p $D2XMODULESDIR && \
-    cd $D2XMODULESDIR && \
-    for url in $(curl -s https://api.github.com/repos/modmii/modmii.github.io/contents/$D2XMODULESDIR | jq -r '.[] | select(.type=="file") | .download_url'); do \
-      wget $url; \
-    done
+RUN apt-get update && apt-get install -y wget unzip \
+    && wget https://github.com/modmii/modmii.github.io/releases/download/8.0.4/ModMii.zip \
+    && unzip ModMii.zip -d /modmii \
+    && rm ModMii.zip \
+    && chmod +x /modmii/ModMii.exe
 
 FROM node:20-alpine
 
 WORKDIR /app
 
 # Install Python dependencies
-RUN apk add --no-cache python3 py3-pip
-COPY --from=python-deps /wiipy /wiipy
-COPY --from=python-deps /modmii /modmii
-ENV PYTHONPATH=$PYTHONPATH:/wiipy/pip-packages
+COPY --from=deps /modmii /modmii
 
 # Install dependencies based on the preferred package manager
 COPY package.json yarn.lock* package-lock.json* pnpm-lock.yaml* .npmrc* ./
