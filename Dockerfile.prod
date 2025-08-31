@@ -11,17 +11,36 @@ FROM node:20 as base
 
 WORKDIR /app
 
-# Install Wine dependencies
-RUN dpkg --add-architecture i386
 
-RUN echo "deb http://deb.debian.org/debian bookworm main contrib non-free" >> /etc/apt/sources.list && \
-    apt-get update
+# Official WineHQ installation steps for Debian Bookworm
+RUN dpkg --add-architecture i386 \
+    # Add WineHQ repository key
+    && mkdir -pm755 /etc/apt/keyrings \
+    && wget -O - https://dl.winehq.org/wine-builds/winehq.key | gpg --dearmor > /etc/apt/keyrings/winehq-archive.key \
+    # Add WineHQ repository for Bookworm
+    && wget -NP /etc/apt/sources.list.d/ https://dl.winehq.org/wine-builds/debian/dists/bookworm/winehq-bookworm.sources \
+    # Update package info
+    && apt-get update && apt-get upgrade -y \
+    # Install Wine (stable branch) and other dependencies
+    && apt-get install -y --install-recommends \
+        software-properties-common wget gnupg2 apt-transport-https ca-certificates \
+        xvfb xauth x11-utils cabextract \
+        curl git unzip \
+        winehq-stable \
+    && rm -rf /var/lib/apt/lists/*
 
-RUN apt-get install -y --no-install-recommends \
-    software-properties-common wget gnupg2 apt-transport-https ca-certificates \
-    xvfb xauth x11-utils \
-    wine wine32 wine64 winbind cabextract winetricks\
-    curl git unzip
+# # Install Wine dependencies
+# RUN dpkg --add-architecture i386
+
+
+# RUN echo "deb http://deb.debian.org/debian bookworm main contrib non-free" >> /etc/apt/sources.list && \
+#     apt-get update
+
+# RUN apt-get install -y --no-install-recommends \
+#     software-properties-common wget gnupg2 apt-transport-https ca-certificates \
+#     xvfb xauth x11-utils \
+#     wine wine32 wine64 winbind cabextract winetricks\
+#     curl git unzip
 
 # Set wine prefix
 ENV WINEPREFIX=/wine
