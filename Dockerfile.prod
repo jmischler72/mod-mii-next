@@ -83,11 +83,7 @@ COPY --from=builder /app/public ./public
 COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
 COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
 
-# Install Python dependencies
-RUN apk add --no-cache python3 py3-pip
-COPY --from=python-deps /wiipy /wiipy
-COPY --from=python-deps /modmii /modmii
-ENV PYTHONPATH=$PYTHONPATH:/wiipy/pip-packages
+COPY --from=deps /modmii /modmii
 
 USER nextjs
 
