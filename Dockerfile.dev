@@ -7,19 +7,21 @@ RUN apt-get update && apt-get install -y wget unzip \
     && rm ModMii.zip \
     && chmod +x /modmii/ModMii.exe
 
-FROM node:20
+FROM node:20 as base
 
 WORKDIR /app
 
 # Install Wine dependencies
-RUN dpkg --add-architecture i386 && \
-    apt-get update && \
-    apt-get install -y --no-install-recommends \
-        software-properties-common wget gnupg2 apt-transport-https ca-certificates \
-        xvfb xauth x11-utils \
-        wine wine32 wine64 winbind cabextract\
-        curl git unzip && \
-    rm -rf /var/lib/apt/lists/*
+RUN dpkg --add-architecture i386
+
+RUN echo "deb http://deb.debian.org/debian bookworm main contrib non-free" >> /etc/apt/sources.list && \
+    apt-get update
+
+RUN apt-get install -y --no-install-recommends \
+    software-properties-common wget gnupg2 apt-transport-https ca-certificates \
+    xvfb xauth x11-utils \
+    wine wine32 wine64 winbind cabextract winetricks\
+    curl git unzip
 
 # Set wine prefix
 ENV WINEPREFIX=/wine
@@ -27,10 +29,9 @@ ENV WINEDEBUG=-all
 
 RUN wineboot --init 
 
-# Install winetricks manually and Visual C++ Redistributables (2015-2022)
-# RUN wget https://raw.githubusercontent.com/Winetricks/winetricks/master/src/winetricks -O /usr/local/bin/winetricks && \
-#     chmod +x /usr/local/bin/winetricks && \
-#     winetricks -q vcrun2022
+# RUN winetricks --self-update && winetricks -q vcrun2022
+
+FROM base
 
 # Install Python dependencies
 COPY --from=deps /modmii /modmii

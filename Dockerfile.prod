@@ -1,24 +1,35 @@
 # syntax=docker.io/docker/dockerfile:1
-FROM python:3 AS python-deps
+FROM ubuntu AS deps
 
-RUN apt-get update && apt-get install -y git wget jq
+RUN apt-get update && apt-get install -y wget unzip \
+    && wget https://github.com/modmii/modmii.github.io/releases/download/8.0.4/ModMii.zip \
+    && unzip ModMii.zip -d /modmii \
+    && rm ModMii.zip \
+    && chmod +x /modmii/ModMii.exe
 
-WORKDIR /wiipy
+FROM node:20 as base
 
-RUN git clone https://github.com/NinjaCheetah/wiipy.git .
-RUN pip install --no-cache-dir -r requirements.txt -t ./pip-packages
+WORKDIR /app
 
-WORKDIR /modmii
+# Install Wine dependencies
+RUN dpkg --add-architecture i386
 
-ENV D2XMODULESDIR=Support/d2xModules
-# Download d2x cIOS files from modmii.github.io
-RUN mkdir -p $D2XMODULESDIR && \
-    cd $D2XMODULESDIR && \
-    for url in $(curl -s https://api.github.com/repos/modmii/modmii.github.io/contents/$D2XMODULESDIR | jq -r '.[] | select(.type=="file") | .download_url'); do \
-      wget $url; \
-    done
+RUN echo "deb http://deb.debian.org/debian bookworm main contrib non-free" >> /etc/apt/sources.list && \
+    apt-get update
 
-FROM node:20-alpine AS base
+RUN apt-get install -y --no-install-recommends \
+    software-properties-common wget gnupg2 apt-transport-https ca-certificates \
+    xvfb xauth x11-utils \
+    wine wine32 wine64 winbind cabextract winetricks\
+    curl git unzip
+
+# Set wine prefix
+ENV WINEPREFIX=/wine
+ENV WINEDEBUG=-all
+
+RUN wineboot --init 
+
+# RUN winetricks --self-update && winetricks -q vcrun2022
 
 # Install dependencies only when needed
 FROM base AS deps
