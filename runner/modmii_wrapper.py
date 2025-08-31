@@ -3,7 +3,7 @@ import subprocess
 
 MODMII_PATH = os.environ.get('MODMII_PATH', '/modmii')
 MODMII_COMMAND = os.path.join(MODMII_PATH, 'Support', 'ModMii.bat')
-WINE_SHELL = 'wine-arm64'
+WINE_SHELL = 'wine'
 KILL_WINE = 'wineserver -k'
 
 
