@@ -1,6 +1,6 @@
 'use client';
 
-import { testModMii } from '@/actions/test-modmii';
+// import { testModMii } from '@/actions/test-modmii';
 import React, { useState } from 'react';
 
 export default function TestConsole() {
@@ -14,9 +14,15 @@ export default function TestConsole() {
 		setOutput('');
 		setError('');
 		try {
-			const data = await testModMii();
-			setOutput(data.output || 'No output');
-			setError(data.err || 'No error');
+			const response = await fetch('/api/test-console', {
+				method: 'POST',
+				headers: { 'Content-Type': 'application/json' },
+				body: JSON.stringify({ exe: 'wine', args: ['/modmii/Support/ModMii.bat', '-h'] }),
+			});
+			const data = await response.json();
+			setOutput(data.stdout || 'No output');
+			setError(data.stderr || 'No error');
+			if (data.error) setOutput(data.error);
 		} catch (err) {
 			setOutput('Error running test');
 			setError('');

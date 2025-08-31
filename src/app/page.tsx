@@ -6,7 +6,6 @@ import { UploadSyscheckData, UploadSyscheckResult } from '@/types/upload-syschec
 import { Button } from '@/components/ui/button';
 import { Archive, Info } from 'lucide-react';
 import Link from 'next/link';
-import { testModMii } from '@/actions/test-modmii';
 
 export default function Home() {
 	const [uploadMessage, setUploadMessage] = useState<string>('');
@@ -23,11 +22,6 @@ export default function Home() {
 		setUploadMessage(`Error: ${error}`);
 		setUploadData(null);
 		console.error('Upload error:', error);
-	};
-
-	const handleTestButtonClick = async () => {
-		console.log('Test button clicked');
-		await testModMii();
 	};
 
 	const handleDownloadArchive = async () => {
@@ -120,12 +114,7 @@ ${summary.failedFiles.map((file: string) => `• ${file}`).join('\n')}`;
 							<br /> This tool will analyze your console &apos;s configuration and provide you with a ZIP file
 							containing all the necessary WAD files for your system.
 						</p>
-						<button
-							onClick={handleTestButtonClick}
-							className='mb-4 rounded bg-blue-600 px-4 py-2 text-white hover:bg-blue-700'
-						>
-							test
-						</button>
+
 						<SyscheckFileUploadForm
 							onUploadSuccess={handleUploadSuccess}
 							onUploadError={handleUploadError}

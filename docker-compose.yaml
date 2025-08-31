@@ -8,12 +8,29 @@ services:
       dockerfile: Dockerfile.dev
     env_file:
       - .env
+    environment:
+      - WINDOWS_IP=runner
     volumes:
       - ./src:/app/src
       - ./public:/app/public
     restart: always
     ports:
       - 3000:3000
+    networks:
+      - mod-mii-next-network
+
+  runner:
+    container_name: modmii-runner
+    build:
+      context: .
+      dockerfile: Dockerfile.runner
+    env_file:
+      - .env
+    volumes:
+      - ./runner:/runner
+    restart: always
+    ports:
+      - 4000:4000
     networks:
       - mod-mii-next-network
 

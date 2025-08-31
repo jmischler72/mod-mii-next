@@ -1,0 +1,28 @@
+FROM linaro/wine-arm64
+
+# Install Node.js (example for Node 20.x)
+RUN apt-get update && \
+	apt-get install -y curl && \
+	curl -fsSL https://deb.nodesource.com/setup_20.x | bash - && \
+	apt-get install -y nodejs
+
+# Create app directory
+WORKDIR /runner
+
+RUN apt-get update && apt-get install -y wget unzip \
+    && wget https://github.com/modmii/modmii.github.io/releases/download/8.0.4/ModMii.zip \
+    && unzip ModMii.zip -d ./modmii \
+    && rm ModMii.zip \
+    && chmod +x ./modmii/ModMii.exe
+
+# Copy runner files
+COPY runner/package.json runner/executor.js ./
+
+# Install dependencies
+RUN npm install
+
+# Expose port
+EXPOSE 4000
+
+# Start the executor API
+CMD ["node", "executor.js"]

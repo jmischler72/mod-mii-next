@@ -1,46 +1,8 @@
 # syntax=docker.io/docker/dockerfile:1
-FROM ubuntu AS deps
-
-RUN apt-get update && apt-get install -y wget unzip \
-    && wget https://github.com/modmii/modmii.github.io/releases/download/8.0.4/ModMii.zip \
-    && unzip ModMii.zip -d /modmii \
-    && rm ModMii.zip \
-    && chmod +x /modmii/ModMii.exe
-
-FROM node:20 as base
+FROM node:20-alpine
 
 WORKDIR /app
 
-
-# Official WineHQ installation steps for Debian Bookworm
-RUN dpkg --add-architecture i386 \
-    # Add WineHQ repository key
-    && mkdir -pm755 /etc/apt/keyrings \
-    && wget -O - https://dl.winehq.org/wine-builds/winehq.key | gpg --dearmor > /etc/apt/keyrings/winehq-archive.key \
-    # Add WineHQ repository for Bookworm
-    && wget -NP /etc/apt/sources.list.d/ https://dl.winehq.org/wine-builds/debian/dists/bookworm/winehq-bookworm.sources \
-    # Update package info
-    && apt-get update && apt-get upgrade -y \
-    # Install Wine (stable branch) and other dependencies
-    && apt-get install -y --install-recommends \
-        software-properties-common wget gnupg2 apt-transport-https ca-certificates \
-        xvfb xauth x11-utils cabextract \
-        curl git unzip \
-        winehq-stable \
-    && rm -rf /var/lib/apt/lists/*
-
-# Set wine prefix
-ENV WINEPREFIX=/wine
-ENV WINEDEBUG=-all
-
-RUN wineboot --init 
-
-# RUN winetricks --self-update && winetricks -q vcrun2022
-
-FROM base
-
-# Install Python dependencies
-COPY --from=deps /modmii /modmii
 
 # Install dependencies based on the preferred package manager
 COPY package.json yarn.lock* package-lock.json* pnpm-lock.yaml* .npmrc* ./
