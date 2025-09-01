@@ -1,3 +1,5 @@
+# Try running modmii with wine
+# Got errors with the temp folder and validation of Windows/Visual C++ components
 
 FROM debian:bookworm
 

@@ -1,0 +1,41 @@
+name: Run Python Script on Windows SSH Runner
+
+on:
+  workflow_dispatch:
+
+jobs:
+  run-on-windows-ssh:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Run commands on Windows runner via SSH
+        uses: appleboy/ssh-action@v0.1.10
+        with:
+          host: ${{ secrets.WINDOWS_HOST }}
+          username: ${{ secrets.WINDOWS_USER }}
+          password: ${{ secrets.WINDOWS_PASSWORD }}
+          port: 22
+          script: |
+            cd C:\Users\${{ secrets.WINDOWS_USER }}
+            if not exist mod-mii-next (
+              git clone https://github.com/jmischler72/mod-mii-next.git
+            )
+            cd mod-mii-next\runner
+
+            powershell -Command "Invoke-WebRequest -Uri https://github.com/modmii/modmii.github.io/releases/download/8.0.4/ModMii.zip -OutFile ModMii.zip"
+            powershell -Command "Expand-Archive -Path ModMii.zip -DestinationPath ./modmii"
+            del ModMii.zip
+
+            # Create .env file for Flask from secret
+            echo ${{ secrets.WINDOWS_ENV }} > .env
+
+            if not exist python.exe (
+              powershell -Command "Invoke-WebRequest -Uri https://www.python.org/ftp/python/3.11.8/python-3.11.8-amd64.exe -OutFile python-installer.exe"
+              powershell -Command "Start-Process python-installer.exe -ArgumentList '/quiet InstallAllUsers=1 PrependPath=1' -Wait"
+            )
+            python -m ensurepip --upgrade
+            python -m pip install --upgrade pip
+            python -m pip install -r requirements.txt
+            python main.py

@@ -9,15 +9,15 @@ def ping():
 
 @app.route('/modmii', methods=['POST'])
 def modmii():
+    secret = os.environ.get('WINDOWS_SECRET')
+    if request.headers.get('Authorization') != f'Bearer {secret}':
+        return jsonify({'error': 'Unauthorized'}), 401
     data = request.get_json(force=True)
     args = data.get('args', '')
     output_str = data.get('outputStr')
     debug = data.get('debug', False)
-    try:
-        result = run_command_with_output(args, output_str, debug)
-        return jsonify({"result": result})
-    except Exception as e:
-        return jsonify({"error": str(e)}), 500
+    result = run_command_with_output(args, output_str, debug)
+    return jsonify(result)
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=4000)
