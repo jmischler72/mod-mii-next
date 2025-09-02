@@ -1,7 +1,6 @@
 import os
 import subprocess
-import sys
-import tempfile
+import signal
 import threading
 import time
 import re
@@ -89,16 +88,6 @@ def _run_with_streaming(proc, caller_id, auto_responses=None, prompt_timeout=5, 
     
     response_index = 0  # For sequential responses
     
-    # Common prompt patterns
-    common_prompts = {
-        r'\(Y/N\)': 'Y',
-        r'\(y/n\)': 'y',
-        r'Press any key': '\n',
-        r'Continue\?': 'Y',
-        r'Proceed\?': 'Y',
-        r'Would you like to.*\?': 'Y'
-    }
-    
     # Create queues for stdout and stderr
     output_queue = Queue()
     
@@ -129,16 +118,15 @@ def _run_with_streaming(proc, caller_id, auto_responses=None, prompt_timeout=5, 
             last_output_time = time.time()
             
             # Display the line in real-time (if streaming is enabled)
-            if stream_name == 'stdout':
-                if stream_output:
+            if stream_output:
+                if stream_name == 'stdout':
                     print(f"[OUT] {line}")
-                all_stdout.append(line)
-                recent_output.append(line)
-            elif stream_name == 'stderr':
-                if stream_output:
+                    all_stdout.append(line)
+                    recent_output.append(line)
+                elif stream_name == 'stderr':
                     print(f"[ERR] {line}")
-                all_stderr.append(line)
-                recent_output.append(line)
+                    all_stderr.append(line)
+                    recent_output.append(line)
             
             # Keep only recent output for prompt detection (last 5 lines)
             if len(recent_output) > 5:
@@ -167,6 +155,16 @@ def _run_with_streaming(proc, caller_id, auto_responses=None, prompt_timeout=5, 
                         print(f"[PROMPT] Using sequential response #{response_index}: '{response}'")
                         response_index += 1
                         break
+
+                # Common prompt patterns
+                common_prompts = {
+                    r'\(Y/N\)': 'Y',
+                    r'\(y/n\)': 'y',
+                    r'Press any key': '\n',
+                    r'Continue\?': 'Y',
+                    r'Proceed\?': 'Y',
+                    r'Would you like to.*\?': 'Y'
+                }
                 
                 # Check common prompts if no user response found
                 if response is None:
@@ -179,8 +177,12 @@ def _run_with_streaming(proc, caller_id, auto_responses=None, prompt_timeout=5, 
                 # Send response if found
                 if response is not None:
                     try:
-                        proc.stdin.write(response + '\n')
-                        proc.stdin.flush()
+                        if response == 'STOP':
+                            proc.send_signal(signal.CTRL_C_EVENT)
+                            break
+                        else:
+                            proc.stdin.write(response + '\n')
+                            proc.stdin.flush()
                         last_output_time = time.time()  # Reset timeout
                         recent_output.append(f"[INPUT] {response}")
                     except Exception as e:
@@ -212,32 +214,5 @@ def _run_with_streaming(proc, caller_id, auto_responses=None, prompt_timeout=5, 
         'stderr': '\n'.join(all_stderr),
         'returncode': proc.returncode
     }
-
-def syscheck_updater(csv_str: str, stream_output=False, prompt_timeout=5):
-    """
-    Run the SysCheck Updater with the specified CSV file.
-    
-    Args:
-        csv_str: CSV content as string for SysCheck Updater
-        stream_output: If True, display output in real-time as it's generated
-        auto_responses: Dict mapping prompt patterns to responses, or list of responses to give in order
-        prompt_timeout: Seconds to wait for new output before considering it a prompt
-        
-    Returns:
-        Dictionary with success, stdout, stderr, and returncode
-    """
-
-    with tempfile.NamedTemporaryFile('w', delete=False, suffix='.csv', encoding='utf-8') as tmpfile:
-        tmpfile.write(csv_str)
-        tmp_csv_path = tmpfile.name
-
-    syscheck_responses = {
-        r'Would you like to install.*Priiloader.*\(Y/N\)': 'Y',
-        r'Press any key to continue': '\n',
-        r'\(Y/N\)': 'N',  # Default response for Y/N prompts
-    }
-
-    return run_modmii_command(['SU', tmp_csv_path], stream_output=stream_output, 
-                                  auto_responses=syscheck_responses, prompt_timeout=prompt_timeout)
 
 

@@ -1,4 +1,4 @@
-from modmii_wrapper import  syscheck_updater
+from syscheck import  syscheck_updater, get_syscheck_list
 
 
 if __name__ == '__main__':
@@ -12,18 +12,28 @@ if __name__ == '__main__':
     
     
     try:
-        with open('./tmp/default-syscheck.csv', 'r', encoding='utf-8') as f:
+        with open('../test/files/default-syscheck.csv', 'r', encoding='utf-8') as f:
             syscheck_content = f.read()
         
         print("Running SysCheck Updater with auto-responses enabled...")
-        result = syscheck_updater(
+        # result = syscheck_updater(
+        #     syscheck_content, 
+        #     stream_output=True, 
+        #     prompt_timeout=3
+        # )
+
+        result = get_syscheck_list(
             syscheck_content, 
             stream_output=True, 
             prompt_timeout=3
         )
         
-        print(f"\nResult: Success={result['success']}, ReturnCode={result['returncode']}")
-        print(f"Output lines: {len(result['stdout'].split('\n')) if result['stdout'] else 0}")
+        print(result)
+
+
+        
+        # print(f"\nResult: Success={result['success']}, ReturnCode={result['returncode']}")
+        # print(f"Output lines: {len(result['stdout'].split('\n')) if result['stdout'] else 0}")
         
     except FileNotFoundError:
         print("Syscheck file not found, skipping this test")
