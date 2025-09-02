@@ -11,13 +11,17 @@ set MODMII_VERSION=8.0.4
 REM Download and extract ModMii if not already present or version mismatch
 set DOWNLOAD_NEEDED=0
 if not exist "modmii" (
+    echo ModMii not found, download needed.
     set DOWNLOAD_NEEDED=1
 ) else (
     if not exist "modmii\VERSION.txt" (
         set DOWNLOAD_NEEDED=1
-    ) else (
+        echo VERSION.txt not found, download needed.
+    ) else (  
         set /p CURRENT_VERSION=<modmii\VERSION.txt
-        if not "!CURRENT_VERSION!"=="%MODMII_VERSION%" (
+        echo Current ModMii version: !CURRENT_VERSION!
+    if not "!CURRENT_VERSION!"=="%MODMII_VERSION%" (
+            echo Version mismatch, download needed.
             set DOWNLOAD_NEEDED=1
         )
     )
@@ -30,7 +34,7 @@ if %DOWNLOAD_NEEDED%==1 (
     if exist "modmii" rmdir /s /q "modmii"
     powershell -Command "Expand-Archive -Path 'ModMii.zip' -DestinationPath './modmii'"
     del ModMii.zip
-    echo %MODMII_VERSION% > modmii\VERSION.txt
+    powershell -Command "Set-Content -NoNewline -Path 'modmii\\VERSION.txt' -Value '%MODMII_VERSION%'"
     echo ModMii extracted successfully
 ) else (
     echo ModMii already exists with correct version, skipping download
@@ -50,5 +54,5 @@ python -m pip install -r requirements.txt
 
 echo Setup complete. Starting Flask app in production mode...
 
-REM Run Flask app with Gunicorn for production
-gunicorn --bind 0.0.0.0:4000 --workers 4 --worker-class sync --timeout 120 main:app
+REM Run Flask app with Waitress for production
+waitress-serve --listen=0.0.0.0:4000 main:app

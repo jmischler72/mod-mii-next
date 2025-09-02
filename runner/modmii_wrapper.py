@@ -1,7 +1,7 @@
 import os
 import subprocess
 
-MODMII_COMMAND = os.path.join('./modmii', 'Support', 'ModMii.bat')
+MODMII_COMMAND = os.path.join('./modmii/ModMii.exe')
 
 def run_command_with_output(args, output_str=None, debug=False):
     # print(f'Running command: {MODMII_COMMAND} {args}')
@@ -20,10 +20,6 @@ def run_command_with_output(args, output_str=None, debug=False):
                 'stdout': f'[{caller_id}] Command timed out after 60 seconds',
                 'stderr': f'[{caller_id}] Command timed out after 60 seconds'
             }
-        if 'Hit any key to use ModMii anyway' in stdout:
-            proc.stdin.write('\n')
-            if debug:
-                print(f'[{caller_id}] Sent newline to continue ModMii execution.')
         return {
             'success': proc.returncode == 0,
             'stdout': stdout,
@@ -31,6 +27,7 @@ def run_command_with_output(args, output_str=None, debug=False):
             'returncode': proc.returncode
         }
     except Exception as e:
+        print(f'[{caller_id}] Error occurred: {e}')
         return {
             'success': False,
             'stdout': '',
