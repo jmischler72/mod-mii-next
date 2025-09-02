@@ -1,3 +1,4 @@
+import os
 from flask import Flask, request, jsonify
 from modmii_wrapper import run_command_with_output
 

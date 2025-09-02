@@ -21,21 +21,15 @@ jobs:
             cd C:\Users\${{ secrets.WINDOWS_USER }}
             if not exist mod-mii-next (
               git clone https://github.com/jmischler72/mod-mii-next.git
+            ) else (
+              cd mod-mii-next
+              git pull origin main
+              cd ..
             )
             cd mod-mii-next\runner
-
-            powershell -Command "Invoke-WebRequest -Uri https://github.com/modmii/modmii.github.io/releases/download/8.0.4/ModMii.zip -OutFile ModMii.zip"
-            powershell -Command "Expand-Archive -Path ModMii.zip -DestinationPath ./modmii"
-            del ModMii.zip
 
             # Create .env file for Flask from secret
             echo ${{ secrets.WINDOWS_ENV }} > .env
 
-            if not exist python.exe (
-              powershell -Command "Invoke-WebRequest -Uri https://www.python.org/ftp/python/3.11.8/python-3.11.8-amd64.exe -OutFile python-installer.exe"
-              powershell -Command "Start-Process python-installer.exe -ArgumentList '/quiet InstallAllUsers=1 PrependPath=1' -Wait"
-            )
-            python -m ensurepip --upgrade
-            python -m pip install --upgrade pip
-            python -m pip install -r requirements.txt
-            python main.py
+            # Run the entrypoint batch script
+            entrypoint.bat
