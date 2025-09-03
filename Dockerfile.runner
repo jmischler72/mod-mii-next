@@ -9,7 +9,7 @@ RUN dpkg --add-architecture arm64 && \
     apt-get install -y python3 python3-pip python3-venv wget unzip 
 
 # Install Xvfb for virtual display
-RUN apt-get install -y xvfb
+RUN apt-get install -y xvfb cabextract
 
 # Set environment variable for X11 display
 ENV DISPLAY=:99
@@ -26,6 +26,10 @@ RUN wget https://github.com/modmii/modmii.github.io/releases/download/8.0.4/ModM
     && rm ModMii.zip \
     && chmod +x ./modmii/ModMii.exe
 
+RUN wget https://raw.githubusercontent.com/Winetricks/winetricks/master/src/winetricks -O /usr/local/bin/winetricks \
+    && chmod +x /usr/local/bin/winetricks \
+    && winetricks -q vcrun2022 win10
+
 # Create app directory
 WORKDIR /runner
 
@@ -36,8 +40,10 @@ COPY runner/main.py runner/modmii_wrapper.py runner/requirements.txt ./
 RUN python3 -m venv /venv \
     && /venv/bin/pip install --no-cache-dir -r requirements.txt
 
+ENV WINEDEBUG=-all
+
 # Expose port
 EXPOSE 4000
 
 # Start Xvfb and then the API using the venv Python
-CMD Xvfb :99 -screen 0 1024x768x16 & /venv/bin/python main.py
+CMD  /venv/bin/python main.py
