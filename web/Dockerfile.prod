@@ -1,24 +1,5 @@
 # syntax=docker.io/docker/dockerfile:1
-FROM python:3 AS python-deps
-
-RUN apt-get update && apt-get install -y git wget jq
-
-WORKDIR /wiipy
-
-RUN git clone https://github.com/NinjaCheetah/wiipy.git .
-RUN pip install --no-cache-dir -r requirements.txt -t ./pip-packages
-
-WORKDIR /modmii
-
-ENV D2XMODULESDIR=Support/d2xModules
-# Download d2x cIOS files from modmii.github.io
-RUN mkdir -p $D2XMODULESDIR && \
-    cd $D2XMODULESDIR && \
-    for url in $(curl -s https://api.github.com/repos/modmii/modmii.github.io/contents/$D2XMODULESDIR | jq -r '.[] | select(.type=="file") | .download_url'); do \
-      wget $url; \
-    done
-
-FROM node:20-alpine AS base
+FROM node:20-alpine as base
 
 # Install dependencies only when needed
 FROM base AS deps
@@ -71,12 +52,6 @@ COPY --from=builder /app/public ./public
 # https://nextjs.org/docs/advanced-features/output-file-tracing
 COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
 COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
-
-# Install Python dependencies
-RUN apk add --no-cache python3 py3-pip
-COPY --from=python-deps /wiipy /wiipy
-COPY --from=python-deps /modmii /modmii
-ENV PYTHONPATH=$PYTHONPATH:/wiipy/pip-packages
 
 USER nextjs
 

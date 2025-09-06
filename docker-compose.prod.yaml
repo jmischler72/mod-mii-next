@@ -4,13 +4,11 @@ services:
   next-app:
     container_name: next-app
     build:
-      context: .
+      context: web
       dockerfile: Dockerfile.prod
-    env_file:
-      - .env
     volumes:
       - temp_data:/mod-mii-next/.temp-downloads
-      - ./public:/mod-mii-next/public
+      - ./web/public:/mod-mii-next/public
     restart: always
     networks:
       - mod-mii-next-network
@@ -18,8 +16,6 @@ services:
   minio:
     image: minio/minio:latest
     container_name: wii-homebrew-minio
-    env_file:
-      - .env
     volumes:
       - minio_data:/data
     command: server /data --console-address ":9001"
@@ -35,8 +31,6 @@ services:
       - minio
     networks:
       - mod-mii-next-network
-    env_file:
-      - .env
     entrypoint: >
       /bin/sh -c "
       sleep 10;

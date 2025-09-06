@@ -37,6 +37,11 @@ export function Navbar() {
 								About
 							</Button>
 						</Link>
+						<Link href='/test-console'>
+							<Button variant='ghost' className='text-white hover:bg-gray-800 hover:text-white'>
+								Test Console
+							</Button>
+						</Link>
 					</div>
 				</div>
 			</div>

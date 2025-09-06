@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "WATCHPACK_POLLING=true next dev",
+    "dev": "WATCHPACK=1 next dev",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",

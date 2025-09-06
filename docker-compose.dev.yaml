@@ -4,13 +4,13 @@ services:
   next-app:
     container_name: next-app
     build:
-      context: .
+      context: web
       dockerfile: Dockerfile.dev
     env_file:
-      - .env
+      - ./web/.env
     volumes:
-      - ./src:/app/src
-      - ./public:/app/public
+      - ./web/src:/app/src
+      - ./web/public:/app/public
     restart: always
     ports:
       - 3000:3000
@@ -25,8 +25,10 @@ services:
     ports:
       - "9000:9000" # MinIO API
       - "9001:9001" # MinIO Console
-    env_file:
-      - .env
+    environment:
+      - MINIO_ENDPOINT=minio
+      - MINIO_ROOT_USER=admin
+      - MINIO_ROOT_PASSWORD=password123
     volumes:
       - minio_data:/data
     command: server /data --console-address ":9001"
@@ -42,8 +44,10 @@ services:
       - minio
     networks:
       - mod-mii-next-network
-    env_file:
-      - .env
+    environment:
+      - MINIO_ENDPOINT=minio
+      - MINIO_ROOT_USER=admin
+      - MINIO_ROOT_PASSWORD=password123
     entrypoint: >
       /bin/sh -c "
       sleep 10;

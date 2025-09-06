@@ -114,6 +114,7 @@ ${summary.failedFiles.map((file: string) => `• ${file}`).join('\n')}`;
 							<br /> This tool will analyze your console &apos;s configuration and provide you with a ZIP file
 							containing all the necessary WAD files for your system.
 						</p>
+
 						<SyscheckFileUploadForm
 							onUploadSuccess={handleUploadSuccess}
 							onUploadError={handleUploadError}
