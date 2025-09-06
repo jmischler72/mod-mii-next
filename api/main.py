@@ -7,17 +7,26 @@ import zipfile
 # Add the libModMii directory to Python path if needed
 from libModMii.download import download_entry
 from libModMii.syscheck import analyse_syscheck_data
-from libModMii.download import get_database_entry
+from libModMii.download import get_database_entry, get_all_entries
 
 from s3_helpers import file_exists_in_s3, download_file_from_s3, upload_file_to_s3, generate_wad_s3_key
-
-
 
 app = Flask(__name__)
 
 @app.route('/ping', methods=['GET'])
 def ping():
     return jsonify({"message": "pong"})
+
+@app.route('/get_entries', methods=['GET'])
+def get_entries():
+    """
+    Retrieve the list of available database entries.
+    """
+    try:
+        entries = get_all_entries()
+        return jsonify({"entries": entries})
+    except Exception as e:
+        return jsonify({"error": f"Failed to retrieve entries: {str(e)}"}), 500
 
 @app.route('/download_entries', methods=['POST'])
 def download_entries_route():
