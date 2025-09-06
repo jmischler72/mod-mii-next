@@ -56,6 +56,18 @@ services:
       exit 0;
       "
     restart: "no"
+  api:
+    container_name: mod-mii-api-dev
+    build:
+      context: api
+      dockerfile: Dockerfile.dev
+    volumes:
+      - ./api:/app
+    ports:
+      - "4000:4000"
+    restart: always
+    networks:
+      - mod-mii-next-network
 
 # Define a network, which allows containers to communicate
 # with each other, by using their container name as a hostname

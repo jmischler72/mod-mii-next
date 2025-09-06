@@ -38,6 +38,16 @@ services:
       /usr/bin/mc mb myminio/$S3_BUCKET_NAME;
       exit 0;
       "
+  api:
+    container_name: mod-mii-api
+    build:
+      context: api
+      dockerfile: Dockerfile.prod
+    ports:
+      - "5000:5000"
+    restart: always
+    networks:
+      - mod-mii-next-network
     restart: "no"
 
 # Define a network, which allows containers to communicate

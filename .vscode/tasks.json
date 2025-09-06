@@ -1,0 +1,14 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"label": "Run Docker Compose (dev)",
+			"type": "shell",
+			"command": "docker-compose -f docker-compose.dev.yaml up --build",
+			"args": [],
+			"isBackground": true,
+			"problemMatcher": [],
+			"group": "build"
+		}
+	]
+}
