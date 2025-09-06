@@ -1,3 +1,4 @@
 flask
-waitress
+gunicorn
 python-dotenv
+git+https://github.com/jmischler72/libModMii
