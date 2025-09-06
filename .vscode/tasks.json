@@ -13,7 +13,7 @@
 		{
 			"label": "Run Flask API (dev)",
 			"type": "shell",
-			"command": "cd api && python3 -m venv .venv && .venv/bin/pip install -r requirements.txt && source .venv/bin/activate && FLASK_APP=main.py flask run --host=0.0.0.0 --port=4000",
+			"command": "source .venv/bin/activate && cd api && pip install -r requirements.txt && FLASK_APP=main.py flask run --host=0.0.0.0 --port=4000",
 			"args": [],
 			"isBackground": true,
 			"problemMatcher": [],
