@@ -3,6 +3,7 @@ from flask import Flask, request, jsonify, send_file
 import os
 import tempfile
 import zipfile
+from flask_cors import CORS
 
 # Add the libModMii directory to Python path if needed
 from libModMii.download import download_entry
@@ -12,6 +13,7 @@ from libModMii.download import get_database_entry, get_all_entries
 from s3_helpers import file_exists_in_s3, download_file_from_s3, upload_file_to_s3, generate_wad_s3_key
 
 app = Flask(__name__)
+CORS(app)
 
 @app.route('/ping', methods=['GET'])
 def ping():
@@ -121,7 +123,7 @@ def get_syscheck_infos():
             cMios=c_mios
         )
         
-        return jsonify({"analysis": result})
+        return jsonify({"data": result})
         
     except Exception as e:
         return jsonify({"error": f"Analysis failed: {str(e)}"}), 500

@@ -1,18 +1,6 @@
 version: "3.8"
 
 services:
-  next-app:
-    container_name: next-app
-    build:
-      context: web
-      dockerfile: Dockerfile.prod
-    volumes:
-      - temp_data:/mod-mii-next/.temp-downloads
-      - ./web/public:/mod-mii-next/public
-    restart: always
-    networks:
-      - mod-mii-next-network
-
   minio:
     image: minio/minio:latest
     container_name: wii-homebrew-minio

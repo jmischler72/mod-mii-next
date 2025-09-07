@@ -24,77 +24,6 @@ export default function Home() {
 		console.error('Upload error:', error);
 	};
 
-	const handleDownloadArchive = async () => {
-		if (!uploadData?.wadsInfos) {
-			setUploadMessage('No files available for archive');
-			return;
-		}
-
-		console.log('Creating archive with files:', uploadData.wadsInfos);
-		setIsCreatingArchive(true);
-		try {
-			const response = await fetch('/api/wads/create-archive', {
-				method: 'POST',
-				headers: {
-					'Content-Type': 'application/json',
-				},
-				body: JSON.stringify({
-					wadnames: uploadData.wadsInfos.filter((file) => file.wadname !== undefined).map((file) => file.wadId),
-				}),
-			});
-
-			if (!response.ok) {
-				const errorData = await response.json();
-				throw new Error(errorData.error || 'Failed to create archive');
-			}
-
-			// Extract download summary from response headers
-			const downloadSummaryHeader = response.headers.get('X-Download-Summary');
-			let summaryMessage = 'Archive downloaded successfully!';
-
-			if (downloadSummaryHeader) {
-				try {
-					const summary = JSON.parse(downloadSummaryHeader);
-					const totalFiles = summary.totalRequested;
-
-					summaryMessage = `✅ Archive downloaded successfully!
-
-📊 Download Summary:
-• Total files requested: ${totalFiles}
-• Downloaded: ${summary.downloaded} files
-• Downloaded from S3: ${summary.cached} files
-• Failed: ${summary.failed} files`;
-
-					if (summary.failedFiles && summary.failedFiles.length > 0) {
-						summaryMessage += `
-
-❌ Failed files:
-${summary.failedFiles.map((file: string) => `• ${file}`).join('\n')}`;
-					}
-				} catch (error) {
-					console.error('Failed to parse download summary:', error);
-				}
-			}
-
-			const blob = await response.blob();
-			const url = window.URL.createObjectURL(blob);
-			const a = document.createElement('a');
-			a.href = url;
-			a.download = 'wad-files.zip';
-			document.body.appendChild(a);
-			a.click();
-			window.URL.revokeObjectURL(url);
-			document.body.removeChild(a);
-
-			setUploadMessage(summaryMessage);
-		} catch (error) {
-			console.error('Archive error:', error);
-			setUploadMessage(`Error creating archive: ${error}`);
-		} finally {
-			setIsCreatingArchive(false);
-		}
-	};
-
 	return (
 		<div className='my-auto flex h-full items-center justify-center p-4 font-sans sm:p-6'>
 			<main className='w-full max-w-4xl'>
@@ -212,11 +141,11 @@ ${summary.failedFiles.map((file: string) => `• ${file}`).join('\n')}`;
 							</div>
 
 							{/* WAD Files */}
-							{uploadData.wadsInfos && uploadData.wadsInfos.length > 0 && (
+							{uploadData.wadToInstall && uploadData.wadToInstall.length > 0 && (
 								<div className='rounded-lg bg-purple-50 p-3'>
 									<div className='mb-2 flex items-center justify-between'>
 										<h3 className='text-sm font-semibold text-purple-900'>
-											Required WAD Files ({uploadData.wadsInfos.length})
+											Required WAD Files ({uploadData.wadToInstall.length})
 										</h3>
 										<Button
 											onClick={handleDownloadArchive}
@@ -230,10 +159,10 @@ ${summary.failedFiles.map((file: string) => `• ${file}`).join('\n')}`;
 										</Button>
 									</div>
 									<div className='max-h-32 space-y-1 overflow-y-auto'>
-										{uploadData.wadsInfos.map((file, index) => (
+										{uploadData.wadToInstall.map((file, index) => (
 											<div key={index} className='flex items-center justify-between rounded bg-white p-2 shadow-sm'>
-												<span className='font-mono text-xs text-gray-700'>{file.wadname}</span>
-												<span className='text-xs text-gray-500'>{file.wadId}</span>
+												{/* <span className='font-mono text-xs text-gray-700'>{file.wadname}</span> */}
+												{/* <span className='text-xs text-gray-500'>{file.wadId}</span> */}
 											</div>
 										))}
 									</div>

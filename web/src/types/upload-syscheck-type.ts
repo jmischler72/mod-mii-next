@@ -30,10 +30,7 @@ export interface UploadSyscheckData {
 		outdatedD2XCios: string[];
 		needsExtraProtection: string[];
 	};
-	wadsInfos: {
-		wadname: string;
-		wadId: string;
-	}[];
+	wadToInstall:string[];
 }
 
 export interface UploadSyscheckResult {

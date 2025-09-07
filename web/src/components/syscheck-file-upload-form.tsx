@@ -10,7 +10,6 @@ import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, For
 import { Input } from '@/components/ui/input';
 import { Checkbox } from '@/components/ui/checkbox';
 import { cn } from '@/lib/utils';
-import { uploadSyscheckFile } from '@/actions/upload-syscheck-file';
 import { UploadSyscheckResult } from '@/types/upload-syscheck-type';
 import { uploadFormSchema, type UploadFormValues, MAX_FILE_SIZE } from '@/schemas/upload-schema';
 
@@ -35,33 +34,42 @@ export function SyscheckFileUploadForm({ onSubmit, onUploadSuccess, onUploadErro
 		},
 	});
 
+	const FLASK_API_URL = process.env.NEXT_PUBLIC_FLASK_API_URL || 'http://localhost:4000';
 	const handleFormSubmit = async (data: UploadFormValues) => {
 		if (onSubmit) {
 			onSubmit(data);
 			return;
 		}
 
-		// Default behavior: use server action
 		setIsUploading(true);
-
 		try {
-			const formData = new FormData();
-			formData.append('file', data.file);
-			formData.append('activeIOS', data.activeIOS.toString());
-			formData.append('extraProtection', data.extraProtection.toString());
+			const fileContent = await data.file.text();
+			const payload = {
+				syscheck_data: fileContent,
+				activeIOS: data.activeIOS,
+				extraProtection: data.extraProtection,
+				cMios: false,
+			};
 
-			const result = await uploadSyscheckFile(formData);
+			const response = await fetch(`${FLASK_API_URL}/get_syscheck_infos`, {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json',
+				},
+				body: JSON.stringify(payload),
+			});
 
-			if (result.success) {
-				onUploadSuccess?.(result);
-			} else {
-				onUploadError?.(result.error || 'Upload failed');
+			if (!response.ok) {
+				const errorData = await response.json();
+				onUploadError?.(errorData.error || 'Upload failed');
+				return;
 			}
+			const result = await response.json();
+			onUploadSuccess?.(result);
 		} catch (error) {
 			console.error('Upload error:', error);
 			onUploadError?.('An unexpected error occurred');
 		} finally {
-			// Reset form after upload attempt (success or error)
 			setSelectedFile(null);
 			form.resetField('file');
 			const fileInput = document.getElementById('file-input') as HTMLInputElement;
