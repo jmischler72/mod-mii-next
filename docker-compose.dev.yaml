@@ -61,8 +61,10 @@ services:
     build:
       context: api
       dockerfile: Dockerfile.dev
+    command: /bin/sh -c "pip install -e /app/libModMii && flask run --host=0.0.0.0 --debug --port=4000"
     volumes:
       - ./api:/app
+      - /Users/utilisateur/Documents/personal-projects/libModMii:/app/libModMii
     ports:
       - "4000:4000"
     restart: always

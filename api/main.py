@@ -7,10 +7,13 @@ from flask_cors import CORS
 
 # Add the libModMii directory to Python path if needed
 from libModMii.download import download_entry
-from libModMii.syscheck import analyse_syscheck_data
+from libModMii.syscheck import get_syscheck_infos, get_syscheck_analysis
 from libModMii.download import get_database_entry, get_all_entries
 
 from s3_helpers import file_exists_in_s3, download_file_from_s3, upload_file_to_s3, generate_wad_s3_key
+
+import logging
+logging.basicConfig(level=logging.DEBUG)
 
 app = Flask(__name__)
 CORS(app)
@@ -109,6 +112,11 @@ def get_syscheck_infos():
         data = request.json
         if not data or 'syscheck_data' not in data:
             return jsonify({"error": "Invalid request. Expected 'syscheck_data' field."}), 400
+        
+        # Check if syscheck_data looks like CSV
+        syscheck_data = data['syscheck_data']
+        if not isinstance(syscheck_data, str) or ',' not in syscheck_data or '\n' not in syscheck_data:
+            return jsonify({"error": "Provided syscheck_data does not appear to be valid CSV."}), 400
 
         syscheck_data = data['syscheck_data']
         active_ios = data.get('activeIOS', False)
@@ -116,14 +124,16 @@ def get_syscheck_infos():
         c_mios = data.get('cMios', False)
 
         # Analyze the syscheck data
-        result = analyse_syscheck_data(
-            syscheck_data,
-            activeIOS=active_ios,
-            extraProtection=extra_protection,
-            cMios=c_mios
-        )
-        
-        return jsonify({"data": result})
+        infos = get_syscheck_infos()
+        analysis = get_syscheck_analysis(syscheck_data, activeIOS=active_ios, extraProtection=extra_protection)
+        wads = []
+
+        for value in analysis:
+            wad = get_database_entry(value)
+            wads.append({"wadId": value, "wadName": wad.wadname})
+
+        app.logger.info(f"SysCheck analysis completed successfully.")
+        return jsonify({"infos": infos, "wadToInstall": wads})
         
     except Exception as e:
         return jsonify({"error": f"Analysis failed: {str(e)}"}), 500
