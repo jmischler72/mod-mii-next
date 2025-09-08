@@ -1,5 +1,5 @@
 import { getDatabaseEntry, getDatabaseEntryFromWadname } from '@/helpers/database-helper';
-import { buildCios, nusDownload, patchIos } from '@/helpers/wiipy-wrapper';
+import { buildD2xCios, nusDownload, patchIos } from '@/helpers/wiipy-wrapper';
 import { fileExistsInS3, uploadFileToS3, generateWadS3Key, generatePresignedUrl } from '@/helpers/s3-storage';
 import fs from 'fs';
 import path from 'path';
@@ -77,33 +77,21 @@ async function downloadWadFile(entry: DatabaseEntry, outputPath: string) {
 		throw new Error(`Unsupported category for download: ${entry.category}`);
 	}
 
-	if (entry.category === 'cios' || entry.category === 'd2x') {
-		// this means the wad is a patched ios or cios so we need to build it using base wad
-		const baseWadPath = `/tmp/${entry.basewad}.wad`;
-		await nusDownload(entry, baseWadPath);
-		await verifyFile(baseWadPath, entry.md5base!, entry.md5basealt);
-		await buildCios(entry, outputPath, baseWadPath);
-	} else {
-		switch (entry.category) {
-			case 'ios':
-				await nusDownload(entry, outputPath);
-				break;
-			case 'OSC':
-				await oscDownload(entry, outputPath);
-				break;
-			case 'patchios':
-				const baseWadPath = `/tmp/${entry.basewad}.wad`;
-				const baseEntry = getDatabaseEntryFromWadname(entry.basewad!);
-				if (!baseEntry) throw new Error(`Base WAD entry not found: ${entry.basewad}`);
-
-				await nusDownload(baseEntry, baseWadPath);
-				await verifyFile(baseWadPath, entry.md5base!, entry.md5basealt);
-
-				await patchIos(entry, outputPath, baseWadPath);
-				break;
-			default:
-				break;
-		}
+	switch (entry.category) {
+		case 'ios':
+			await nusDownload(entry, outputPath);
+			break;
+		case 'OSC':
+			await oscDownload(entry, outputPath);
+			break;
+		case 'd2x':
+			await buildD2xCios(entry, outputPath);
+			break;
+		case 'patchios':
+			await patchIos(entry, outputPath);
+			break;
+		default:
+			break;
 	}
 
 	if (!entry.md5 && entry.category === 'OSC') return;
