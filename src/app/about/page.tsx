@@ -53,11 +53,6 @@ export default function About() {
 								functions including USB-loader setup and emulated NAND creation.
 							</p>
 						</div>
-						<p className='text-gray-300'>
-							While ModMii is an incredibly comprehensive desktop application, this web-based tool focuses specifically
-							on the syscheck analysis and WAD file provision functionality, making it accessible from any device with a
-							web browser.
-						</p>
 					</section>
 					{/* Key differences and advantages */}
 					<section className='rounded-lg border border-gray-700 bg-gray-900 p-6 shadow-sm'>
@@ -123,13 +118,163 @@ export default function About() {
 							</div>
 						</div>
 					</section>
-					{/* Credits and links */}
-					{/* Credits and links */}
+					{/* Credits, Supporting Apps, and Sources */}
 					<section className='rounded-lg border border-gray-700 bg-gray-900 p-6 shadow-sm'>
-						<h2 className='mb-4 text-xl font-semibold text-white'>Credits & Links</h2>
-						<div className='space-y-4'>
+						<h2 className='mb-6 text-xl font-semibold text-white'>Credits, Supporting Apps, and Sources</h2>
+						
+						{/* Introduction */}
+						<div className='mb-6 rounded-lg border border-gray-600 bg-gray-800 p-4'>
+							<p className='mb-2 text-sm text-gray-300'>
+								ModMii was written entirely by <strong>XFlak</strong>. Trust me, no one else is crazy enough to try to maintain a batch file that has grown so large and 'all over the place'. But without the help of many other very talented people ModMii would not exist. Some people have contributed supporting files or programs, others have shared their knowledge, some have provided ideas and others have given their time.
+							</p>
+							<p className='text-sm text-gray-400'>
+								The following credits are from the original ModMii project and acknowledge all the incredible contributors who made ModMii possible.
+							</p>
+						</div>
+
+						<div className='space-y-6'>
+							{/* Team Twiizers */}
 							<div>
-								<h3 className='mb-2 font-semibold text-gray-200'>Original ModMii Project</h3>
+								<h3 className='mb-3 text-lg font-semibold text-gray-200'>Team Twiizers</h3>
+								<div className='rounded-lg border border-gray-600 bg-gray-800 p-4'>
+									<p className='mb-2 text-sm text-gray-300'>
+										Thanks to Team Twiizers for creating the revolutionary HackMii Installer. Without their hard work, the Wii might never have been unlocked. Many Team Twiizer Members went on to join Team Fail Overflow; a team that played a vital role in unlocking the PS3.
+									</p>
+									<p className='text-sm text-gray-400'>
+										Special thanks to <strong>Bushing</strong> (may he rest in peace), who before his untimely passing gave ModMii his blessing to download and use the HackMii Installer.
+									</p>
+								</div>
+							</div>
+
+							{/* Key Contributors */}
+							<div>
+								<h3 className='mb-3 text-lg font-semibold text-gray-200'>Key Contributors</h3>
+								<div className='space-y-4'>
+									{/* Giantpune */}
+									<div className='rounded-lg border border-gray-600 bg-gray-800 p-4'>
+										<h4 className='mb-2 font-semibold text-white'>Giantpune</h4>
+										<p className='text-sm text-gray-300'>
+											A legend in the Wii Scene who created many exploits, including the Smash Stack exploit for PAL and KOR Wii's, the Channel Forwarder dol, USB Loader GX, and many other programs. He explained cIOS details when ModMii was still known as NUS Auto Downloader.
+										</p>
+									</div>
+
+									{/* DeadlyFoez */}
+									<div className='rounded-lg border border-gray-600 bg-gray-800 p-4'>
+										<h4 className='mb-2 font-semibold text-white'>DeadlyFoez</h4>
+										<p className='text-sm text-gray-300'>
+											Legendary for his Wii Repairs and infectus tutorial. Played a key role in ModMii v5.0.0 update by helping create HTML guides, recording videos and images, and building the first official ModMii website.
+										</p>
+									</div>
+
+									{/* Crediar, Daco Taco and Phpgeek */}
+									<div className='rounded-lg border border-gray-600 bg-gray-800 p-4'>
+										<h4 className='mb-2 font-semibold text-white'>Crediar, Daco Taco and Phpgeek</h4>
+										<p className='text-sm text-gray-300'>
+											Created Priiloader, the revolutionary tool that offered protection to newer Wii's unable to install Bootmii at boot2. Special thanks to Daco Taco for actively maintaining Priiloader and developing OpenDolBoot.
+										</p>
+									</div>
+
+									{/* NinjaCheetah */}
+									<div className='rounded-lg border border-gray-600 bg-gray-800 p-4'>
+										<h4 className='mb-2 font-semibold text-white'>NinjaCheetah</h4>
+										<p className='text-sm text-gray-300'>
+											Thanks for his work on libWiiPy, WiiPy, NUSGet and more! Always very open to feedback and feature requests.
+										</p>
+									</div>
+
+									{/* Waninkoko */}
+									<div className='rounded-lg border border-gray-600 bg-gray-800 p-4'>
+										<h4 className='mb-2 font-semibold text-white'>Waninkoko</h4>
+										<p className='text-sm text-gray-300'>
+											The first to publicly release a cIOS and creator of WAD manager, Save Game Manager, USB loader, etc. Gave ModMii permission to recreate his cIOSs in WAD form.
+										</p>
+									</div>
+
+									{/* d2x cIOS Team */}
+									<div className='rounded-lg border border-gray-600 bg-gray-800 p-4'>
+										<h4 className='mb-2 font-semibold text-white'>d2x cIOS Team (davebaol, blackb0x, XFlak, xabby)</h4>
+										<p className='text-sm text-gray-300'>
+											These developers worked together to modify Waninkoko's rev21 cIOS and created the "d2x" cIOS, currently considered the ultimate cIOS for its bug fixes and new features like IOS Reloading support.
+										</p>
+									</div>
+								</div>
+							</div>
+
+							{/* USB Loader Teams */}
+							<div>
+								<h3 className='mb-3 text-lg font-semibold text-gray-200'>USB Loader Development Teams</h3>
+								<div className='grid gap-4 md:grid-cols-2'>
+									<div className='rounded-lg border border-gray-600 bg-gray-800 p-4'>
+										<h4 className='mb-2 font-semibold text-white'>USBLoaderGX Team</h4>
+										<p className='text-sm text-gray-300'>Cyan, dimok, blackb0x and team for one of the most feature-rich USB loaders.</p>
+									</div>
+									<div className='rounded-lg border border-gray-600 bg-gray-800 p-4'>
+										<h4 className='mb-2 font-semibold text-white'>WiiFlow Team</h4>
+										<p className='text-sm text-gray-300'>Hibernatus, Fledge68 and team for the beautiful WiiFlow loader.</p>
+									</div>
+									<div className='rounded-lg border border-gray-600 bg-gray-800 p-4'>
+										<h4 className='mb-2 font-semibold text-white'>Configurable USB Loader</h4>
+										<p className='text-sm text-gray-300'>oggzee, usptactical, gannon and Dr.Clipper for always being first with new features.</p>
+									</div>
+									<div className='rounded-lg border border-gray-600 bg-gray-800 p-4'>
+										<h4 className='mb-2 font-semibold text-white'>YAWM ModMii Edition</h4>
+										<p className='text-sm text-gray-300'>OverjoY, blackb0x, Peter0x44, scooby74029 and thepikachugamer for bringing XFlak's vision to life.</p>
+									</div>
+								</div>
+							</div>
+
+							{/* Special Recognition */}
+							<div>
+								<h3 className='mb-3 text-lg font-semibold text-gray-200'>Special Recognition</h3>
+								<div className='space-y-3'>
+									<div className='rounded-lg border border-gray-600 bg-gray-800 p-3'>
+										<p className='text-sm text-gray-300'>
+											<strong>ModMii's Translators:</strong> French (mamule, xav91, ketufe), Dutch (Hielkenator), Italian (Wasabi, Step, Robilyn), Spanish (ledebene, Burton), Korean (DDinghoya)
+										</p>
+									</div>
+									<div className='rounded-lg border border-gray-600 bg-gray-800 p-3'>
+										<p className='text-sm text-gray-300'>
+											<strong>Beta Testers:</strong> scooby74029, DeadlyFoez, redia, Etheboss, JoostinOnline, person66, brausm08, geovalley, undeadsquirrel, mauifrog, FIX94, wolf, Larsenv, Peter0x44, Alexander1970, Cyan, and many others who ensured ModMii's stability.
+										</p>
+									</div>
+									<div className='rounded-lg border border-gray-600 bg-gray-800 p-3'>
+										<p className='text-sm text-gray-300'>
+											<strong>Content Creators:</strong> Gabubu, sthetix, Foxlet, Alexander1970, Vila, Aep for YouTube videos; WiiShizzza and pepxl for ModMii icons; RobGee789, M3RK, AuroraNemoia for graphics and themes.
+										</p>
+									</div>
+								</div>
+							</div>
+
+							{/* Supporting Apps */}
+							<div>
+								<h3 className='mb-3 text-lg font-semibold text-gray-200'>Supporting Apps & Tools</h3>
+								<div className='rounded-lg border border-gray-600 bg-gray-800 p-4'>
+									<p className='mb-3 text-sm text-gray-300'>
+										ModMii bundles and utilizes numerous supporting applications:
+									</p>
+									<div className='grid gap-2 text-xs text-gray-400 md:grid-cols-3'>
+										<div>• WiiPy</div>
+										<div>• wget</div>
+										<div>• 7za</div>
+										<div>• nircmd</div>
+										<div>• sfk</div>
+										<div>• jptch</div>
+										<div>• hexalter</div>
+										<div>• Waninkoko's cIOS</div>
+										<div>• Hermes v4/v5 cIOS</div>
+										<div>• d2x cIOS</div>
+										<div>• Swiss cMIOS</div>
+										<div>• NandLoaders</div>
+									</div>
+									<p className='mt-3 text-xs text-gray-500'>
+										Full source code and supporting files are available in ModMii's GitHub repository.
+									</p>
+								</div>
+							</div>
+
+							{/* Original ModMii Project Links */}
+							<div>
+								<h3 className='mb-3 text-lg font-semibold text-gray-200'>Original ModMii Project</h3>
 								<div className='flex flex-wrap gap-2'>
 									<a
 										href='https://modmii.github.io/'
@@ -150,13 +295,14 @@ export default function About() {
 										ModMii GitHub
 									</a>
 								</div>
-								<p className='mt-2 text-sm text-gray-400'>
-									Special thanks to XFlak and all ModMii contributors for their incredible work in the Wii homebrew
-									community.
+								<p className='mt-3 text-sm text-gray-400'>
+									ModMii is entirely free to use and ad-free. This passion project has taken over 9,000-10,000 hours of development time and represents the incredible dedication of XFlak and the entire Wii homebrew community.
 								</p>
 							</div>
+
+							{/* This Project */}
 							<div>
-								<h3 className='mb-2 font-semibold text-gray-200'>This Project</h3>
+								<h3 className='mb-3 text-lg font-semibold text-gray-200'>This Project (ModMiiNext)</h3>
 								<div className='flex flex-wrap gap-2'>
 									<a
 										href='https://github.com/jmischler72/mod-mii-next'
@@ -168,8 +314,8 @@ export default function About() {
 										Source Code
 									</a>
 								</div>
-								<p className='mt-2 text-sm text-gray-400'>
-									Built with Next.js, TypeScript, and Tailwind CSS. Open source and available on GitHub.
+								<p className='mt-3 text-sm text-gray-400'>
+									Built with Next.js, TypeScript, and Tailwind CSS. This web-based tool focuses on syscheck analysis and WAD file provision, making ModMii's functionality accessible from any device with a web browser. Open source and available on GitHub.
 								</p>
 							</div>
 						</div>
