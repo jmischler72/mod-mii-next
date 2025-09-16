@@ -26,6 +26,16 @@ export function Navbar() {
 								Home
 							</Button>
 						</Link>
+						<Link href='/syscheck'>
+							<Button variant='ghost' className='text-white hover:bg-gray-800 hover:text-white'>
+								Syscheck
+							</Button>
+						</Link>
+						<Link href='/usb-loader'>
+							<Button variant='ghost' className='text-white hover:bg-gray-800 hover:text-white'>
+								USB Loader
+							</Button>
+						</Link>
 						<Link href='/browse'>
 							<Button variant='ghost' className='text-white hover:bg-gray-800 hover:text-white'>
 								Browse Database
