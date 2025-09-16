@@ -345,152 +345,155 @@ ${summary.failedFiles.map((file: string) => `• ${file}`).join('\n')}`;
 													Install Guide
 												</Button>
 											</DialogTrigger>
-											<DialogContent className='max-h-[90vh] max-w-4xl overflow-y-auto'>
+											<DialogContent className='max-h-[90vh] max-w-5xl overflow-y-auto'>
 												<DialogHeader>
 													<DialogTitle className='flex items-center gap-2'>
 														<Upload className='h-5 w-5 text-green-400' />
-														How to Install WAD Files on Your Wii
+														Install WADs - Complete Guide
 													</DialogTitle>
 													<DialogDescription>
-														Follow these steps to safely install the downloaded WAD files on your Wii console.
+														Official ModMii guide for installing WAD files using YAWM ModMii Edition
 													</DialogDescription>
 												</DialogHeader>
 
 												<div className='space-y-6 text-gray-300'>
+													{/* Video and Introduction */}
+													<div className='text-center'>
+														<div className='mb-4 flex justify-center'>
+															<iframe
+																width='480'
+																height='270'
+																src='https://www.youtube-nocookie.com/embed/eTODLzI_Hsk?rel=0'
+																title='YAWM ModMii Edition Tutorial'
+																frameBorder='0'
+																allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture'
+																allowFullScreen
+																className='rounded-lg'
+															></iframe>
+														</div>
+														<p className='text-sm italic text-gray-400'>
+															<strong>YAWM ModMii Edition</strong> stands for Yet Another Wad Manager ModMii Edition (aka yawmME). 
+															A WAD Manager will allow you to install "WADs" containing things like updates and other content 
+															for your console, like IOSs, custom IOSs (or cIOSs), or other downloadable content, which can 
+															be all packed into WADs and installed to your console. Think of a WAD like a zip file but for the Wii.
+														</p>
+													</div>
+
+													{/* Critical Warnings */}
 													<div className='rounded-lg border border-red-700 bg-red-900/30 p-4'>
-														<h4 className='mb-2 font-medium text-red-200'>⚠️ Important Safety Notice:</h4>
+														<h4 className='mb-3 font-medium text-red-200'>⚠️ CRITICAL WARNINGS:</h4>
 														<ul className='ml-4 list-inside list-disc space-y-1 text-sm text-red-100'>
-															<li>Installing WAD files can brick your Wii if done incorrectly</li>
-															<li>Always install BootMii and Priiloader before installing WADs</li>
-															<li>Never install WADs from untrusted sources</li>
-															<li>Make sure the WADs match your console region</li>
+															<li><strong>Do not unplug the console when installing WADs</strong></li>
+															<li>WADs can be <u>uninstalled</u>, and if you're not careful you can brick your console by uninstalling or even installing the wrong WAD</li>
+															<li>YAWM ModMii Edition has extra brick protection built in to restrict catastrophic actions like uninstalling System Menu WADs or required System Menu IOS</li>
+															<li><strong>Stick to your ModMii guide and you'll be fine</strong></li>
 														</ul>
 													</div>
 
-													<div>
-														<h3 className='mb-3 text-lg font-medium text-white'>Prerequisites</h3>
-														<ul className='ml-4 list-inside list-disc space-y-2'>
-															<li>A modded Wii with Homebrew Channel installed</li>
-															<li>
-																BootMii installed (as boot2 or IOS) -{' '}
-																<strong className='text-red-400'>CRITICAL for recovery</strong>
-															</li>
-															<li>
-																Priiloader installed - <strong className='text-yellow-400'>Highly recommended</strong>
-															</li>
-															<li>A WAD manager (YAWMM, Wii Mod Lite, or similar)</li>
-															<li>SD card or USB drive</li>
-															<li>The downloaded ZIP file from this tool</li>
-														</ul>
-													</div>
-
-													<div>
-														<h3 className='mb-3 text-lg font-medium text-white'>Installation Steps</h3>
-														<ol className='ml-4 list-inside list-decimal space-y-3'>
-															<li>
-																<strong className='text-white'>Download and Install a WAD Manager:</strong>
-																<ul className='mt-2 ml-6 list-inside list-disc space-y-1'>
-																	<li>
-																		Download{' '}
-																		<Link
-																			href='https://github.com/Naim2000/YAWM-ModMii-Edition/releases'
-																			className='text-blue-400 underline hover:text-blue-300'
-																		>
-																			YAWMM (Yet Another Wad Manager ModMii Edition)
-																		</Link>{' '}
-																		- Recommended
-																	</li>
-																	<li>
-																		Extract and copy the app folder to your SD card's{' '}
-																		<code className='rounded bg-gray-800 px-2 py-1'>apps</code> directory
-																	</li>
-																</ul>
-															</li>
-
-															<li>
-																<strong className='text-white'>Prepare the WAD Files:</strong>
-																<ul className='mt-2 ml-6 list-inside list-disc space-y-1'>
-																	<li>Extract the downloaded ZIP file from this tool</li>
-																	<li>
-																		Create a folder called <code className='rounded bg-gray-800 px-2 py-1'>wad</code> in
-																		the root of your SD card
-																	</li>
-																	<li>
-																		Copy all the .wad files to the{' '}
-																		<code className='rounded bg-gray-800 px-2 py-1'>wad</code> folder on your SD card
-																	</li>
-																	<li>
-																		Structure should be:{' '}
-																		<code className='rounded bg-gray-800 px-2 py-1'>SD:/wad/filename.wad</code>
-																	</li>
-																</ul>
-															</li>
-
-															<li>
-																<strong className='text-white'>Create a NAND Backup (CRITICAL):</strong>
-																<ul className='mt-2 ml-6 list-inside list-disc space-y-1'>
-																	<li>Launch BootMii from the Homebrew Channel</li>
-																	<li>Create a full NAND backup to your SD card</li>
-																	<li>This backup can restore your Wii if something goes wrong</li>
-																	<li>
-																		<strong className='text-red-400'>Do NOT skip this step!</strong>
-																	</li>
-																</ul>
-															</li>
-
-															<li>
-																<strong className='text-white'>Install WADs Using YAWMM:</strong>
-																<ul className='mt-2 ml-6 list-inside list-disc space-y-1'>
-																	<li>Insert your SD card into the Wii</li>
-																	<li>Launch the Homebrew Channel</li>
-																	<li>Launch YAWMM (Yet Another Wad Manager ModMii Edition)</li>
-																	<li>
-																		Navigate to the <code className='rounded bg-gray-800 px-2 py-1'>wad</code> folder
-																	</li>
-																	<li>Select the WAD files you want to install (use + button to select multiple)</li>
-																	<li>Press A to install selected WADs</li>
-																	<li>Wait for installation to complete</li>
-																</ul>
-															</li>
-
-															<li>
-																<strong className='text-white'>Post-Installation:</strong>
-																<ul className='mt-2 ml-6 list-inside list-disc space-y-1'>
-																	<li>Restart your Wii</li>
-																	<li>Check that the System Menu boots properly</li>
-																	<li>Verify that new channels appear if you installed any</li>
-																	<li>Test the Homebrew Channel still works</li>
-																</ul>
-															</li>
-														</ol>
-													</div>
-
-													<div className='rounded-lg border border-orange-700 bg-orange-900/30 p-4'>
-														<h4 className='mb-2 font-medium text-orange-200'>🔧 Installation Order Recommendations:</h4>
-														<ol className='ml-4 list-inside list-decimal space-y-1 text-sm text-orange-100'>
-															<li>Install IOS files first (IOS58, IOS60, etc.)</li>
-															<li>Install cIOS files (d2x-cios)</li>
-															<li>Install System Menu updates last (if any)</li>
-															<li>Install channels and other WADs afterward</li>
-														</ol>
-													</div>
-
-													<div className='rounded-lg border border-yellow-700 bg-yellow-900/30 p-4'>
-														<h4 className='mb-2 font-medium text-yellow-200'>🚨 If Something Goes Wrong:</h4>
-														<ul className='ml-4 list-inside list-disc space-y-1 text-sm text-yellow-100'>
-															<li>If Wii won't boot: Hold RESET while powering on to access Priiloader</li>
-															<li>If Priiloader is installed: Use "Load/Install File" to reinstall System Menu</li>
-															<li>If BootMii is installed as boot2: Restore NAND backup using BootMii</li>
-															<li>
-																Visit{' '}
+													{/* IOS/cIOS Information */}
+													<div className='rounded-lg border border-blue-700 bg-blue-900/30 p-4'>
+														<h4 className='mb-2 font-medium text-blue-200'>💡 What are IOSs and cIOSs?</h4>
+														<div className='text-sm text-blue-100'>
+															<p className='mb-2 italic'>
+																"The Wii console uses the 'IOS' system to communicate with the hardware, it's like a driver 
+																(compared to Windows). It contains information and communication tools (like how to access 
+																the Disc drive, how to access USB, read the savegames data stored on internal memory, etc.)" ~Cyan
+															</p>
+															<p>
+																If you're curious to learn more about IOSs or cIOSs, a thorough explanation can be found in{' '}
 																<Link
-																	href='https://wii.hacks.guide/bricks'
+																	href='https://gbatemp.net/threads/d2xl-cios-a-fork-of-davebaols-d2x-cios.558581/#post-8968173'
 																	className='text-blue-300 underline hover:text-blue-200'
+																	target='_blank'
 																>
-																	wii.hacks.guide/bricks
-																</Link>{' '}
-																for brick recovery guides
+																	Cyan's IOS Explanation post
+																</Link>
+															</p>
+														</div>
+													</div>
+
+													{/* Installation Steps */}
+													<div>
+														<h3 className='mb-4 text-lg font-medium text-white'>Installation Steps</h3>
+														<ol className='ml-4 space-y-4 text-sm' style={{listStyleType: 'upper-alpha'}}>
+															<li>
+																<strong className='text-white'>On your console, load "YAWM ModMii Edition" from the HomeBrew Channel</strong>
 															</li>
+															
+															<li>
+																<strong className='text-white'>Choose your source device using left and right, most likely "Wii SD Slot", and Press <kbd className='rounded bg-gray-800 px-1'>A</kbd></strong>
+															</li>
+
+															<li>
+																<div className='mb-2'>
+																	<strong className='text-white'>Install your custom list of WADs found in the list below</strong>
+																</div>
+																<ul className='ml-4 list-inside list-disc space-y-1 text-gray-300'>
+																	<li>Be careful not to install any additional WADs that may have been previously saved in this folder (they may be safe, but cannot be guaranteed)</li>
+																</ul>
+															</li>
+
+															<li>
+																<div className='mb-2'>
+																	<strong className='text-white'>Hold <kbd className='rounded bg-gray-800 px-1'>+</kbd> for 2 seconds</strong> to select all the WADs in the folder
+																</div>
+																<ul className='ml-4 list-inside list-disc space-y-1 text-gray-300'>
+																	<li>Alternatively, you can select or deselect your WADs individually by navigating to each one and hitting <kbd className='rounded bg-gray-800 px-1'>+</kbd></li>
+																	<li><strong className='text-red-300'>Warning:</strong> do <u>not</u> use minus (-) as this will mark WADs for <u>uninstallation</u></li>
+																</ul>
+															</li>
+
+															<li>
+																<strong className='text-white'>After you've marked all the WADs listed below, press <kbd className='rounded bg-gray-800 px-1'>A</kbd> on any marked WAD to install them all</strong>
+															</li>
+
+															<li>
+																<div className='mb-2'>
+																	<strong className='text-white'>Confirm the total number selected for installation matches your WAD count, then press <kbd className='rounded bg-gray-800 px-1'>A</kbd> again to install</strong>
+																</div>
+																<ul className='ml-4 list-inside list-disc space-y-1 text-gray-300'>
+																	<li>If any WADs fail to install properly please retry installing them</li>
+																	<li>If asked whether to retain or remove Priiloader, <strong>press <kbd className='rounded bg-gray-800 px-1'>A</kbd> to retain Priiloader</strong></li>
+																	<li>If you get error -1029 when attempting to install Mii-Channel-NUS-v6, carefully uninstall <u>only</u> this WAD using the minus <kbd className='rounded bg-gray-800 px-1'>-</kbd> button instead of <kbd className='rounded bg-gray-800 px-1'>+</kbd> before trying to install it again. Do NOT uninstall any other WADs unless you know what you are doing</li>
+																</ul>
+															</li>
+
+															<li>
+																<strong className='text-white'>After successfully installing all the WADs, press any button to continue, then press the <kbd className='rounded bg-gray-800 px-1'>Home</kbd> button on your Wiimote to exit YAWM ModMii Edition</strong>
+															</li>
+														</ol>
+													</div>
+
+													{/* Prerequisites */}
+													<div className='rounded-lg border border-yellow-700 bg-yellow-900/30 p-4'>
+														<h4 className='mb-2 font-medium text-yellow-200'>📋 Before You Begin:</h4>
+														<ul className='ml-4 list-inside list-disc space-y-1 text-sm text-yellow-100'>
+															<li>Ensure you have YAWM ModMii Edition installed in your Homebrew Channel</li>
+															<li>Copy the downloaded WAD files to your SD card (recommended in a dedicated 'wad' folder)</li>
+															<li>Have your Wii powered on and ready</li>
+															<li>Make sure you have the correct WADs for your region</li>
+														</ul>
+													</div>
+
+													{/* Recovery Information */}
+													<div className='rounded-lg border border-red-700 bg-red-900/30 p-4'>
+														<h4 className='mb-2 font-medium text-red-200'>🚨 Recovery Options:</h4>
+														<ul className='ml-4 list-inside list-disc space-y-1 text-sm text-red-100'>
+															<li><strong>BootMii:</strong> Can restore NAND backups if installed as boot2</li>
+															<li><strong>Priiloader:</strong> Hold RESET while powering on to access recovery menu</li>
+															<li><strong>Brick Recovery:</strong> Visit <Link href='https://wii.hacks.guide/bricks' className='text-blue-300 underline' target='_blank'>wii.hacks.guide/bricks</Link> for detailed recovery guides</li>
+														</ul>
+													</div>
+
+													{/* Installation Tips */}
+													<div className='rounded-lg border border-green-700 bg-green-900/30 p-4'>
+														<h4 className='mb-2 font-medium text-green-200'>💡 Pro Tips:</h4>
+														<ul className='ml-4 list-inside list-disc space-y-1 text-sm text-green-100'>
+															<li>Install IOS files before cIOS files for best compatibility</li>
+															<li>Take your time - rushing can lead to mistakes</li>
+															<li>Double-check the WAD count before confirming installation</li>
+															<li>Keep your SD card organized with a dedicated 'wad' folder</li>
+															<li>Test your system after installation to ensure everything works</li>
 														</ul>
 													</div>
 												</div>

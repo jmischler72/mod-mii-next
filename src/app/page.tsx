@@ -12,7 +12,7 @@ export default function Home() {
 						ModMii<span className='text-blue-400'>Next</span>
 					</h1>
 					<p className='mx-auto max-w-2xl text-lg text-gray-300'>
-						The next generation of ModMii tools. Modernize your Wii console with essential homebrew applications, system
+						The next generation of ModMii. Modernize your Wii console with essential homebrew applications, system
 						updates, and USB loaders.
 					</p>
 				</div>
@@ -91,7 +91,7 @@ export default function Home() {
 						<div>
 							<h4 className='mb-2 font-semibold text-white'>Prerequisites</h4>
 							<ul className='space-y-1 text-sm text-gray-300'>
-								<li>• Wii console with homebrew capability</li>
+								<li>• Wii console (obviously)</li>
 								<li>• SD card (2GB or smaller recommended)</li>
 								<li>• USB storage device (for loaders)</li>
 								<li>• Computer with internet access</li>
