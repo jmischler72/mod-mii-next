@@ -12,8 +12,7 @@ import {
 	DialogTitle,
 	DialogTrigger,
 } from '@/components/ui/dialog';
-
-
+import { useRouter } from 'next/navigation';
 
 export default function USBLoaderPage() {
 	const [selectedLoader, setSelectedLoader] = useState<USBLoader | null>(null);
@@ -22,6 +21,7 @@ export default function USBLoaderPage() {
 	const [downloadMessage, setDownloadMessage] = useState<string>('');
 	const [isSetupGuideOpen, setIsSetupGuideOpen] = useState<boolean>(false);
 
+	const router = useRouter();
 	const handleLoaderSelection = async (loader: USBLoader) => {
 		setSelectedLoader(loader);
 		try {
@@ -42,7 +42,7 @@ export default function USBLoaderPage() {
 
 		setIsCreatingArchive(true);
 		setDownloadMessage('');
-		
+
 		try {
 			const response = await fetch('/api/wads/create-archive', {
 				method: 'POST',
@@ -113,8 +113,8 @@ ${summary.failedFiles.map((file: string) => `• ${file}`).join('\n')}`;
 					<h1 className='mb-4 text-3xl font-bold text-white'>USB Loader Installation</h1>
 					<div className='mb-6 flex flex-col sm:flex-row sm:items-center sm:justify-between'>
 						<p className='mb-4 text-gray-300 sm:mb-0'>
-							Choose a USB loader for your Wii console. Each loader has different features and interfaces.
-							Select the one that best suits your needs.
+							Choose a USB loader for your Wii console. Each loader has different features and interfaces. Select the
+							one that best suits your needs.
 						</p>
 
 						<Dialog open={isSetupGuideOpen} onOpenChange={setIsSetupGuideOpen}>
@@ -136,10 +136,11 @@ ${summary.failedFiles.map((file: string) => `• ${file}`).join('\n')}`;
 								</DialogHeader>
 
 								<div className='space-y-6 text-gray-300'>
-
 									{/* Step 1: Set Partition Style to MBR */}
 									<div>
-										<h3 className='mb-4 text-lg font-semibold text-white'>Step 1: Set External Hard Drive Partition Style to MBR</h3>
+										<h3 className='mb-4 text-lg font-semibold text-white'>
+											Step 1: Set External Hard Drive Partition Style to MBR
+										</h3>
 										<div className='space-y-4'>
 											<div className='rounded-lg border border-yellow-600 bg-yellow-900/20 p-4'>
 												<h4 className='mb-2 font-medium text-yellow-200'>🔍 Check Current Partition Style</h4>
@@ -158,18 +159,27 @@ ${summary.failedFiles.map((file: string) => `• ${file}`).join('\n')}`;
 											<div className='rounded-lg border border-red-600 bg-red-900/20 p-4'>
 												<h4 className='mb-2 font-medium text-red-200'>⚠️ Drive Size Limitations</h4>
 												<ul className='ml-4 list-disc space-y-1 text-sm text-red-100'>
-													<li><strong>Drives {'>'}2TB:</strong> Must follow specialized guides for Western Digital or Seagate drives</li>
-													<li><strong>Drives ≤2TB:</strong> Can use standard conversion methods below</li>
-													<li><strong>Unsupported {'>'}2TB drives:</strong> Currently not compatible</li>
+													<li>
+														<strong>Drives {'>'}2TB:</strong> Must follow specialized guides for Western Digital or
+														Seagate drives
+													</li>
+													<li>
+														<strong>Drives ≤2TB:</strong> Can use standard conversion methods below
+													</li>
+													<li>
+														<strong>Unsupported {'>'}2TB drives:</strong> Currently not compatible
+													</li>
 												</ul>
 											</div>
 
 											<div className='space-y-4'>
 												<h4 className='font-medium text-white'>Conversion Methods (choose one):</h4>
-												
+
 												{/* Method 1: MiniTool */}
 												<div className='rounded-lg border border-gray-600 bg-gray-800 p-4'>
-													<h5 className='mb-2 font-medium text-white'>Method 1: MiniTool Partition Wizard (Data Preserved)</h5>
+													<h5 className='mb-2 font-medium text-white'>
+														Method 1: MiniTool Partition Wizard (Data Preserved)
+													</h5>
 													<ol className='ml-4 list-decimal space-y-1 text-sm text-gray-300'>
 														<li>Download and install MiniTool Partition Wizard</li>
 														<li>Right-click your GPT disk and choose "Convert GPT Disk to MBR Disk"</li>
@@ -185,7 +195,9 @@ ${summary.failedFiles.map((file: string) => `• ${file}`).join('\n')}`;
 												{/* Method 2: Windows Disk Management */}
 												<div className='rounded-lg border border-gray-600 bg-gray-800 p-4'>
 													<h5 className='mb-2 font-medium text-white'>Method 2: Windows Disk Management</h5>
-													<p className='text-sm text-gray-300'>Available through the same Disk Management interface used for checking partition style</p>
+													<p className='text-sm text-gray-300'>
+														Available through the same Disk Management interface used for checking partition style
+													</p>
 												</div>
 
 												{/* Method 3: DiskPart */}
@@ -199,8 +211,10 @@ ${summary.failedFiles.map((file: string) => `• ${file}`).join('\n')}`;
 
 									{/* Step 2: Format Drive */}
 									<div>
-										<h3 className='mb-4 text-lg font-semibold text-white'>Step 2: Partition and Format the External Hard Drive</h3>
-										
+										<h3 className='mb-4 text-lg font-semibold text-white'>
+											Step 2: Partition and Format the External Hard Drive
+										</h3>
+
 										{/* Format Options */}
 										<div className='mb-4 grid gap-4 md:grid-cols-3'>
 											<div className='rounded-lg border border-green-600 bg-green-900/20 p-4'>
@@ -222,7 +236,7 @@ ${summary.failedFiles.map((file: string) => `• ${file}`).join('\n')}`;
 													</div>
 												</div>
 											</div>
-											
+
 											<div className='rounded-lg border border-blue-600 bg-blue-900/20 p-4'>
 												<h4 className='mb-2 font-medium text-blue-200'>NTFS</h4>
 												<div className='space-y-2 text-sm'>
@@ -268,11 +282,16 @@ ${summary.failedFiles.map((file: string) => `• ${file}`).join('\n')}`;
 										<div className='rounded-lg border border-gray-600 bg-gray-800 p-4'>
 											<h4 className='mb-3 font-medium text-white'>FAT32 Formatting Process</h4>
 											<ol className='ml-4 list-decimal space-y-2 text-sm text-gray-300'>
-												<li>Open "This PC" or "My Computer" (<kbd className='rounded bg-gray-700 px-1'>⊞ Win+E</kbd>)</li>
+												<li>
+													Open "This PC" or "My Computer" (<kbd className='rounded bg-gray-700 px-1'>⊞ Win+E</kbd>)
+												</li>
 												<li>Right-click your external hard drive and select "Properties"</li>
 												<li>Note the Drive Letter - this is important for later steps</li>
 												<li>If File-System is already FAT32, skip this formatting step</li>
-												<li><strong className='text-yellow-300'>Backup any existing data</strong> - formatting will erase everything</li>
+												<li>
+													<strong className='text-yellow-300'>Backup any existing data</strong> - formatting will erase
+													everything
+												</li>
 												<li>Launch FAT32 GUI Formatter from Start Menu or Desktop</li>
 												<li>Carefully select the correct drive letter</li>
 												<li>Optionally uncheck "Quick Format" for thorough formatting</li>
@@ -287,7 +306,7 @@ ${summary.failedFiles.map((file: string) => `• ${file}`).join('\n')}`;
 									{/* Step 3: Game Management Tools */}
 									<div>
 										<h3 className='mb-4 text-lg font-semibold text-white'>Step 3: Manage Game Backups</h3>
-										
+
 										<div className='space-y-6'>
 											{/* Wii Backup Manager */}
 											<div className='rounded-lg border border-gray-600 bg-gray-800 p-4'>
@@ -296,24 +315,25 @@ ${summary.failedFiles.map((file: string) => `• ${file}`).join('\n')}`;
 													<h4 className='font-medium text-white'>Wii Backup Manager (WBM)</h4>
 												</div>
 												<p className='mb-3 text-sm text-gray-300'>
-													Windows program to transfer Wii games to and from hard drives and SD cards. Can download game covers, 
-													list games, identify missing games between devices, and more.
+													Windows program to transfer Wii games to and from hard drives and SD cards. Can download game
+													covers, list games, identify missing games between devices, and more.
 												</p>
-												
+
 												<div className='mb-3'>
 													<h5 className='mb-2 font-medium text-white'>Wii Game Directory Structure:</h5>
 													<div className='rounded bg-gray-900 p-3 font-mono text-xs text-gray-300'>
 														<div>💾 SD Card or USB Drive</div>
 														<div>┗ 📂wbfs</div>
-														<div>      ┣ 📂GameName [GameID]</div>
-														<div>      ┃ ┗ 📜GameID.wbfs (for non-split titles)</div>
-														<div>      ┗ 📂GameName [GameID]</div>
-														<div>           ┣ 📜GameID.wbfs</div>
-														<div>           ┗ 📜GameID.wbf1</div>
+														<div> ┣ 📂GameName [GameID]</div>
+														<div> ┃ ┗ 📜GameID.wbfs (for non-split titles)</div>
+														<div> ┗ 📂GameName [GameID]</div>
+														<div> ┣ 📜GameID.wbfs</div>
+														<div> ┗ 📜GameID.wbf1</div>
 													</div>
 												</div>
 												<p className='text-xs text-gray-400'>
-													WBM automatically splits games over 4GB for FAT32 drives and sets up proper directory structure
+													WBM automatically splits games over 4GB for FAT32 drives and sets up proper directory
+													structure
 												</p>
 											</div>
 
@@ -324,20 +344,20 @@ ${summary.failedFiles.map((file: string) => `• ${file}`).join('\n')}`;
 													<h4 className='font-medium text-white'>GameCube Backup Manager (GCBM)</h4>
 												</div>
 												<p className='mb-3 text-sm text-gray-300'>
-													Windows program to transfer GameCube games to and from storage devices. Similar interface to 
+													Windows program to transfer GameCube games to and from storage devices. Similar interface to
 													Wii Backup Manager for easy use.
 												</p>
-												
+
 												<div className='mb-3'>
 													<h5 className='mb-2 font-medium text-white'>GameCube (Nintendont) Directory Structure:</h5>
 													<div className='rounded bg-gray-900 p-3 font-mono text-xs text-gray-300'>
 														<div>💾 SD Card or USB Drive</div>
 														<div>┗ 📂games</div>
-														<div>      ┣ 📂GameName [GameID]</div>
-														<div>      ┃ ┗ 📜game.ciso (for single disc)</div>
-														<div>      ┗ 📂GameName [GameID]</div>
-														<div>           ┣ 📜game.iso</div>
-														<div>           ┗ 📜disc2.iso</div>
+														<div> ┣ 📂GameName [GameID]</div>
+														<div> ┃ ┗ 📜game.ciso (for single disc)</div>
+														<div> ┗ 📂GameName [GameID]</div>
+														<div> ┣ 📜game.iso</div>
+														<div> ┗ 📜disc2.iso</div>
 													</div>
 												</div>
 												<p className='text-xs text-gray-400'>
@@ -352,10 +372,10 @@ ${summary.failedFiles.map((file: string) => `• ${file}`).join('\n')}`;
 													<h4 className='font-medium text-white'>NKit Processing App</h4>
 												</div>
 												<p className='mb-3 text-sm text-gray-300'>
-													Nintendo ToolKit for recovering and preserving Wii and GameCube disc images. 
-													Needed for converting NKit.iso or NKit.gcz files that WBM/GCBM cannot handle.
+													Nintendo ToolKit for recovering and preserving Wii and GameCube disc images. Needed for
+													converting NKit.iso or NKit.gcz files that WBM/GCBM cannot handle.
 												</p>
-												
+
 												<div className='rounded-lg border border-yellow-600 bg-yellow-900/20 p-3'>
 													<h5 className='mb-2 font-medium text-yellow-200'>How to Convert NKit Files:</h5>
 													<ol className='ml-4 list-decimal space-y-1 text-sm text-yellow-100'>
@@ -376,10 +396,21 @@ ${summary.failedFiles.map((file: string) => `• ${file}`).join('\n')}`;
 									<div className='rounded-lg border border-red-600 bg-red-900/20 p-4'>
 										<h3 className='mb-3 font-medium text-red-200'>📋 Important Notes</h3>
 										<ul className='ml-4 list-disc space-y-2 text-sm text-red-100'>
-											<li><strong>Original Disc Ripping:</strong> Requires rare LG-branded disc drives capable of reading Wii discs</li>
-											<li><strong>File Management:</strong> Use the appropriate backup manager for your game type (WBM for Wii, GCBM for GameCube)</li>
-											<li><strong>Directory Structure:</strong> Proper folder structure is critical for USB loaders to recognize games</li>
-											<li><strong>Format Choice:</strong> FAT32 is recommended for maximum compatibility with Wii features</li>
+											<li>
+												<strong>Original Disc Ripping:</strong> Requires rare LG-branded disc drives capable of reading
+												Wii discs
+											</li>
+											<li>
+												<strong>File Management:</strong> Use the appropriate backup manager for your game type (WBM for
+												Wii, GCBM for GameCube)
+											</li>
+											<li>
+												<strong>Directory Structure:</strong> Proper folder structure is critical for USB loaders to
+												recognize games
+											</li>
+											<li>
+												<strong>Format Choice:</strong> FAT32 is recommended for maximum compatibility with Wii features
+											</li>
 										</ul>
 									</div>
 								</div>
@@ -393,14 +424,12 @@ ${summary.failedFiles.map((file: string) => `• ${file}`).join('\n')}`;
 					{Object.entries(loaderDescriptions).map(([key, info]) => {
 						const loader = key as USBLoader;
 						const isSelected = selectedLoader === loader;
-						
+
 						return (
 							<div
 								key={loader}
 								className={`cursor-pointer rounded-lg border p-6 transition-all ${
-									isSelected
-										? 'border-blue-500 bg-blue-900/20'
-										: 'border-gray-700 bg-gray-900 hover:border-gray-600'
+									isSelected ? 'border-blue-500 bg-blue-900/20' : 'border-gray-700 bg-gray-900 hover:border-gray-600'
 								}`}
 								onClick={() => handleLoaderSelection(loader)}
 							>
@@ -412,9 +441,9 @@ ${summary.failedFiles.map((file: string) => `• ${file}`).join('\n')}`;
 									</div>
 									<h3 className='text-lg font-semibold text-white'>{info.name}</h3>
 								</div>
-								
+
 								<p className='mb-4 text-sm text-gray-300'>{info.description}</p>
-								
+
 								<div className='space-y-1'>
 									<h4 className='text-sm font-medium text-white'>Features:</h4>
 									<ul className='space-y-1'>
@@ -435,38 +464,57 @@ ${summary.failedFiles.map((file: string) => `• ${file}`).join('\n')}`;
 					<div className='mb-8 rounded-lg border border-gray-700 bg-gray-900 p-6'>
 						<h2 className='mb-4 text-xl font-bold text-white'>Installation Instructions</h2>
 						<div className='space-y-4 text-gray-300'>
-							<div className='rounded-lg bg-yellow-900/20 border border-yellow-600 p-4'>
-								<div className='flex items-center gap-2 mb-2'>
+							<div className='rounded-lg border border-yellow-600 bg-yellow-900/20 p-4'>
+								<div className='mb-2 flex items-center gap-2'>
 									<Info className='h-5 w-5 text-yellow-400' />
 									<h3 className='font-semibold text-yellow-400'>Prerequisites</h3>
 								</div>
 								<ul className='space-y-1 text-sm'>
 									<li>• Homebrew Channel must be installed</li>
-									<li>• USB storage device formatted as FAT32 or NTFS</li>
+									<li>
+										• <span className='font-semibold text-yellow-300'>cIOS must be installed</span> — required for USB
+										loader functionality
+										<Button
+											variant='link'
+											className='ml-2 text-blue-400 underline'
+											onClick={() => router.push('/syscheck')}
+										>
+											If you are not sure, you can do a quick syscheck with our Syscheck Tool
+										</Button>
+									</li>
 									<li>• SD card or USB device for homebrew apps</li>
+									<li>
+										• A USB storage device formatted as FAT32 or NTFS or an SD card to store games
+										<Button
+											variant='link'
+											className='ml-2 text-blue-400 underline'
+											onClick={() => setIsSetupGuideOpen(true)}
+										>
+											See Hard Drive Setup Guide
+										</Button>
+									</li>
 								</ul>
 							</div>
-							
+
 							<div>
 								<h3 className='mb-2 font-semibold text-white'>Step 1: Download Required Files</h3>
 								<p className='text-sm'>
-									Download the required WAD files and homebrew applications for {loaderDescriptions[selectedLoader].name}.
-									The archive will include the loader WAD and essential tools like Nintendont and CleanRip.
+									Download the required WAD files and homebrew applications for{' '}
+									{loaderDescriptions[selectedLoader].name}. The archive will include the loader WAD and essential tools
+									like Nintendont and CleanRip.
 								</p>
 							</div>
-							
+
 							<div>
 								<h3 className='mb-2 font-semibold text-white'>Step : Copy Homebrew Apps</h3>
-								<p className='text-sm'>
-									Extract the wad archive on your SD card or USB device.
-								</p>
+								<p className='text-sm'>Extract the wad archive on your SD card or USB device.</p>
 							</div>
-							
+
 							<div>
 								<h3 className='mb-2 font-semibold text-white'>Step 3: Prepare USB Storage</h3>
 								<p className='text-sm'>
-									Create the required folder structure on your USB storage device:
-									/wbfs/ for Wii games, /games/ for GameCube games (if using Nintendont).
+									Create the required folder structure on your USB storage device: /wbfs/ for Wii games, /games/ for
+									GameCube games (if using Nintendont).
 								</p>
 							</div>
 						</div>
@@ -489,7 +537,7 @@ ${summary.failedFiles.map((file: string) => `• ${file}`).join('\n')}`;
 								{isCreatingArchive ? 'Creating Archive...' : 'Download All Files'}
 							</Button>
 						</div>
-						
+
 						<div className='grid gap-2 md:grid-cols-2 lg:grid-cols-3'>
 							{requiredWads.map((wad, index) => (
 								<div key={index} className='rounded bg-gray-800 p-3'>
@@ -500,16 +548,16 @@ ${summary.failedFiles.map((file: string) => `• ${file}`).join('\n')}`;
 								</div>
 							))}
 						</div>
-						
+
 						{downloadMessage && (
 							<div
 								className={`mt-4 rounded-lg p-3 ${
 									downloadMessage.startsWith('Error')
-										? 'bg-red-900/20 border border-red-600 text-red-300'
-										: 'bg-green-900/20 border border-green-600 text-green-300'
+										? 'border border-red-600 bg-red-900/20 text-red-300'
+										: 'border border-green-600 bg-green-900/20 text-green-300'
 								}`}
 							>
-								<p className='whitespace-pre-line text-sm'>{downloadMessage}</p>
+								<p className='text-sm whitespace-pre-line'>{downloadMessage}</p>
 							</div>
 						)}
 					</div>
