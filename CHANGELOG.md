@@ -1,5 +1,14 @@
 # Changelog
 
+## [1.1.0](https://github.com/jmischler72/mod-mii-next/compare/v1.0.0...v1.1.0) (2025-09-16)
+
+
+### Features
+
+* **home:** update project description and improve prerequisites list ([4484d77](https://github.com/jmischler72/mod-mii-next/commit/4484d779ad0a92f653d3ee93b46749593201a054))
+* **syscheck:** enhance WAD installation guide with video and critical warnings ([4484d77](https://github.com/jmischler72/mod-mii-next/commit/4484d779ad0a92f653d3ee93b46749593201a054))
+* **usb-loader:** add hard drive setup guide and improve installation steps ([4484d77](https://github.com/jmischler72/mod-mii-next/commit/4484d779ad0a92f653d3ee93b46749593201a054))
+
 ## 1.0.0 (2025-09-14)
 
 
