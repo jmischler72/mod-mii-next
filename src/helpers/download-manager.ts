@@ -1,11 +1,14 @@
-import { getDatabaseEntry, getDatabaseEntryFromWadname } from '@/helpers/database-helper';
-import { buildD2xCios, nusDownload, patchIos } from '@/helpers/wiipy-wrapper';
+import { getDatabaseEntry } from '@/helpers/database-helper';
+import {  nusDownload } from '@/helpers/wiipy-wrapper';
 import { fileExistsInS3, uploadFileToS3, generateWadS3Key, generatePresignedUrl } from '@/helpers/s3-storage';
 import fs from 'fs';
 import path from 'path';
 import { oscDownload } from './osc-download';
 import { createHash } from 'crypto';
 import { DatabaseEntry } from '@/types/database';
+import { buildD2xCios } from './ios-builder/build-d2x-cios';
+import { patchIos } from './ios-builder/patch-ios';
+import { buildHazaIos } from './ios-builder/build-haza-ios';
 
 // Temporary directory for downloads (will be deleted after S3 upload)
 export const TEMP_DIRECTORY = process.env.TEMP_DIRECTORY || path.join(process.cwd(), 'temp-downloads');
@@ -73,8 +76,21 @@ export async function verifyFile(filePath: string, md5: string, md5alt?: string)
 }
 
 async function downloadWadFile(entry: DatabaseEntry, outputPath: string) {
+	if (fs.existsSync(outputPath)) {
+		try {
+			await verifyFile(outputPath, entry.md5, entry.md5alt);
+			return Promise.resolve(`WAD ${entry.wadname} found in cache`);
+		} catch (err) {
+			console.warn('NUS: Cached file verification failed, re-downloading');
+		}
+	}
+
 	if (!entry.category && !entry.ciosslot) {
 		throw new Error(`Unsupported category for download: ${entry.category}`);
+	}
+
+	if (entry.name.includes("HAZA")) {
+		await buildHazaIos(outputPath);
 	}
 
 	switch (entry.category) {
