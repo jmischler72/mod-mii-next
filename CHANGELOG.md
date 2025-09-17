@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.1](https://github.com/jmischler72/mod-mii-next/compare/v1.1.0...v1.1.1) (2025-09-16)
+
+
+### Bug Fixes
+
+* **usb-loader:** enhance user instructions for usb/sd + cios reqs ([f7717a5](https://github.com/jmischler72/mod-mii-next/commit/f7717a57771ec1b36085437176ed440d0280e657))
+
 ## [1.1.0](https://github.com/jmischler72/mod-mii-next/compare/v1.0.0...v1.1.0) (2025-09-16)
 
 
