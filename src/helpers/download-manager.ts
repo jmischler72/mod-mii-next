@@ -111,6 +111,7 @@ async function downloadWadFile(entry: DatabaseEntry, outputPath: string) {
 	}
 
 	if (!entry.md5 && entry.category === 'OSC') return;
+	if (entry.category === 'patchios') return;
 	await verifyFile(outputPath, entry.md5, entry.md5alt);
 }
 
