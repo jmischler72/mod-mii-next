@@ -7,7 +7,7 @@
  */
 export function isDownloadableCategory(category: string | undefined): boolean {
 	if (!category) return false;
-	return ['ios', 'd2x', 'osc'].includes(category.toLowerCase());
+	return ['ios', 'd2x', 'osc', 'patchios'].includes(category.toLowerCase());
 }
 
 /**

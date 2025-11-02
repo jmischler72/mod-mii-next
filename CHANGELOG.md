@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.2.0](https://github.com/jmischler72/mod-mii-next/compare/v1.1.1...v1.2.0) (2025-11-02)
+
+
+### Features
+
+* **patchios:** handle downloading ([691c838](https://github.com/jmischler72/mod-mii-next/commit/691c8387ca655229987ec1509bfd05aa9835b2d2))
+
 ## [1.1.1](https://github.com/jmischler72/mod-mii-next/compare/v1.1.0...v1.1.1) (2025-09-16)
 
 
